@@ -65,5 +65,6 @@ Google Labs(Stitch) 가 오픈소스화한 포맷. 코딩 에이전트가 디자
 
 ## Related
 
-- 글로벌 디자인 컨설팅 스킬: `/design-consultation`, `/design`, `/design-system`, `/design-qa`, `/design-export`
+- 본 레포의 진입점 스킬: `/design-bootstrap` (드래프트는 `harness/design-bootstrap/`, 승격 후 글로벌)
+- 글로벌 디자인 컨설팅 스킬 (기존): `/design-consultation`, `/design`, `/design-system`, `/design-qa`, `/design-export`
 - 프론트엔드 코드 생성: `frontend-design:frontend-design` 스킬

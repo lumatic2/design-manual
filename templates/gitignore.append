@@ -1,0 +1,9 @@
+
+# desing-manual harness
+.design/
+.design-harness.json
+src/theme.generated.css
+playwright-report/
+test-results/
+tests/__screenshots__/*-actual.png
+tests/__screenshots__/*-diff.png
