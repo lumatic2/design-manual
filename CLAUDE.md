@@ -38,11 +38,11 @@ desing-manual/
 │   ├── editorial.md
 │   ├── brutalist.md
 │   └── neo-claude.md
-├── examples/                # 실제 생성 결과물 (before/after, prompt 포함)
-└── harness/                 # 스킬·에이전트 드래프트 (승격 전 보관)
-    ├── design-consult/      # → ~/projects/custom-skills/design-consultation
-    └── design-qa/           # → ~/projects/custom-skills/design-qa
+└── examples/                # 실제 생성 결과물 (before/after, prompt 포함)
 ```
+
+> 스킬 자체는 본 레포가 아닌 `~/projects/custom-skills/` 에 산다 (예: `design-bootstrap`).
+> 본 레포는 그 스킬이 *호출하는 도구·템플릿·지식* 만 갖는다.
 
 ## Conventions
 
@@ -57,7 +57,7 @@ desing-manual/
 
 1. **새 디자인 시스템 의뢰** → `templates/` 에서 가장 가까운 베이스 골라 fork → DESIGN.md 작성 → `design-consultation` 스킬로 보강
 2. **기존 UI 비평** → `design-qa` 스킬 (WCAG + 토큰 lint + 스크린샷 diff)
-3. **새 방법론 발견** → `methodology/` 에 글로 정리 → 패턴이 굳어지면 `harness/` 에 스킬 드래프트 → `custom-skills/` 로 승격
+3. **새 방법론 발견** → `methodology/` 에 글로 정리 → 패턴이 굳어지면 `~/projects/custom-skills/<new-skill>/SKILL.md` 작성 → `bash ~/projects/custom-skills/setup.sh` 배포
 
 ## 참고 — DESIGN.md 란?
 
@@ -65,6 +65,6 @@ Google Labs(Stitch) 가 오픈소스화한 포맷. 코딩 에이전트가 디자
 
 ## Related
 
-- 본 레포의 진입점 스킬: `/design-bootstrap` (드래프트는 `harness/design-bootstrap/`, 승격 후 글로벌)
-- 글로벌 디자인 컨설팅 스킬 (기존): `/design-consultation`, `/design`, `/design-system`, `/design-qa`, `/design-export`
+- 본 레포의 진입점 스킬: `/design-bootstrap` (소스: `~/projects/custom-skills/design-bootstrap/`)
+- 글로벌 디자인 스킬 (기존, 별도 출처): `/design`, `/design-consultation`, `/design-system`, `/design-qa`, `/design-export`, `/design-flow`, `/design-full`
 - 프론트엔드 코드 생성: `frontend-design:frontend-design` 스킬
