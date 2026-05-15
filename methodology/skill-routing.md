@@ -16,7 +16,7 @@
                   │                    │                    │
         /design-bootstrap         /design                /design-qa
         /design-consultation      /design-flow           desing-manual
-                                  /design-system           lint pipeline
+        /design-bridge ⭐         /design-system           lint pipeline
                                   /design-full
                                   frontend-design:
                                     frontend-design
@@ -42,6 +42,17 @@
 | **출력** | DESIGN.md + docs/CLAUDE-design.md + pre-commit hook + (vite-react) Playwright VRT |
 | **특징** | desing-manual 스펙(DTCG 호환) 강제 + 4단계 lint 자동 검증 + hash-tracked sync |
 | **트레이드오프** | 스펙·검증이 강제 → 자유도 적음 |
+
+### `/design-bridge` (본 레포 출처 — brownfield 진입점)
+
+| | |
+|---|---|
+| **언제** | 이미 토큰 시스템(shadcn / mui / 자체)이 깔린 프로젝트에 DESIGN.md 를 *얹을* 때 |
+| **입력** | DESIGN.md (있어야 함), `app/globals.css` 또는 `src/app/globals.css` |
+| **출력** | globals.css 끝에 AUTO-GENERATED `:root { }` bridge 블록 (기존 토큰 → DESIGN.md semantic 매핑) |
+| **특징** | regex 기반 프로파일 자동 감지 (shadcn / custom-1 / generic), idempotent 적용, `.dark` 블록 안 만듦 (DESIGN.md themes.dark 가 .dark 셀렉터에서 semantic 값을 재정의하므로 단일 :root 면 충분) |
+| **트레이드오프** | regex 매핑이라 의미가 코드별로 다른 var (예: `--brand-color`) 는 잘못 매핑 가능 — dry-run 으로 확인 필요 |
+| **짝꿍** | `/design-bootstrap` 다음 단계 (greenfield → brownfield 진입 순서) |
 
 ### `/design-consultation` (gstack 출처)
 
@@ -207,3 +218,26 @@ DESIGN.md 가 *있다는 전제* 에서 동작. 시스템을 만들지는 않음
 - 📝 **Finding #9 — non-shadcn brownfield**: luma3 는 shadcn 안 씀. 자체 시멘틱 (`--bg`, `--fg`, `--accent`, `--bg-subtle`, `--fg-muted`, `--border`) 사용. `/design-bridge` 가 단순 shadcn detect 만으론 부족. heuristic: `globals.css` 의 `:root { }` 블록을 파싱해서 시멘틱 var 이름 추출 → DESIGN.md semantic 매핑 후보 추론 (예: `bg → surface.base`, `fg → text.default`).
 
 요약 — `/design-bootstrap` 의 nextjs 분기는 아직 두 가지 환경 (Tailwind v3 vs v4) × 두 가지 구조 (src/ vs root) = 4 조합 중 1 조합만 검증됨 (`app/` + v4 + shadcn). 나머지 3 조합은 미지원.
+
+### 2026-05-15 — B1 infra fix (4 조합 매트릭스 완성)
+
+- ✅ `build.js --cssvars` 플래그 추가 → v3 모드(`:root { }` 출력)
+- ✅ `init-design.sh` 의 nextjs 분기가 package.json deps 의 `tailwindcss` 버전 정규식 파싱 → v3/v4 자동 분기 (`--cssvars` vs `--bare`)
+- ✅ `init-design.sh` 의 nextjs 분기가 `src/app/` 존재 여부 자동 감지 → `package.json` scripts 의 출력 경로 자동 치환
+- 정적 `templates/package.json.scripts.nextjs.json` 템플릿 폐기, inline node 생성으로 대체
+
+4 조합 모두 자동 지원: (v3 vs v4) × (root vs src/).
+
+### 2026-05-15 — B2 /design-bridge 신규 스킬
+
+- `~/projects/custom-skills/design-bridge/` 에 스킬 신설
+- 핵심: regex 기반 var-name → DESIGN.md semantic 자동 매핑
+- 프로파일 자동 감지: shadcn / custom-1 (luma3 류) / generic
+- claude-code-guide 32 vars → 25 mapped / 7 unmapped 검증
+- luma3-portfolio 16 vars → 10 mapped / 6 unmapped 검증
+- idempotent: AUTO-GENERATED marker 로 재실행 시 블록 교체
+
+검증 안 한 것 (다음 dogfooding 후보):
+- 실제 적용 후 시각 검증 (claude-code-guide 의 manual bridge 와 /design-bridge 결과 차이 비교)
+- mui / chakra 프로젝트에서 generic profile 동작 확인
+- 한국어/일본어 폰트 스택이 들어간 DESIGN.md 에서 typography token 매핑
