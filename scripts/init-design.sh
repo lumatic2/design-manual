@@ -152,15 +152,45 @@ if [[ "$STACK" == "vite-react" ]]; then
 elif [[ "$STACK" == "nextjs" ]]; then
   PKG="$TARGET/package.json"
   if [[ -f "$PKG" ]]; then
+    # Detect Tailwind major version (3 → v3 mode, default 4)
+    TW_MAJOR=$(node -e "
+const f=process.argv[1];
+const p=JSON.parse(require('fs').readFileSync(f,'utf8'));
+const all=Object.assign({},p.dependencies||{},p.devDependencies||{});
+const tw=all.tailwindcss||'';
+const m=tw.match(/(\d+)/);
+process.stdout.write(m?m[1]:'4');
+" "$PKG")
+    # Detect app dir location (src/app vs app)
+    if [[ -d "$TARGET/src/app" ]]; then APP_DIR="src/app"
+    else APP_DIR="app"; fi
+    # Choose build flag based on TW version
+    if [[ "$TW_MAJOR" == "3" ]]; then BUILD_FLAG="--cssvars"
+    else BUILD_FLAG="--bare"; fi
+
     before=$(sha "$PKG")
-    json_merge_scripts "$PKG" "$ROOT/templates/package.json.scripts.nextjs.json"
+    node -e "
+const fs=require('fs');
+const pkg=JSON.parse(fs.readFileSync(process.argv[1],'utf8'));
+pkg.scripts=Object.assign({},pkg.scripts||{},{
+  'lint:design': 'node \$DESIGN_HARNESS_ROOT/scripts/lint/index.js ./DESIGN.md',
+  'build:design': 'node \$DESIGN_HARNESS_ROOT/scripts/lint/build.js ./DESIGN.md --out ./${APP_DIR}/theme.generated.css ${BUILD_FLAG}'
+});
+fs.writeFileSync(process.argv[1],JSON.stringify(pkg,null,2)+'\n');
+" "$PKG"
     after=$(sha "$PKG")
-    if [[ "$before" != "$after" ]]; then echo "[pkg] scripts merged (nextjs)"
-    else echo "[pkg] scripts already present"; fi
+    if [[ "$before" != "$after" ]]; then
+      echo "[pkg] scripts merged (nextjs: TW v${TW_MAJOR}, ${APP_DIR}/)"
+    else
+      echo "[pkg] scripts already present"
+    fi
   else
     echo "[warn] package.json missing — skip scripts merge"
   fi
-  echo "[note] add to app/globals.css:  @import \"./theme.generated.css\";"
+  echo "[note] add to ${APP_DIR:-app}/globals.css:  @import \"./theme.generated.css\";"
+  if [[ "$TW_MAJOR" == "3" ]]; then
+    echo "[note] (TW v3) generated file emits :root { ... } — works with @tailwind base/components/utilities"
+  fi
   echo "[note] then:  npm run build:design"
 fi
 

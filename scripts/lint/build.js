@@ -25,6 +25,10 @@ const outPath =
     ? args[outIdx + 1]
     : path.join(path.dirname(target), ".design", "theme.generated.css");
 const bare = args.includes("--bare");
+// --cssvars: Tailwind v3 mode — emit plain :root { } instead of @theme {}
+// (v3 doesn't recognize @theme at-rule, browser ignores it, vars disappear).
+// Implies no @import.
+const cssvars = args.includes("--cssvars");
 
 // ── token-path → CSS var name ────────────────────────────────────────────
 // Strips tier names (primitive/semantic/component) and maps groups to
@@ -92,8 +96,8 @@ walk(data?.tokens ?? {}, [], tokens);
 
 let out = `/* AUTO-GENERATED from ${path.relative(path.dirname(outPath), target).replaceAll("\\", "/")} */\n`;
 out += `/* Edit DESIGN.md, then run: node ~/projects/desing-manual/scripts/lint/build.js DESIGN.md */\n\n`;
-if (!bare) out += `@import "tailwindcss";\n\n`;
-out += `@theme {\n`;
+if (!bare && !cssvars) out += `@import "tailwindcss";\n\n`;
+out += cssvars ? `:root {\n` : `@theme {\n`;
 for (const [p, t] of tokens) {
   out += `  ${varName(p)}: ${formatValue(t)};\n`;
 }
