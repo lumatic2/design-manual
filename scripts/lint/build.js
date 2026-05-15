@@ -24,6 +24,7 @@ const outPath =
   outIdx >= 0
     ? args[outIdx + 1]
     : path.join(path.dirname(target), ".design", "theme.generated.css");
+const bare = args.includes("--bare");
 
 // ── token-path → CSS var name ────────────────────────────────────────────
 // Strips tier names (primitive/semantic/component) and maps groups to
@@ -91,7 +92,7 @@ walk(data?.tokens ?? {}, [], tokens);
 
 let out = `/* AUTO-GENERATED from ${path.relative(path.dirname(outPath), target).replaceAll("\\", "/")} */\n`;
 out += `/* Edit DESIGN.md, then run: node ~/projects/desing-manual/scripts/lint/build.js DESIGN.md */\n\n`;
-out += `@import "tailwindcss";\n\n`;
+if (!bare) out += `@import "tailwindcss";\n\n`;
 out += `@theme {\n`;
 for (const [p, t] of tokens) {
   out += `  ${varName(p)}: ${formatValue(t)};\n`;
