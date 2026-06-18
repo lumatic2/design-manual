@@ -43,6 +43,16 @@
 | **특징** | desing-manual 스펙(DTCG 호환) 강제 + 4단계 lint 자동 검증 + hash-tracked sync |
 | **트레이드오프** | 스펙·검증이 강제 → 자유도 적음 |
 
+### `/design-harness` (본 레포 출처 — 운영 단계 진입점)
+
+| | |
+|---|---|
+| **언제** | `/design-bootstrap` 완료 후 — DesignSync 등록, GitHub Codebase 연결, HTML→React 변환, propagate |
+| **입력** | 이미 DESIGN.md + lint hook이 깔린 프로젝트 |
+| **출력** | 서브커맨드별: DesignSync project + 등록된 cards / GitHub remote + Codebase context / React 컴포넌트 / 갱신된 theme.generated.css |
+| **특징** | Claude Design 완전 루프의 2~5번 단계를 담당. `/design-bootstrap`의 짝 스킬 |
+| **트레이드오프** | DesignSync 등록·변환은 claude.ai 로그인 세션 필요. 화면 생성 자체는 웹 UI |
+
 ### `/design-bridge` (본 레포 출처 — brownfield 진입점)
 
 | | |
@@ -153,6 +163,30 @@ DESIGN.md 가 *있다는 전제* 에서 동작. 시스템을 만들지는 않음
 ---
 
 ## 조합 패턴 (recipe)
+
+### 패턴 4: "Claude Design 완전 루프" (검증 완료 2026-06-18)
+
+GitHub Codebase context + DesignSync + Claude Design을 묶은 전체 루프.
+
+```
+1. /design-bootstrap                  → DESIGN.md + lint hook + theme.generated.css
+2. /design-harness sync               → HTML preview cards → DesignSync 등록
+3. /design-harness codebase           → GitHub push → claude.ai/design Codebase context 연결
+4. claude.ai/design (웹 UI)           → 화면 생성 (Landing Page / Pricing 등)
+                                         — 레포 구조 + Design System 토큰 자동 참조
+5. /design-harness convert <html>     → Claude Design 생성 HTML → React 컴포넌트
+6. /design-qa                         → WCAG + 토큰 lint 검증
+```
+
+핵심 발견:
+- **DesignSync** = Claude Code 컴포넌트 레지스트리 (Code 레이어) — UI 피커 미노출, 구조적
+- **Codebase context** = claude.ai/design이 레포 전체 인덱싱 + Design System 토큰 자동 매칭 (Design 레이어)
+- 두 레이어는 별개지만 보완적 — 합산하면 Design ↔ Code 완전 루프
+
+의사 결정: 이 루프가 필요한 경우는 "Claude Design에서 디자인 시스템 인식 상태로 새 화면을 뽑고 싶을 때".
+URL 명시 없이 레포 구조(CLAUDE.md, templates/, methodology/)만으로 Claude Design이 자동 컨텍스트 획득함.
+
+---
 
 ### 패턴 1: "랜딩 페이지 처음부터" (가장 흔함)
 1. `/design-bootstrap` — DESIGN.md + hooks + (vite-react) Playwright
