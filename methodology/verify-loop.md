@@ -28,7 +28,7 @@
 `scripts/lint/index.js` 가 1-4 를 한 번에 돌린다.
 
 ```bash
-node ~/projects/desing-manual/scripts/lint/index.js DESIGN.md
+node ~/projects/design-manual/scripts/lint/index.js DESIGN.md
 # stdout: [PASS]/[FAIL] per stage
 # file:   <DESIGN.md 디렉토리>/.design/lint.json
 ```
@@ -197,7 +197,7 @@ npx odiff baseline.png actual.png diff.png  # exit 21 if diff
 7 단계 산출을 `.design/report.json` 하나로 묶어 에이전트가 한 번에 읽게.
 
 ```bash
-node ~/projects/desing-manual/scripts/lint/aggregate.js .design/ > .design/report.json
+node ~/projects/design-manual/scripts/lint/aggregate.js .design/ > .design/report.json
 ```
 
 (현재 미구현. 후속 작업.)
@@ -208,7 +208,7 @@ node ~/projects/desing-manual/scripts/lint/aggregate.js .design/ > .design/repor
 
 ```bash
 # .git/hooks/pre-commit.design (이미 templates/hooks/ 에 있음)
-node ~/projects/desing-manual/scripts/lint/index.js DESIGN.md       # 1-4
+node ~/projects/design-manual/scripts/lint/index.js DESIGN.md       # 1-4
 npx lint-staged                                                      # 5 (변경 파일)
 ```
 
@@ -221,7 +221,7 @@ npx lint-staged                                                      # 5 (변경
 jobs:
   design-qa:
     steps:
-      - run: node ~/projects/desing-manual/scripts/lint/index.js DESIGN.md
+      - run: node ~/projects/design-manual/scripts/lint/index.js DESIGN.md
       - run: npx stylelint "**/*.css" --formatter json -o .design/css-lint.json
       - run: npx eslint . --format json -o .design/eslint.json
       - run: npm run build
@@ -235,7 +235,7 @@ jobs:
 
 ```bash
 # 사이클이 빠른 1-4 만 watch
-nodemon -w DESIGN.md -x "node ~/projects/desing-manual/scripts/lint/index.js DESIGN.md"
+nodemon -w DESIGN.md -x "node ~/projects/design-manual/scripts/lint/index.js DESIGN.md"
 ```
 
 ## 비용 가드레일

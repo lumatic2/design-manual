@@ -105,7 +105,7 @@ WHY 가 들어가야 한다. "변경했다" 가 아니라 "왜 변경했다". `g
 
 ```bash
 # 1) lint (4단계, 5초 안에)
-node ~/projects/desing-manual/scripts/lint/index.js DESIGN.md
+node ~/projects/design-manual/scripts/lint/index.js DESIGN.md
 
 # 2) 빌드 산출물 — .design/tokens.json (Style Dictionary 입력)
 # (build 스크립트는 후속 작업, 현재 lint 만)
@@ -118,7 +118,7 @@ node ~/projects/desing-manual/scripts/lint/index.js DESIGN.md
 ### 시나리오 A: 0 → 1 (새 프로젝트)
 
 ```bash
-bash ~/projects/desing-manual/scripts/init-design.sh ~/projects/new-app --style minimal
+bash ~/projects/design-manual/scripts/init-design.sh ~/projects/new-app --style minimal
 # → DESIGN.md 가 생기고, .design-harness.json 추적 시작
 # → § 1 Personality, § 8 Anti-patterns 부터 손으로 채움
 # → lint 통과 확인
@@ -130,11 +130,11 @@ bash ~/projects/desing-manual/scripts/init-design.sh ~/projects/new-app --style 
 
 ### 시나리오 C: 디자인 변경 후 propagate
 
-`desing-manual` 본체의 템플릿이 갱신되면:
+`design-manual` 본체의 템플릿이 갱신되면:
 
 ```bash
 cd ~/projects/new-app
-bash ~/projects/desing-manual/scripts/propagate.sh
+bash ~/projects/design-manual/scripts/propagate.sh
 # → 사용자가 안 건드린 파일만 갱신, 수정한 파일은 skip + 경고
 ```
 

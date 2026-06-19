@@ -1,4 +1,4 @@
-# DESIGN.md Spec — v0.1 (desing-manual canonical)
+# DESIGN.md Spec — v0.1 (design-manual canonical)
 
 > 본 레포가 채택·검증·전파하는 DESIGN.md 의 정식 형태. DTCG v2025.10 호환을 목표.
 

@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-# pre-commit.design — run desing-manual lint on DESIGN.md changes.
+# pre-commit.design — run design-manual lint on DESIGN.md changes.
 # Installed by init-design.sh. Skips gracefully if harness is unavailable.
 set -e
 
-HARNESS="${DESIGN_HARNESS_ROOT:-$HOME/projects/desing-manual}"
+HARNESS="${DESIGN_HARNESS_ROOT:-$HOME/projects/design-manual}"
 LINT="$HARNESS/scripts/lint/index.js"
 
 if git diff --cached --name-only | grep -q '^DESIGN.md$'; then

@@ -1,4 +1,4 @@
-# desing-manual
+# design-manual
 
 > 컴퓨터로 디자인하는 법을 총망라 — 바이브 코딩 시대의 디자인 방법론·하네스·지식 베이스
 
@@ -19,7 +19,7 @@
 ## Structure
 
 ```
-desing-manual/
+design-manual/
 ├── CLAUDE.md                # (이 파일) 프로젝트 지침
 ├── README.md                # 외부용 진입점
 ├── ROADMAP.md               # 마일스톤

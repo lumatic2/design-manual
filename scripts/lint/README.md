@@ -5,14 +5,14 @@ DESIGN.md 검증기. 4단계 fail-fast 파이프라인.
 ## 설치
 
 ```bash
-cd ~/projects/desing-manual/scripts/lint
+cd ~/projects/design-manual/scripts/lint
 npm install
 ```
 
 ## 사용
 
 ```bash
-node ~/projects/desing-manual/scripts/lint/index.js /path/to/DESIGN.md
+node ~/projects/design-manual/scripts/lint/index.js /path/to/DESIGN.md
 ```
 
 종료 코드: `0` PASS / `1` lint FAIL / `2` IO 에러.

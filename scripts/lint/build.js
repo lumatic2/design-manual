@@ -95,7 +95,7 @@ const tokens = new Map();
 walk(data?.tokens ?? {}, [], tokens);
 
 let out = `/* AUTO-GENERATED from ${path.relative(path.dirname(outPath), target).replaceAll("\\", "/")} */\n`;
-out += `/* Edit DESIGN.md, then run: node ~/projects/desing-manual/scripts/lint/build.js DESIGN.md */\n\n`;
+out += `/* Edit DESIGN.md, then run: node ~/projects/design-manual/scripts/lint/build.js DESIGN.md */\n\n`;
 if (!bare && !cssvars) out += `@import "tailwindcss";\n\n`;
 out += cssvars ? `:root {\n` : `@theme {\n`;
 for (const [p, t] of tokens) {

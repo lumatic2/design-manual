@@ -65,12 +65,12 @@
 
 ---
 
-## 결정 사항 — 본 레포(desing-manual) 의 최종 형태
+## 결정 사항 — 본 레포(design-manual) 의 최종 형태
 
 **Layout** (rohitg00 의 aesthetic-family core + google-labs 의 spec rigor + nexu-io 의 멀티에이전트):
 
 ```
-desing-manual/
+design-manual/
 ├── CLAUDE.md
 ├── AGENTS.md                       # Codex/Cursor 용 미러
 ├── README.md
@@ -110,7 +110,7 @@ desing-manual/
 
 **QA pipeline**: 위 C 표 7단계. 1-4 가 pre-commit hook, 5-7 가 CI/수동.
 
-**Bootstrap**: `bash ~/projects/desing-manual/scripts/init-design.sh <target> --style <family>` — D 의 스크립트 스켈레톤 채택. `.design-harness.json` 으로 sync 추적.
+**Bootstrap**: `bash ~/projects/design-manual/scripts/init-design.sh <target> --style <family>` — D 의 스크립트 스켈레톤 채택. `.design-harness.json` 으로 sync 추적.
 
 **스킬 연동**: 기존 글로벌 `/design-consultation`, `/design-system`, `/design-qa`, `/design-export` 가 본 레포의 `templates/`·`schema/`·`scripts/lint/` 를 단일 출처로 참조하도록 묶음. 안정화되면 `harness/` 드래프트를 `~/projects/custom-skills/` 로 승격.
 

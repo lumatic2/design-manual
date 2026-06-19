@@ -15,7 +15,7 @@
         (시스템 만들기)         (시스템에서 만들기)    (시스템 지키기)
                   │                    │                    │
         /design-bootstrap         /design                /design-qa
-        /design-consultation      /design-flow           desing-manual
+        /design-consultation      /design-flow           design-manual
         /design-bridge ⭐         /design-system           lint pipeline
                                   /design-full
                                   frontend-design:
@@ -40,7 +40,7 @@
 | **언제** | 새 프로젝트에 처음 디자인 깔 때 |
 | **입력** | git repo, (선택) 톤 한 문장 |
 | **출력** | DESIGN.md + docs/CLAUDE-design.md + pre-commit hook + (vite-react) Playwright VRT |
-| **특징** | desing-manual 스펙(DTCG 호환) 강제 + 4단계 lint 자동 검증 + hash-tracked sync |
+| **특징** | design-manual 스펙(DTCG 호환) 강제 + 4단계 lint 자동 검증 + hash-tracked sync |
 | **트레이드오프** | 스펙·검증이 강제 → 자유도 적음 |
 
 ### `/design-harness` (본 레포 출처 — 운영 단계 진입점)
@@ -76,11 +76,11 @@
 
 ### 둘 다 안 부르면?
 
-이미 다른 출처(Figma, Notion 등) 에서 DESIGN.md 만들어 코드 레포에 복사해도 OK. desing-manual 의 lint·build 만 따로 호출 가능:
+이미 다른 출처(Figma, Notion 등) 에서 DESIGN.md 만들어 코드 레포에 복사해도 OK. design-manual 의 lint·build 만 따로 호출 가능:
 
 ```bash
-node ~/projects/desing-manual/scripts/lint/index.js ./DESIGN.md
-node ~/projects/desing-manual/scripts/lint/build.js ./DESIGN.md --out ./src/theme.generated.css
+node ~/projects/design-manual/scripts/lint/index.js ./DESIGN.md
+node ~/projects/design-manual/scripts/lint/build.js ./DESIGN.md --out ./src/theme.generated.css
 ```
 
 ---
@@ -111,14 +111,14 @@ DESIGN.md 가 *있다는 전제* 에서 동작. 시스템을 만들지는 않음
 ### `/design-qa` (외부)
 **렌더된 UI 에 대해 WCAG/a11y/일관성 검사**. axe-core 류 도구를 자동으로 돌려준다고 추정.
 
-### desing-manual lint pipeline (본 레포)
+### design-manual lint pipeline (본 레포)
 **DESIGN.md 자체에 대해 4 단계 검증** — parse / schema / alias / contrast (multi-theme).
 - `/design-bootstrap` 가 깔아준 pre-commit hook 으로 자동 실행
 - 또는 `npm run lint:design` 으로 수동
 - `verify-loop.md` 의 5-7 단계 (stylelint / axe / Playwright VRT) 는 별도 npm scripts
 
 **둘의 차이**:
-- desing-manual lint = *토큰 정합성* (정의된 디자인 시스템 내부의 모순 잡기)
+- design-manual lint = *토큰 정합성* (정의된 디자인 시스템 내부의 모순 잡기)
 - `/design-qa` = *렌더 결과 검사* (실제 화면이 a11y 기준 통과하는지)
 
 둘 다 필요. 보완적.
@@ -139,7 +139,7 @@ DESIGN.md 가 *있다는 전제* 에서 동작. 시스템을 만들지는 않음
 │
 ├─ "디자인부터 깔자" / "DESIGN.md 만들어줘"
 │      │
-│      ├─ desing-manual 의 4 family + DTCG + 검증을 원함 → /design-bootstrap
+│      ├─ design-manual 의 4 family + DTCG + 검증을 원함 → /design-bootstrap
 │      └─ 10+ aesthetic direction 중 골라 폭넓게 탐색      → /design-consultation
 │
 ├─ 이미 DESIGN.md 있음, 페이지 만들고 싶음
@@ -204,7 +204,7 @@ URL 명시 없이 레포 구조(CLAUDE.md, templates/, methodology/)만으로 Cl
 
 ### 패턴 3: "외부 시스템(Figma) 에서 가져온 DESIGN.md 검증만"
 1. 외부에서 DESIGN.md 받아 레포에 두기
-2. `node ~/projects/desing-manual/scripts/lint/index.js ./DESIGN.md` — 통과 안 하면 fix
+2. `node ~/projects/design-manual/scripts/lint/index.js ./DESIGN.md` — 통과 안 하면 fix
 3. (선택) `/design-bootstrap` 의 부산물 — hook 만 따로 깔고 싶으면 `init-design.sh` 직접 호출
 4. 코드 생성은 `frontend-design:frontend-design`
 
@@ -222,7 +222,7 @@ URL 명시 없이 레포 구조(CLAUDE.md, templates/, methodology/)만으로 Cl
 ## 정확히 안 풀린 것 (TODO)
 
 - `/design-full`, `/generate-asset` 의 정확한 동작은 미확인. 호출 후 결과 보고 본 문서 갱신 필요
-- `/design-qa` 와 desing-manual lint 의 stage 5-7 (stylelint/axe/VRT) 가 겹칠 수 있음. 실제 둘 다 돌려보고 중복 제거 정책 결정
+- `/design-qa` 와 design-manual lint 의 stage 5-7 (stylelint/axe/VRT) 가 겹칠 수 있음. 실제 둘 다 돌려보고 중복 제거 정책 결정
 - `/design`, `/design-system`, `/design-flow` 가 외부 출처(예: Anthropic Claude Design 또는 3rd-party 마켓플레이스) 인 듯한데 정확한 출처·계정 의존성은 미확인
 
 본 문서는 *현재 알려진 동작 기준*이고, 새 정보 들어오면 즉시 갱신한다.
@@ -235,7 +235,7 @@ URL 명시 없이 레포 구조(CLAUDE.md, templates/, methodology/)만으로 Cl
 
 발견·수정:
 - ✅ **Next.js 분기 추가** — `init-design.sh` 가 nextjs 스택을 인식하고 `package.json` 에 `lint:design`/`build:design` 스크립트만 머지 (Playwright VRT 없음). build:design 출력은 `./app/theme.generated.css` 로 보냄. `app/globals.css` 에 `@import "./theme.generated.css"` 를 사용자가 직접 추가하라는 안내 출력.
-- ⚠ **`$DESIGN_HARNESS_ROOT` env 의존** — 머지된 npm 스크립트는 `$DESIGN_HARNESS_ROOT/scripts/lint/...` 를 호출. 사용자가 env 안 깔면 `npm run build:design` 실패. 대안 — npm script 안에서 절대경로 하드코딩, 또는 `node_modules/.bin/` 로 심볼릭 링크, 또는 `npx desing-manual lint` 형태로 wrapper 패키징. 차후 결정.
+- ⚠ **`$DESIGN_HARNESS_ROOT` env 의존** — 머지된 npm 스크립트는 `$DESIGN_HARNESS_ROOT/scripts/lint/...` 를 호출. 사용자가 env 안 깔면 `npm run build:design` 실패. 대안 — npm script 안에서 절대경로 하드코딩, 또는 `node_modules/.bin/` 로 심볼릭 링크, 또는 `npx design-manual lint` 형태로 wrapper 패키징. 차후 결정.
 - 📝 **shadcn 컨벤션과의 결합** — claude-code-guide 는 `--background`/`--foreground` 같은 shadcn CSS 변수를 이미 씀. 우리 semantic 토큰(`--color-surface-base`, `--color-text-default`) 과 매핑이 필요. 두 가지 접근: (1) DESIGN.md semantic 토큰 이름을 shadcn 컨벤션으로 바꾼다, (2) `theme.generated.css` 다음 줄에 `--background: var(--color-surface-base)` 같은 alias block 을 사용자가 추가. 현재는 (2) 가 가장 깔끔. 차후 `--shadcn` 플래그로 자동 생성하는 옵션 고려.
 
 후속:

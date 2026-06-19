@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://desing-manual/schema/design-md.schema.json",
+  "$id": "https://design-manual/schema/design-md.schema.json",
   "title": "DESIGN.md frontmatter",
   "description": "Schema for the YAML frontmatter portion of a DESIGN.md file. DTCG v2025.10 compatible (short form: `value`/`type` without `$` prefix, normalized at build time).",
   "type": "object",
