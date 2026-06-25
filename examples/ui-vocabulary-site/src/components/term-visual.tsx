@@ -257,6 +257,26 @@ function renderVisual(variant: string, label: string) {
   if (variant === "mobile-bottom-sheet") return <MobileBottomSheetVisual />
   if (variant === "page-layout") return <PageLayoutVisual />
   if (variant === "dashboard-grid") return <DashboardGridVisual />
+  if (variant === "permission-state") return <PermissionStateVisual />
+  if (variant === "locked-state") return <LockedStateVisual />
+  if (variant === "offline-state") return <OfflineStateVisual />
+  if (variant === "maintenance-state") return <MaintenanceStateVisual />
+  if (variant === "syncing-state") return <SyncingStateVisual />
+  if (variant === "saving-indicator") return <SavingIndicatorVisual />
+  if (variant === "unsaved-changes-banner") return <UnsavedChangesBannerVisual />
+  if (variant === "session-expired-dialog") return <SessionExpiredDialogVisual />
+  if (variant === "upgrade-prompt") return <UpgradePromptVisual />
+  if (variant === "quota-warning") return <QuotaWarningVisual />
+  if (variant === "trial-banner") return <TrialBannerVisual />
+  if (variant === "destructive-confirmation") return <DestructiveConfirmationVisual />
+  if (variant === "success-toast") return <SuccessToastVisual />
+  if (variant === "error-toast") return <ErrorToastVisual />
+  if (variant === "notification-center") return <NotificationCenterVisual />
+  if (variant === "notification-list") return <NotificationListVisual />
+  if (variant === "status-chip") return <StatusChipVisual />
+  if (variant === "health-indicator") return <HealthIndicatorVisual />
+  if (variant === "connection-status") return <ConnectionStatusVisual />
+  if (variant === "retry-panel") return <RetryPanelVisual />
   if (variant === "error-state") return <StateVisual tone="error" />
   if (variant === "success-state") return <StateVisual tone="success" />
   if (variant === "warning-state") return <StateVisual tone="warning" />
@@ -1930,6 +1950,132 @@ function DashboardGridVisual() {
   const [wide, setWide] = useState(0)
 
   return <div className="grid w-60 grid-cols-4 gap-2 rounded-md border bg-card p-2">{[0, 1, 2, 3, 4].map((item) => <button key={item} type="button" className={cn("h-9 rounded bg-muted", wide === item && "col-span-2 bg-primary/20")} onClick={() => setWide(item)}><span className="sr-only">widget {item + 1}</span></button>)}</div>
+}
+
+function PermissionStateVisual() {
+  const [requested, setRequested] = useState(false)
+
+  return <Chrome className="flex w-52 flex-col items-center gap-2 p-3 text-center text-xs"><EyeOff aria-hidden="true" className="text-muted-foreground" /><p className="font-medium">{requested ? "요청됨" : "권한 필요"}</p><button type="button" className="rounded border px-2 py-1" onClick={() => setRequested(true)}>권한 요청</button></Chrome>
+}
+
+function LockedStateVisual() {
+  const [locked, setLocked] = useState(true)
+
+  return <button type="button" className={cn("flex h-24 w-48 flex-col items-center justify-center gap-2 rounded-md border bg-card text-xs", locked && "opacity-70")} onClick={() => setLocked((value) => !value)}><EyeOff aria-hidden="true" /><span>{locked ? "잠김" : "잠금 해제"}</span><Line className="w-24" /></button>
+}
+
+function OfflineStateVisual() {
+  const [online, setOnline] = useState(false)
+
+  return <Chrome className="flex w-56 items-center justify-between gap-2 p-3 text-xs"><span className="flex items-center gap-2"><span className={cn("size-2 rounded-full", online ? "bg-primary" : "bg-destructive")} />{online ? "온라인" : "오프라인"}</span><button type="button" className="rounded border px-2 py-1" onClick={() => setOnline(true)}>재연결</button></Chrome>
+}
+
+function MaintenanceStateVisual() {
+  const [eta, setEta] = useState("10:30")
+
+  return <Chrome className="w-52 p-3 text-xs"><p className="font-medium">서비스 점검</p><p className="mt-1 text-muted-foreground">예상 종료 {eta}</p><button type="button" className="mt-3 rounded border px-2 py-1" onClick={() => setEta("10:45")}>업데이트</button></Chrome>
+}
+
+function SyncingStateVisual() {
+  const [done, setDone] = useState(false)
+
+  return <button type="button" className="flex items-center gap-2 rounded-md border bg-card px-3 py-2 text-xs" onClick={() => setDone((value) => !value)}>{done ? <CheckCircle2 className="text-primary" aria-hidden="true" /> : <LoaderCircle className="animate-spin text-primary" aria-hidden="true" />}<span>{done ? "동기화됨" : "동기화 중"}</span></button>
+}
+
+function SavingIndicatorVisual() {
+  const [saved, setSaved] = useState(false)
+
+  return <button type="button" className="flex items-center gap-2 rounded-full border bg-card px-3 py-1 text-xs" onClick={() => setSaved((value) => !value)}>{saved ? <Check aria-hidden="true" className="text-primary" /> : <LoaderCircle aria-hidden="true" className="animate-spin" />}{saved ? "저장됨" : "저장 중"}</button>
+}
+
+function UnsavedChangesBannerVisual() {
+  const [dirty, setDirty] = useState(true)
+
+  if (!dirty) return <button type="button" className="rounded border px-3 py-2 text-xs" onClick={() => setDirty(true)}>변경 만들기</button>
+  return <Chrome className="flex w-60 items-center justify-between px-3 py-2 text-xs"><span>저장 안 된 변경</span><div className="flex gap-1"><button type="button" className="rounded border px-2 py-1" onClick={() => setDirty(false)}>취소</button><button type="button" className="rounded bg-primary px-2 py-1 text-primary-foreground" onClick={() => setDirty(false)}>저장</button></div></Chrome>
+}
+
+function SessionExpiredDialogVisual() {
+  const [open, setOpen] = useState(true)
+
+  if (!open) return <button type="button" className="rounded border px-3 py-2 text-xs" onClick={() => setOpen(true)}>세션 만료 보기</button>
+  return <div className="relative h-28 w-56 rounded-md bg-foreground/10"><Chrome className="absolute left-1/2 top-1/2 w-44 -translate-x-1/2 -translate-y-1/2 p-3 text-xs"><p className="font-medium">세션 만료</p><p className="mt-1 text-muted-foreground">다시 로그인하세요.</p><button type="button" className="mt-3 rounded bg-primary px-2 py-1 text-primary-foreground" onClick={() => setOpen(false)}>로그인</button></Chrome></div>
+}
+
+function UpgradePromptVisual() {
+  const [upgraded, setUpgraded] = useState(false)
+
+  return <Chrome className="w-52 p-3 text-xs"><p className="font-medium">{upgraded ? "Pro 활성" : "Pro 기능"}</p><Line className="mt-2 w-28" /><button type="button" className="mt-3 rounded bg-primary px-2 py-1 text-primary-foreground" onClick={() => setUpgraded(true)}>업그레이드</button></Chrome>
+}
+
+function QuotaWarningVisual() {
+  const [value, setValue] = useState(80)
+
+  return <Chrome className="w-52 p-3 text-xs"><div className="mb-2 flex justify-between"><span>사용량</span><span>{value}%</span></div><div className="h-2 overflow-hidden rounded bg-muted"><div className="h-full bg-destructive" style={{ width: `${value}%` }} /></div><button type="button" className="mt-3 rounded border px-2 py-1" onClick={() => setValue(Math.max(45, value - 10))}>정리</button></Chrome>
+}
+
+function TrialBannerVisual() {
+  const [days, setDays] = useState(5)
+
+  return <Chrome className="flex w-60 items-center justify-between px-3 py-2 text-xs"><span>체험 {days}일 남음</span><button type="button" className="rounded border px-2 py-1" onClick={() => setDays(Math.max(0, days - 1))}>하루 지남</button></Chrome>
+}
+
+function DestructiveConfirmationVisual() {
+  const [deleted, setDeleted] = useState(false)
+
+  return <Chrome className="w-52 p-3 text-xs"><p className="font-medium">{deleted ? "삭제됨" : "삭제할까요?"}</p><p className="mt-1 text-muted-foreground">되돌릴 수 없습니다.</p><div className="mt-3 flex justify-end gap-1"><button type="button" className="rounded border px-2 py-1" onClick={() => setDeleted(false)}>취소</button><button type="button" className="rounded bg-destructive px-2 py-1 text-white" onClick={() => setDeleted(true)}>삭제</button></div></Chrome>
+}
+
+function SuccessToastVisual() {
+  const [visible, setVisible] = useState(true)
+
+  if (!visible) return <button type="button" className="rounded border px-3 py-2 text-xs" onClick={() => setVisible(true)}>토스트 보기</button>
+  return <Chrome className="flex w-52 items-center justify-between px-3 py-2 text-xs"><span className="flex items-center gap-2"><CheckCircle2 className="text-primary" aria-hidden="true" />저장됨</span><button type="button" onClick={() => setVisible(false)}><X aria-hidden="true" /></button></Chrome>
+}
+
+function ErrorToastVisual() {
+  const [retrying, setRetrying] = useState(false)
+
+  return <Chrome className="flex w-56 items-center justify-between gap-2 px-3 py-2 text-xs"><span className="flex items-center gap-2"><AlertTriangle className="text-destructive" aria-hidden="true" />업로드 실패</span><button type="button" className="rounded border px-2 py-1" onClick={() => setRetrying(true)}>{retrying ? "재시도중" : "재시도"}</button></Chrome>
+}
+
+function NotificationCenterVisual() {
+  const [open, setOpen] = useState(true)
+
+  return <div className="relative h-28 w-52"><button type="button" className="relative rounded-full border bg-card p-2" onClick={() => setOpen((value) => !value)}><Bell aria-hidden="true" /><span className="absolute -right-1 -top-1 rounded-full bg-destructive px-1 text-[10px] text-white">3</span></button>{open && <Chrome className="absolute right-0 top-10 w-44 p-2 text-xs"><p className="font-medium">알림</p><Line className="mt-2 w-32" /><Line className="mt-2 w-24" /></Chrome>}</div>
+}
+
+function NotificationListVisual() {
+  const [read, setRead] = useState(false)
+
+  return <Chrome className="w-56 p-2 text-xs">{["댓글", "승인", "배포"].map((item, index) => <button key={item} type="button" className="mb-1 flex w-full items-center gap-2 rounded px-2 py-1 text-left hover:bg-muted" onClick={() => setRead(true)}><span className={cn("size-2 rounded-full", !read && index === 0 ? "bg-primary" : "bg-muted-foreground/30")} />{item}<span className="ml-auto text-muted-foreground">{index + 1}m</span></button>)}</Chrome>
+}
+
+function StatusChipVisual() {
+  const [state, setState] = useState("승인됨")
+
+  return <div className="flex gap-2">{["승인됨", "보류", "실패"].map((item) => <button key={item} type="button" className={cn("rounded-full border px-2 py-1 text-xs", state === item && "bg-primary text-primary-foreground")} onClick={() => setState(item)}>{item}</button>)}</div>
+}
+
+function HealthIndicatorVisual() {
+  const states = ["정상", "경고", "장애"]
+  const [index, setIndex] = useState(1)
+  const tone = index === 0 ? "bg-primary" : index === 1 ? "bg-amber-500" : "bg-destructive"
+
+  return <button type="button" className="flex items-center gap-2 rounded-md border bg-card px-3 py-2 text-xs" onClick={() => setIndex((value) => (value + 1) % states.length)}><span className={cn("size-3 rounded-full", tone)} />API {states[index]}</button>
+}
+
+function ConnectionStatusVisual() {
+  const states = ["연결됨", "재연결중", "끊김"]
+  const [index, setIndex] = useState(1)
+
+  return <button type="button" className="flex items-center gap-2 rounded-md border bg-card px-3 py-2 text-xs" onClick={() => setIndex((value) => (value + 1) % states.length)}>{index === 1 ? <LoaderCircle className="animate-spin" aria-hidden="true" /> : <span className={cn("size-2 rounded-full", index === 0 ? "bg-primary" : "bg-destructive")} />}{states[index]}</button>
+}
+
+function RetryPanelVisual() {
+  const [loaded, setLoaded] = useState(false)
+
+  return <Chrome className="flex w-52 flex-col items-center gap-2 p-3 text-center text-xs">{loaded ? <CheckCircle2 className="text-primary" aria-hidden="true" /> : <AlertTriangle className="text-destructive" aria-hidden="true" />}<p className="font-medium">{loaded ? "불러옴" : "로드 실패"}</p><button type="button" className="rounded border px-2 py-1" onClick={() => setLoaded(true)}>다시 시도</button></Chrome>
 }
 
 function StateVisual({ tone }: { tone: "error" | "success" | "warning" | "info" }) {

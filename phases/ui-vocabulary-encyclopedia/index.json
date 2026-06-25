@@ -66,7 +66,10 @@
     {
       "step": 9,
       "name": "batch-3-app-dashboard-layout-patterns",
-      "status": "pending"
+      "status": "completed",
+      "started_at": "2026-06-26T06:05:00+09:00",
+      "completed_at": "2026-06-26T06:20:00+09:00",
+      "summary": "Added 20 permission, lock, offline, maintenance, sync, save, unsaved-change, session, upgrade, quota, trial, destructive confirmation, toast, notification, status, health, connection, and retry terms, growing the dataset from 197 to 217 terms. Implemented distinct interactive mini visuals for each state. npm run build and npm run lint passed; Chrome render smoke confirmed 217 / 217 terms and Step 9 search results."
     },
     {
       "step": 10,

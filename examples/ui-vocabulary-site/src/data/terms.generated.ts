@@ -10325,6 +10325,1030 @@ export const terms = [
       }
     ],
     "confidence": "medium"
+  },
+  {
+    "id": "permission-state",
+    "status": "draft",
+    "category": "feedback",
+    "ko": {
+      "name": "권한 필요 상태",
+      "aliases": [
+        "permission state",
+        "권한 없음 화면",
+        "접근 권한 안내"
+      ]
+    },
+    "en": {
+      "name": "Permission state",
+      "aliases": [
+        "Permission required state",
+        "Access denied state"
+      ]
+    },
+    "one_liner": "현재 기능을 쓰려면 권한 요청이나 관리자 승인이 필요하다고 안내하는 상태.",
+    "description": "왜 접근할 수 없는지, 어떤 권한이 필요한지, 요청 행동은 무엇인지 보여준다.",
+    "visual_anatomy": [
+      "lock icon",
+      "permission explanation",
+      "request access action",
+      "contact hint"
+    ],
+    "when_to_use": [
+      "사용자가 볼 수 있지만 권한이 없어 접근하지 못하는 기능에서"
+    ],
+    "anti_use": [
+      "기능 자체가 없거나 유료 제한이면 upgrade prompt가 더 정확하다"
+    ],
+    "prompt_phrases": [
+      "권한 요청 버튼이 있는 permission state를 보여줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "permission-state",
+      "props": {
+        "requestable": true
+      }
+    },
+    "sources": [
+      {
+        "source_id": "atlassian-design-components",
+        "note": "empty and permission-like state patterns"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": "locked-state",
+    "status": "draft",
+    "category": "feedback",
+    "ko": {
+      "name": "잠금 상태",
+      "aliases": [
+        "locked state",
+        "잠긴 화면",
+        "잠금 안내"
+      ]
+    },
+    "en": {
+      "name": "Locked state",
+      "aliases": [
+        "Locked content state",
+        "Read-only locked state"
+      ]
+    },
+    "one_liner": "콘텐츠나 설정이 현재 조건에서 잠겨 있음을 알려주는 상태.",
+    "description": "편집 권한, 플랜, 워크플로 단계 때문에 조작할 수 없는 영역을 명확히 표시한다.",
+    "visual_anatomy": [
+      "lock indicator",
+      "disabled content",
+      "reason text",
+      "unlock hint"
+    ],
+    "when_to_use": [
+      "콘텐츠는 보이지만 수정이나 사용이 막혀 있을 때"
+    ],
+    "anti_use": [
+      "권한 요청이 가능한 경우에는 permission state가 더 구체적이다"
+    ],
+    "prompt_phrases": [
+      "잠긴 설정 카드에 locked state를 표시해줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "locked-state",
+      "props": {
+        "locked": true
+      }
+    },
+    "sources": [
+      {
+        "source_id": "apple-hig-components",
+        "note": "disabled and locked content presentation"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": "offline-state",
+    "status": "draft",
+    "category": "feedback",
+    "ko": {
+      "name": "오프라인 상태",
+      "aliases": [
+        "offline state",
+        "네트워크 끊김 상태",
+        "offline banner"
+      ]
+    },
+    "en": {
+      "name": "Offline state",
+      "aliases": [
+        "No connection state",
+        "Offline banner"
+      ]
+    },
+    "one_liner": "인터넷 연결이 없어 일부 기능이 제한된다는 상태 표시.",
+    "description": "사용자가 문제 원인을 네트워크로 이해하고 재연결 또는 오프라인 사용 가능 범위를 알게 한다.",
+    "visual_anatomy": [
+      "connection icon",
+      "offline message",
+      "retry action",
+      "limited mode hint"
+    ],
+    "when_to_use": [
+      "네트워크 연결이 필요한 데이터를 불러오지 못할 때"
+    ],
+    "anti_use": [
+      "서버 오류는 error state나 retry panel로 구분한다"
+    ],
+    "prompt_phrases": [
+      "상단에 오프라인 상태 배너와 다시 시도 버튼을 넣어줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "offline-state",
+      "props": {
+        "retry": true
+      }
+    },
+    "sources": [
+      {
+        "source_id": "material-m3-components",
+        "note": "banners and status communication"
+      }
+    ],
+    "confidence": "high"
+  },
+  {
+    "id": "maintenance-state",
+    "status": "draft",
+    "category": "feedback",
+    "ko": {
+      "name": "점검 상태",
+      "aliases": [
+        "maintenance state",
+        "서비스 점검 화면",
+        "maintenance page"
+      ]
+    },
+    "en": {
+      "name": "Maintenance state",
+      "aliases": [
+        "Service maintenance state",
+        "Maintenance page"
+      ]
+    },
+    "one_liner": "서비스나 기능이 계획된 점검 중임을 알려주는 상태 화면.",
+    "description": "예상 종료 시간, 영향 범위, 상태 페이지 링크를 제공해 불확실성을 줄인다.",
+    "visual_anatomy": [
+      "maintenance icon",
+      "schedule",
+      "affected area",
+      "status link"
+    ],
+    "when_to_use": [
+      "계획된 서비스 점검이나 배포로 기능이 일시 중단될 때"
+    ],
+    "anti_use": [
+      "예상치 못한 실패는 error state나 retry panel이 맞다"
+    ],
+    "prompt_phrases": [
+      "예상 종료 시간이 있는 maintenance state를 만들어줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "maintenance-state",
+      "props": {
+        "eta": true
+      }
+    },
+    "sources": [
+      {
+        "source_id": "material-m3-components",
+        "note": "status communication pattern"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": "syncing-state",
+    "status": "draft",
+    "category": "feedback",
+    "ko": {
+      "name": "동기화 중 상태",
+      "aliases": [
+        "syncing state",
+        "동기화 표시",
+        "syncing indicator"
+      ]
+    },
+    "en": {
+      "name": "Syncing state",
+      "aliases": [
+        "Sync status",
+        "Syncing indicator"
+      ]
+    },
+    "one_liner": "로컬 변경이나 원격 데이터가 동기화 중임을 보여주는 상태.",
+    "description": "사용자가 저장 완료와 아직 동기화 중인 상태를 구분하게 한다.",
+    "visual_anatomy": [
+      "sync spinner",
+      "status label",
+      "last synced hint",
+      "progress feedback"
+    ],
+    "when_to_use": [
+      "백그라운드 동기화가 사용자 작업 결과에 영향을 줄 때"
+    ],
+    "anti_use": [
+      "단순 로딩은 loading state가 더 간단하다"
+    ],
+    "prompt_phrases": [
+      "문서 상단에 syncing state와 마지막 동기화 시간을 보여줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "syncing-state",
+      "props": {
+        "progress": true
+      }
+    },
+    "sources": [
+      {
+        "source_id": "material-m3-components",
+        "note": "progress indicators and status"
+      }
+    ],
+    "confidence": "high"
+  },
+  {
+    "id": "saving-indicator",
+    "status": "draft",
+    "category": "feedback",
+    "ko": {
+      "name": "저장 표시기",
+      "aliases": [
+        "saving indicator",
+        "저장 중 표시",
+        "autosave status"
+      ]
+    },
+    "en": {
+      "name": "Saving indicator",
+      "aliases": [
+        "Autosave indicator",
+        "Save status"
+      ]
+    },
+    "one_liner": "입력 내용이 저장 중인지 저장 완료인지 작게 보여주는 상태 표시.",
+    "description": "자동 저장 편집기에서 사용자가 닫기 전에 저장 상태를 확인할 수 있게 한다.",
+    "visual_anatomy": [
+      "saving spinner",
+      "saved check",
+      "compact label",
+      "timestamp"
+    ],
+    "when_to_use": [
+      "자동 저장이나 비동기 저장이 있는 편집 화면에서"
+    ],
+    "anti_use": [
+      "저장 실패는 error toast나 inline alert로 더 명확히 알려야 한다"
+    ],
+    "prompt_phrases": [
+      "우측 상단에 저장 중에서 저장됨으로 바뀌는 saving indicator를 넣어줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "saving-indicator",
+      "props": {
+        "autosave": true
+      }
+    },
+    "sources": [
+      {
+        "source_id": "apple-hig-components",
+        "note": "save and progress feedback"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": "unsaved-changes-banner",
+    "status": "draft",
+    "category": "feedback",
+    "ko": {
+      "name": "저장 안 된 변경 배너",
+      "aliases": [
+        "unsaved changes banner",
+        "변경사항 배너",
+        "저장 필요 배너"
+      ]
+    },
+    "en": {
+      "name": "Unsaved changes banner",
+      "aliases": [
+        "Unsaved changes bar",
+        "Dirty state banner"
+      ]
+    },
+    "one_liner": "저장되지 않은 변경이 있음을 알리고 저장 또는 취소 행동을 제공하는 배너.",
+    "description": "편집 화면에서 사용자가 변경 상태를 잃지 않도록 명확한 행동을 제공한다.",
+    "visual_anatomy": [
+      "dirty state text",
+      "save action",
+      "discard action",
+      "sticky placement"
+    ],
+    "when_to_use": [
+      "저장 전 변경을 잃을 위험이 있는 설정이나 폼에서"
+    ],
+    "anti_use": [
+      "자동 저장이 즉시 완료되면 saving indicator만으로 충분하다"
+    ],
+    "prompt_phrases": [
+      "하단에 저장 안 된 변경 배너와 저장 취소 버튼을 넣어줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "unsaved-changes-banner",
+      "props": {
+        "sticky": true
+      }
+    },
+    "sources": [
+      {
+        "source_id": "atlassian-design-components",
+        "note": "form state and flag patterns"
+      }
+    ],
+    "confidence": "high"
+  },
+  {
+    "id": "session-expired-dialog",
+    "status": "draft",
+    "category": "feedback",
+    "ko": {
+      "name": "세션 만료 다이얼로그",
+      "aliases": [
+        "session expired dialog",
+        "로그인 만료 모달",
+        "세션 만료 창"
+      ]
+    },
+    "en": {
+      "name": "Session expired dialog",
+      "aliases": [
+        "Session timeout dialog",
+        "Login expired modal"
+      ]
+    },
+    "one_liner": "로그인 세션이 만료되어 다시 인증해야 함을 알리는 모달.",
+    "description": "사용자가 현재 작업을 잃지 않도록 재로그인 행동과 취소 가능성을 명확히 한다.",
+    "visual_anatomy": [
+      "modal surface",
+      "timeout message",
+      "sign in action",
+      "secondary action"
+    ],
+    "when_to_use": [
+      "보안 세션이 만료되어 API 요청이나 저장이 막혔을 때"
+    ],
+    "anti_use": [
+      "일반 권한 부족은 permission state가 더 정확하다"
+    ],
+    "prompt_phrases": [
+      "세션이 만료되면 재로그인 버튼이 있는 dialog를 띄워줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "session-expired-dialog",
+      "props": {
+        "modal": true
+      }
+    },
+    "sources": [
+      {
+        "source_id": "wai-aria-apg-patterns",
+        "note": "modal dialog pattern"
+      }
+    ],
+    "confidence": "high"
+  },
+  {
+    "id": "upgrade-prompt",
+    "status": "draft",
+    "category": "feedback",
+    "ko": {
+      "name": "업그레이드 유도",
+      "aliases": [
+        "upgrade prompt",
+        "유료 플랜 안내",
+        "paywall prompt"
+      ]
+    },
+    "en": {
+      "name": "Upgrade prompt",
+      "aliases": [
+        "Plan upgrade prompt",
+        "Paywall prompt"
+      ]
+    },
+    "one_liner": "현재 플랜에서 제한된 기능을 상위 플랜으로 안내하는 UI.",
+    "description": "기능 가치와 제한 이유를 설명하고 업그레이드 CTA를 제공한다.",
+    "visual_anatomy": [
+      "locked feature",
+      "value message",
+      "plan label",
+      "upgrade action"
+    ],
+    "when_to_use": [
+      "유료 플랜 차이 때문에 기능 접근이 제한될 때"
+    ],
+    "anti_use": [
+      "권한 문제나 오류를 과금 유도처럼 보이게 만들지 않는다"
+    ],
+    "prompt_phrases": [
+      "고급 분석 기능에 upgrade prompt를 보여줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "upgrade-prompt",
+      "props": {
+        "cta": true
+      }
+    },
+    "sources": [
+      {
+        "source_id": "carbon-design-components",
+        "note": "callout and actionable notification patterns"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": "quota-warning",
+    "status": "draft",
+    "category": "feedback",
+    "ko": {
+      "name": "사용량 경고",
+      "aliases": [
+        "quota warning",
+        "한도 경고",
+        "usage warning"
+      ]
+    },
+    "en": {
+      "name": "Quota warning",
+      "aliases": [
+        "Usage limit warning",
+        "Quota alert"
+      ]
+    },
+    "one_liner": "저장공간, API 호출, 크레딧 같은 사용 한도에 가까워졌음을 알려주는 경고.",
+    "description": "현재 사용량, 한도, 남은 양, 업그레이드나 정리 행동을 함께 제공한다.",
+    "visual_anatomy": [
+      "usage meter",
+      "warning text",
+      "limit value",
+      "action link"
+    ],
+    "when_to_use": [
+      "사용자가 한도 초과 전에 조치할 수 있어야 할 때"
+    ],
+    "anti_use": [
+      "이미 차단된 상태면 rate-limit state나 locked state가 더 직접적이다"
+    ],
+    "prompt_phrases": [
+      "월 사용량 80% quota warning을 표시해줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "quota-warning",
+      "props": {
+        "percent": 80
+      }
+    },
+    "sources": [
+      {
+        "source_id": "material-m3-components",
+        "note": "progress and warning communication"
+      }
+    ],
+    "confidence": "high"
+  },
+  {
+    "id": "trial-banner",
+    "status": "draft",
+    "category": "feedback",
+    "ko": {
+      "name": "체험판 배너",
+      "aliases": [
+        "trial banner",
+        "무료 체험 배너",
+        "trial notice"
+      ]
+    },
+    "en": {
+      "name": "Trial banner",
+      "aliases": [
+        "Free trial banner",
+        "Trial notice"
+      ]
+    },
+    "one_liner": "무료 체험 기간, 남은 일수, 전환 행동을 상단이나 하단에 표시하는 배너.",
+    "description": "현재 계정의 체험 상태와 종료 전 필요한 행동을 지속적으로 알려준다.",
+    "visual_anatomy": [
+      "trial days left",
+      "plan action",
+      "dismiss or learn link",
+      "banner placement"
+    ],
+    "when_to_use": [
+      "체험 기간이 제품 사용 맥락에 영향을 줄 때"
+    ],
+    "anti_use": [
+      "일회성 마케팅 메시지는 announcement banner가 더 적합하다"
+    ],
+    "prompt_phrases": [
+      "상단에 5일 남음 trial banner를 넣어줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "trial-banner",
+      "props": {
+        "days": 5
+      }
+    },
+    "sources": [
+      {
+        "source_id": "atlassian-design-components",
+        "note": "banner and flag communication"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": "destructive-confirmation",
+    "status": "draft",
+    "category": "action",
+    "ko": {
+      "name": "파괴적 작업 확인",
+      "aliases": [
+        "destructive confirmation",
+        "삭제 확인",
+        "위험 작업 확인"
+      ]
+    },
+    "en": {
+      "name": "Destructive confirmation",
+      "aliases": [
+        "Delete confirmation",
+        "Dangerous action confirmation"
+      ]
+    },
+    "one_liner": "삭제나 초기화처럼 되돌리기 어려운 행동 전 사용자의 명시 확인을 받는 UI.",
+    "description": "위험한 결과를 설명하고 취소와 실행 버튼을 명확히 구분한다.",
+    "visual_anatomy": [
+      "danger message",
+      "object name",
+      "cancel action",
+      "destructive action"
+    ],
+    "when_to_use": [
+      "데이터 삭제",
+      "권한 제거",
+      "결제 취소처럼 영향이 큰 행동에서"
+    ],
+    "anti_use": [
+      "되돌리기 쉬운 사소한 행동마다 confirmation을 띄우지 않는다"
+    ],
+    "prompt_phrases": [
+      "프로젝트 삭제 전에 destructive confirmation dialog를 띄워줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "destructive-confirmation",
+      "props": {
+        "typedConfirm": false
+      }
+    },
+    "sources": [
+      {
+        "source_id": "wai-aria-apg-patterns",
+        "note": "alert dialog and modal confirmation"
+      }
+    ],
+    "confidence": "high"
+  },
+  {
+    "id": "success-toast",
+    "status": "draft",
+    "category": "feedback",
+    "ko": {
+      "name": "성공 토스트",
+      "aliases": [
+        "success toast",
+        "완료 토스트",
+        "성공 알림"
+      ]
+    },
+    "en": {
+      "name": "Success toast",
+      "aliases": [
+        "Success notification",
+        "Completion toast"
+      ]
+    },
+    "one_liner": "작업이 성공적으로 끝났음을 짧게 알려주는 비차단 알림.",
+    "description": "저장, 복사, 업로드 완료처럼 즉시 확인만 필요한 성공 상태를 표시한다.",
+    "visual_anatomy": [
+      "check icon",
+      "success message",
+      "optional undo or close",
+      "transient surface"
+    ],
+    "when_to_use": [
+      "사용자가 결과 확인만 하면 되는 짧은 성공 피드백에서"
+    ],
+    "anti_use": [
+      "다음 행동이 필수라면 dialog나 inline result가 더 적절하다"
+    ],
+    "prompt_phrases": [
+      "저장되면 success toast가 잠깐 뜨게 해줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "success-toast",
+      "props": {
+        "dismissible": true
+      }
+    },
+    "sources": [
+      {
+        "source_id": "material-m3-components",
+        "note": "snackbar and feedback behavior"
+      }
+    ],
+    "confidence": "high"
+  },
+  {
+    "id": "error-toast",
+    "status": "draft",
+    "category": "feedback",
+    "ko": {
+      "name": "오류 토스트",
+      "aliases": [
+        "error toast",
+        "실패 토스트",
+        "에러 알림"
+      ]
+    },
+    "en": {
+      "name": "Error toast",
+      "aliases": [
+        "Error notification",
+        "Failure toast"
+      ]
+    },
+    "one_liner": "가벼운 작업 실패를 짧게 알리고 재시도 같은 행동을 제공하는 알림.",
+    "description": "저장 실패나 복사 실패처럼 맥락은 유지하되 즉시 피드백이 필요한 오류에 쓴다.",
+    "visual_anatomy": [
+      "error icon",
+      "failure message",
+      "retry action",
+      "close action"
+    ],
+    "when_to_use": [
+      "오류가 현재 화면 전체를 막지는 않지만 사용자가 알아야 할 때"
+    ],
+    "anti_use": [
+      "화면을 사용할 수 없는 심각한 오류는 error state나 retry panel이 낫다"
+    ],
+    "prompt_phrases": [
+      "업로드 실패 시 다시 시도 버튼이 있는 error toast를 보여줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "error-toast",
+      "props": {
+        "retry": true
+      }
+    },
+    "sources": [
+      {
+        "source_id": "material-m3-components",
+        "note": "snackbar action and feedback behavior"
+      }
+    ],
+    "confidence": "high"
+  },
+  {
+    "id": "notification-center",
+    "status": "draft",
+    "category": "feedback",
+    "ko": {
+      "name": "알림 센터",
+      "aliases": [
+        "notification center",
+        "알림함",
+        "notification panel"
+      ]
+    },
+    "en": {
+      "name": "Notification center",
+      "aliases": [
+        "Notifications panel",
+        "Notification drawer"
+      ]
+    },
+    "one_liner": "여러 알림을 모아 읽고 상태를 관리하는 패널.",
+    "description": "읽음 처리, 필터, 알림 목록, 설정 이동을 한곳에서 제공한다.",
+    "visual_anatomy": [
+      "trigger badge",
+      "notification panel",
+      "unread count",
+      "notification rows"
+    ],
+    "when_to_use": [
+      "알림이 누적되고 사용자가 나중에 다시 확인해야 할 때"
+    ],
+    "anti_use": [
+      "한 번 보고 사라질 메시지는 toast나 snackbar가 가볍다"
+    ],
+    "prompt_phrases": [
+      "벨을 누르면 unread 알림이 보이는 notification center를 열어줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "notification-center",
+      "props": {
+        "unread": 3
+      }
+    },
+    "sources": [
+      {
+        "source_id": "atlassian-design-components",
+        "note": "notification and flag patterns"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": "notification-list",
+    "status": "draft",
+    "category": "data-display",
+    "ko": {
+      "name": "알림 목록",
+      "aliases": [
+        "notification list",
+        "알림 리스트",
+        "notification feed"
+      ]
+    },
+    "en": {
+      "name": "Notification list",
+      "aliases": [
+        "Notification feed",
+        "Alerts list"
+      ]
+    },
+    "one_liner": "알림 항목을 시간순이나 상태별로 나열한 목록.",
+    "description": "각 알림의 제목, 설명, 시간, 읽음 상태, 관련 행동을 행 단위로 보여준다.",
+    "visual_anatomy": [
+      "notification row",
+      "unread marker",
+      "timestamp",
+      "row action"
+    ],
+    "when_to_use": [
+      "알림 센터나 활동 피드 안에서 알림을 구조적으로 보여줄 때"
+    ],
+    "anti_use": [
+      "사용자 활동 전체를 보여주려면 activity feed가 더 넓은 개념이다"
+    ],
+    "prompt_phrases": [
+      "읽지 않은 점과 시간이 있는 notification list를 만들어줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "notification-list",
+      "props": {
+        "unread": true
+      }
+    },
+    "sources": [
+      {
+        "source_id": "atlassian-design-components",
+        "note": "notification list and activity patterns"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": "status-chip",
+    "status": "draft",
+    "category": "feedback",
+    "ko": {
+      "name": "상태 칩",
+      "aliases": [
+        "status chip",
+        "상태 태그",
+        "state chip"
+      ]
+    },
+    "en": {
+      "name": "Status chip",
+      "aliases": [
+        "State chip",
+        "Status tag"
+      ]
+    },
+    "one_liner": "항목의 상태를 작은 pill 형태로 표시하는 컴팩트 라벨.",
+    "description": "진행중, 승인됨, 보류, 실패 같은 상태를 리스트나 테이블 안에서 빠르게 구분한다.",
+    "visual_anatomy": [
+      "pill shape",
+      "state color",
+      "short label",
+      "optional icon"
+    ],
+    "when_to_use": [
+      "테이블이나 카드에서 항목 상태를 짧게 보여줄 때"
+    ],
+    "anti_use": [
+      "긴 설명이나 조치가 필요하면 alert나 inline message가 낫다"
+    ],
+    "prompt_phrases": [
+      "테이블 상태 열에 승인됨 보류 status chip을 넣어줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "status-chip",
+      "props": {
+        "states": 3
+      }
+    },
+    "sources": [
+      {
+        "source_id": "material-m3-components",
+        "note": "chips and assistive status labels"
+      }
+    ],
+    "confidence": "high"
+  },
+  {
+    "id": "health-indicator",
+    "status": "draft",
+    "category": "feedback",
+    "ko": {
+      "name": "헬스 인디케이터",
+      "aliases": [
+        "health indicator",
+        "상태등",
+        "서비스 상태 표시"
+      ]
+    },
+    "en": {
+      "name": "Health indicator",
+      "aliases": [
+        "Service health indicator",
+        "Health status"
+      ]
+    },
+    "one_liner": "시스템이나 서비스의 정상, 경고, 장애 상태를 색과 라벨로 보여주는 표시.",
+    "description": "운영 대시보드에서 서비스 상태를 빠르게 스캔할 수 있게 한다.",
+    "visual_anatomy": [
+      "health dot",
+      "status label",
+      "severity color",
+      "service name"
+    ],
+    "when_to_use": [
+      "서버",
+      "API",
+      "작업 큐 같은 시스템 상태를 모니터링할 때"
+    ],
+    "anti_use": [
+      "사용자 작업 성공 여부는 success/error toast가 더 적합하다"
+    ],
+    "prompt_phrases": [
+      "API 정상 경고 장애를 health indicator로 보여줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "health-indicator",
+      "props": {
+        "severity": "warning"
+      }
+    },
+    "sources": [
+      {
+        "source_id": "carbon-design-components",
+        "note": "status indicators and data table status"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": "connection-status",
+    "status": "draft",
+    "category": "feedback",
+    "ko": {
+      "name": "연결 상태",
+      "aliases": [
+        "connection status",
+        "연결 표시",
+        "네트워크 상태"
+      ]
+    },
+    "en": {
+      "name": "Connection status",
+      "aliases": [
+        "Connectivity status",
+        "Network status"
+      ]
+    },
+    "one_liner": "실시간 연결, 재연결, 끊김 상태를 사용자에게 보여주는 표시.",
+    "description": "채팅, 협업 편집, 스트리밍처럼 연결 상태가 기능 동작에 직접 영향을 줄 때 쓴다.",
+    "visual_anatomy": [
+      "connection dot",
+      "label",
+      "reconnecting state",
+      "last update"
+    ],
+    "when_to_use": [
+      "실시간 연결이 끊기면 사용자가 바로 알아야 하는 화면에서"
+    ],
+    "anti_use": [
+      "일반 오프라인 안내는 offline state가 더 넓은 패턴이다"
+    ],
+    "prompt_phrases": [
+      "상단에 연결됨 재연결중 연결 끊김 connection status를 보여줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "connection-status",
+      "props": {
+        "reconnecting": true
+      }
+    },
+    "sources": [
+      {
+        "source_id": "material-m3-components",
+        "note": "status and progress feedback"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": "retry-panel",
+    "status": "draft",
+    "category": "feedback",
+    "ko": {
+      "name": "재시도 패널",
+      "aliases": [
+        "retry panel",
+        "다시 시도 영역",
+        "실패 복구 패널"
+      ]
+    },
+    "en": {
+      "name": "Retry panel",
+      "aliases": [
+        "Retry state panel",
+        "Recovery panel"
+      ]
+    },
+    "one_liner": "데이터 로드나 작업 실패 후 원인과 다시 시도 행동을 제공하는 패널.",
+    "description": "사용자가 화면을 떠나지 않고 오류를 복구할 수 있도록 실패 메시지와 재시도 버튼을 둔다.",
+    "visual_anatomy": [
+      "error message",
+      "retry action",
+      "support hint",
+      "optional details"
+    ],
+    "when_to_use": [
+      "목록이나 카드 영역 일부가 실패했지만 재요청 가능할 때"
+    ],
+    "anti_use": [
+      "전체 앱 장애나 점검은 maintenance state로 분리한다"
+    ],
+    "prompt_phrases": [
+      "데이터 로드 실패 영역에 retry panel을 넣어줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "retry-panel",
+      "props": {
+        "retry": true
+      }
+    },
+    "sources": [
+      {
+        "source_id": "material-m3-components",
+        "note": "error and recovery feedback"
+      }
+    ],
+    "confidence": "high"
   }
 ] satisfies VocabularyTerm[]
 
