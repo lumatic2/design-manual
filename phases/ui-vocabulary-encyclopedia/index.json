@@ -1,0 +1,34 @@
+{
+  "project": "design-manual",
+  "phase": "ui-vocabulary-encyclopedia",
+  "mode": "product",
+  "steps": [
+    {
+      "step": 0,
+      "name": "product-spec-and-phase-scaffolding",
+      "status": "completed",
+      "summary": "Created product PRD, architecture, ADR 0001, and durable plan for the UI Vocabulary Encyclopedia. MVP is a static Vite React TypeScript site with Tailwind CSS, shadcn/ui, YAML source data, generated site data, mini UI visual components beside terms, and poster view deferred until after card rendering works."
+    },
+    {
+      "step": 1,
+      "name": "vocabulary-dataset-foundation",
+      "status": "completed",
+      "summary": "Added docs/ui-vocabulary/terms.yml with 60 starter terms across input, selection, action, structure, feedback, and data-display categories. Validation passed with required schema fields, unique ids, Korean and English names, prompt phrases, visual anatomy, assets, sources, and confidence values."
+    },
+    {
+      "step": 2,
+      "name": "react-shadcn-site-scaffold",
+      "status": "pending"
+    },
+    {
+      "step": 3,
+      "name": "glossary-browsing-experience",
+      "status": "pending"
+    },
+    {
+      "step": 4,
+      "name": "poster-style-summary-view",
+      "status": "pending"
+    }
+  ]
+}
