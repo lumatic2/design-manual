@@ -9299,6 +9299,1032 @@ export const terms = [
       }
     ],
     "confidence": "medium"
+  },
+  {
+    "id": "global-header",
+    "status": "draft",
+    "category": "structure",
+    "ko": {
+      "name": "전역 헤더",
+      "aliases": [
+        "global header",
+        "글로벌 헤더",
+        "최상단 헤더"
+      ]
+    },
+    "en": {
+      "name": "Global header",
+      "aliases": [
+        "App header",
+        "Global navigation header"
+      ]
+    },
+    "one_liner": "앱 전체에 공통으로 고정되는 최상단 탐색과 계정 영역.",
+    "description": "제품 로고, 전역 탐색, 검색, 알림, 계정 메뉴처럼 모든 화면에서 필요한 항목을 배치한다.",
+    "visual_anatomy": [
+      "brand",
+      "primary navigation",
+      "global search",
+      "utility actions",
+      "account menu"
+    ],
+    "when_to_use": [
+      "여러 페이지를 가진 앱에서 전역 이동과 계정 행동이 필요할 때"
+    ],
+    "anti_use": [
+      "단일 화면 위젯에는 별도 global header가 과하다"
+    ],
+    "prompt_phrases": [
+      "로고 검색 알림 아바타가 있는 global header를 만들어줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "global-header",
+      "props": {
+        "search": true
+      }
+    },
+    "sources": [
+      {
+        "source_id": "material-m3-components",
+        "note": "top app bar and navigation structure"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": "utility-bar",
+    "status": "draft",
+    "category": "structure",
+    "ko": {
+      "name": "유틸리티 바",
+      "aliases": [
+        "utility bar",
+        "보조 도구 바",
+        "상단 보조 바"
+      ]
+    },
+    "en": {
+      "name": "Utility bar",
+      "aliases": [
+        "Utility toolbar",
+        "Secondary app bar"
+      ]
+    },
+    "one_liner": "현재 화면의 보조 도구, 상태, 빠른 설정을 한 줄로 모은 영역.",
+    "description": "필터, 보기 방식, 동기화 상태, 도움말처럼 전역 탐색보다 낮은 우선순위의 기능을 제공한다.",
+    "visual_anatomy": [
+      "secondary controls",
+      "status text",
+      "quick actions",
+      "compact layout"
+    ],
+    "when_to_use": [
+      "페이지마다 자주 쓰는 보조 도구가 여러 개 있을 때"
+    ],
+    "anti_use": [
+      "주요 CTA를 숨기는 잡다한 버튼 모음으로 쓰지 않는다"
+    ],
+    "prompt_phrases": [
+      "필터 보기 옵션 동기화 상태가 있는 utility bar를 넣어줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "utility-bar",
+      "props": {
+        "actions": 3
+      }
+    },
+    "sources": [
+      {
+        "source_id": "fluent2-react-components",
+        "note": "toolbar and command surface composition"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": "command-bar",
+    "status": "draft",
+    "category": "action",
+    "ko": {
+      "name": "커맨드 바",
+      "aliases": [
+        "command bar",
+        "명령 바",
+        "액션 바"
+      ]
+    },
+    "en": {
+      "name": "Command bar",
+      "aliases": [
+        "Action command bar",
+        "Command toolbar"
+      ]
+    },
+    "one_liner": "선택된 문서나 데이터에 적용할 주요 명령을 한 줄로 모은 도구 막대.",
+    "description": "저장, 공유, 복제, 삭제처럼 현재 작업 대상에 대한 명령을 빠르게 실행하게 한다.",
+    "visual_anatomy": [
+      "primary command",
+      "secondary commands",
+      "overflow menu",
+      "target context"
+    ],
+    "when_to_use": [
+      "편집기나 관리 화면에서 명령이 여러 개 반복적으로 쓰일 때"
+    ],
+    "anti_use": [
+      "전역 탐색 링크를 command bar에 섞지 않는다"
+    ],
+    "prompt_phrases": [
+      "저장 공유 삭제와 더보기 메뉴가 있는 command bar를 만들어줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "command-bar",
+      "props": {
+        "overflow": true
+      }
+    },
+    "sources": [
+      {
+        "source_id": "fluent2-react-components",
+        "note": "command-like toolbar patterns"
+      }
+    ],
+    "confidence": "high"
+  },
+  {
+    "id": "status-bar",
+    "status": "draft",
+    "category": "feedback",
+    "ko": {
+      "name": "상태 표시줄",
+      "aliases": [
+        "status bar",
+        "상태 바",
+        "하단 상태줄"
+      ]
+    },
+    "en": {
+      "name": "Status bar",
+      "aliases": [
+        "Bottom status bar",
+        "Editor status bar"
+      ]
+    },
+    "one_liner": "현재 문서, 연결, 저장, 선택 상태를 작게 지속 표시하는 막대.",
+    "description": "편집기나 대시보드 하단에서 저장됨, 온라인, 선택 수, 좌표 같은 주변 상태 정보를 제공한다.",
+    "visual_anatomy": [
+      "status segments",
+      "connection state",
+      "selection count",
+      "compact indicators"
+    ],
+    "when_to_use": [
+      "작업 중 계속 참고해야 하는 보조 상태가 있을 때"
+    ],
+    "anti_use": [
+      "중요 오류나 확인 요청을 작게 묻어두지 않는다"
+    ],
+    "prompt_phrases": [
+      "화면 하단에 온라인과 저장됨을 표시하는 status bar를 넣어줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "status-bar",
+      "props": {
+        "connected": true
+      }
+    },
+    "sources": [
+      {
+        "source_id": "apple-hig-components",
+        "note": "status presentation and persistent chrome"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": "breadcrumb-header",
+    "status": "draft",
+    "category": "structure",
+    "ko": {
+      "name": "브레드크럼 헤더",
+      "aliases": [
+        "breadcrumb header",
+        "경로 헤더",
+        "위치 헤더"
+      ]
+    },
+    "en": {
+      "name": "Breadcrumb header",
+      "aliases": [
+        "Path header",
+        "Location header"
+      ]
+    },
+    "one_liner": "상단 제목 영역에 현재 위치 경로와 페이지 제목을 함께 보여주는 헤더.",
+    "description": "깊은 정보 구조에서 사용자가 현재 위치를 확인하고 상위 경로로 이동할 수 있게 한다.",
+    "visual_anatomy": [
+      "breadcrumb trail",
+      "page title",
+      "optional actions",
+      "hierarchy context"
+    ],
+    "when_to_use": [
+      "문서",
+      "설정",
+      "관리 화면처럼 깊은 계층이 있을 때"
+    ],
+    "anti_use": [
+      "평면 구조 앱에서 장식용 경로를 만들지 않는다"
+    ],
+    "prompt_phrases": [
+      "브레드크럼과 페이지 제목이 같이 있는 breadcrumb header를 넣어줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "breadcrumb-header",
+      "props": {
+        "depth": 3
+      }
+    },
+    "sources": [
+      {
+        "source_id": "shadcn-ui-docs",
+        "note": "breadcrumb and page header composition"
+      }
+    ],
+    "confidence": "high"
+  },
+  {
+    "id": "page-title-bar",
+    "status": "draft",
+    "category": "structure",
+    "ko": {
+      "name": "페이지 제목 바",
+      "aliases": [
+        "page title bar",
+        "페이지 헤더",
+        "타이틀 바"
+      ]
+    },
+    "en": {
+      "name": "Page title bar",
+      "aliases": [
+        "Page header bar",
+        "Title bar"
+      ]
+    },
+    "one_liner": "페이지 제목, 설명, 주요 액션을 한 영역에 묶는 상단 헤더.",
+    "description": "화면이 무엇인지 설명하고 가장 중요한 생성, 저장, 내보내기 같은 액션을 가까이 둔다.",
+    "visual_anatomy": [
+      "page title",
+      "supporting text",
+      "primary action",
+      "secondary actions"
+    ],
+    "when_to_use": [
+      "목록",
+      "설정",
+      "리포트 화면의 목적과 주요 행동을 명확히 해야 할 때"
+    ],
+    "anti_use": [
+      "이미 global header가 화면 제목을 충분히 설명하면 중복하지 않는다"
+    ],
+    "prompt_phrases": [
+      "제목 설명 새로 만들기 버튼이 있는 page title bar를 만들어줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "page-title-bar",
+      "props": {
+        "primaryAction": true
+      }
+    },
+    "sources": [
+      {
+        "source_id": "atlassian-design-components",
+        "note": "page layout and header composition"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": "content-tabs",
+    "status": "draft",
+    "category": "selection",
+    "ko": {
+      "name": "콘텐츠 탭",
+      "aliases": [
+        "content tabs",
+        "section tabs",
+        "내부 탭"
+      ]
+    },
+    "en": {
+      "name": "Content tabs",
+      "aliases": [
+        "Section tabs",
+        "In-page tabs"
+      ]
+    },
+    "one_liner": "같은 페이지 안에서 관련 콘텐츠 섹션을 탭으로 전환하는 패턴.",
+    "description": "전역 네비게이션이 아니라 상세 화면 안의 개요, 활동, 설정 같은 하위 콘텐츠를 나눈다.",
+    "visual_anatomy": [
+      "tab list",
+      "active tab",
+      "content panel",
+      "section scope"
+    ],
+    "when_to_use": [
+      "한 리소스 안의 관련 정보를 짧은 섹션으로 나눌 때"
+    ],
+    "anti_use": [
+      "서로 다른 페이지 이동은 navigation tab이나 sidebar가 낫다"
+    ],
+    "prompt_phrases": [
+      "상세 화면에 개요 활동 설정 content tabs를 넣어줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "content-tabs",
+      "props": {
+        "active": 1
+      }
+    },
+    "sources": [
+      {
+        "source_id": "wai-aria-apg-patterns",
+        "note": "tabs pattern applied to page sections"
+      }
+    ],
+    "confidence": "high"
+  },
+  {
+    "id": "right-rail",
+    "status": "draft",
+    "category": "structure",
+    "ko": {
+      "name": "우측 레일",
+      "aliases": [
+        "right rail",
+        "오른쪽 보조 패널",
+        "사이드 레일"
+      ]
+    },
+    "en": {
+      "name": "Right rail",
+      "aliases": [
+        "Side rail",
+        "Right sidebar"
+      ]
+    },
+    "one_liner": "본문 오른쪽에 보조 정보나 도구를 세로로 배치하는 좁은 영역.",
+    "description": "관련 항목, 도움말, 속성 요약처럼 본문을 방해하지 않고 참고해야 하는 정보를 둔다.",
+    "visual_anatomy": [
+      "main content",
+      "narrow right column",
+      "supporting cards",
+      "sticky area"
+    ],
+    "when_to_use": [
+      "본문과 함께 참고해야 할 보조 정보가 있을 때"
+    ],
+    "anti_use": [
+      "핵심 작업을 좁은 rail 안에 가두지 않는다"
+    ],
+    "prompt_phrases": [
+      "본문 오른쪽에 관련 문서와 상태를 보여주는 right rail을 넣어줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "right-rail",
+      "props": {
+        "sticky": true
+      }
+    },
+    "sources": [
+      {
+        "source_id": "atlassian-design-components",
+        "note": "layout side content patterns"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": "inspector-panel",
+    "status": "draft",
+    "category": "structure",
+    "ko": {
+      "name": "인스펙터 패널",
+      "aliases": [
+        "inspector panel",
+        "검사 패널",
+        "선택 항목 패널"
+      ]
+    },
+    "en": {
+      "name": "Inspector panel",
+      "aliases": [
+        "Object inspector",
+        "Selection inspector"
+      ]
+    },
+    "one_liner": "선택한 객체의 속성과 상태를 오른쪽에서 확인하고 조정하는 패널.",
+    "description": "디자인 도구, 빌더, 관리 도구에서 현재 선택 항목의 세부 정보를 보여준다.",
+    "visual_anatomy": [
+      "selected object title",
+      "property groups",
+      "controls",
+      "preview metadata"
+    ],
+    "when_to_use": [
+      "캔버스나 리스트에서 선택한 대상의 속성을 편집해야 할 때"
+    ],
+    "anti_use": [
+      "전역 설정처럼 선택 대상과 무관한 정보는 settings panel이 낫다"
+    ],
+    "prompt_phrases": [
+      "선택한 카드의 속성을 보여주는 inspector panel을 만들어줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "inspector-panel",
+      "props": {
+        "sections": 2
+      }
+    },
+    "sources": [
+      {
+        "source_id": "apple-hig-components",
+        "note": "inspector and sidebar-like editing panels"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": "properties-panel",
+    "status": "draft",
+    "category": "structure",
+    "ko": {
+      "name": "속성 패널",
+      "aliases": [
+        "properties panel",
+        "프로퍼티 패널",
+        "속성 편집 영역"
+      ]
+    },
+    "en": {
+      "name": "Properties panel",
+      "aliases": [
+        "Property panel",
+        "Property editor"
+      ]
+    },
+    "one_liner": "선택 항목이나 설정 대상의 값을 폼 컨트롤로 편집하는 패널.",
+    "description": "인스펙터보다 편집 폼 성격이 강하며 라벨, 입력, 토글, 셀렉트가 그룹으로 배치된다.",
+    "visual_anatomy": [
+      "property labels",
+      "form controls",
+      "grouped sections",
+      "apply state"
+    ],
+    "when_to_use": [
+      "사용자가 대상의 여러 속성을 한곳에서 조정해야 할 때"
+    ],
+    "anti_use": [
+      "단일 값만 바꾸면 inline edit이나 popover가 더 가볍다"
+    ],
+    "prompt_phrases": [
+      "오른쪽에 색상 크기 공개 여부를 바꾸는 properties panel을 넣어줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "properties-panel",
+      "props": {
+        "editable": true
+      }
+    },
+    "sources": [
+      {
+        "source_id": "fluent2-react-components",
+        "note": "form controls in side panels"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": "preview-pane",
+    "status": "draft",
+    "category": "structure",
+    "ko": {
+      "name": "미리보기 패널",
+      "aliases": [
+        "preview pane",
+        "프리뷰 패널",
+        "미리보기 영역"
+      ]
+    },
+    "en": {
+      "name": "Preview pane",
+      "aliases": [
+        "Preview panel",
+        "Reading pane"
+      ]
+    },
+    "one_liner": "목록이나 편집 결과를 선택 즉시 옆에서 미리 보여주는 영역.",
+    "description": "이메일, 파일, 템플릿, 리포트처럼 선택 결과를 열기 전에 확인할 수 있게 한다.",
+    "visual_anatomy": [
+      "source list",
+      "preview area",
+      "title",
+      "content snapshot"
+    ],
+    "when_to_use": [
+      "항목을 빠르게 훑고 비교해야 할 때"
+    ],
+    "anti_use": [
+      "미리보기 내용이 복잡한 전체 작업이면 detail page가 낫다"
+    ],
+    "prompt_phrases": [
+      "왼쪽 목록을 고르면 오른쪽에 preview pane이 바뀌게 해줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "preview-pane",
+      "props": {
+        "selected": true
+      }
+    },
+    "sources": [
+      {
+        "source_id": "apple-hig-components",
+        "note": "sidebars and preview-oriented layouts"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": "canvas-toolbar",
+    "status": "draft",
+    "category": "action",
+    "ko": {
+      "name": "캔버스 툴바",
+      "aliases": [
+        "canvas toolbar",
+        "작업 캔버스 도구막대",
+        "편집 툴바"
+      ]
+    },
+    "en": {
+      "name": "Canvas toolbar",
+      "aliases": [
+        "Editor toolbar",
+        "Canvas tool palette"
+      ]
+    },
+    "one_liner": "캔버스 위나 옆에서 선택, 그리기, 확대 같은 편집 도구를 제공하는 막대.",
+    "description": "디자인 편집기나 화이트보드에서 현재 도구 모드와 캔버스 조작을 빠르게 바꾼다.",
+    "visual_anatomy": [
+      "tool buttons",
+      "selected tool",
+      "zoom control",
+      "canvas context"
+    ],
+    "when_to_use": [
+      "사용자가 캔버스 객체를 직접 만들고 조작할 때"
+    ],
+    "anti_use": [
+      "일반 목록 화면의 액션을 캔버스 툴처럼 표현하지 않는다"
+    ],
+    "prompt_phrases": [
+      "캔버스 왼쪽에 선택 펜 도형 도구가 있는 canvas toolbar를 붙여줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "canvas-toolbar",
+      "props": {
+        "selectedTool": "select"
+      }
+    },
+    "sources": [
+      {
+        "source_id": "wai-aria-apg-patterns",
+        "note": "toolbar pattern for grouped editor commands"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": "floating-panel",
+    "status": "draft",
+    "category": "structure",
+    "ko": {
+      "name": "플로팅 패널",
+      "aliases": [
+        "floating panel",
+        "떠 있는 패널",
+        "floating palette"
+      ]
+    },
+    "en": {
+      "name": "Floating panel",
+      "aliases": [
+        "Floating palette",
+        "Floating inspector"
+      ]
+    },
+    "one_liner": "화면 흐름 위에 떠서 이동 가능한 보조 도구나 정보를 담는 패널.",
+    "description": "캔버스나 지도처럼 넓은 작업면 위에서 맥락 도구를 가볍게 제공한다.",
+    "visual_anatomy": [
+      "floating surface",
+      "shadow",
+      "compact controls",
+      "draggable affordance"
+    ],
+    "when_to_use": [
+      "작업면을 유지한 채 보조 도구를 가까이 두고 싶을 때"
+    ],
+    "anti_use": [
+      "읽기 화면에서 장식 패널을 띄워 본문을 가리지 않는다"
+    ],
+    "prompt_phrases": [
+      "캔버스 위에 이동 가능한 floating panel을 만들어줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "floating-panel",
+      "props": {
+        "draggable": true
+      }
+    },
+    "sources": [
+      {
+        "source_id": "radix-ui-primitives",
+        "note": "layered floating surfaces and popover behavior"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": "dockable-panel",
+    "status": "draft",
+    "category": "structure",
+    "ko": {
+      "name": "도킹 패널",
+      "aliases": [
+        "dockable panel",
+        "고정 가능한 패널",
+        "dock panel"
+      ]
+    },
+    "en": {
+      "name": "Dockable panel",
+      "aliases": [
+        "Dock panel",
+        "Docked panel"
+      ]
+    },
+    "one_liner": "떠 있는 패널을 화면 가장자리나 레이아웃 안에 고정할 수 있는 패턴.",
+    "description": "전문 도구에서 사용자가 작업 방식에 맞춰 패널을 붙이거나 분리해 배치한다.",
+    "visual_anatomy": [
+      "panel surface",
+      "dock target",
+      "attached state",
+      "undocked state"
+    ],
+    "when_to_use": [
+      "고급 사용자가 작업 공간 배치를 자주 바꾸는 생산성 도구에서"
+    ],
+    "anti_use": [
+      "초보자용 단순 앱에서는 배치 자유도가 오히려 부담이다"
+    ],
+    "prompt_phrases": [
+      "오른쪽에 붙이거나 띄울 수 있는 dockable panel을 구현해줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "dockable-panel",
+      "props": {
+        "docked": true
+      }
+    },
+    "sources": [
+      {
+        "source_id": "fluent2-react-components",
+        "note": "panels and command surfaces in productivity UI"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": "collapsible-sidebar",
+    "status": "draft",
+    "category": "structure",
+    "ko": {
+      "name": "접이식 사이드바",
+      "aliases": [
+        "collapsible sidebar",
+        "접히는 사이드바",
+        "collapse nav"
+      ]
+    },
+    "en": {
+      "name": "Collapsible sidebar",
+      "aliases": [
+        "Collapsible navigation",
+        "Expandable sidebar"
+      ]
+    },
+    "one_liner": "넓은 메뉴를 아이콘만 남기거나 다시 펼칠 수 있는 좌측 탐색 영역.",
+    "description": "화면 공간을 아끼면서도 앱의 주요 탐색 구조를 유지한다.",
+    "visual_anatomy": [
+      "expanded sidebar",
+      "collapsed rail",
+      "toggle control",
+      "nav items"
+    ],
+    "when_to_use": [
+      "데스크톱 앱에서 탐색 메뉴가 크고 작업 공간도 넓게 필요할 때"
+    ],
+    "anti_use": [
+      "모바일에서는 drawer나 bottom navigation이 더 자연스럽다"
+    ],
+    "prompt_phrases": [
+      "좌측 사이드바를 접으면 아이콘만 남는 collapsible sidebar로 만들어줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "collapsible-sidebar",
+      "props": {
+        "collapsed": false
+      }
+    },
+    "sources": [
+      {
+        "source_id": "atlassian-design-components",
+        "note": "side navigation and collapsible layout patterns"
+      }
+    ],
+    "confidence": "high"
+  },
+  {
+    "id": "mini-sidebar",
+    "status": "draft",
+    "category": "structure",
+    "ko": {
+      "name": "미니 사이드바",
+      "aliases": [
+        "mini sidebar",
+        "아이콘 사이드바",
+        "compact sidebar"
+      ]
+    },
+    "en": {
+      "name": "Mini sidebar",
+      "aliases": [
+        "Icon sidebar",
+        "Compact sidebar"
+      ]
+    },
+    "one_liner": "아이콘 중심의 매우 좁은 세로 탐색 영역.",
+    "description": "상세 라벨 대신 툴팁이나 선택 상태로 주요 섹션 이동을 제공한다.",
+    "visual_anatomy": [
+      "icon rail",
+      "active item",
+      "compact width",
+      "optional tooltip"
+    ],
+    "when_to_use": [
+      "사용자가 아이콘 의미를 익힌 반복 사용 앱에서"
+    ],
+    "anti_use": [
+      "초보자에게 처음 보이는 주요 탐색에는 라벨 없는 아이콘만 쓰지 않는다"
+    ],
+    "prompt_phrases": [
+      "왼쪽에 아이콘만 있는 mini sidebar를 넣어줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "mini-sidebar",
+      "props": {
+        "active": 1
+      }
+    },
+    "sources": [
+      {
+        "source_id": "material-m3-components",
+        "note": "navigation rail and compact navigation"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": "responsive-stack",
+    "status": "draft",
+    "category": "structure",
+    "ko": {
+      "name": "반응형 스택",
+      "aliases": [
+        "responsive stack",
+        "responsive layout stack",
+        "모바일 스택"
+      ]
+    },
+    "en": {
+      "name": "Responsive stack",
+      "aliases": [
+        "Stacked responsive layout",
+        "Mobile stack"
+      ]
+    },
+    "one_liner": "데스크톱의 가로 배치를 좁은 화면에서 세로로 쌓는 레이아웃 패턴.",
+    "description": "카드, 폼, 패널이 화면 폭에 따라 열 구조에서 단일 열 구조로 바뀐다.",
+    "visual_anatomy": [
+      "wide columns",
+      "narrow stacked layout",
+      "breakpoint",
+      "consistent spacing"
+    ],
+    "when_to_use": [
+      "같은 콘텐츠를 데스크톱과 모바일에서 모두 읽기 쉽게 보여줘야 할 때"
+    ],
+    "anti_use": [
+      "정보 우선순위가 바뀌어야 하면 단순 stack만으로 해결하지 않는다"
+    ],
+    "prompt_phrases": [
+      "데스크톱에서는 3열",
+      "모바일에서는 세로로 쌓이는 responsive stack을 만들어줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "responsive-stack",
+      "props": {
+        "breakpoint": true
+      }
+    },
+    "sources": [
+      {
+        "source_id": "material-m3-components",
+        "note": "adaptive layout guidance"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": "mobile-bottom-sheet",
+    "status": "draft",
+    "category": "structure",
+    "ko": {
+      "name": "모바일 바텀 시트",
+      "aliases": [
+        "mobile bottom sheet",
+        "바텀시트",
+        "하단 시트"
+      ]
+    },
+    "en": {
+      "name": "Mobile bottom sheet",
+      "aliases": [
+        "Bottom sheet",
+        "Modal bottom sheet"
+      ]
+    },
+    "one_liner": "모바일 화면 하단에서 올라오는 작업 또는 선택 패널.",
+    "description": "작은 화면에서 추가 선택지, 필터, 간단한 폼을 현재 맥락 위에 표시한다.",
+    "visual_anatomy": [
+      "scrim",
+      "bottom surface",
+      "drag handle",
+      "action rows"
+    ],
+    "when_to_use": [
+      "모바일에서 현재 화면을 유지한 채 보조 선택을 받아야 할 때"
+    ],
+    "anti_use": [
+      "복잡한 긴 폼은 별도 화면이나 dialog가 낫다"
+    ],
+    "prompt_phrases": [
+      "모바일에서 필터를 누르면 bottom sheet가 올라오게 해줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "mobile-bottom-sheet",
+      "props": {
+        "open": true
+      }
+    },
+    "sources": [
+      {
+        "source_id": "material-m3-components",
+        "note": "bottom sheets component"
+      }
+    ],
+    "confidence": "high"
+  },
+  {
+    "id": "page-layout",
+    "status": "draft",
+    "category": "structure",
+    "ko": {
+      "name": "페이지 레이아웃",
+      "aliases": [
+        "page layout",
+        "화면 레이아웃",
+        "page frame"
+      ]
+    },
+    "en": {
+      "name": "Page layout",
+      "aliases": [
+        "Page frame",
+        "Content layout"
+      ]
+    },
+    "one_liner": "헤더, 사이드바, 본문, 보조 영역처럼 페이지의 큰 영역 배치를 정한 구조.",
+    "description": "개별 컴포넌트보다 상위 수준에서 화면의 정보 영역과 행동 영역을 나눈다.",
+    "visual_anatomy": [
+      "header area",
+      "navigation area",
+      "main content",
+      "supporting region"
+    ],
+    "when_to_use": [
+      "앱 화면을 처음 설계하며 큰 영역을 먼저 정해야 할 때"
+    ],
+    "anti_use": [
+      "작은 카드 하나를 설명할 때 page layout이라고 부르지 않는다"
+    ],
+    "prompt_phrases": [
+      "헤더 사이드바 본문 우측 보조영역이 있는 page layout을 잡아줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "page-layout",
+      "props": {
+        "regions": 4
+      }
+    },
+    "sources": [
+      {
+        "source_id": "atlassian-design-components",
+        "note": "page layout composition"
+      }
+    ],
+    "confidence": "high"
+  },
+  {
+    "id": "dashboard-grid",
+    "status": "draft",
+    "category": "structure",
+    "ko": {
+      "name": "대시보드 그리드",
+      "aliases": [
+        "dashboard grid",
+        "위젯 그리드",
+        "카드 대시보드"
+      ]
+    },
+    "en": {
+      "name": "Dashboard grid",
+      "aliases": [
+        "Widget grid",
+        "Card dashboard grid"
+      ]
+    },
+    "one_liner": "여러 지표 카드와 차트 위젯을 격자로 배치하는 대시보드 구조.",
+    "description": "크기가 다른 카드와 차트를 일관된 컬럼과 간격으로 정렬해 한눈에 비교하게 한다.",
+    "visual_anatomy": [
+      "metric cards",
+      "chart widgets",
+      "grid columns",
+      "responsive rows"
+    ],
+    "when_to_use": [
+      "여러 지표와 시각화를 동시에 모니터링해야 할 때"
+    ],
+    "anti_use": [
+      "단일 리포트나 긴 본문 콘텐츠에는 일반 page layout이 낫다"
+    ],
+    "prompt_phrases": [
+      "지표 카드와 차트를 12컬럼 dashboard grid로 배치해줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "dashboard-grid",
+      "props": {
+        "widgets": 5
+      }
+    },
+    "sources": [
+      {
+        "source_id": "carbon-design-components",
+        "note": "dashboard and structured data composition"
+      }
+    ],
+    "confidence": "medium"
   }
 ] satisfies VocabularyTerm[]
 

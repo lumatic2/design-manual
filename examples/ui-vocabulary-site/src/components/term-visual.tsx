@@ -237,6 +237,26 @@ function renderVisual(variant: string, label: string) {
   if (variant === "audit-log") return <AuditLogVisual />
   if (variant === "workspace-switcher") return <WorkspaceSwitcherVisual />
   if (variant === "account-switcher") return <AccountSwitcherVisual />
+  if (variant === "global-header") return <GlobalHeaderVisual />
+  if (variant === "utility-bar") return <UtilityBarVisual />
+  if (variant === "command-bar") return <CommandBarVisual />
+  if (variant === "status-bar") return <StatusBarVisual />
+  if (variant === "breadcrumb-header") return <BreadcrumbHeaderVisual />
+  if (variant === "page-title-bar") return <PageTitleBarVisual />
+  if (variant === "content-tabs") return <ContentTabsVisual />
+  if (variant === "right-rail") return <RightRailVisual />
+  if (variant === "inspector-panel") return <InspectorPanelVisual />
+  if (variant === "properties-panel") return <PropertiesPanelVisual />
+  if (variant === "preview-pane") return <PreviewPaneVisual />
+  if (variant === "canvas-toolbar") return <CanvasToolbarVisual />
+  if (variant === "floating-panel") return <FloatingPanelVisual />
+  if (variant === "dockable-panel") return <DockablePanelVisual />
+  if (variant === "collapsible-sidebar") return <CollapsibleSidebarVisual />
+  if (variant === "mini-sidebar") return <MiniSidebarVisual />
+  if (variant === "responsive-stack") return <ResponsiveStackVisual />
+  if (variant === "mobile-bottom-sheet") return <MobileBottomSheetVisual />
+  if (variant === "page-layout") return <PageLayoutVisual />
+  if (variant === "dashboard-grid") return <DashboardGridVisual />
   if (variant === "error-state") return <StateVisual tone="error" />
   if (variant === "success-state") return <StateVisual tone="success" />
   if (variant === "warning-state") return <StateVisual tone="warning" />
@@ -1792,6 +1812,124 @@ function AccountSwitcherVisual() {
   const [account, setAccount] = useState("yusun")
 
   return <Chrome className="w-48 p-2 text-xs"><div className="mb-2 flex items-center gap-2"><span className="flex size-7 items-center justify-center rounded-full bg-primary text-primary-foreground"><User aria-hidden="true" /></span><span>{account}</span></div>{["yusun", "work"].map((item) => <button key={item} type="button" className="block w-full rounded px-2 py-1 text-left hover:bg-muted" onClick={() => setAccount(item)}>{item}@mail</button>)}</Chrome>
+}
+
+function GlobalHeaderVisual() {
+  const [active, setActive] = useState("문서")
+
+  return <Chrome className="flex h-12 w-64 items-center gap-3 px-3 text-xs"><span className="flex size-7 items-center justify-center rounded bg-primary text-primary-foreground"><BookOpen aria-hidden="true" /></span><div className="flex gap-1">{["홈", "문서", "팀"].map((item) => <button key={item} type="button" className={cn("rounded px-2 py-1", active === item && "bg-primary/10 text-primary")} onClick={() => setActive(item)}>{item}</button>)}</div><div className="ml-auto flex items-center gap-2"><Search aria-hidden="true" /><Bell aria-hidden="true" /><User aria-hidden="true" /></div></Chrome>
+}
+
+function UtilityBarVisual() {
+  const [view, setView] = useState("표")
+
+  return <Chrome className="flex w-60 items-center gap-2 px-2 py-1 text-xs"><button type="button" className="rounded border px-2 py-1" onClick={() => setView(view === "표" ? "카드" : "표")}>{view}</button><button type="button" className="rounded border px-2 py-1">필터</button><span className="ml-auto flex items-center gap-1 text-muted-foreground"><CheckCircle2 aria-hidden="true" />동기화됨</span></Chrome>
+}
+
+function CommandBarVisual() {
+  const [saved, setSaved] = useState(false)
+
+  return <Chrome className="flex w-60 items-center gap-1 px-2 py-1 text-xs"><button type="button" className={cn("rounded px-2 py-1", saved ? "bg-primary text-primary-foreground" : "border")} onClick={() => setSaved(true)}>저장</button><button type="button" className="rounded border px-2 py-1"><Share2 aria-hidden="true" /></button><button type="button" className="rounded border px-2 py-1"><Copy aria-hidden="true" /></button><button type="button" className="rounded border px-2 py-1 text-destructive"><Trash2 aria-hidden="true" /></button><button type="button" className="ml-auto rounded border px-2 py-1"><MoreHorizontal aria-hidden="true" /></button></Chrome>
+}
+
+function StatusBarVisual() {
+  const [online, setOnline] = useState(true)
+
+  return <Chrome className="flex w-64 items-center gap-3 px-3 py-1 text-xs"><button type="button" className="flex items-center gap-1" onClick={() => setOnline((value) => !value)}><span className={cn("size-2 rounded-full", online ? "bg-primary" : "bg-muted-foreground")} />{online ? "Online" : "Offline"}</button><span>저장됨</span><span className="ml-auto">3 selected</span></Chrome>
+}
+
+function BreadcrumbHeaderVisual() {
+  const [section, setSection] = useState("설정")
+
+  return <Chrome className="w-60 p-3 text-xs"><div className="mb-2 flex items-center gap-1 text-muted-foreground"><span>홈</span><ChevronRight aria-hidden="true" /><button type="button" className="text-primary" onClick={() => setSection(section === "설정" ? "권한" : "설정")}>{section}</button></div><p className="text-sm font-medium">{section} 관리</p><Line className="mt-2 w-36" /></Chrome>
+}
+
+function PageTitleBarVisual() {
+  const [created, setCreated] = useState(false)
+
+  return <Chrome className="flex w-64 items-center justify-between p-3 text-xs"><div><p className="text-sm font-medium">프로젝트</p><Line className="mt-2 w-28" /></div><button type="button" className={cn("rounded px-3 py-1", created ? "border" : "bg-primary text-primary-foreground")} onClick={() => setCreated(true)}>{created ? "생성됨" : "새로 만들기"}</button></Chrome>
+}
+
+function ContentTabsVisual() {
+  const [active, setActive] = useState("활동")
+
+  return <Chrome className="w-56 p-2 text-xs"><div className="mb-3 flex border-b">{["개요", "활동", "설정"].map((tab) => <button key={tab} type="button" className={cn("px-2 py-1", active === tab && "border-b-2 border-primary text-primary")} onClick={() => setActive(tab)}>{tab}</button>)}</div><p className="font-medium">{active}</p><Line className="mt-2 w-32" /></Chrome>
+}
+
+function RightRailVisual() {
+  const [hidden, setHidden] = useState(false)
+
+  return <div className="grid h-28 w-60 grid-cols-[1fr_auto] overflow-hidden rounded-md border bg-card text-xs"><div className="p-3"><Line className="w-28" /><Line className="mt-2 w-36" /></div>{!hidden && <aside className="w-20 border-l bg-muted/40 p-2"><button type="button" className="mb-2 rounded border bg-background px-2 py-1" onClick={() => setHidden(true)}>숨김</button><Line className="w-12" /><Line className="mt-2 w-10" /></aside>}</div>
+}
+
+function InspectorPanelVisual() {
+  const [selected, setSelected] = useState("카드")
+
+  return <Chrome className="grid h-28 w-60 grid-cols-[1fr_92px] overflow-hidden text-xs"><div className="flex items-center justify-center bg-muted/30"><button type="button" className="rounded border bg-background px-3 py-2" onClick={() => setSelected(selected === "카드" ? "이미지" : "카드")}>{selected}</button></div><aside className="border-l p-2"><p className="font-medium">{selected}</p><Line className="mt-2 w-14" /><Line className="mt-2 w-10" /></aside></Chrome>
+}
+
+function PropertiesPanelVisual() {
+  const [visible, setVisible] = useState(true)
+
+  return <Chrome className="w-52 p-2 text-xs"><p className="font-medium">속성</p><label className="mt-2 flex items-center justify-between gap-3">공개<Switch checked={visible} onCheckedChange={setVisible} /></label><div className="mt-2 rounded border px-2 py-1">색상 · Primary</div><div className="mt-1 rounded border px-2 py-1">크기 · 24</div></Chrome>
+}
+
+function PreviewPaneVisual() {
+  const [item, setItem] = useState(1)
+
+  return <Chrome className="grid h-28 w-60 grid-cols-[82px_1fr] overflow-hidden text-xs"><div className="border-r p-1">{[1, 2, 3].map((row) => <button key={row} type="button" className={cn("mb-1 block w-full rounded px-2 py-1 text-left", item === row && "bg-primary text-primary-foreground")} onClick={() => setItem(row)}>파일 {row}</button>)}</div><div className="p-3"><p className="font-medium">Preview {item}</p><Line className="mt-2 w-28" /><Line className="mt-2 w-20" /></div></Chrome>
+}
+
+function CanvasToolbarVisual() {
+  const [tool, setTool] = useState("선택")
+
+  return <div className="relative h-28 w-56 rounded-md border bg-card p-2"><div className="absolute left-2 top-2 flex flex-col gap-1 rounded border bg-background p-1">{["선택", "펜", "도형"].map((item) => <button key={item} type="button" className={cn("rounded px-2 py-1 text-xs", tool === item && "bg-primary text-primary-foreground")} onClick={() => setTool(item)}>{item.slice(0, 1)}</button>)}</div><div className="ml-14 mt-2 h-20 rounded bg-muted/60 p-3 text-xs">{tool} 도구</div></div>
+}
+
+function FloatingPanelVisual() {
+  const [moved, setMoved] = useState(false)
+
+  return <div className="relative h-28 w-56 rounded-md border bg-muted/40"><Chrome className={cn("absolute w-36 p-2 text-xs transition-all", moved ? "right-3 top-8" : "left-3 top-3")}><button type="button" className="mb-2 flex items-center gap-2" onClick={() => setMoved((value) => !value)}><ReorderDots />이동</button><Line className="w-24" /></Chrome></div>
+}
+
+function DockablePanelVisual() {
+  const [docked, setDocked] = useState(true)
+
+  return <div className="relative h-28 w-56 rounded-md border bg-card p-2 text-xs"><button type="button" className="rounded border px-2 py-1" onClick={() => setDocked((value) => !value)}>{docked ? "Undock" : "Dock"}</button><Chrome className={cn("p-2", docked ? "absolute bottom-0 right-0 top-0 w-20 rounded-none border-y-0 border-r-0" : "absolute left-14 top-8 w-28")}><Line className="w-12" /><Line className="mt-2 w-10" /></Chrome></div>
+}
+
+function CollapsibleSidebarVisual() {
+  const [collapsed, setCollapsed] = useState(false)
+
+  return <Chrome className={cn("grid h-28 overflow-hidden text-xs transition-all", collapsed ? "w-36 grid-cols-[38px_1fr]" : "w-60 grid-cols-[96px_1fr]")}><aside className="border-r p-2"><button type="button" className="mb-2 rounded border px-2 py-1" onClick={() => setCollapsed((value) => !value)}><Menu aria-hidden="true" /></button>{[Home, Search, Settings].map((Icon, index) => <div key={index} className="mb-2 flex items-center gap-2"><Icon aria-hidden="true" />{!collapsed && <Line className="w-10" />}</div>)}</aside><main className="p-3"><Line className="w-24" /></main></Chrome>
+}
+
+function MiniSidebarVisual() {
+  const [active, setActive] = useState(1)
+
+  return <Chrome className="grid h-28 w-40 grid-cols-[40px_1fr] overflow-hidden text-xs"><aside className="flex flex-col items-center gap-2 border-r p-2">{[Home, Search, Settings].map((Icon, index) => <button key={index} type="button" className={cn("rounded p-1", active === index && "bg-primary text-primary-foreground")} onClick={() => setActive(index)}><Icon aria-hidden="true" /></button>)}</aside><main className="p-3"><Line className="w-16" /><Line className="mt-2 w-12" /></main></Chrome>
+}
+
+function ResponsiveStackVisual() {
+  const [stacked, setStacked] = useState(false)
+
+  return <button type="button" className={cn("grid w-56 gap-2 rounded-md border bg-card p-2 transition-all", stacked ? "grid-cols-1" : "grid-cols-3")} onClick={() => setStacked((value) => !value)}>{[0, 1, 2].map((item) => <div key={item} className="h-10 rounded bg-muted" />)}<span className="sr-only">responsive stack toggle</span></button>
+}
+
+function MobileBottomSheetVisual() {
+  const [open, setOpen] = useState(true)
+
+  return <div className="relative h-32 w-28 overflow-hidden rounded-xl border bg-card p-2 text-xs"><button type="button" className="rounded border px-2 py-1" onClick={() => setOpen((value) => !value)}>필터</button>{open && <div className="absolute inset-x-0 bottom-0 rounded-t-xl border-t bg-background p-2 shadow-sm"><div className="mx-auto mb-2 h-1 w-8 rounded bg-muted-foreground/40" /><Line className="w-20" /><Line className="mt-2 w-16" /></div>}</div>
+}
+
+function PageLayoutVisual() {
+  return <div className="grid h-28 w-60 grid-cols-[52px_1fr_54px] grid-rows-[28px_1fr] overflow-hidden rounded-md border bg-card text-xs"><header className="col-span-3 border-b bg-muted/50 p-2">Header</header><aside className="border-r p-2"><Line className="w-7" /></aside><main className="p-2"><Line className="w-24" /><Line className="mt-2 w-28" /></main><aside className="border-l p-2"><Line className="w-7" /></aside></div>
+}
+
+function DashboardGridVisual() {
+  const [wide, setWide] = useState(0)
+
+  return <div className="grid w-60 grid-cols-4 gap-2 rounded-md border bg-card p-2">{[0, 1, 2, 3, 4].map((item) => <button key={item} type="button" className={cn("h-9 rounded bg-muted", wide === item && "col-span-2 bg-primary/20")} onClick={() => setWide(item)}><span className="sr-only">widget {item + 1}</span></button>)}</div>
 }
 
 function StateVisual({ tone }: { tone: "error" | "success" | "warning" | "info" }) {

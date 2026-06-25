@@ -5,7 +5,7 @@ Purpose: expand `docs/ui-vocabulary/terms.yml` without turning the glossary into
 ## Current Baseline
 
 - Source of truth: `docs/ui-vocabulary/terms.yml`
-- Current count: 177 terms
+- Current count: 197 terms
 - Website renderer: `examples/ui-vocabulary-site/src/components/term-visual.tsx`
 - Visual policy: every published term needs a recognizable mini mock. Interactive terms should expose a small local state change when clicked, typed into, opened, dismissed, or selected.
 
@@ -104,6 +104,29 @@ These should be the next dataset expansion because they are common in product UI
 - `audit-log`
 - `workspace-switcher`
 - `account-switcher`
+
+### Promoted In 2026-06-26 Step 8
+
+- `global-header`
+- `utility-bar`
+- `command-bar`
+- `status-bar`
+- `breadcrumb-header`
+- `page-title-bar`
+- `content-tabs`
+- `right-rail`
+- `inspector-panel`
+- `properties-panel`
+- `preview-pane`
+- `canvas-toolbar`
+- `floating-panel`
+- `dockable-panel`
+- `collapsible-sidebar`
+- `mini-sidebar`
+- `responsive-stack`
+- `mobile-bottom-sheet`
+- `page-layout`
+- `dashboard-grid`
 
 ### Inputs
 

@@ -58,7 +58,10 @@
     {
       "step": 8,
       "name": "batch-2-advanced-data-list-patterns",
-      "status": "pending"
+      "status": "completed",
+      "started_at": "2026-06-26T05:45:00+09:00",
+      "completed_at": "2026-06-26T06:02:00+09:00",
+      "summary": "Added 20 app and dashboard layout terms, growing the dataset from 177 to 197 terms. Implemented interactive mini visuals for global header, utility/command/status bars, page headers, content tabs, right rail, inspector/properties/preview panes, canvas/floating/dockable panels, collapsible and mini sidebars, responsive stack, mobile bottom sheet, page layout, and dashboard grid. npm run build and npm run lint passed; Chrome render smoke confirmed 197 / 197 terms and Step 8 search results."
     },
     {
       "step": 9,
