@@ -104,14 +104,22 @@ select {
     min-height: auto !important;
   }
 
-  main > section {
+  main > div {
+    display: block !important;
     max-width: none !important;
+  }
+
+  header {
+    position: static !important;
+  }
+
+  main section {
     gap: 16px !important;
     padding: 0 !important;
   }
 
-  header {
-    gap: 12px !important;
+  header > div {
+    padding: 0 0 16px !important;
   }
 
   [data-print-grid] {
