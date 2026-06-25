@@ -37,28 +37,42 @@ function App() {
 
   return (
     <main className="min-h-svh bg-background">
+      <nav className="sticky top-0 z-20 border-b bg-background/95 backdrop-blur" data-print-hidden>
+        <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between gap-4 px-5 md:px-8 lg:px-10">
+          <div className="flex min-w-0 items-center gap-3">
+            <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+              <BookOpen aria-hidden="true" className="size-5" />
+            </div>
+            <div className="min-w-0">
+              <p className="truncate text-base font-semibold text-foreground">UI 용어 사전</p>
+              <p className="hidden text-xs text-muted-foreground sm:block">이름과 생김새를 함께 보는 컴포넌트 레퍼런스</p>
+            </div>
+          </div>
+
+          <div className="flex shrink-0 items-center gap-2">
+            <Badge variant="secondary" className="hidden rounded-md px-3 py-1 text-sm sm:inline-flex">
+              {filteredTerms.length} / {terms.length} terms
+            </Badge>
+            <Button className="h-9 rounded-md" size="sm" variant="outline" onClick={saveAsPdf}>
+              <Download aria-hidden="true" />
+              PDF로 저장
+            </Button>
+          </div>
+        </div>
+      </nav>
+
       <section className="mx-auto flex w-full max-w-7xl flex-col gap-8 px-5 py-8 md:px-8 lg:px-10">
         <header className="flex flex-col gap-5">
-          <div className="flex flex-wrap items-center justify-between gap-3">
-            <div className="flex items-center gap-3">
-              <div className="flex size-10 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-                <BookOpen aria-hidden="true" />
-              </div>
-              <div>
-                <p className="text-sm font-medium text-muted-foreground">UI Vocabulary Encyclopedia</p>
-                <h1 className="text-3xl font-semibold tracking-normal text-foreground md:text-5xl">
-                  이름 옆에 생김새가 붙는 UI 용어 사전
-                </h1>
-              </div>
-            </div>
-            <div className="flex items-center gap-2">
-              <Badge variant="secondary" className="rounded-md px-3 py-1 text-sm">
-                {filteredTerms.length} / {terms.length} terms
-              </Badge>
-              <Button className="h-9 rounded-md" size="sm" variant="outline" onClick={saveAsPdf}>
-                <Download aria-hidden="true" />
-                PDF로 저장
-              </Button>
+          <div className="flex flex-col gap-3">
+            <Badge variant="secondary" className="w-fit rounded-md px-3 py-1 text-sm sm:hidden">
+              {filteredTerms.length} / {terms.length} terms
+            </Badge>
+            <div>
+              <p className="text-sm font-medium text-muted-foreground">UI Vocabulary Encyclopedia</p>
+              <h1 className="text-3xl font-semibold tracking-normal text-foreground md:text-5xl">UI 용어 사전</h1>
+              <p className="mt-3 max-w-2xl text-sm leading-6 text-muted-foreground md:text-base">
+                바이브코딩과 UI/UX 설계에서 자주 쓰는 화면 요소의 이름, 쓰임새, 생김새를 한곳에서 확인합니다.
+              </p>
             </div>
           </div>
 
