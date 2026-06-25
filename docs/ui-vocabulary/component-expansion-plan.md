@@ -5,7 +5,7 @@ Purpose: expand `docs/ui-vocabulary/terms.yml` without turning the glossary into
 ## Current Baseline
 
 - Source of truth: `docs/ui-vocabulary/terms.yml`
-- Current count: 217 terms
+- Current count: 237 terms
 - Website renderer: `examples/ui-vocabulary-site/src/components/term-visual.tsx`
 - Visual policy: every published term needs a recognizable mini mock. Interactive terms should expose a small local state change when clicked, typed into, opened, dismissed, or selected.
 
@@ -150,6 +150,29 @@ These should be the next dataset expansion because they are common in product UI
 - `health-indicator`
 - `connection-status`
 - `retry-panel`
+
+### Promoted In 2026-06-26 Step 10
+
+- `media-card`
+- `video-player-controls`
+- `audio-player-controls`
+- `image-gallery`
+- `lightbox`
+- `cropper`
+- `upload-dropzone`
+- `attachment-list`
+- `file-card`
+- `product-card`
+- `price-card`
+- `plan-card`
+- `feature-comparison`
+- `coupon-field`
+- `quantity-stepper`
+- `cart-summary`
+- `checkout-step`
+- `payment-method-card`
+- `address-card`
+- `order-status`
 
 ### Inputs
 

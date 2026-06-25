@@ -11349,6 +11349,1041 @@ export const terms = [
       }
     ],
     "confidence": "high"
+  },
+  {
+    "id": "media-card",
+    "status": "draft",
+    "category": "data-display",
+    "ko": {
+      "name": "미디어 카드",
+      "aliases": [
+        "media card",
+        "콘텐츠 카드",
+        "이미지 카드"
+      ]
+    },
+    "en": {
+      "name": "Media card",
+      "aliases": [
+        "Content card",
+        "Image card"
+      ]
+    },
+    "one_liner": "이미지나 영상 썸네일과 제목, 메타 정보를 묶어 보여주는 카드.",
+    "description": "콘텐츠 목록에서 시각 자료를 먼저 보여주고 제목, 설명, 행동을 함께 배치한다.",
+    "visual_anatomy": [
+      "thumbnail",
+      "title",
+      "metadata",
+      "action area"
+    ],
+    "when_to_use": [
+      "동영상",
+      "글",
+      "이미지 자료처럼 썸네일이 선택에 중요한 콘텐츠에서"
+    ],
+    "anti_use": [
+      "텍스트 속성 비교가 핵심이면 table이나 list가 낫다"
+    ],
+    "prompt_phrases": [
+      "썸네일 제목 조회수가 있는 media card를 만들어줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "media-card",
+      "props": {
+        "thumbnail": true
+      }
+    },
+    "sources": [
+      {
+        "source_id": "material-m3-components",
+        "note": "card media usage"
+      }
+    ],
+    "confidence": "high"
+  },
+  {
+    "id": "video-player-controls",
+    "status": "draft",
+    "category": "action",
+    "ko": {
+      "name": "비디오 플레이어 컨트롤",
+      "aliases": [
+        "video player controls",
+        "영상 컨트롤",
+        "재생 컨트롤"
+      ]
+    },
+    "en": {
+      "name": "Video player controls",
+      "aliases": [
+        "Video controls",
+        "Player controls"
+      ]
+    },
+    "one_liner": "영상 재생, 일시정지, 진행바, 음량, 전체화면을 조작하는 컨트롤 묶음.",
+    "description": "영상 위나 아래에 배치되어 사용자가 재생 상태와 위치를 직접 제어하게 한다.",
+    "visual_anatomy": [
+      "play pause button",
+      "timeline",
+      "time label",
+      "volume",
+      "fullscreen action"
+    ],
+    "when_to_use": [
+      "앱 안에서 사용자가 동영상을 직접 재생해야 할 때"
+    ],
+    "anti_use": [
+      "단순 썸네일 미리보기에는 play overlay만으로 충분하다"
+    ],
+    "prompt_phrases": [
+      "재생 버튼과 타임라인이 있는 video player controls를 넣어줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "video-player-controls",
+      "props": {
+        "playing": false
+      }
+    },
+    "sources": [
+      {
+        "source_id": "apple-hig-components",
+        "note": "media playback controls"
+      }
+    ],
+    "confidence": "high"
+  },
+  {
+    "id": "audio-player-controls",
+    "status": "draft",
+    "category": "action",
+    "ko": {
+      "name": "오디오 플레이어 컨트롤",
+      "aliases": [
+        "audio player controls",
+        "음악 컨트롤",
+        "음성 재생 컨트롤"
+      ]
+    },
+    "en": {
+      "name": "Audio player controls",
+      "aliases": [
+        "Audio controls",
+        "Music player controls"
+      ]
+    },
+    "one_liner": "오디오 재생, 진행, 시간, 음량을 조작하는 compact 컨트롤.",
+    "description": "팟캐스트, 음성 메모, 음악 같은 오디오 콘텐츠의 재생 상태를 보여준다.",
+    "visual_anatomy": [
+      "play pause button",
+      "waveform or progress",
+      "time",
+      "volume"
+    ],
+    "when_to_use": [
+      "오디오 파일이나 음성 콘텐츠를 화면 안에서 재생할 때"
+    ],
+    "anti_use": [
+      "다운로드 링크만 제공할 파일에는 불필요하다"
+    ],
+    "prompt_phrases": [
+      "파형과 재생 버튼이 있는 audio player controls를 만들어줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "audio-player-controls",
+      "props": {
+        "waveform": true
+      }
+    },
+    "sources": [
+      {
+        "source_id": "apple-hig-components",
+        "note": "media playback controls"
+      }
+    ],
+    "confidence": "high"
+  },
+  {
+    "id": "image-gallery",
+    "status": "draft",
+    "category": "data-display",
+    "ko": {
+      "name": "이미지 갤러리",
+      "aliases": [
+        "image gallery",
+        "사진 갤러리",
+        "gallery grid"
+      ]
+    },
+    "en": {
+      "name": "Image gallery",
+      "aliases": [
+        "Photo gallery",
+        "Gallery grid"
+      ]
+    },
+    "one_liner": "여러 이미지를 격자나 썸네일 목록으로 탐색하는 UI.",
+    "description": "사진, 제품 이미지, 포트폴리오처럼 이미지 묶음을 빠르게 훑고 선택하게 한다.",
+    "visual_anatomy": [
+      "image grid",
+      "selected thumbnail",
+      "preview",
+      "navigation controls"
+    ],
+    "when_to_use": [
+      "여러 이미지를 비교하거나 선택해야 할 때"
+    ],
+    "anti_use": [
+      "하나의 대표 이미지만 있으면 image나 media card가 더 단순하다"
+    ],
+    "prompt_phrases": [
+      "썸네일을 누르면 선택되는 image gallery를 넣어줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "image-gallery",
+      "props": {
+        "selected": 1
+      }
+    },
+    "sources": [
+      {
+        "source_id": "apple-hig-components",
+        "note": "image and media presentation"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": "lightbox",
+    "status": "draft",
+    "category": "structure",
+    "ko": {
+      "name": "라이트박스",
+      "aliases": [
+        "lightbox",
+        "이미지 확대 모달",
+        "갤러리 모달"
+      ]
+    },
+    "en": {
+      "name": "Lightbox",
+      "aliases": [
+        "Image lightbox",
+        "Media overlay"
+      ]
+    },
+    "one_liner": "이미지나 미디어를 화면 위 오버레이로 크게 보여주는 패턴.",
+    "description": "배경을 어둡게 하고 미디어, 닫기, 이전/다음 탐색을 제공한다.",
+    "visual_anatomy": [
+      "scrim",
+      "enlarged media",
+      "close button",
+      "previous next controls"
+    ],
+    "when_to_use": [
+      "목록의 미디어를 현재 맥락 위에서 크게 확인해야 할 때"
+    ],
+    "anti_use": [
+      "복잡한 편집은 별도 detail page나 editor가 낫다"
+    ],
+    "prompt_phrases": [
+      "이미지를 클릭하면 lightbox로 크게 열리게 해줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "lightbox",
+      "props": {
+        "open": true
+      }
+    },
+    "sources": [
+      {
+        "source_id": "wai-aria-apg-patterns",
+        "note": "dialog pattern for modal media"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": "cropper",
+    "status": "draft",
+    "category": "action",
+    "ko": {
+      "name": "크롭퍼",
+      "aliases": [
+        "cropper",
+        "이미지 자르기",
+        "crop tool"
+      ]
+    },
+    "en": {
+      "name": "Cropper",
+      "aliases": [
+        "Image cropper",
+        "Crop tool"
+      ]
+    },
+    "one_liner": "이미지의 자를 영역을 선택하고 비율을 조정하는 편집 컨트롤.",
+    "description": "프로필 사진, 썸네일, 업로드 이미지의 사용 영역을 사용자가 직접 지정한다.",
+    "visual_anatomy": [
+      "image canvas",
+      "crop box",
+      "handles",
+      "aspect ratio control",
+      "apply action"
+    ],
+    "when_to_use": [
+      "사용자 업로드 이미지를 특정 비율에 맞춰야 할 때"
+    ],
+    "anti_use": [
+      "단순 파일 첨부만 필요하면 upload dropzone이 적합하다"
+    ],
+    "prompt_phrases": [
+      "아바타 업로드 뒤 cropper로 정사각형 영역을 고르게 해줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "cropper",
+      "props": {
+        "handles": true
+      }
+    },
+    "sources": [
+      {
+        "source_id": "apple-hig-components",
+        "note": "image editing controls"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": "upload-dropzone",
+    "status": "draft",
+    "category": "input",
+    "ko": {
+      "name": "업로드 드롭존",
+      "aliases": [
+        "upload dropzone",
+        "드래그 업로드 영역",
+        "파일 드롭 영역"
+      ]
+    },
+    "en": {
+      "name": "Upload dropzone",
+      "aliases": [
+        "Dropzone",
+        "File drop area"
+      ]
+    },
+    "one_liner": "파일을 클릭 선택하거나 끌어다 놓아 업로드하는 큰 입력 영역.",
+    "description": "허용 파일 형식, 크기 제한, 드래그 상태, 업로드 행동을 명확히 보여준다.",
+    "visual_anatomy": [
+      "drop area",
+      "upload icon",
+      "instruction text",
+      "file constraints",
+      "drag state"
+    ],
+    "when_to_use": [
+      "파일 업로드가 화면의 주요 행동일 때"
+    ],
+    "anti_use": [
+      "작은 첨부만 필요하면 file upload button이나 attachment list가 낫다"
+    ],
+    "prompt_phrases": [
+      "PDF를 끌어다 놓는 upload dropzone을 만들어줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "upload-dropzone",
+      "props": {
+        "dragging": true
+      }
+    },
+    "sources": [
+      {
+        "source_id": "shadcn-ui-docs",
+        "note": "input and file upload composition"
+      }
+    ],
+    "confidence": "high"
+  },
+  {
+    "id": "attachment-list",
+    "status": "draft",
+    "category": "data-display",
+    "ko": {
+      "name": "첨부파일 목록",
+      "aliases": [
+        "attachment list",
+        "첨부 목록",
+        "파일 첨부 리스트"
+      ]
+    },
+    "en": {
+      "name": "Attachment list",
+      "aliases": [
+        "File attachments list",
+        "Attachment rows"
+      ]
+    },
+    "one_liner": "첨부된 파일을 이름, 크기, 상태, 제거 행동과 함께 나열하는 목록.",
+    "description": "메시지, 폼, 이슈, 문서에 붙은 파일을 업로드 상태와 함께 관리한다.",
+    "visual_anatomy": [
+      "file icon",
+      "filename",
+      "size",
+      "upload status",
+      "remove action"
+    ],
+    "when_to_use": [
+      "여러 첨부파일을 확인하거나 삭제해야 할 때"
+    ],
+    "anti_use": [
+      "파일 자체가 주요 콘텐츠면 file card나 gallery가 더 잘 보인다"
+    ],
+    "prompt_phrases": [
+      "업로드 진행 상태가 있는 attachment list를 넣어줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "attachment-list",
+      "props": {
+        "removable": true
+      }
+    },
+    "sources": [
+      {
+        "source_id": "carbon-design-components",
+        "note": "file uploader and file list patterns"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": "file-card",
+    "status": "draft",
+    "category": "data-display",
+    "ko": {
+      "name": "파일 카드",
+      "aliases": [
+        "file card",
+        "문서 카드",
+        "파일 타일"
+      ]
+    },
+    "en": {
+      "name": "File card",
+      "aliases": [
+        "Document card",
+        "File tile"
+      ]
+    },
+    "one_liner": "파일 하나를 아이콘, 이름, 메타데이터, 액션과 함께 카드로 보여주는 UI.",
+    "description": "드라이브, 문서함, 업로드 결과에서 파일을 시각적으로 선택하게 한다.",
+    "visual_anatomy": [
+      "file icon",
+      "filename",
+      "metadata",
+      "preview area",
+      "actions"
+    ],
+    "when_to_use": [
+      "파일을 카드/타일 뷰로 탐색해야 할 때"
+    ],
+    "anti_use": [
+      "열 정렬과 대량 작업이 중요하면 table이 낫다"
+    ],
+    "prompt_phrases": [
+      "PDF 아이콘과 더보기 메뉴가 있는 file card를 만들어줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "file-card",
+      "props": {
+        "menu": true
+      }
+    },
+    "sources": [
+      {
+        "source_id": "material-m3-components",
+        "note": "cards and list item composition"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": "product-card",
+    "status": "draft",
+    "category": "data-display",
+    "ko": {
+      "name": "상품 카드",
+      "aliases": [
+        "product card",
+        "제품 카드",
+        "commerce card"
+      ]
+    },
+    "en": {
+      "name": "Product card",
+      "aliases": [
+        "Commerce card",
+        "Item card"
+      ]
+    },
+    "one_liner": "상품 이미지, 이름, 가격, 평점, 장바구니 행동을 묶은 카드.",
+    "description": "커머스 목록에서 사용자가 상품을 훑고 선택하거나 바로 담을 수 있게 한다.",
+    "visual_anatomy": [
+      "product image",
+      "title",
+      "price",
+      "rating",
+      "add action"
+    ],
+    "when_to_use": [
+      "상품 목록이나 추천 영역을 카드로 보여줄 때"
+    ],
+    "anti_use": [
+      "상품 속성 비교가 핵심이면 comparison table이 낫다"
+    ],
+    "prompt_phrases": [
+      "이미지 가격 장바구니 버튼이 있는 product card를 만들어줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "product-card",
+      "props": {
+        "rating": true
+      }
+    },
+    "sources": [
+      {
+        "source_id": "material-m3-components",
+        "note": "card component for product content"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": "price-card",
+    "status": "draft",
+    "category": "data-display",
+    "ko": {
+      "name": "가격 카드",
+      "aliases": [
+        "price card",
+        "요금 카드",
+        "pricing card"
+      ]
+    },
+    "en": {
+      "name": "Price card",
+      "aliases": [
+        "Pricing card",
+        "Price plan card"
+      ]
+    },
+    "one_liner": "요금제나 상품 가격, 핵심 혜택, 선택 행동을 보여주는 카드.",
+    "description": "가격과 주요 조건을 빠르게 비교하고 사용자가 선택 행동으로 이어지게 한다.",
+    "visual_anatomy": [
+      "plan name",
+      "price",
+      "billing period",
+      "feature bullets",
+      "select action"
+    ],
+    "when_to_use": [
+      "요금제나 상품 옵션을 카드 형태로 제시할 때"
+    ],
+    "anti_use": [
+      "세부 기능 비교가 많으면 comparison table과 함께 쓴다"
+    ],
+    "prompt_phrases": [
+      "월 가격과 시작하기 버튼이 있는 price card를 넣어줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "price-card",
+      "props": {
+        "highlighted": true
+      }
+    },
+    "sources": [
+      {
+        "source_id": "material-m3-components",
+        "note": "cards and commerce-like content"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": "plan-card",
+    "status": "draft",
+    "category": "data-display",
+    "ko": {
+      "name": "플랜 카드",
+      "aliases": [
+        "plan card",
+        "요금제 카드",
+        "subscription plan card"
+      ]
+    },
+    "en": {
+      "name": "Plan card",
+      "aliases": [
+        "Subscription plan card",
+        "Tier card"
+      ]
+    },
+    "one_liner": "구독 플랜의 이름, 대상, 기능, 현재 선택 상태를 보여주는 카드.",
+    "description": "price card보다 구독 tier의 차이와 현재 플랜 표시가 중심이다.",
+    "visual_anatomy": [
+      "tier name",
+      "current badge",
+      "feature summary",
+      "upgrade or select action"
+    ],
+    "when_to_use": [
+      "구독 플랜을 선택하거나 변경하는 설정 화면에서"
+    ],
+    "anti_use": [
+      "단순 가격 노출만 필요하면 price card가 더 직접적이다"
+    ],
+    "prompt_phrases": [
+      "현재 플랜 배지가 있는 plan card 목록을 보여줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "plan-card",
+      "props": {
+        "current": true
+      }
+    },
+    "sources": [
+      {
+        "source_id": "carbon-design-components",
+        "note": "card-based product option display"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": "feature-comparison",
+    "status": "draft",
+    "category": "data-display",
+    "ko": {
+      "name": "기능 비교",
+      "aliases": [
+        "feature comparison",
+        "기능 비교표",
+        "플랜 비교"
+      ]
+    },
+    "en": {
+      "name": "Feature comparison",
+      "aliases": [
+        "Feature comparison table",
+        "Plan comparison"
+      ]
+    },
+    "one_liner": "플랜이나 제품별 기능 제공 여부를 행과 열로 비교하는 UI.",
+    "description": "comparison table의 커머스/플랜 특화 형태로 체크, 제한, 강조 열을 사용한다.",
+    "visual_anatomy": [
+      "feature rows",
+      "plan columns",
+      "checkmarks",
+      "highlighted tier"
+    ],
+    "when_to_use": [
+      "사용자가 플랜별 기능 차이를 근거로 선택해야 할 때"
+    ],
+    "anti_use": [
+      "기능이 3개 이하이면 plan card 안 요약으로 충분하다"
+    ],
+    "prompt_phrases": [
+      "Basic Pro Team 기능 차이를 feature comparison으로 보여줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "feature-comparison",
+      "props": {
+        "columns": 3
+      }
+    },
+    "sources": [
+      {
+        "source_id": "carbon-design-components",
+        "note": "comparison table structure"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": "coupon-field",
+    "status": "draft",
+    "category": "input",
+    "ko": {
+      "name": "쿠폰 입력 필드",
+      "aliases": [
+        "coupon field",
+        "프로모션 코드 입력",
+        "할인 코드"
+      ]
+    },
+    "en": {
+      "name": "Coupon field",
+      "aliases": [
+        "Promo code field",
+        "Discount code input"
+      ]
+    },
+    "one_liner": "쿠폰이나 프로모션 코드를 입력하고 적용하는 입력+버튼 조합.",
+    "description": "결제 요약 근처에서 코드 입력, 적용, 성공/실패 상태를 보여준다.",
+    "visual_anatomy": [
+      "code input",
+      "apply button",
+      "validation state",
+      "discount feedback"
+    ],
+    "when_to_use": [
+      "체크아웃이나 결제 화면에서 할인 코드를 받을 때"
+    ],
+    "anti_use": [
+      "일반 검색이나 인증 코드를 coupon field라고 부르지 않는다"
+    ],
+    "prompt_phrases": [
+      "결제 요약 아래에 적용 버튼이 있는 coupon field를 넣어줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "coupon-field",
+      "props": {
+        "applied": false
+      }
+    },
+    "sources": [
+      {
+        "source_id": "shadcn-ui-docs",
+        "note": "input and button composition"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": "quantity-stepper",
+    "status": "draft",
+    "category": "input",
+    "ko": {
+      "name": "수량 스테퍼",
+      "aliases": [
+        "quantity stepper",
+        "수량 조절기",
+        "plus minus input"
+      ]
+    },
+    "en": {
+      "name": "Quantity stepper",
+      "aliases": [
+        "Quantity input stepper",
+        "Plus minus input"
+      ]
+    },
+    "one_liner": "빼기/더하기 버튼으로 상품 수량 같은 숫자를 조절하는 입력.",
+    "description": "직접 입력보다 작은 정수 범위를 빠르게 늘리거나 줄이게 한다.",
+    "visual_anatomy": [
+      "minus button",
+      "quantity value",
+      "plus button",
+      "min max constraints"
+    ],
+    "when_to_use": [
+      "장바구니 수량",
+      "인원수",
+      "티켓 수처럼 작은 정수를 조절할 때"
+    ],
+    "anti_use": [
+      "큰 범위나 연속 값은 slider나 number input이 낫다"
+    ],
+    "prompt_phrases": [
+      "장바구니에 plus minus quantity stepper를 넣어줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "quantity-stepper",
+      "props": {
+        "min": 1
+      }
+    },
+    "sources": [
+      {
+        "source_id": "apple-hig-components",
+        "note": "steppers and numeric controls"
+      }
+    ],
+    "confidence": "high"
+  },
+  {
+    "id": "cart-summary",
+    "status": "draft",
+    "category": "data-display",
+    "ko": {
+      "name": "장바구니 요약",
+      "aliases": [
+        "cart summary",
+        "주문 요약",
+        "checkout summary"
+      ]
+    },
+    "en": {
+      "name": "Cart summary",
+      "aliases": [
+        "Order summary",
+        "Checkout summary"
+      ]
+    },
+    "one_liner": "상품 합계, 배송비, 할인, 총 결제 금액을 요약하는 영역.",
+    "description": "결제 전 사용자가 비용 구성을 확인하고 다음 단계로 이동하게 한다.",
+    "visual_anatomy": [
+      "line items",
+      "subtotal",
+      "discount",
+      "shipping",
+      "total",
+      "checkout action"
+    ],
+    "when_to_use": [
+      "장바구니나 체크아웃에서 결제 금액을 확인해야 할 때"
+    ],
+    "anti_use": [
+      "주문 완료 이후에는 order status나 receipt가 더 적절하다"
+    ],
+    "prompt_phrases": [
+      "소계 배송비 할인 총액이 있는 cart summary를 만들어줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "cart-summary",
+      "props": {
+        "total": true
+      }
+    },
+    "sources": [
+      {
+        "source_id": "material-m3-components",
+        "note": "lists and cards for commerce summary"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": "checkout-step",
+    "status": "draft",
+    "category": "structure",
+    "ko": {
+      "name": "체크아웃 단계",
+      "aliases": [
+        "checkout step",
+        "결제 단계",
+        "주문 단계"
+      ]
+    },
+    "en": {
+      "name": "Checkout step",
+      "aliases": [
+        "Checkout stepper",
+        "Purchase step"
+      ]
+    },
+    "one_liner": "배송, 결제, 확인처럼 구매 흐름의 현재 단계를 보여주는 구조.",
+    "description": "사용자가 결제 흐름에서 어디에 있고 다음에 무엇을 해야 하는지 알게 한다.",
+    "visual_anatomy": [
+      "step indicator",
+      "current step",
+      "completed steps",
+      "step content"
+    ],
+    "when_to_use": [
+      "구매나 가입처럼 여러 단계가 순서대로 진행될 때"
+    ],
+    "anti_use": [
+      "한 화면에서 끝나는 간단 결제에는 stepper가 과하다"
+    ],
+    "prompt_phrases": [
+      "배송 결제 확인 checkout step을 상단에 보여줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "checkout-step",
+      "props": {
+        "current": 2
+      }
+    },
+    "sources": [
+      {
+        "source_id": "material-m3-components",
+        "note": "progress and step-like navigation"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": "payment-method-card",
+    "status": "draft",
+    "category": "selection",
+    "ko": {
+      "name": "결제수단 카드",
+      "aliases": [
+        "payment method card",
+        "카드 선택 UI",
+        "결제 카드"
+      ]
+    },
+    "en": {
+      "name": "Payment method card",
+      "aliases": [
+        "Payment card selector",
+        "Billing method card"
+      ]
+    },
+    "one_liner": "신용카드나 계좌 같은 결제수단을 선택하고 관리하는 카드.",
+    "description": "브랜드, 마지막 번호, 만료일, 기본 결제수단 여부, 선택 상태를 보여준다.",
+    "visual_anatomy": [
+      "payment brand",
+      "masked number",
+      "expiry",
+      "selected state",
+      "manage action"
+    ],
+    "when_to_use": [
+      "여러 결제수단 중 하나를 선택하거나 기본값을 관리할 때"
+    ],
+    "anti_use": [
+      "카드 정보 입력 폼은 별도 payment form으로 구분한다"
+    ],
+    "prompt_phrases": [
+      "기본 배지가 있는 payment method card를 선택 가능하게 만들어줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "payment-method-card",
+      "props": {
+        "selected": true
+      }
+    },
+    "sources": [
+      {
+        "source_id": "material-m3-components",
+        "note": "selectable cards and list items"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": "address-card",
+    "status": "draft",
+    "category": "data-display",
+    "ko": {
+      "name": "주소 카드",
+      "aliases": [
+        "address card",
+        "배송지 카드",
+        "address selector"
+      ]
+    },
+    "en": {
+      "name": "Address card",
+      "aliases": [
+        "Shipping address card",
+        "Address selector"
+      ]
+    },
+    "one_liner": "배송지나 청구지 주소를 카드 형태로 표시하고 선택하는 UI.",
+    "description": "수령인, 주소, 전화번호, 기본 주소 배지, 편집 행동을 함께 보여준다.",
+    "visual_anatomy": [
+      "recipient",
+      "address lines",
+      "default badge",
+      "selected state",
+      "edit action"
+    ],
+    "when_to_use": [
+      "여러 배송지나 청구지 중 하나를 고를 때"
+    ],
+    "anti_use": [
+      "주소를 새로 입력하는 폼은 address form으로 분리한다"
+    ],
+    "prompt_phrases": [
+      "기본 배송지 배지가 있는 address card를 만들어줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "address-card",
+      "props": {
+        "default": true
+      }
+    },
+    "sources": [
+      {
+        "source_id": "material-m3-components",
+        "note": "cards and selection controls"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": "order-status",
+    "status": "draft",
+    "category": "feedback",
+    "ko": {
+      "name": "주문 상태",
+      "aliases": [
+        "order status",
+        "배송 상태",
+        "주문 진행상태"
+      ]
+    },
+    "en": {
+      "name": "Order status",
+      "aliases": [
+        "Delivery status",
+        "Fulfillment status"
+      ]
+    },
+    "one_liner": "주문 접수, 결제, 배송, 완료 같은 진행 상태를 표시하는 UI.",
+    "description": "현재 주문이 어디까지 진행됐는지와 예상 도착일, 다음 행동을 알려준다.",
+    "visual_anatomy": [
+      "status label",
+      "progress steps",
+      "timestamp",
+      "delivery estimate"
+    ],
+    "when_to_use": [
+      "구매 후 주문이나 배송 진행을 추적해야 할 때"
+    ],
+    "anti_use": [
+      "결제 전 단계 안내는 checkout step이 더 정확하다"
+    ],
+    "prompt_phrases": [
+      "주문 접수 배송중 완료 order status를 보여줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "order-status",
+      "props": {
+        "step": 2
+      }
+    },
+    "sources": [
+      {
+        "source_id": "material-m3-components",
+        "note": "progress and status display"
+      }
+    ],
+    "confidence": "medium"
   }
 ] satisfies VocabularyTerm[]
 

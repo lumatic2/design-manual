@@ -277,6 +277,26 @@ function renderVisual(variant: string, label: string) {
   if (variant === "health-indicator") return <HealthIndicatorVisual />
   if (variant === "connection-status") return <ConnectionStatusVisual />
   if (variant === "retry-panel") return <RetryPanelVisual />
+  if (variant === "media-card") return <MediaCardVisual />
+  if (variant === "video-player-controls") return <VideoPlayerControlsVisual />
+  if (variant === "audio-player-controls") return <AudioPlayerControlsVisual />
+  if (variant === "image-gallery") return <ImageGalleryVisual />
+  if (variant === "lightbox") return <LightboxVisual />
+  if (variant === "cropper") return <CropperVisual />
+  if (variant === "upload-dropzone") return <UploadDropzoneVisual />
+  if (variant === "attachment-list") return <AttachmentListVisual />
+  if (variant === "file-card") return <FileCardVisual />
+  if (variant === "product-card") return <ProductCardVisual />
+  if (variant === "price-card") return <PriceCardVisual />
+  if (variant === "plan-card") return <PlanCardVisual />
+  if (variant === "feature-comparison") return <FeatureComparisonVisual />
+  if (variant === "coupon-field") return <CouponFieldVisual />
+  if (variant === "quantity-stepper") return <QuantityStepperVisual />
+  if (variant === "cart-summary") return <CartSummaryVisual />
+  if (variant === "checkout-step") return <CheckoutStepVisual />
+  if (variant === "payment-method-card") return <PaymentMethodCardVisual />
+  if (variant === "address-card") return <AddressCardVisual />
+  if (variant === "order-status") return <OrderStatusVisual />
   if (variant === "error-state") return <StateVisual tone="error" />
   if (variant === "success-state") return <StateVisual tone="success" />
   if (variant === "warning-state") return <StateVisual tone="warning" />
@@ -2076,6 +2096,125 @@ function RetryPanelVisual() {
   const [loaded, setLoaded] = useState(false)
 
   return <Chrome className="flex w-52 flex-col items-center gap-2 p-3 text-center text-xs">{loaded ? <CheckCircle2 className="text-primary" aria-hidden="true" /> : <AlertTriangle className="text-destructive" aria-hidden="true" />}<p className="font-medium">{loaded ? "불러옴" : "로드 실패"}</p><button type="button" className="rounded border px-2 py-1" onClick={() => setLoaded(true)}>다시 시도</button></Chrome>
+}
+
+function MediaCardVisual() {
+  const [liked, setLiked] = useState(false)
+
+  return <Chrome className="w-44 overflow-hidden text-xs"><div className="flex h-20 items-center justify-center bg-muted"><ImageIcon aria-hidden="true" /></div><div className="p-2"><p className="font-medium">콘텐츠 제목</p><div className="mt-2 flex justify-between"><span>1.2K views</span><button type="button" onClick={() => setLiked((value) => !value)}><Heart className={cn(liked && "fill-primary text-primary")} aria-hidden="true" /></button></div></div></Chrome>
+}
+
+function VideoPlayerControlsVisual() {
+  const [playing, setPlaying] = useState(false)
+
+  return <Chrome className="w-56 overflow-hidden text-xs"><div className="flex h-20 items-center justify-center bg-foreground/10"><button type="button" className="rounded-full bg-background p-2" onClick={() => setPlaying((value) => !value)}><Play aria-hidden="true" className={cn(playing && "text-primary")} /></button></div><div className="flex items-center gap-2 p-2"><span>{playing ? "0:24" : "0:00"}</span><div className="h-1 flex-1 rounded bg-muted"><div className={cn("h-full rounded bg-primary", playing ? "w-1/2" : "w-1/5")} /></div><span>1:20</span></div></Chrome>
+}
+
+function AudioPlayerControlsVisual() {
+  const [playing, setPlaying] = useState(false)
+
+  return <Chrome className="flex w-56 items-center gap-3 p-3 text-xs"><button type="button" className="rounded-full border p-2" onClick={() => setPlaying((value) => !value)}><Play aria-hidden="true" className={cn(playing && "text-primary")} /></button><div className="flex flex-1 items-end gap-1">{[12, 20, 14, 24, 18, 28, 16].map((height, index) => <span key={index} className={cn("w-2 rounded bg-primary/50", playing && index < 4 && "bg-primary")} style={{ height }} />)}</div><span>0:32</span></Chrome>
+}
+
+function ImageGalleryVisual() {
+  const [selected, setSelected] = useState(1)
+
+  return <Chrome className="grid w-56 grid-cols-[1fr_72px] gap-2 p-2"><div className="flex items-center justify-center rounded bg-muted"><ImageIcon aria-hidden="true" /><span className="text-xs">{selected + 1}</span></div><div className="grid grid-cols-2 gap-1">{[0, 1, 2, 3].map((item) => <button key={item} type="button" className={cn("h-8 rounded bg-muted", selected === item && "ring-2 ring-primary")} onClick={() => setSelected(item)}><span className="sr-only">image {item + 1}</span></button>)}</div></Chrome>
+}
+
+function LightboxVisual() {
+  const [open, setOpen] = useState(true)
+
+  if (!open) return <button type="button" className="rounded border px-3 py-2 text-xs" onClick={() => setOpen(true)}>이미지 열기</button>
+  return <div className="relative h-28 w-56 rounded-md bg-foreground/80 p-3 text-white"><button type="button" className="absolute right-2 top-2" onClick={() => setOpen(false)}><X aria-hidden="true" /></button><div className="mx-auto flex h-20 w-36 items-center justify-center rounded bg-white/20"><ImageIcon aria-hidden="true" /></div></div>
+}
+
+function CropperVisual() {
+  const [wide, setWide] = useState(false)
+
+  return <button type="button" className="relative h-28 w-48 rounded-md border bg-muted" onClick={() => setWide((value) => !value)}><div className={cn("absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 border-2 border-primary bg-background/40", wide ? "h-14 w-28" : "size-20")}><span className="absolute -right-1 -top-1 size-2 rounded-full bg-primary" /><span className="absolute -bottom-1 -left-1 size-2 rounded-full bg-primary" /></div></button>
+}
+
+function UploadDropzoneVisual() {
+  const [dragging, setDragging] = useState(true)
+
+  return <button type="button" className={cn("flex h-28 w-52 flex-col items-center justify-center gap-2 rounded-md border border-dashed bg-card text-xs", dragging && "border-primary bg-primary/5")} onClick={() => setDragging((value) => !value)}><FileUp aria-hidden="true" /><span>{dragging ? "놓아서 업로드" : "파일 드롭"}</span><span className="text-muted-foreground">PDF, PNG</span></button>
+}
+
+function AttachmentListVisual() {
+  const [count, setCount] = useState(2)
+
+  return <Chrome className="w-56 p-2 text-xs">{Array.from({ length: count }).map((_, item) => <div key={item} className="mb-1 flex items-center gap-2 rounded border px-2 py-1"><FileUp aria-hidden="true" /><span>file-{item + 1}.pdf</span><button type="button" className="ml-auto" onClick={() => setCount((value) => Math.max(0, value - 1))}><X aria-hidden="true" /></button></div>)}</Chrome>
+}
+
+function FileCardVisual() {
+  const [menu, setMenu] = useState(false)
+
+  return <Chrome className="relative w-40 p-3 text-xs"><FileUp aria-hidden="true" /><p className="mt-2 font-medium">Report.pdf</p><p className="text-muted-foreground">2.4 MB</p><button type="button" className="absolute right-2 top-2" onClick={() => setMenu((value) => !value)}><MoreHorizontal aria-hidden="true" /></button>{menu && <div className="absolute right-2 top-8 rounded border bg-background px-2 py-1">다운로드</div>}</Chrome>
+}
+
+function ProductCardVisual() {
+  const [added, setAdded] = useState(false)
+
+  return <Chrome className="w-44 overflow-hidden text-xs"><div className="h-16 bg-muted" /><div className="p-2"><p className="font-medium">Product</p><p className="text-primary">₩29,000</p><button type="button" className={cn("mt-2 rounded px-2 py-1", added ? "border" : "bg-primary text-primary-foreground")} onClick={() => setAdded(true)}>{added ? "담김" : "담기"}</button></div></Chrome>
+}
+
+function PriceCardVisual() {
+  const [selected, setSelected] = useState(false)
+
+  return <button type="button" className={cn("w-44 rounded-md border bg-card p-3 text-left text-xs", selected && "ring-2 ring-primary")} onClick={() => setSelected((value) => !value)}><p className="font-medium">Pro</p><p className="mt-1 text-lg font-semibold">₩12K</p><Line className="mt-2 w-24" /><span className="mt-3 inline-block rounded bg-primary px-2 py-1 text-primary-foreground">선택</span></button>
+}
+
+function PlanCardVisual() {
+  const [current, setCurrent] = useState(true)
+
+  return <Chrome className="w-48 p-3 text-xs"><div className="flex justify-between"><b>Team</b>{current && <span className="rounded-full bg-primary px-2 py-0.5 text-primary-foreground">현재</span>}</div><Line className="mt-3 w-28" /><button type="button" className="mt-3 rounded border px-2 py-1" onClick={() => setCurrent((value) => !value)}>전환</button></Chrome>
+}
+
+function FeatureComparisonVisual() {
+  const [highlight, setHighlight] = useState(1)
+
+  return <div className="grid w-60 grid-cols-3 overflow-hidden rounded-md border text-xs">{["Basic", "Pro", "Team"].map((plan, index) => <button key={plan} type="button" className={cn("border-r p-2 last:border-r-0", highlight === index && "bg-primary/10")} onClick={() => setHighlight(index)}><b>{plan}</b><Check className="mx-auto mt-2 text-primary" aria-hidden="true" /><Line className="mt-2 w-12" /></button>)}</div>
+}
+
+function CouponFieldVisual() {
+  const [applied, setApplied] = useState(false)
+
+  return <Chrome className="flex w-56 items-center gap-2 p-2 text-xs"><input className="min-w-0 flex-1 rounded border bg-background px-2 py-1 outline-none" value={applied ? "SAVE10" : ""} placeholder="쿠폰 코드" readOnly /><button type="button" className="rounded bg-primary px-2 py-1 text-primary-foreground" onClick={() => setApplied(true)}>{applied ? "적용됨" : "적용"}</button></Chrome>
+}
+
+function QuantityStepperVisual() {
+  const [quantity, setQuantity] = useState(1)
+
+  return <div className="flex items-center rounded-md border bg-card text-sm"><button type="button" className="px-3 py-2" onClick={() => setQuantity((value) => Math.max(1, value - 1))}>-</button><span className="border-x px-4 py-2">{quantity}</span><button type="button" className="px-3 py-2" onClick={() => setQuantity((value) => value + 1)}>+</button></div>
+}
+
+function CartSummaryVisual() {
+  return <Chrome className="w-52 p-3 text-xs"><div className="flex justify-between"><span>소계</span><span>₩29K</span></div><div className="mt-1 flex justify-between"><span>배송</span><span>₩3K</span></div><div className="mt-2 border-t pt-2 flex justify-between font-medium"><span>총액</span><span>₩32K</span></div><button type="button" className="mt-3 w-full rounded bg-primary py-1 text-primary-foreground">결제</button></Chrome>
+}
+
+function CheckoutStepVisual() {
+  const [step, setStep] = useState(2)
+
+  return <Chrome className="w-56 p-3 text-xs"><div className="flex items-center justify-between">{["배송", "결제", "확인"].map((label, index) => <button key={label} type="button" className={cn("flex size-8 items-center justify-center rounded-full border", index + 1 <= step && "bg-primary text-primary-foreground")} onClick={() => setStep(index + 1)}>{index + 1}</button>)}</div><p className="mt-3 font-medium">{["배송", "결제", "확인"][step - 1]}</p></Chrome>
+}
+
+function PaymentMethodCardVisual() {
+  const [selected, setSelected] = useState(true)
+
+  return <button type="button" className={cn("w-52 rounded-md border bg-card p-3 text-left text-xs", selected && "ring-2 ring-primary")} onClick={() => setSelected((value) => !value)}><p className="font-medium">Visa **** 4242</p><p className="mt-1 text-muted-foreground">만료 12/28</p><span className="mt-2 inline-block rounded-full bg-muted px-2 py-0.5">기본</span></button>
+}
+
+function AddressCardVisual() {
+  const [selected, setSelected] = useState(true)
+
+  return <button type="button" className={cn("w-52 rounded-md border bg-card p-3 text-left text-xs", selected && "ring-2 ring-primary")} onClick={() => setSelected((value) => !value)}><div className="flex justify-between"><b>유성</b><span className="rounded-full bg-primary px-2 py-0.5 text-primary-foreground">기본</span></div><p className="mt-2 text-muted-foreground">서울 종로구 명륜3길 27</p></button>
+}
+
+function OrderStatusVisual() {
+  const [step, setStep] = useState(2)
+
+  return <Chrome className="w-56 p-3 text-xs"><div className="mb-3 flex items-center">{[1, 2, 3].map((item) => <button key={item} type="button" className={cn("mr-1 h-2 flex-1 rounded", item <= step ? "bg-primary" : "bg-muted")} onClick={() => setStep(item)}><span className="sr-only">step {item}</span></button>)}</div><p className="font-medium">{["주문 접수", "배송 중", "완료"][step - 1]}</p><p className="text-muted-foreground">예상 도착 내일</p></Chrome>
 }
 
 function StateVisual({ tone }: { tone: "error" | "success" | "warning" | "info" }) {
