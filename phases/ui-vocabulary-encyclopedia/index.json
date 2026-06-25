@@ -30,7 +30,14 @@
     {
       "step": 4,
       "name": "poster-style-summary-view",
-      "status": "pending"
+      "status": "completed",
+      "summary": "Replaced the separate poster-view milestone with a lighter browser print workflow: added a top-right PDF save action that opens window.print() and print CSS that hides controls while formatting the term grid for A4 output."
+    },
+    {
+      "step": 5,
+      "name": "vocabulary-expansion-batch-1",
+      "status": "completed",
+      "summary": "Expanded the editable YAML dataset from 60 to 106 terms, adding foundational visual atoms, input details, navigation patterns, action buttons, dashboard controls, and feedback states. Added matching TermVisual variants so new terms render as recognizable mini UI assets instead of falling back to generic placeholders."
     }
   ]
 }

@@ -1,22 +1,35 @@
 import {
   AlertTriangle,
   Bell,
+  Bold,
+  BookOpen,
   CalendarDays,
   Check,
+  CheckCircle2,
   ChevronDown,
   ChevronLeft,
   ChevronRight,
   Circle,
+  Copy,
+  Download,
+  EyeOff,
   FileUp,
   Folder,
   Heart,
   Home,
+  Image as ImageIcon,
+  Info,
+  Link as LinkIcon,
   LoaderCircle,
   Menu,
   MoreHorizontal,
+  Palette,
+  Play,
   Plus,
   Search,
   Settings,
+  Share2,
+  Type,
   Trash2,
   User,
   X,
@@ -104,10 +117,56 @@ function renderVisual(variant: string, label: string) {
   if (variant === "calendar-view") return <CalendarView />
   if (variant === "tree-view") return <TreeView />
   if (variant === "description-list") return <DescriptionList />
+  if (variant === "icon") return <IconVisual />
+  if (variant === "label") return <LabelVisual />
+  if (variant === "divider") return <DividerVisual />
+  if (variant === "spacer") return <SpacerVisual />
+  if (variant === "typography") return <TypographyVisual />
+  if (variant === "image") return <ImageVisual />
+  if (variant === "logo") return <LogoVisual />
+  if (variant === "thumbnail") return <ThumbnailVisual />
+  if (variant === "password-field") return <PasswordField />
+  if (variant === "number-input") return <NumberInput />
+  if (variant === "otp-input") return <OtpInput />
+  if (variant === "autocomplete") return <AutocompleteVisual />
+  if (variant === "search-suggestions") return <SearchSuggestions />
+  if (variant === "inline-edit") return <InlineEditVisual />
+  if (variant === "rich-text-editor") return <RichTextEditor />
+  if (variant === "color-picker") return <ColorPicker />
+  if (variant === "listbox") return <ListboxVisual />
+  if (variant === "menu-bar") return <MenuBarVisual />
+  if (variant === "bottom-navigation") return <BottomNavigation />
+  if (variant === "tab-bar") return <BottomNavigation />
+  if (variant === "filter-chip") return <FilterChip />
+  if (variant === "toggle-button") return <ToggleButtonVisual />
+  if (variant === "disclosure") return <DisclosureVisual />
+  if (variant === "anchor-nav") return <AnchorNav />
+  if (variant === "back-button") return <BackButtonVisual />
+  if (variant === "navigation-bar") return <NavigationBarVisual />
+  if (variant === "button-group") return <ButtonGroupVisual />
+  if (variant === "copy-button") return <ActionIconButton icon={<Copy aria-hidden="true" />} label="복사" />
+  if (variant === "download-button") return <ActionIconButton icon={<Download aria-hidden="true" />} label="PDF" />
+  if (variant === "share-button") return <ActionIconButton icon={<Share2 aria-hidden="true" />} label="공유" />
+  if (variant === "close-button") return <ActionIconButton icon={<X aria-hidden="true" />} label="닫기" />
+  if (variant === "overflow-button") return <ActionIconButton icon={<MoreHorizontal aria-hidden="true" />} label="더보기" />
+  if (variant === "top-app-bar") return <TopAppBar />
+  if (variant === "section") return <SectionVisual />
+  if (variant === "container") return <ContainerVisual />
+  if (variant === "hero") return <HeroVisual />
+  if (variant === "filter-bar") return <FilterBarVisual />
+  if (variant === "sort-control") return <SortControl />
+  if (variant === "data-grid") return <DataGridVisual />
+  if (variant === "legend") return <LegendVisual />
+  if (variant === "chart-axis") return <ChartAxisVisual />
+  if (variant === "error-state") return <StateVisual tone="error" />
+  if (variant === "success-state") return <StateVisual tone="success" />
+  if (variant === "warning-state") return <StateVisual tone="warning" />
+  if (variant === "info-state") return <StateVisual tone="info" />
+  if (variant === "loading-state") return <LoadingStateVisual />
   return <FallbackVisual label={label} />
 }
 
-function Chrome({ children, className }: { children: React.ReactNode; className?: string }) {
+function Chrome({ children, className }: { children?: React.ReactNode; className?: string }) {
   return <div className={cn("rounded-md border bg-card shadow-sm", className)}>{children}</div>
 }
 
@@ -548,6 +607,172 @@ function TreeRow({ icon, text, indent }: { icon: React.ReactNode; text: string; 
 
 function DescriptionList() {
   return <Chrome className="grid w-48 grid-cols-[64px_1fr] gap-y-2 p-3 text-xs"><span className="text-muted-foreground">상태</span><span>활성</span><span className="text-muted-foreground">역할</span><span>관리자</span><span className="text-muted-foreground">지역</span><span>서울</span></Chrome>
+}
+
+function IconVisual() {
+  return <span className="flex size-14 items-center justify-center rounded-lg border bg-card text-primary shadow-sm"><Home aria-hidden="true" /></span>
+}
+
+function LabelVisual() {
+  return <div className="w-48"><p className="mb-1 text-xs font-medium">이름</p><TextField /></div>
+}
+
+function DividerVisual() {
+  return <div className="w-48 space-y-3"><Line className="w-32" /><div className="h-px w-full bg-border" /><Line className="w-40" /></div>
+}
+
+function SpacerVisual() {
+  return <div className="flex w-48 items-center gap-4"><span className="h-16 w-14 rounded border bg-card" /><span className="flex h-16 flex-1 items-center justify-center rounded border border-dashed text-xs text-muted-foreground">gap</span><span className="h-16 w-14 rounded border bg-card" /></div>
+}
+
+function TypographyVisual() {
+  return <div className="w-48 space-y-2"><p className="text-2xl font-semibold">Heading</p><p className="text-sm">Body text line</p><p className="text-xs text-muted-foreground">Caption</p></div>
+}
+
+function ImageVisual() {
+  return <div className="flex h-24 w-44 items-center justify-center rounded-md border bg-card text-muted-foreground"><ImageIcon aria-hidden="true" /></div>
+}
+
+function LogoVisual() {
+  return <div className="flex items-center gap-2"><span className="flex size-10 items-center justify-center rounded-lg bg-primary text-primary-foreground"><BookOpen aria-hidden="true" /></span><span className="text-lg font-semibold">Brand</span></div>
+}
+
+function ThumbnailVisual() {
+  return <div className="relative flex h-20 w-36 items-center justify-center rounded-md border bg-card text-muted-foreground"><ImageIcon aria-hidden="true" /><span className="absolute bottom-2 right-2 flex size-7 items-center justify-center rounded-full bg-primary text-primary-foreground"><Play aria-hidden="true" /></span></div>
+}
+
+function PasswordField() {
+  return <Chrome className="flex h-10 w-48 items-center justify-between px-3 text-sm"><span>••••••••</span><EyeOff aria-hidden="true" /></Chrome>
+}
+
+function NumberInput() {
+  return <Chrome className="flex h-10 w-36 items-center justify-between overflow-hidden text-sm"><button className="h-full border-r px-3">-</button><span>3</span><button className="h-full border-l px-3">+</button></Chrome>
+}
+
+function OtpInput() {
+  return <div className="flex gap-1">{["4", "2", "8", "", "", ""].map((item, index) => <span key={index} className={cn("flex size-8 items-center justify-center rounded border bg-card text-sm", index === 3 && "border-primary")}>{item}</span>)}</div>
+}
+
+function AutocompleteVisual() {
+  return <Chrome className="w-48 overflow-hidden"><div className="flex h-9 items-center gap-2 border-b px-3 text-sm"><Search aria-hidden="true" /><span>sea</span></div><div className="p-1 text-xs"><p className="rounded bg-primary px-2 py-1 text-primary-foreground">Search field</p><p className="px-2 py-1 text-muted-foreground">Search view</p></div></Chrome>
+}
+
+function SearchSuggestions() {
+  return <Chrome className="w-52 overflow-hidden"><SearchField /><div className="border-t p-1 text-xs"><Row icon={<Search aria-hidden="true" />} text="검색 제안" /><Row icon={<Search aria-hidden="true" />} text="최근 검색어" /></div></Chrome>
+}
+
+function InlineEditVisual() {
+  return <Chrome className="flex h-10 w-48 items-center justify-between px-3 text-sm"><span className="border-b border-primary">문서 제목</span><Type aria-hidden="true" /></Chrome>
+}
+
+function RichTextEditor() {
+  return <Chrome className="w-52 overflow-hidden"><div className="flex gap-1 border-b p-1"><SmallIcon><Bold aria-hidden="true" /></SmallIcon><SmallIcon><LinkIcon aria-hidden="true" /></SmallIcon></div><div className="space-y-2 p-3"><Line className="w-36" /><Line className="w-28" /></div></Chrome>
+}
+
+function ColorPicker() {
+  return <Chrome className="w-44 p-3"><div className="mb-3 flex items-center gap-2 text-sm"><Palette aria-hidden="true" /><span>#6D5DF6</span></div><div className="grid grid-cols-6 gap-1">{["bg-primary", "bg-destructive", "bg-accent", "bg-muted-foreground", "bg-card", "bg-foreground"].map((color) => <span key={color} className={cn("size-5 rounded border", color)} />)}</div></Chrome>
+}
+
+function ListboxVisual() {
+  return <Chrome className="w-44 p-1 text-sm"><p className="rounded bg-primary px-2 py-1 text-primary-foreground">옵션 A</p><p className="px-2 py-1">옵션 B</p><p className="px-2 py-1 text-muted-foreground">옵션 C</p></Chrome>
+}
+
+function MenuBarVisual() {
+  return <Chrome className="w-52 overflow-hidden text-xs"><div className="flex border-b"><span className="bg-muted px-3 py-2">파일</span><span className="px-3 py-2">편집</span><span className="px-3 py-2">보기</span></div><div className="w-24 p-1"><p className="rounded bg-primary px-2 py-1 text-primary-foreground">새로 만들기</p><p className="px-2 py-1">열기</p></div></Chrome>
+}
+
+function BottomNavigation() {
+  return <Chrome className="flex h-14 w-52 items-center justify-around px-2 text-[10px]"><NavItem active icon={<Home aria-hidden="true" />} text="홈" /><NavItem icon={<Search aria-hidden="true" />} text="검색" /><NavItem icon={<User aria-hidden="true" />} text="내 정보" /></Chrome>
+}
+
+function NavItem({ icon, text, active }: { icon: React.ReactNode; text: string; active?: boolean }) {
+  return <span className={cn("flex flex-col items-center gap-0.5", active && "text-primary")}>{icon}<span>{text}</span></span>
+}
+
+function FilterChip() {
+  return <span className="inline-flex items-center gap-1 rounded-full border bg-primary px-3 py-1 text-sm text-primary-foreground"><Check aria-hidden="true" />진행 중</span>
+}
+
+function ToggleButtonVisual() {
+  return <button className="flex items-center gap-2 rounded-md border bg-primary px-3 py-2 text-sm text-primary-foreground"><Bold aria-hidden="true" />굵게</button>
+}
+
+function DisclosureVisual() {
+  return <Chrome className="w-48 p-2 text-sm"><div className="flex items-center justify-between"><span>상세 옵션</span><ChevronDown aria-hidden="true" /></div><Line className="mt-3 w-32" /></Chrome>
+}
+
+function AnchorNav() {
+  return <Chrome className="w-44 p-2 text-sm"><p className="border-l-2 border-transparent px-2 py-1 text-muted-foreground">개요</p><p className="border-l-2 border-primary px-2 py-1 font-medium">컴포넌트</p><p className="border-l-2 border-transparent px-2 py-1 text-muted-foreground">예시</p></Chrome>
+}
+
+function BackButtonVisual() {
+  return <button className="inline-flex items-center gap-2 rounded-md border bg-card px-3 py-2 text-sm"><ChevronLeft aria-hidden="true" />이전</button>
+}
+
+function NavigationBarVisual() {
+  return <Chrome className="flex h-12 w-64 items-center justify-between px-3 text-xs"><LogoVisual /><span className="flex gap-3"><b>홈</b><span>문서</span><span>설정</span></span></Chrome>
+}
+
+function ButtonGroupVisual() {
+  return <div className="flex gap-2"><ButtonVisual label="취소" emphasis="secondary" /><ButtonVisual label="저장" emphasis="primary" /></div>
+}
+
+function ActionIconButton({ icon, label }: { icon: React.ReactNode; label: string }) {
+  return <button className="inline-flex items-center gap-2 rounded-md border bg-card px-3 py-2 text-sm shadow-sm">{icon}{label}</button>
+}
+
+function TopAppBar() {
+  return <Chrome className="flex h-12 w-60 items-center justify-between px-3"><ChevronLeft aria-hidden="true" /><span className="text-sm font-semibold">화면 제목</span><span className="flex gap-2"><Search aria-hidden="true" /><MoreHorizontal aria-hidden="true" /></span></Chrome>
+}
+
+function SectionVisual() {
+  return <div className="w-52 space-y-3"><div><p className="text-sm font-semibold">섹션 제목</p><Line className="mt-1 w-32" /></div><Chrome className="h-14" /></div>
+}
+
+function ContainerVisual() {
+  return <div className="w-60 rounded-md border border-dashed p-3"><Chrome className="mx-auto h-20 w-40" /></div>
+}
+
+function HeroVisual() {
+  return <Chrome className="grid w-60 grid-cols-[1fr_72px] gap-3 p-3"><div><p className="text-lg font-semibold">Hero title</p><Line className="mt-2 w-24" /><button className="mt-3 rounded bg-primary px-2 py-1 text-xs text-primary-foreground">시작</button></div><div className="rounded bg-muted" /></Chrome>
+}
+
+function FilterBarVisual() {
+  return <Chrome className="flex w-64 items-center gap-2 p-2"><div className="min-w-0 flex-1"><SearchField /></div><span className="rounded-full border px-2 py-1 text-xs">상태</span><span className="rounded-full border px-2 py-1 text-xs">정렬</span></Chrome>
+}
+
+function SortControl() {
+  return <Chrome className="flex h-10 w-40 items-center justify-between px-3 text-sm"><span>최신순</span><ChevronDown aria-hidden="true" /></Chrome>
+}
+
+function DataGridVisual() {
+  return <div className="grid w-52 grid-cols-4 overflow-hidden rounded-md border bg-card text-xs">{Array.from({ length: 16 }).map((_, cell) => <div key={cell} className={cn("h-7 border-b border-r p-1", cell === 9 && "bg-primary text-primary-foreground")}><Line className="w-full" /></div>)}</div>
+}
+
+function LegendVisual() {
+  return <Chrome className="w-44 space-y-2 p-3 text-xs"><LegendRow color="bg-primary" text="매출" /><LegendRow color="bg-destructive" text="비용" /><LegendRow color="bg-muted-foreground" text="이익" /></Chrome>
+}
+
+function LegendRow({ color, text }: { color: string; text: string }) {
+  return <p className="flex items-center gap-2"><span className={cn("size-3 rounded-sm", color)} />{text}</p>
+}
+
+function ChartAxisVisual() {
+  return <div className="relative h-28 w-44 border-b border-l bg-card p-2"><div className="absolute bottom-2 left-4 right-2 flex items-end gap-2">{[24, 48, 36, 64].map((height) => <span key={height} className="w-5 rounded-t bg-primary" style={{ height }} />)}</div><span className="absolute bottom-0 right-0 text-[10px] text-muted-foreground">x</span><span className="absolute left-1 top-0 text-[10px] text-muted-foreground">y</span></div>
+}
+
+function StateVisual({ tone }: { tone: "error" | "success" | "warning" | "info" }) {
+  const config = {
+    error: { icon: <AlertTriangle aria-hidden="true" />, title: "문제가 발생했습니다" },
+    success: { icon: <CheckCircle2 aria-hidden="true" />, title: "완료되었습니다" },
+    warning: { icon: <AlertTriangle aria-hidden="true" />, title: "확인이 필요합니다" },
+    info: { icon: <Info aria-hidden="true" />, title: "안내" },
+  }[tone]
+  return <Chrome className="flex w-52 items-start gap-2 p-3 text-sm"><span className={cn(tone === "success" && "text-primary", tone === "error" && "text-destructive")}>{config.icon}</span><div><p className="font-medium">{config.title}</p><Line className="mt-2 w-28" /></div></Chrome>
+}
+
+function LoadingStateVisual() {
+  return <Chrome className="w-48 p-3"><div className="flex items-center gap-2 text-sm"><LoaderCircle className="animate-spin text-primary" aria-hidden="true" />불러오는 중</div><SkeletonVisual /></Chrome>
 }
 
 function FallbackVisual({ label }: { label: string }) {

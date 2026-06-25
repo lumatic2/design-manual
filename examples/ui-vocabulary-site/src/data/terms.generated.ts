@@ -3187,6 +3187,2483 @@ export const terms = [
       }
     ],
     "confidence": "low"
+  },
+  {
+    "id": "icon",
+    "status": "draft",
+    "category": "structure",
+    "ko": {
+      "name": "아이콘",
+      "aliases": [
+        "icon",
+        "심볼",
+        "그림 기호"
+      ]
+    },
+    "en": {
+      "name": "Icon",
+      "aliases": [
+        "Symbol",
+        "Glyph"
+      ]
+    },
+    "one_liner": "행동, 상태, 대상을 작은 그림 기호로 표현하는 요소.",
+    "description": "텍스트를 보조하거나 공간이 좁은 곳에서 의미를 빠르게 전달한다.",
+    "visual_anatomy": [
+      "simple pictogram",
+      "consistent stroke or fill",
+      "optional label",
+      "accessible name when interactive"
+    ],
+    "when_to_use": [
+      "반복되는 행동이나 상태를 빠르게 인식시킬 때",
+      "버튼이나 메뉴의 의미를 보조할 때"
+    ],
+    "anti_use": [
+      "낯선 아이콘을 라벨 없이 단독으로 쓰지 않는다",
+      "장식 아이콘에 의미를 부여하지 않는다"
+    ],
+    "prompt_phrases": [
+      "저장 버튼 옆에 save icon을 넣어줘",
+      "메뉴 항목마다 의미를 보여주는 아이콘을 붙여줘"
+    ],
+    "asset": {
+      "kind": "icon-composition",
+      "variant": "icon",
+      "props": {
+        "symbol": "home"
+      }
+    },
+    "sources": [
+      {
+        "source_id": "apple-hig-components",
+        "note": "icon guidance and component usage"
+      }
+    ],
+    "confidence": "high"
+  },
+  {
+    "id": "label",
+    "status": "draft",
+    "category": "structure",
+    "ko": {
+      "name": "라벨",
+      "aliases": [
+        "label",
+        "이름표",
+        "필드명"
+      ]
+    },
+    "en": {
+      "name": "Label",
+      "aliases": [
+        "Field label",
+        "Text label"
+      ]
+    },
+    "one_liner": "입력값이나 UI 요소가 무엇을 의미하는지 이름을 붙이는 짧은 텍스트.",
+    "description": "입력창, 스위치, 체크박스, 값 옆에 붙어 사용자가 목적을 이해하게 한다.",
+    "visual_anatomy": [
+      "short text",
+      "associated control",
+      "optional required mark",
+      "helper relationship"
+    ],
+    "when_to_use": [
+      "입력 요소의 의미를 명확히 알려야 할 때",
+      "아이콘이나 값만으로 의미가 부족할 때"
+    ],
+    "anti_use": [
+      "placeholder만으로 label을 대체하지 않는다",
+      "너무 긴 설명은 helper text로 분리한다"
+    ],
+    "prompt_phrases": [
+      "입력창 위에 이름 label을 붙여줘",
+      "스위치 오른쪽에 알림 받기 라벨을 넣어줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "label",
+      "props": {
+        "target": "text-field"
+      }
+    },
+    "sources": [
+      {
+        "source_id": "material-m3-components",
+        "note": "labels in text fields and controls"
+      }
+    ],
+    "confidence": "high"
+  },
+  {
+    "id": "divider",
+    "status": "draft",
+    "category": "structure",
+    "ko": {
+      "name": "구분선",
+      "aliases": [
+        "divider",
+        "separator",
+        "분리선"
+      ]
+    },
+    "en": {
+      "name": "Divider",
+      "aliases": [
+        "Separator",
+        "Rule"
+      ]
+    },
+    "one_liner": "관련 영역이나 항목 사이를 얇은 선으로 구분하는 요소.",
+    "description": "목록, 메뉴, 카드 내부에서 정보 덩어리의 경계를 시각적으로 만든다.",
+    "visual_anatomy": [
+      "thin horizontal or vertical line",
+      "spacing around line",
+      "low contrast color"
+    ],
+    "when_to_use": [
+      "항목 사이의 경계를 가볍게 보여줄 때",
+      "섹션이 붙어 보여 혼란스러울 때"
+    ],
+    "anti_use": [
+      "간격만으로 충분하면 선을 남발하지 않는다",
+      "너무 강한 색상으로 시선을 빼앗지 않는다"
+    ],
+    "prompt_phrases": [
+      "설정 항목 사이에 divider를 넣어줘",
+      "카드 제목과 본문 사이를 얇은 구분선으로 나눠줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "divider",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "sources": [
+      {
+        "source_id": "material-m3-components",
+        "note": "divider component"
+      }
+    ],
+    "confidence": "high"
+  },
+  {
+    "id": "spacer",
+    "status": "draft",
+    "category": "structure",
+    "ko": {
+      "name": "여백",
+      "aliases": [
+        "spacing",
+        "spacer",
+        "간격"
+      ]
+    },
+    "en": {
+      "name": "Spacer",
+      "aliases": [
+        "Spacing",
+        "Gap"
+      ]
+    },
+    "one_liner": "요소 사이에 의도적인 빈 공간을 만들어 구조와 리듬을 잡는 요소.",
+    "description": "실제 보이는 컴포넌트는 아니지만 UI의 묶음, 위계, 읽기 흐름을 결정한다.",
+    "visual_anatomy": [
+      "empty space",
+      "consistent gap size",
+      "alignment relationship"
+    ],
+    "when_to_use": [
+      "요소가 너무 붙어 보여 읽기 어려울 때",
+      "그룹 사이의 관계를 표현할 때"
+    ],
+    "anti_use": [
+      "아무 의미 없이 큰 빈 공간을 만들지 않는다",
+      "반응형에서 여백이 콘텐츠를 밀어내지 않게 한다"
+    ],
+    "prompt_phrases": [
+      "카드 사이 여백을 넉넉하게 줘",
+      "버튼 그룹과 본문 사이에 spacer를 넣어줘"
+    ],
+    "asset": {
+      "kind": "diagram",
+      "variant": "spacer",
+      "props": {
+        "size": "md"
+      }
+    },
+    "sources": [
+      {
+        "source_id": "apple-hig-components",
+        "note": "layout spacing guidance"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": "typography",
+    "status": "draft",
+    "category": "structure",
+    "ko": {
+      "name": "타이포그래피",
+      "aliases": [
+        "typography",
+        "글자 스타일",
+        "텍스트 스타일"
+      ]
+    },
+    "en": {
+      "name": "Typography",
+      "aliases": [
+        "Text style",
+        "Type scale"
+      ]
+    },
+    "one_liner": "제목, 본문, 캡션처럼 글자의 크기와 굵기, 위계를 정하는 체계.",
+    "description": "화면의 정보 우선순위를 글자 크기, 굵기, 줄간격으로 전달한다.",
+    "visual_anatomy": [
+      "heading text",
+      "body text",
+      "caption text",
+      "weight and size contrast"
+    ],
+    "when_to_use": [
+      "정보의 위계를 명확히 보여줘야 할 때",
+      "같은 종류의 텍스트 스타일을 반복 적용할 때"
+    ],
+    "anti_use": [
+      "너무 많은 글자 크기를 섞지 않는다",
+      "작은 영역에 hero 크기 글자를 쓰지 않는다"
+    ],
+    "prompt_phrases": [
+      "제목 본문 캡션이 구분되는 typography scale을 적용해줘",
+      "카드 제목은 더 굵게 보여줘"
+    ],
+    "asset": {
+      "kind": "diagram",
+      "variant": "typography",
+      "props": {
+        "levels": 3
+      }
+    },
+    "sources": [
+      {
+        "source_id": "material-m3-components",
+        "note": "typography and component text hierarchy"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": "image",
+    "status": "draft",
+    "category": "structure",
+    "ko": {
+      "name": "이미지",
+      "aliases": [
+        "image",
+        "사진",
+        "그림"
+      ]
+    },
+    "en": {
+      "name": "Image",
+      "aliases": [
+        "Picture",
+        "Media image"
+      ]
+    },
+    "one_liner": "사진이나 그림을 화면 안에 표시하는 시각 요소.",
+    "description": "제품, 프로필, 콘텐츠 미리보기처럼 텍스트보다 시각 확인이 중요한 정보를 보여준다.",
+    "visual_anatomy": [
+      "image frame",
+      "aspect ratio",
+      "alt text meaning",
+      "optional caption"
+    ],
+    "when_to_use": [
+      "사용자가 실제 모습이나 분위기를 확인해야 할 때",
+      "카드나 상세 화면의 시각 자료가 필요할 때"
+    ],
+    "anti_use": [
+      "의미 없는 stock 이미지를 장식으로 남발하지 않는다",
+      "비율이 깨지거나 중요한 부분이 잘리지 않게 한다"
+    ],
+    "prompt_phrases": [
+      "카드 상단에 상품 image를 넣어줘",
+      "16대9 비율의 썸네일 이미지를 보여줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "image",
+      "props": {
+        "ratio": "16:9"
+      }
+    },
+    "sources": [
+      {
+        "source_id": "apple-hig-components",
+        "note": "image and media presentation guidance"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": "logo",
+    "status": "draft",
+    "category": "structure",
+    "ko": {
+      "name": "로고",
+      "aliases": [
+        "logo",
+        "브랜드 마크",
+        "product mark"
+      ]
+    },
+    "en": {
+      "name": "Logo",
+      "aliases": [
+        "Brand mark",
+        "Product mark"
+      ]
+    },
+    "one_liner": "제품이나 브랜드를 식별하게 하는 고유한 시각 표시.",
+    "description": "헤더, 로그인 화면, 빈 상태, 문서 표지에서 제품 정체성을 알려준다.",
+    "visual_anatomy": [
+      "brand mark",
+      "optional wordmark",
+      "clear space",
+      "consistent size"
+    ],
+    "when_to_use": [
+      "사용자가 어느 제품이나 조직에 있는지 알아야 할 때",
+      "첫 화면에서 브랜드를 식별시킬 때"
+    ],
+    "anti_use": [
+      "작은 버튼 아이콘처럼 남용하지 않는다",
+      "주변 여백 없이 찌그러뜨리지 않는다"
+    ],
+    "prompt_phrases": [
+      "헤더 왼쪽에 logo를 넣어줘",
+      "로그인 화면 상단에 브랜드 마크를 크게 배치해줘"
+    ],
+    "asset": {
+      "kind": "icon-composition",
+      "variant": "logo",
+      "props": {
+        "shape": "mark"
+      }
+    },
+    "sources": [
+      {
+        "source_id": "apple-hig-components",
+        "note": "branding and icon presentation guidance"
+      }
+    ],
+    "confidence": "low"
+  },
+  {
+    "id": "thumbnail",
+    "status": "draft",
+    "category": "structure",
+    "ko": {
+      "name": "썸네일",
+      "aliases": [
+        "thumbnail",
+        "미리보기 이미지",
+        "preview image"
+      ]
+    },
+    "en": {
+      "name": "Thumbnail",
+      "aliases": [
+        "Preview image",
+        "Cover image"
+      ]
+    },
+    "one_liner": "콘텐츠를 빠르게 알아보게 하는 작은 미리보기 이미지.",
+    "description": "목록이나 카드에서 영상, 글, 파일, 상품의 대표 장면을 작게 보여준다.",
+    "visual_anatomy": [
+      "small image frame",
+      "fixed aspect ratio",
+      "optional overlay icon",
+      "fallback state"
+    ],
+    "when_to_use": [
+      "콘텐츠가 시각적으로 구분될 때",
+      "목록에서 항목을 빠르게 찾게 할 때"
+    ],
+    "anti_use": [
+      "모든 항목이 비슷한 이미지라면 정보 가치가 낮다",
+      "너무 작아 식별이 안 되면 의미가 없다"
+    ],
+    "prompt_phrases": [
+      "게시글 카드 왼쪽에 thumbnail을 넣어줘",
+      "영상 썸네일 위에 재생 아이콘을 올려줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "thumbnail",
+      "props": {
+        "overlay": "play"
+      }
+    },
+    "sources": [
+      {
+        "source_id": "material-m3-components",
+        "note": "cards and media thumbnails"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": "password-field",
+    "status": "draft",
+    "category": "input",
+    "ko": {
+      "name": "비밀번호 입력창",
+      "aliases": [
+        "password input",
+        "password field",
+        "비번 입력"
+      ]
+    },
+    "en": {
+      "name": "Password field",
+      "aliases": [
+        "Password input",
+        "Secure text field"
+      ]
+    },
+    "one_liner": "입력한 문자를 가려서 비밀번호를 받는 입력 요소.",
+    "description": "보통 눈 아이콘으로 표시/숨김을 전환하고, 오류나 보안 조건 안내를 함께 보여준다.",
+    "visual_anatomy": [
+      "masked characters",
+      "secure input container",
+      "show-hide icon",
+      "optional validation text"
+    ],
+    "when_to_use": [
+      "비밀번호나 민감한 인증 값을 입력받을 때"
+    ],
+    "anti_use": [
+      "일반 텍스트 값에 쓰지 않는다",
+      "표시 전환 없이 복잡한 비밀번호 조건만 강요하지 않는다"
+    ],
+    "prompt_phrases": [
+      "비밀번호를 입력하는 password field를 넣어줘",
+      "눈 아이콘으로 비밀번호 보기 전환을 만들어줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "password-field",
+      "props": {
+        "visible": false
+      }
+    },
+    "sources": [
+      {
+        "source_id": "material-m3-components",
+        "note": "text field variants and trailing icons"
+      }
+    ],
+    "confidence": "high"
+  },
+  {
+    "id": "number-input",
+    "status": "draft",
+    "category": "input",
+    "ko": {
+      "name": "숫자 입력창",
+      "aliases": [
+        "number input",
+        "numeric field",
+        "수량 입력"
+      ]
+    },
+    "en": {
+      "name": "Number input",
+      "aliases": [
+        "Numeric input",
+        "Number field"
+      ]
+    },
+    "one_liner": "숫자 값을 직접 입력하거나 증감 버튼으로 조절하는 입력 요소.",
+    "description": "수량, 나이, 금액처럼 숫자 형식이 필요한 값을 받는다.",
+    "visual_anatomy": [
+      "numeric value",
+      "input box",
+      "optional stepper buttons",
+      "min-max helper"
+    ],
+    "when_to_use": [
+      "정확한 숫자를 입력받아야 할 때",
+      "범위나 단위가 명확한 값일 때"
+    ],
+    "anti_use": [
+      "대략적인 값 조절에는 slider가 더 적합하다",
+      "전화번호처럼 숫자 모양의 문자열은 text field가 낫다"
+    ],
+    "prompt_phrases": [
+      "수량을 입력하는 number input을 넣어줘",
+      "플러스 마이너스 버튼으로 숫자를 조절하게 해줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "number-input",
+      "props": {
+        "value": 3
+      }
+    },
+    "sources": [
+      {
+        "source_id": "wai-aria-apg-patterns",
+        "note": "spinbutton pattern for numeric input"
+      }
+    ],
+    "confidence": "high"
+  },
+  {
+    "id": "otp-input",
+    "status": "draft",
+    "category": "input",
+    "ko": {
+      "name": "인증번호 입력",
+      "aliases": [
+        "OTP 입력",
+        "verification code",
+        "코드 입력"
+      ]
+    },
+    "en": {
+      "name": "OTP input",
+      "aliases": [
+        "One-time code input",
+        "Verification code input"
+      ]
+    },
+    "one_liner": "일회용 인증번호를 여러 칸에 나누어 입력받는 요소.",
+    "description": "SMS, 이메일, 2단계 인증 코드처럼 짧은 숫자/문자 코드를 빠르게 입력하게 한다.",
+    "visual_anatomy": [
+      "multiple small input boxes",
+      "focused box",
+      "fixed code length",
+      "paste behavior"
+    ],
+    "when_to_use": [
+      "인증번호나 2FA 코드를 받을 때",
+      "코드 길이가 짧고 고정되어 있을 때"
+    ],
+    "anti_use": [
+      "긴 문자열이나 자유 입력에는 쓰지 않는다",
+      "복사 붙여넣기를 막지 않는다"
+    ],
+    "prompt_phrases": [
+      "6자리 인증번호 OTP input을 넣어줘",
+      "각 숫자가 한 칸씩 들어가는 코드 입력 UI를 만들어줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "otp-input",
+      "props": {
+        "length": 6
+      }
+    },
+    "sources": [
+      {
+        "source_id": "shadcn-ui-docs",
+        "note": "input OTP component"
+      }
+    ],
+    "confidence": "high"
+  },
+  {
+    "id": "autocomplete",
+    "status": "draft",
+    "category": "input",
+    "ko": {
+      "name": "자동완성",
+      "aliases": [
+        "autocomplete",
+        "자동 추천",
+        "입력 제안"
+      ]
+    },
+    "en": {
+      "name": "Autocomplete",
+      "aliases": [
+        "Typeahead",
+        "Autosuggest"
+      ]
+    },
+    "one_liner": "사용자가 입력하는 동안 관련 후보를 추천하는 입력 패턴.",
+    "description": "검색어, 주소, 사용자 이름처럼 후보가 많은 값을 빠르게 완성하게 돕는다.",
+    "visual_anatomy": [
+      "text input",
+      "suggestion list",
+      "highlighted match",
+      "keyboard selection"
+    ],
+    "when_to_use": [
+      "입력 후보를 예측할 수 있을 때",
+      "사용자가 긴 값을 빠르게 입력해야 할 때"
+    ],
+    "anti_use": [
+      "추천 품질이 낮으면 오히려 방해가 된다",
+      "선택만 필요한 경우 combobox와 구분한다"
+    ],
+    "prompt_phrases": [
+      "검색어를 입력하면 autocomplete suggestions가 나오게 해줘",
+      "도시 이름 자동완성을 붙여줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "autocomplete",
+      "props": {
+        "open": true
+      }
+    },
+    "sources": [
+      {
+        "source_id": "material-m3-components",
+        "note": "autocomplete-like input and menu behavior"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": "search-suggestions",
+    "status": "draft",
+    "category": "input",
+    "ko": {
+      "name": "검색 제안",
+      "aliases": [
+        "search suggestions",
+        "추천 검색어",
+        "자동 추천 목록"
+      ]
+    },
+    "en": {
+      "name": "Search suggestions",
+      "aliases": [
+        "Suggested searches",
+        "Query suggestions"
+      ]
+    },
+    "one_liner": "검색창 아래에 추천 검색어나 최근 검색어를 보여주는 목록.",
+    "description": "사용자가 무엇을 찾을지 빠르게 고르게 하고 오타나 빈 검색 상태를 줄인다.",
+    "visual_anatomy": [
+      "search field",
+      "suggestion rows",
+      "icons or history marker",
+      "highlighted query"
+    ],
+    "when_to_use": [
+      "검색어 후보가 많거나 최근 검색 기록을 활용할 때",
+      "사용자가 검색 범위를 잘 모를 때"
+    ],
+    "anti_use": [
+      "개인정보가 담긴 최근 검색어를 무심코 노출하지 않는다",
+      "결과 목록과 시각적으로 혼동시키지 않는다"
+    ],
+    "prompt_phrases": [
+      "검색창 아래에 search suggestions를 보여줘",
+      "최근 검색어와 추천 검색어를 나눠서 표시해줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "search-suggestions",
+      "props": {
+        "rows": 3
+      }
+    },
+    "sources": [
+      {
+        "source_id": "material-m3-components",
+        "note": "search view and suggestions pattern"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": "inline-edit",
+    "status": "draft",
+    "category": "input",
+    "ko": {
+      "name": "인라인 편집",
+      "aliases": [
+        "inline edit",
+        "바로 수정",
+        "직접 편집"
+      ]
+    },
+    "en": {
+      "name": "Inline edit",
+      "aliases": [
+        "Inline editing",
+        "Editable text"
+      ]
+    },
+    "one_liner": "표시된 텍스트를 같은 자리에서 바로 입력 상태로 바꾸는 패턴.",
+    "description": "제목, 이름, 라벨처럼 짧은 값을 상세 화면 이동 없이 수정하게 한다.",
+    "visual_anatomy": [
+      "display text",
+      "edit affordance",
+      "focused input state",
+      "save or confirm behavior"
+    ],
+    "when_to_use": [
+      "짧은 텍스트를 빠르게 수정해야 할 때",
+      "목록이나 상세 화면 맥락을 유지해야 할 때"
+    ],
+    "anti_use": [
+      "복잡한 폼이나 검증이 많은 값에는 별도 편집 화면이 낫다",
+      "편집 가능 여부가 숨겨지면 안 된다"
+    ],
+    "prompt_phrases": [
+      "제목을 클릭하면 inline edit로 바로 수정되게 해줘",
+      "이름 옆에 연필 아이콘을 넣어줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "inline-edit",
+      "props": {
+        "editing": true
+      }
+    },
+    "sources": [
+      {
+        "source_id": "atlassian-design-components",
+        "note": "inline edit component pattern"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": "rich-text-editor",
+    "status": "draft",
+    "category": "input",
+    "ko": {
+      "name": "리치 텍스트 에디터",
+      "aliases": [
+        "rich text editor",
+        "WYSIWYG",
+        "서식 편집기"
+      ]
+    },
+    "en": {
+      "name": "Rich text editor",
+      "aliases": [
+        "WYSIWYG editor",
+        "Formatting editor"
+      ]
+    },
+    "one_liner": "굵게, 링크, 목록 같은 서식을 포함해 글을 작성하는 입력 영역.",
+    "description": "본문 작성, 댓글, 문서 편집처럼 텍스트에 구조와 스타일을 넣어야 할 때 쓴다.",
+    "visual_anatomy": [
+      "formatting toolbar",
+      "editable area",
+      "selection state",
+      "placeholder"
+    ],
+    "when_to_use": [
+      "사용자가 긴 글에 서식이나 링크를 넣어야 할 때"
+    ],
+    "anti_use": [
+      "단순 메모에는 textarea가 더 가볍다",
+      "저장 형식과 접근성을 고려하지 않고 붙이지 않는다"
+    ],
+    "prompt_phrases": [
+      "본문 작성용 rich text editor를 넣어줘",
+      "굵게 링크 목록 버튼이 있는 에디터를 만들어줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "rich-text-editor",
+      "props": {
+        "toolbar": true
+      }
+    },
+    "sources": [
+      {
+        "source_id": "wai-aria-apg-patterns",
+        "note": "toolbar pattern for editor controls"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": "color-picker",
+    "status": "draft",
+    "category": "input",
+    "ko": {
+      "name": "색상 선택기",
+      "aliases": [
+        "color picker",
+        "컬러 피커",
+        "색 선택"
+      ]
+    },
+    "en": {
+      "name": "Color picker",
+      "aliases": [
+        "Color input",
+        "Swatch picker"
+      ]
+    },
+    "one_liner": "색상 값을 팔레트, 스와치, 입력값으로 고르는 요소.",
+    "description": "테마 색, 태그 색, 그래픽 편집처럼 시각적 색 선택이 필요한 곳에 쓴다.",
+    "visual_anatomy": [
+      "color swatch",
+      "palette grid",
+      "selected color",
+      "optional hex input"
+    ],
+    "when_to_use": [
+      "사용자가 색상을 직접 선택해야 할 때",
+      "제한된 브랜드 색 중 하나를 골라야 할 때"
+    ],
+    "anti_use": [
+      "색상 선택이 제품 사용에 불필요하면 복잡도를 늘리지 않는다",
+      "색상만으로 상태 의미를 정하지 않는다"
+    ],
+    "prompt_phrases": [
+      "태그 색상을 고르는 color picker를 넣어줘",
+      "스와치 팔레트와 hex 입력을 함께 보여줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "color-picker",
+      "props": {
+        "swatches": 6
+      }
+    },
+    "sources": [
+      {
+        "source_id": "shadcn-ui-docs",
+        "note": "form input composition for custom controls"
+      }
+    ],
+    "confidence": "low"
+  },
+  {
+    "id": "listbox",
+    "status": "draft",
+    "category": "selection",
+    "ko": {
+      "name": "리스트박스",
+      "aliases": [
+        "listbox",
+        "선택 목록",
+        "옵션 리스트"
+      ]
+    },
+    "en": {
+      "name": "Listbox",
+      "aliases": [
+        "Selection list",
+        "Option list"
+      ]
+    },
+    "one_liner": "여러 옵션을 펼쳐진 목록으로 보여주고 선택하게 하는 요소.",
+    "description": "select와 달리 목록이 화면에 직접 보이며 단일 또는 다중 선택을 지원할 수 있다.",
+    "visual_anatomy": [
+      "visible option list",
+      "selected option",
+      "focus highlight",
+      "optional multi-select marks"
+    ],
+    "when_to_use": [
+      "옵션을 항상 보여줘야 할 때",
+      "키보드로 목록 선택이 중요할 때"
+    ],
+    "anti_use": [
+      "공간이 좁으면 select가 낫다",
+      "단순 텍스트 목록에는 선택 상태를 억지로 붙이지 않는다"
+    ],
+    "prompt_phrases": [
+      "옵션을 펼쳐진 listbox로 보여줘",
+      "선택된 항목이 강조되는 선택 목록을 만들어줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "listbox",
+      "props": {
+        "selected": 1
+      }
+    },
+    "sources": [
+      {
+        "source_id": "wai-aria-apg-patterns",
+        "note": "listbox pattern"
+      }
+    ],
+    "confidence": "high"
+  },
+  {
+    "id": "menu-bar",
+    "status": "draft",
+    "category": "selection",
+    "ko": {
+      "name": "메뉴바",
+      "aliases": [
+        "menubar",
+        "상단 메뉴",
+        "앱 메뉴"
+      ]
+    },
+    "en": {
+      "name": "Menubar",
+      "aliases": [
+        "Menu bar",
+        "Application menu"
+      ]
+    },
+    "one_liner": "여러 메뉴를 가로로 배치하고 각 메뉴에서 하위 명령을 여는 구조.",
+    "description": "데스크톱 앱처럼 파일, 편집, 보기 같은 명령 묶음을 제공할 때 쓴다.",
+    "visual_anatomy": [
+      "horizontal menu items",
+      "active menu",
+      "dropdown submenu",
+      "keyboard navigation"
+    ],
+    "when_to_use": [
+      "명령이 많고 분류가 명확한 생산성 도구에서",
+      "데스크톱 앱과 비슷한 조작이 필요할 때"
+    ],
+    "anti_use": [
+      "일반 웹사이트 내비게이션을 ARIA menubar처럼 과하게 만들지 않는다",
+      "모바일에서는 단순 메뉴가 낫다"
+    ],
+    "prompt_phrases": [
+      "상단에 파일 편집 보기 menubar를 넣어줘",
+      "메뉴를 열면 하위 명령이 나오게 해줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "menu-bar",
+      "props": {
+        "open": true
+      }
+    },
+    "sources": [
+      {
+        "source_id": "wai-aria-apg-patterns",
+        "note": "menu and menubar pattern"
+      }
+    ],
+    "confidence": "high"
+  },
+  {
+    "id": "bottom-navigation",
+    "status": "draft",
+    "category": "selection",
+    "ko": {
+      "name": "하단 내비게이션",
+      "aliases": [
+        "bottom navigation",
+        "bottom nav",
+        "하단 탭"
+      ]
+    },
+    "en": {
+      "name": "Bottom navigation",
+      "aliases": [
+        "Bottom nav",
+        "Navigation bar"
+      ]
+    },
+    "one_liner": "모바일 화면 하단에 주요 목적지를 아이콘과 라벨로 배치한 내비게이션.",
+    "description": "앱의 최상위 섹션을 엄지로 쉽게 전환하게 한다.",
+    "visual_anatomy": [
+      "bottom bar",
+      "destination icons",
+      "labels",
+      "active indicator",
+      "optional badge"
+    ],
+    "when_to_use": [
+      "모바일 앱의 주요 섹션이 3-5개일 때",
+      "어디서든 최상위 목적지로 이동해야 할 때"
+    ],
+    "anti_use": [
+      "일회성 행동이나 설정을 목적지로 넣지 않는다",
+      "항목이 너무 많으면 숨김 메뉴를 검토한다"
+    ],
+    "prompt_phrases": [
+      "모바일 화면 아래에 bottom navigation을 넣어줘",
+      "홈 검색 프로필 3개 탭을 하단에 배치해줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "bottom-navigation",
+      "props": {
+        "items": 3
+      }
+    },
+    "sources": [
+      {
+        "source_id": "mui-material-components",
+        "note": "bottom navigation component definition"
+      }
+    ],
+    "confidence": "high"
+  },
+  {
+    "id": "tab-bar",
+    "status": "draft",
+    "category": "selection",
+    "ko": {
+      "name": "탭 바",
+      "aliases": [
+        "tab bar",
+        "모바일 탭바",
+        "iOS 탭"
+      ]
+    },
+    "en": {
+      "name": "Tab bar",
+      "aliases": [
+        "iOS tab bar",
+        "Mobile tab bar"
+      ]
+    },
+    "one_liner": "앱의 여러 섹션을 전환하는 하단 또는 상단 탭형 내비게이션.",
+    "description": "각 탭은 앱의 동등한 주요 영역으로 이동하며 아이콘과 라벨을 함께 쓰는 경우가 많다.",
+    "visual_anatomy": [
+      "bar container",
+      "tab icons",
+      "tab labels",
+      "selected tab",
+      "optional badge"
+    ],
+    "when_to_use": [
+      "앱의 주요 섹션을 빠르게 오갈 때",
+      "현재 선택된 섹션을 계속 보여줘야 할 때"
+    ],
+    "anti_use": [
+      "서로 관련 없는 행동 버튼을 탭으로 넣지 않는다",
+      "섹션이 너무 많으면 sidebar나 more 탭을 검토한다"
+    ],
+    "prompt_phrases": [
+      "하단에 tab bar를 넣고 홈 검색 설정 탭을 보여줘",
+      "선택된 탭은 아이콘과 라벨을 강조해줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "tab-bar",
+      "props": {
+        "active": 0
+      }
+    },
+    "sources": [
+      {
+        "source_id": "apple-hig-components",
+        "note": "tab bars for app sections"
+      }
+    ],
+    "confidence": "high"
+  },
+  {
+    "id": "filter-chip",
+    "status": "draft",
+    "category": "selection",
+    "ko": {
+      "name": "필터 칩",
+      "aliases": [
+        "filter chip",
+        "필터 태그",
+        "선택 칩"
+      ]
+    },
+    "en": {
+      "name": "Filter chip",
+      "aliases": [
+        "Filter tag",
+        "Choice chip"
+      ]
+    },
+    "one_liner": "조건을 작은 칩 형태로 켜고 끄며 목록을 필터링하는 요소.",
+    "description": "카테고리, 상태, 태그 같은 여러 조건을 빠르게 선택하거나 해제하게 한다.",
+    "visual_anatomy": [
+      "pill shape",
+      "label",
+      "selected state",
+      "optional check or close icon"
+    ],
+    "when_to_use": [
+      "필터 조건이 짧고 여러 개일 때",
+      "사용자가 조건을 빠르게 바꾸게 할 때"
+    ],
+    "anti_use": [
+      "복잡한 범위나 다단 조건은 filter panel이 낫다",
+      "칩이 너무 많으면 스캔이 어려워진다"
+    ],
+    "prompt_phrases": [
+      "목록 위에 filter chip들을 넣어줘",
+      "선택된 필터 칩에는 체크 아이콘을 보여줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "filter-chip",
+      "props": {
+        "selected": true
+      }
+    },
+    "sources": [
+      {
+        "source_id": "material-m3-components",
+        "note": "chips component and filter chip usage"
+      }
+    ],
+    "confidence": "high"
+  },
+  {
+    "id": "toggle-button",
+    "status": "draft",
+    "category": "selection",
+    "ko": {
+      "name": "토글 버튼",
+      "aliases": [
+        "toggle button",
+        "선택 버튼",
+        "pressed button"
+      ]
+    },
+    "en": {
+      "name": "Toggle button",
+      "aliases": [
+        "Pressed button",
+        "Selectable button"
+      ]
+    },
+    "one_liner": "버튼처럼 보이지만 눌린 상태를 유지해 선택 여부를 표현하는 요소.",
+    "description": "굵게, 즐겨찾기, 보기 옵션처럼 on/off 상태를 버튼 형태로 보여준다.",
+    "visual_anatomy": [
+      "button container",
+      "icon or label",
+      "pressed state",
+      "optional group"
+    ],
+    "when_to_use": [
+      "명령 버튼과 선택 상태가 연결되어 있을 때",
+      "툴바에서 기능을 켜고 끌 때"
+    ],
+    "anti_use": [
+      "즉시 적용되는 설정은 switch가 더 명확할 수 있다",
+      "여러 독립 옵션은 checkbox와 비교한다"
+    ],
+    "prompt_phrases": [
+      "즐겨찾기를 켜는 toggle button을 넣어줘",
+      "선택되면 눌린 상태가 유지되게 해줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "toggle-button",
+      "props": {
+        "pressed": true
+      }
+    },
+    "sources": [
+      {
+        "source_id": "wai-aria-apg-patterns",
+        "note": "button pattern with pressed state"
+      }
+    ],
+    "confidence": "high"
+  },
+  {
+    "id": "disclosure",
+    "status": "draft",
+    "category": "selection",
+    "ko": {
+      "name": "펼침 버튼",
+      "aliases": [
+        "disclosure",
+        "show hide",
+        "접기 펼치기"
+      ]
+    },
+    "en": {
+      "name": "Disclosure",
+      "aliases": [
+        "Show-hide",
+        "Disclosure button"
+      ]
+    },
+    "one_liner": "버튼을 눌러 관련 내용을 펼치거나 접는 패턴.",
+    "description": "아코디언보다 단순하게 한 덩어리의 추가 정보를 열고 닫을 때 쓴다.",
+    "visual_anatomy": [
+      "trigger button",
+      "chevron",
+      "expanded state",
+      "revealed content"
+    ],
+    "when_to_use": [
+      "보조 정보를 사용자가 필요할 때만 보게 할 때",
+      "설정의 세부 옵션을 접어둘 때"
+    ],
+    "anti_use": [
+      "핵심 정보를 숨기는 용도로 쓰지 않는다",
+      "여러 항목을 체계적으로 접으려면 accordion을 검토한다"
+    ],
+    "prompt_phrases": [
+      "상세 옵션을 disclosure로 접어둬",
+      "더보기 버튼을 누르면 설명이 펼쳐지게 해줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "disclosure",
+      "props": {
+        "open": true
+      }
+    },
+    "sources": [
+      {
+        "source_id": "wai-aria-apg-patterns",
+        "note": "disclosure show-hide pattern"
+      }
+    ],
+    "confidence": "high"
+  },
+  {
+    "id": "anchor-nav",
+    "status": "draft",
+    "category": "selection",
+    "ko": {
+      "name": "앵커 내비게이션",
+      "aliases": [
+        "anchor nav",
+        "목차 링크",
+        "섹션 내비게이션"
+      ]
+    },
+    "en": {
+      "name": "Anchor navigation",
+      "aliases": [
+        "In-page navigation",
+        "Table of contents nav"
+      ]
+    },
+    "one_liner": "같은 페이지 안의 섹션으로 이동하는 링크 목록.",
+    "description": "긴 문서나 설정 화면에서 현재 섹션을 보여주고 클릭하면 해당 위치로 스크롤한다.",
+    "visual_anatomy": [
+      "section links",
+      "active section",
+      "sticky side or top area",
+      "anchor targets"
+    ],
+    "when_to_use": [
+      "한 페이지가 길고 섹션이 명확할 때",
+      "사용자가 원하는 부분으로 바로 이동해야 할 때"
+    ],
+    "anti_use": [
+      "페이지가 짧으면 불필요하다",
+      "앱의 주요 페이지 이동과 섞지 않는다"
+    ],
+    "prompt_phrases": [
+      "문서 왼쪽에 anchor navigation을 넣어줘",
+      "스크롤 위치에 따라 현재 섹션을 강조해줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "anchor-nav",
+      "props": {
+        "active": 1
+      }
+    },
+    "sources": [
+      {
+        "source_id": "apple-hig-components",
+        "note": "navigation and content structure guidance"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": "back-button",
+    "status": "draft",
+    "category": "selection",
+    "ko": {
+      "name": "뒤로가기 버튼",
+      "aliases": [
+        "back button",
+        "이전 버튼",
+        "뒤로"
+      ]
+    },
+    "en": {
+      "name": "Back button",
+      "aliases": [
+        "Back navigation",
+        "Previous button"
+      ]
+    },
+    "one_liner": "이전 화면이나 상위 화면으로 돌아가게 하는 내비게이션 버튼.",
+    "description": "상세 화면, 설정 하위 화면, 모바일 내비게이션에서 현재 흐름을 되돌린다.",
+    "visual_anatomy": [
+      "left arrow icon",
+      "optional label",
+      "top bar placement",
+      "navigation target"
+    ],
+    "when_to_use": [
+      "사용자가 상세나 하위 화면에서 원래 위치로 돌아가야 할 때"
+    ],
+    "anti_use": [
+      "취소나 닫기 행동과 의미를 섞지 않는다",
+      "브라우저 뒤로가기와 충돌하지 않게 한다"
+    ],
+    "prompt_phrases": [
+      "상단 왼쪽에 back button을 넣어줘",
+      "뒤로가기 화살표와 이전 라벨을 보여줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "back-button",
+      "props": {
+        "label": "이전"
+      }
+    },
+    "sources": [
+      {
+        "source_id": "apple-hig-components",
+        "note": "navigation bars and back affordance"
+      }
+    ],
+    "confidence": "high"
+  },
+  {
+    "id": "navigation-bar",
+    "status": "draft",
+    "category": "selection",
+    "ko": {
+      "name": "내비게이션 바",
+      "aliases": [
+        "navbar",
+        "nav bar",
+        "상단 메뉴"
+      ]
+    },
+    "en": {
+      "name": "Navigation bar",
+      "aliases": [
+        "Navbar",
+        "Nav bar"
+      ]
+    },
+    "one_liner": "주요 페이지나 섹션으로 이동하는 링크를 한 줄로 배치한 영역.",
+    "description": "웹사이트나 앱 상단에서 브랜드, 메뉴, 행동 버튼을 함께 담는 경우가 많다.",
+    "visual_anatomy": [
+      "brand area",
+      "navigation links",
+      "active link",
+      "optional actions"
+    ],
+    "when_to_use": [
+      "여러 주요 페이지를 반복적으로 이동해야 할 때",
+      "현재 섹션을 상단에서 보여줘야 할 때"
+    ],
+    "anti_use": [
+      "명령 메뉴와 혼동하지 않는다",
+      "너무 많은 링크는 grouping이나 sidebar를 검토한다"
+    ],
+    "prompt_phrases": [
+      "상단에 logo와 메뉴 링크가 있는 navigation bar를 넣어줘",
+      "현재 페이지 메뉴를 강조해줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "navigation-bar",
+      "props": {
+        "active": 0
+      }
+    },
+    "sources": [
+      {
+        "source_id": "material-m3-components",
+        "note": "app bars and navigation components"
+      }
+    ],
+    "confidence": "high"
+  },
+  {
+    "id": "button-group",
+    "status": "draft",
+    "category": "action",
+    "ko": {
+      "name": "버튼 그룹",
+      "aliases": [
+        "button group",
+        "액션 그룹",
+        "버튼 묶음"
+      ]
+    },
+    "en": {
+      "name": "Button group",
+      "aliases": [
+        "Action group",
+        "Grouped buttons"
+      ]
+    },
+    "one_liner": "관련된 여러 버튼을 한 덩어리로 배치한 요소.",
+    "description": "저장/취소, 정렬/필터, 보기 전환처럼 연결된 행동을 가까이 묶는다.",
+    "visual_anatomy": [
+      "adjacent buttons",
+      "shared alignment",
+      "primary-secondary ordering",
+      "consistent spacing"
+    ],
+    "when_to_use": [
+      "관련 행동을 한눈에 비교하고 선택하게 할 때",
+      "폼 하단의 제출과 취소를 함께 둘 때"
+    ],
+    "anti_use": [
+      "서로 관련 없는 행동을 한 그룹으로 묶지 않는다",
+      "너무 많은 버튼을 한 줄에 밀어 넣지 않는다"
+    ],
+    "prompt_phrases": [
+      "저장 취소 버튼을 button group으로 묶어줘",
+      "오른쪽 아래에 액션 버튼 그룹을 배치해줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "button-group",
+      "props": {
+        "primary": true
+      }
+    },
+    "sources": [
+      {
+        "source_id": "material-m3-components",
+        "note": "button component grouping and emphasis"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": "copy-button",
+    "status": "draft",
+    "category": "action",
+    "ko": {
+      "name": "복사 버튼",
+      "aliases": [
+        "copy button",
+        "클립보드 버튼",
+        "복사 액션"
+      ]
+    },
+    "en": {
+      "name": "Copy button",
+      "aliases": [
+        "Clipboard button",
+        "Copy action"
+      ]
+    },
+    "one_liner": "텍스트나 값을 클립보드에 복사하는 버튼.",
+    "description": "코드, 링크, API 키, 초대 URL 옆에 배치하고 복사 결과를 피드백으로 알려준다.",
+    "visual_anatomy": [
+      "copy icon",
+      "button hit area",
+      "copied state",
+      "toast or inline feedback"
+    ],
+    "when_to_use": [
+      "사용자가 값을 다른 곳에 붙여넣어야 할 때",
+      "긴 텍스트를 직접 선택하기 어렵게 만들지 않을 때"
+    ],
+    "anti_use": [
+      "복사 대상이 불명확하면 쓰지 않는다",
+      "복사 완료 피드백 없이 조용히 끝내지 않는다"
+    ],
+    "prompt_phrases": [
+      "초대 링크 옆에 copy button을 넣어줘",
+      "복사되면 copied 상태와 toast를 보여줘"
+    ],
+    "asset": {
+      "kind": "icon-composition",
+      "variant": "copy-button",
+      "props": {
+        "state": "copied"
+      }
+    },
+    "sources": [
+      {
+        "source_id": "shadcn-ui-docs",
+        "note": "button and toast composition"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": "download-button",
+    "status": "draft",
+    "category": "action",
+    "ko": {
+      "name": "다운로드 버튼",
+      "aliases": [
+        "download button",
+        "내려받기",
+        "파일 저장"
+      ]
+    },
+    "en": {
+      "name": "Download button",
+      "aliases": [
+        "Download action",
+        "Save file button"
+      ]
+    },
+    "one_liner": "파일이나 데이터를 사용자의 기기로 내려받게 하는 버튼.",
+    "description": "PDF, CSV, 이미지, 첨부파일 다운로드처럼 결과물을 저장하는 행동에 쓴다.",
+    "visual_anatomy": [
+      "download icon",
+      "action label",
+      "file type hint",
+      "optional loading state"
+    ],
+    "when_to_use": [
+      "사용자가 파일을 저장해야 할 때",
+      "내보내기 결과가 하나로 명확할 때"
+    ],
+    "anti_use": [
+      "여러 형식 중 선택해야 하면 split button이나 menu를 검토한다",
+      "진행 시간이 길면 loading feedback을 붙인다"
+    ],
+    "prompt_phrases": [
+      "우측 상단에 PDF download button을 넣어줘",
+      "CSV 내려받기 버튼에 다운로드 아이콘을 붙여줘"
+    ],
+    "asset": {
+      "kind": "icon-composition",
+      "variant": "download-button",
+      "props": {
+        "file": "pdf"
+      }
+    },
+    "sources": [
+      {
+        "source_id": "material-m3-components",
+        "note": "buttons with icon and action label"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": "share-button",
+    "status": "draft",
+    "category": "action",
+    "ko": {
+      "name": "공유 버튼",
+      "aliases": [
+        "share button",
+        "공유하기",
+        "share action"
+      ]
+    },
+    "en": {
+      "name": "Share button",
+      "aliases": [
+        "Share action",
+        "Send button"
+      ]
+    },
+    "one_liner": "링크나 콘텐츠를 다른 사람이나 앱으로 보내는 버튼.",
+    "description": "공유 시트, 링크 복사, SNS 전송 같은 후속 옵션을 열 수 있다.",
+    "visual_anatomy": [
+      "share icon",
+      "button label",
+      "optional share sheet",
+      "success feedback"
+    ],
+    "when_to_use": [
+      "사용자가 콘텐츠를 외부로 전달해야 할 때",
+      "링크 공유가 핵심 행동일 때"
+    ],
+    "anti_use": [
+      "내부 저장이나 내보내기와 혼동하지 않는다",
+      "공유 권한이나 공개 범위를 숨기지 않는다"
+    ],
+    "prompt_phrases": [
+      "게시글 카드에 share button을 넣어줘",
+      "공유 버튼을 누르면 공유 옵션 sheet가 열리게 해줘"
+    ],
+    "asset": {
+      "kind": "icon-composition",
+      "variant": "share-button",
+      "props": {
+        "opens": "sheet"
+      }
+    },
+    "sources": [
+      {
+        "source_id": "apple-hig-components",
+        "note": "share actions and system affordances"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": "close-button",
+    "status": "draft",
+    "category": "action",
+    "ko": {
+      "name": "닫기 버튼",
+      "aliases": [
+        "close button",
+        "X 버튼",
+        "dismiss"
+      ]
+    },
+    "en": {
+      "name": "Close button",
+      "aliases": [
+        "Dismiss button",
+        "X button"
+      ]
+    },
+    "one_liner": "모달, 배너, 패널 같은 임시 UI를 닫는 버튼.",
+    "description": "X 아이콘으로 표현되는 경우가 많고 현재 작업을 종료하거나 패널을 숨긴다.",
+    "visual_anatomy": [
+      "x icon",
+      "button hit area",
+      "top corner placement",
+      "accessible label"
+    ],
+    "when_to_use": [
+      "사용자가 오버레이나 알림을 닫을 수 있어야 할 때"
+    ],
+    "anti_use": [
+      "저장되지 않은 변경을 조용히 버리지 않는다",
+      "뒤로가기와 닫기의 의미를 섞지 않는다"
+    ],
+    "prompt_phrases": [
+      "모달 오른쪽 위에 close button을 넣어줘",
+      "배너 끝에 닫기 X 버튼을 붙여줘"
+    ],
+    "asset": {
+      "kind": "icon-composition",
+      "variant": "close-button",
+      "props": {
+        "placement": "top-right"
+      }
+    },
+    "sources": [
+      {
+        "source_id": "apple-hig-components",
+        "note": "dismiss and close controls in presentations"
+      }
+    ],
+    "confidence": "high"
+  },
+  {
+    "id": "overflow-button",
+    "status": "draft",
+    "category": "action",
+    "ko": {
+      "name": "더보기 버튼",
+      "aliases": [
+        "overflow button",
+        "kebab menu",
+        "more button"
+      ]
+    },
+    "en": {
+      "name": "Overflow button",
+      "aliases": [
+        "More button",
+        "Kebab menu button"
+      ]
+    },
+    "one_liner": "추가 행동을 숨긴 메뉴로 여는 점 세 개 버튼.",
+    "description": "카드나 행 오른쪽에서 편집, 삭제, 복사 같은 덜 중요한 명령을 모아 연다.",
+    "visual_anatomy": [
+      "three-dot icon",
+      "button hit area",
+      "anchored menu",
+      "secondary actions"
+    ],
+    "when_to_use": [
+      "공간이 좁고 보조 행동을 숨겨야 할 때",
+      "항목별 추가 메뉴가 필요할 때"
+    ],
+    "anti_use": [
+      "주요 행동을 더보기 안에 숨기지 않는다",
+      "메뉴 항목이 하나뿐이면 직접 버튼이 낫다"
+    ],
+    "prompt_phrases": [
+      "카드 오른쪽에 overflow button을 넣어줘",
+      "점 세 개 버튼을 누르면 편집 삭제 메뉴가 나오게 해줘"
+    ],
+    "asset": {
+      "kind": "icon-composition",
+      "variant": "overflow-button",
+      "props": {
+        "dots": 3
+      }
+    },
+    "sources": [
+      {
+        "source_id": "wai-aria-apg-patterns",
+        "note": "menu button pattern"
+      }
+    ],
+    "confidence": "high"
+  },
+  {
+    "id": "top-app-bar",
+    "status": "draft",
+    "category": "structure",
+    "ko": {
+      "name": "상단 앱 바",
+      "aliases": [
+        "top app bar",
+        "app bar",
+        "앱 상단바"
+      ]
+    },
+    "en": {
+      "name": "Top app bar",
+      "aliases": [
+        "App bar",
+        "Top bar"
+      ]
+    },
+    "one_liner": "화면 상단에서 제목, 내비게이션, 주요 행동을 담는 앱 구조 요소.",
+    "description": "모바일/앱 화면에서 뒤로가기, 화면 제목, 검색이나 더보기 같은 행동을 배치한다.",
+    "visual_anatomy": [
+      "top bar container",
+      "navigation icon",
+      "title",
+      "action icons"
+    ],
+    "when_to_use": [
+      "현재 화면의 제목과 주요 행동을 계속 보여줘야 할 때",
+      "앱 화면 간 이동이 있을 때"
+    ],
+    "anti_use": [
+      "브랜드 웹사이트의 복잡한 전역 메뉴와 혼동하지 않는다",
+      "행동 아이콘을 너무 많이 넣지 않는다"
+    ],
+    "prompt_phrases": [
+      "상단에 top app bar를 넣고 제목과 더보기 아이콘을 보여줘",
+      "앱 화면 상단바에 뒤로가기 버튼을 넣어줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "top-app-bar",
+      "props": {
+        "actions": 2
+      }
+    },
+    "sources": [
+      {
+        "source_id": "material-m3-components",
+        "note": "top app bar component"
+      }
+    ],
+    "confidence": "high"
+  },
+  {
+    "id": "section",
+    "status": "draft",
+    "category": "structure",
+    "ko": {
+      "name": "섹션",
+      "aliases": [
+        "section",
+        "화면 구역",
+        "콘텐츠 영역"
+      ]
+    },
+    "en": {
+      "name": "Section",
+      "aliases": [
+        "Page section",
+        "Content section"
+      ]
+    },
+    "one_liner": "한 주제나 기능 단위를 묶는 화면의 큰 구역.",
+    "description": "제목, 설명, 콘텐츠 묶음을 함께 배치해 페이지를 읽기 쉬운 덩어리로 나눈다.",
+    "visual_anatomy": [
+      "section heading",
+      "supporting text optional",
+      "grouped content",
+      "vertical spacing"
+    ],
+    "when_to_use": [
+      "한 화면에 여러 주제가 있을 때",
+      "콘텐츠를 스캔 가능한 덩어리로 나눌 때"
+    ],
+    "anti_use": [
+      "카드처럼 과하게 테두리를 씌우지 않는다",
+      "너무 작은 요소마다 섹션을 만들지 않는다"
+    ],
+    "prompt_phrases": [
+      "설정 화면을 여러 section으로 나눠줘",
+      "각 섹션에는 제목과 관련 카드들을 배치해줘"
+    ],
+    "asset": {
+      "kind": "diagram",
+      "variant": "section",
+      "props": {
+        "blocks": 2
+      }
+    },
+    "sources": [
+      {
+        "source_id": "wai-aria-apg-patterns",
+        "note": "landmarks and page region concepts"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": "container",
+    "status": "draft",
+    "category": "structure",
+    "ko": {
+      "name": "컨테이너",
+      "aliases": [
+        "container",
+        "wrapper",
+        "내용 폭"
+      ]
+    },
+    "en": {
+      "name": "Container",
+      "aliases": [
+        "Wrapper",
+        "Content container"
+      ]
+    },
+    "one_liner": "콘텐츠의 최대 폭과 좌우 여백을 잡아주는 레이아웃 영역.",
+    "description": "넓은 화면에서도 내용이 너무 퍼지지 않게 하고 정렬 기준을 만든다.",
+    "visual_anatomy": [
+      "max-width boundary",
+      "horizontal padding",
+      "centered content",
+      "responsive width"
+    ],
+    "when_to_use": [
+      "페이지 전체 콘텐츠를 일정 폭 안에 정리할 때",
+      "데스크톱에서 읽기 폭을 제한해야 할 때"
+    ],
+    "anti_use": [
+      "모든 작은 요소에 중첩 컨테이너를 만들지 않는다",
+      "데이터 테이블처럼 넓이가 필요한 콘텐츠를 억지로 좁히지 않는다"
+    ],
+    "prompt_phrases": [
+      "본문을 가운데 정렬된 container 안에 넣어줘",
+      "최대 폭이 있는 콘텐츠 컨테이너를 만들어줘"
+    ],
+    "asset": {
+      "kind": "diagram",
+      "variant": "container",
+      "props": {
+        "maxWidth": true
+      }
+    },
+    "sources": [
+      {
+        "source_id": "material-m3-components",
+        "note": "layout and component container usage"
+      }
+    ],
+    "confidence": "low"
+  },
+  {
+    "id": "hero",
+    "status": "draft",
+    "category": "structure",
+    "ko": {
+      "name": "히어로 영역",
+      "aliases": [
+        "hero",
+        "hero section",
+        "메인 비주얼"
+      ]
+    },
+    "en": {
+      "name": "Hero section",
+      "aliases": [
+        "Hero",
+        "Lead section"
+      ]
+    },
+    "one_liner": "페이지 첫 화면에서 핵심 메시지와 대표 행동을 크게 보여주는 영역.",
+    "description": "랜딩 페이지나 제품 소개에서 제목, 설명, 주요 버튼, 대표 이미지를 가장 먼저 배치한다.",
+    "visual_anatomy": [
+      "large headline",
+      "supporting copy",
+      "primary action",
+      "hero image or media"
+    ],
+    "when_to_use": [
+      "첫 화면에서 제품이나 제안의 핵심을 바로 전달해야 할 때"
+    ],
+    "anti_use": [
+      "작업형 도구나 대시보드 첫 화면에 불필요하게 크게 만들지 않는다",
+      "실제 콘텐츠를 가리지 않는다"
+    ],
+    "prompt_phrases": [
+      "첫 화면에 hero section을 만들고 제품 이름과 시작 버튼을 넣어줘",
+      "히어로 영역 배경에 실제 제품 이미지를 보여줘"
+    ],
+    "asset": {
+      "kind": "diagram",
+      "variant": "hero",
+      "props": {
+        "media": true
+      }
+    },
+    "sources": [
+      {
+        "source_id": "apple-hig-components",
+        "note": "layout and content hierarchy guidance"
+      }
+    ],
+    "confidence": "low"
+  },
+  {
+    "id": "filter-bar",
+    "status": "draft",
+    "category": "data-display",
+    "ko": {
+      "name": "필터 바",
+      "aliases": [
+        "filter bar",
+        "검색 필터 영역",
+        "필터 툴바"
+      ]
+    },
+    "en": {
+      "name": "Filter bar",
+      "aliases": [
+        "Filter toolbar",
+        "Search and filter bar"
+      ]
+    },
+    "one_liner": "목록 위에서 검색, 필터, 정렬 조건을 한 줄로 조작하는 영역.",
+    "description": "데이터 목록이나 카드 그리드의 결과를 좁히는 조건들을 모아 보여준다.",
+    "visual_anatomy": [
+      "search input",
+      "filter controls",
+      "sort control",
+      "active filter count"
+    ],
+    "when_to_use": [
+      "목록 데이터가 많고 사용자가 조건으로 좁혀야 할 때"
+    ],
+    "anti_use": [
+      "항목이 적으면 과하다",
+      "복잡한 필터는 별도 panel이나 drawer로 분리한다"
+    ],
+    "prompt_phrases": [
+      "테이블 위에 search와 filter chip이 있는 filter bar를 넣어줘",
+      "목록 상단에 필터 바와 정렬 선택을 배치해줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "filter-bar",
+      "props": {
+        "chips": 3
+      }
+    },
+    "sources": [
+      {
+        "source_id": "carbon-design-components",
+        "note": "filtering data table and list controls"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": "sort-control",
+    "status": "draft",
+    "category": "data-display",
+    "ko": {
+      "name": "정렬 컨트롤",
+      "aliases": [
+        "sort control",
+        "sort dropdown",
+        "정렬 선택"
+      ]
+    },
+    "en": {
+      "name": "Sort control",
+      "aliases": [
+        "Sort dropdown",
+        "Sort selector"
+      ]
+    },
+    "one_liner": "목록이나 테이블의 표시 순서를 바꾸는 선택 요소.",
+    "description": "최신순, 이름순, 가격순처럼 사용자가 데이터를 원하는 기준으로 재배열하게 한다.",
+    "visual_anatomy": [
+      "sort label",
+      "selected criterion",
+      "direction indicator",
+      "dropdown or button"
+    ],
+    "when_to_use": [
+      "사용자가 목록 순서를 바꿔 탐색해야 할 때",
+      "여러 정렬 기준이 의미 있을 때"
+    ],
+    "anti_use": [
+      "정렬 기준이 하나뿐이면 노출하지 않는다",
+      "필터와 정렬의 의미를 섞지 않는다"
+    ],
+    "prompt_phrases": [
+      "목록 오른쪽에 sort control을 넣어줘",
+      "최신순 인기순을 고르는 정렬 드롭다운을 만들어줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "sort-control",
+      "props": {
+        "selected": "recent"
+      }
+    },
+    "sources": [
+      {
+        "source_id": "carbon-design-components",
+        "note": "data table sorting controls"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": "data-grid",
+    "status": "draft",
+    "category": "data-display",
+    "ko": {
+      "name": "데이터 그리드",
+      "aliases": [
+        "data grid",
+        "고급 테이블",
+        "spreadsheet grid"
+      ]
+    },
+    "en": {
+      "name": "Data grid",
+      "aliases": [
+        "Interactive grid",
+        "Spreadsheet grid"
+      ]
+    },
+    "one_liner": "행과 열 데이터를 선택, 편집, 정렬할 수 있는 고급 표 형태.",
+    "description": "단순 table보다 상호작용이 많고 키보드 탐색, 셀 선택, 대량 데이터 조작을 포함한다.",
+    "visual_anatomy": [
+      "column headers",
+      "row headers optional",
+      "selected cell",
+      "grid lines",
+      "keyboard focus"
+    ],
+    "when_to_use": [
+      "대량 데이터를 표 안에서 탐색하거나 편집해야 할 때"
+    ],
+    "anti_use": [
+      "단순 읽기용 데이터에는 table이 낫다",
+      "모바일에서는 복잡도가 크게 올라간다"
+    ],
+    "prompt_phrases": [
+      "셀 선택이 가능한 data grid를 넣어줘",
+      "행 선택과 컬럼 정렬이 되는 고급 테이블을 만들어줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "data-grid",
+      "props": {
+        "selectedCell": true
+      }
+    },
+    "sources": [
+      {
+        "source_id": "wai-aria-apg-patterns",
+        "note": "grid pattern for interactive tabular widgets"
+      }
+    ],
+    "confidence": "high"
+  },
+  {
+    "id": "legend",
+    "status": "draft",
+    "category": "data-display",
+    "ko": {
+      "name": "범례",
+      "aliases": [
+        "legend",
+        "차트 범례",
+        "색상 설명"
+      ]
+    },
+    "en": {
+      "name": "Legend",
+      "aliases": [
+        "Chart legend",
+        "Key"
+      ]
+    },
+    "one_liner": "차트나 지도에서 색상, 선, 기호가 무엇을 뜻하는지 설명하는 요소.",
+    "description": "여러 데이터 시리즈를 구분하고 사용자가 시각 부호의 의미를 해석하게 돕는다.",
+    "visual_anatomy": [
+      "color swatches",
+      "series labels",
+      "marker shapes",
+      "optional toggle behavior"
+    ],
+    "when_to_use": [
+      "차트에 여러 색상이나 시리즈가 있을 때",
+      "색상 의미를 명확히 알려야 할 때"
+    ],
+    "anti_use": [
+      "라벨을 직접 붙일 수 있으면 불필요할 수 있다",
+      "색상만으로 의미를 전달하지 않는다"
+    ],
+    "prompt_phrases": [
+      "차트 아래에 legend를 넣어줘",
+      "색상별 범례로 매출과 비용을 구분해줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "legend",
+      "props": {
+        "items": 3
+      }
+    },
+    "sources": [
+      {
+        "source_id": "carbon-design-components",
+        "note": "data visualization legend guidance"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": "chart-axis",
+    "status": "draft",
+    "category": "data-display",
+    "ko": {
+      "name": "차트 축",
+      "aliases": [
+        "axis",
+        "x축",
+        "y축"
+      ]
+    },
+    "en": {
+      "name": "Chart axis",
+      "aliases": [
+        "Axis",
+        "X-axis",
+        "Y-axis"
+      ]
+    },
+    "one_liner": "차트에서 값의 기준과 범위를 보여주는 가로·세로 기준선.",
+    "description": "데이터 위치가 어떤 값이나 범주를 의미하는지 눈금과 라벨로 설명한다.",
+    "visual_anatomy": [
+      "axis line",
+      "tick marks",
+      "tick labels",
+      "axis title optional"
+    ],
+    "when_to_use": [
+      "숫자 규모나 범주 위치를 읽어야 하는 차트에서"
+    ],
+    "anti_use": [
+      "작은 sparkline처럼 추세만 보여줄 때는 축을 줄일 수 있다",
+      "눈금이 너무 많으면 읽기 어렵다"
+    ],
+    "prompt_phrases": [
+      "라인 차트에 x-axis와 y-axis 라벨을 넣어줘",
+      "축 눈금이 보이는 bar chart를 만들어줘"
+    ],
+    "asset": {
+      "kind": "diagram",
+      "variant": "chart-axis",
+      "props": {
+        "axes": 2
+      }
+    },
+    "sources": [
+      {
+        "source_id": "carbon-design-components",
+        "note": "chart axes and data visualization guidance"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": "error-state",
+    "status": "draft",
+    "category": "feedback",
+    "ko": {
+      "name": "오류 상태",
+      "aliases": [
+        "error state",
+        "실패 화면",
+        "오류 UI"
+      ]
+    },
+    "en": {
+      "name": "Error state",
+      "aliases": [
+        "Failure state",
+        "Error UI"
+      ]
+    },
+    "one_liner": "작업이나 데이터 로딩이 실패했을 때 원인과 복구 행동을 보여주는 상태 화면.",
+    "description": "오류 메시지, 재시도 버튼, 대체 행동을 함께 제공해 사용자가 막히지 않게 한다.",
+    "visual_anatomy": [
+      "error icon",
+      "clear message",
+      "recovery action",
+      "optional detail text"
+    ],
+    "when_to_use": [
+      "요청 실패",
+      "권한 문제",
+      "네트워크 오류처럼 사용자가 알아야 하는 실패가 발생했을 때"
+    ],
+    "anti_use": [
+      "기술적인 에러 코드만 보여주지 않는다",
+      "사용자가 할 수 있는 행동 없이 막아두지 않는다"
+    ],
+    "prompt_phrases": [
+      "데이터 로딩 실패 시 error state를 보여줘",
+      "재시도 버튼이 있는 오류 화면을 만들어줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "error-state",
+      "props": {
+        "retry": true
+      }
+    },
+    "sources": [
+      {
+        "source_id": "carbon-design-components",
+        "note": "error and empty state guidance"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": "success-state",
+    "status": "draft",
+    "category": "feedback",
+    "ko": {
+      "name": "성공 상태",
+      "aliases": [
+        "success state",
+        "완료 화면",
+        "성공 UI"
+      ]
+    },
+    "en": {
+      "name": "Success state",
+      "aliases": [
+        "Completion state",
+        "Success UI"
+      ]
+    },
+    "one_liner": "작업이 성공적으로 끝났음을 확인시켜 주는 상태 화면이나 메시지.",
+    "description": "체크 아이콘, 완료 문구, 다음 행동을 제공해 사용자가 결과를 확신하게 한다.",
+    "visual_anatomy": [
+      "success icon",
+      "confirmation title",
+      "supporting text",
+      "next action"
+    ],
+    "when_to_use": [
+      "결제",
+      "제출",
+      "업로드처럼 완료 확인이 중요한 작업 뒤에"
+    ],
+    "anti_use": [
+      "사소한 저장 완료에는 toast가 충분할 수 있다",
+      "다음 단계 없이 막다른 화면을 만들지 않는다"
+    ],
+    "prompt_phrases": [
+      "결제 완료 success state를 보여줘",
+      "체크 아이콘과 다음으로 버튼이 있는 완료 화면을 만들어줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "success-state",
+      "props": {
+        "action": true
+      }
+    },
+    "sources": [
+      {
+        "source_id": "material-m3-components",
+        "note": "feedback and confirmation patterns"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": "warning-state",
+    "status": "draft",
+    "category": "feedback",
+    "ko": {
+      "name": "경고 상태",
+      "aliases": [
+        "warning state",
+        "주의 상태",
+        "warning UI"
+      ]
+    },
+    "en": {
+      "name": "Warning state",
+      "aliases": [
+        "Caution state",
+        "Warning UI"
+      ]
+    },
+    "one_liner": "위험하거나 주의가 필요한 상황을 노란색 계열과 설명으로 알려주는 상태.",
+    "description": "삭제 전 확인, 할당량 초과 임박, 불완전한 설정처럼 즉시 실패는 아니지만 주의가 필요할 때 쓴다.",
+    "visual_anatomy": [
+      "warning icon",
+      "caution color",
+      "message text",
+      "optional action"
+    ],
+    "when_to_use": [
+      "사용자가 계속 진행하기 전에 위험을 알아야 할 때"
+    ],
+    "anti_use": [
+      "모든 안내를 warning으로 만들지 않는다",
+      "실제 오류는 error state나 alert로 구분한다"
+    ],
+    "prompt_phrases": [
+      "저장되지 않은 변경사항 warning state를 보여줘",
+      "경고 아이콘과 노란 배너를 넣어줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "warning-state",
+      "props": {
+        "tone": "warning"
+      }
+    },
+    "sources": [
+      {
+        "source_id": "shadcn-ui-docs",
+        "note": "alert component variants"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": "info-state",
+    "status": "draft",
+    "category": "feedback",
+    "ko": {
+      "name": "정보 상태",
+      "aliases": [
+        "info state",
+        "안내 상태",
+        "informational message"
+      ]
+    },
+    "en": {
+      "name": "Info state",
+      "aliases": [
+        "Informational state",
+        "Info message"
+      ]
+    },
+    "one_liner": "사용자가 알아두면 좋은 보조 정보를 중립적으로 보여주는 상태.",
+    "description": "기능 제한, 팁, 시스템 안내처럼 경고나 오류는 아니지만 맥락 설명이 필요할 때 쓴다.",
+    "visual_anatomy": [
+      "info icon",
+      "neutral container",
+      "concise message",
+      "optional link"
+    ],
+    "when_to_use": [
+      "사용자에게 맥락이나 추가 설명을 제공해야 할 때"
+    ],
+    "anti_use": [
+      "중요한 오류를 info처럼 약하게 표현하지 않는다",
+      "긴 도움말은 documentation link로 분리한다"
+    ],
+    "prompt_phrases": [
+      "상단에 info state 안내 박스를 넣어줘",
+      "도움말 링크가 있는 정보 메시지를 보여줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "info-state",
+      "props": {
+        "link": true
+      }
+    },
+    "sources": [
+      {
+        "source_id": "shadcn-ui-docs",
+        "note": "alert component for informational messages"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": "loading-state",
+    "status": "draft",
+    "category": "feedback",
+    "ko": {
+      "name": "로딩 상태",
+      "aliases": [
+        "loading state",
+        "불러오는 중 화면",
+        "대기 상태"
+      ]
+    },
+    "en": {
+      "name": "Loading state",
+      "aliases": [
+        "Loading UI",
+        "Pending state"
+      ]
+    },
+    "one_liner": "데이터나 화면이 준비되는 동안 사용자가 기다리고 있음을 보여주는 상태.",
+    "description": "spinner, skeleton, progress bar, 로딩 문구를 상황에 맞게 조합한다.",
+    "visual_anatomy": [
+      "loading indicator",
+      "placeholder area",
+      "optional message",
+      "disabled actions"
+    ],
+    "when_to_use": [
+      "비동기 작업 때문에 콘텐츠를 즉시 보여줄 수 없을 때"
+    ],
+    "anti_use": [
+      "빈 화면으로 방치하지 않는다",
+      "긴 작업에 이유나 예상 시간을 전혀 주지 않으면 불안하다"
+    ],
+    "prompt_phrases": [
+      "목록을 불러오는 동안 loading state를 보여줘",
+      "skeleton과 로딩 문구를 함께 넣어줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "loading-state",
+      "props": {
+        "skeleton": true
+      }
+    },
+    "sources": [
+      {
+        "source_id": "material-m3-components",
+        "note": "progress indicators and loading feedback"
+      }
+    ],
+    "confidence": "high"
   }
 ] satisfies VocabularyTerm[]
 
