@@ -1,4 +1,4 @@
-import { useCallback, useDeferredValue, useEffect, useMemo, useRef, useState } from "react"
+import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import {
   BellDot,
   BookOpen,
@@ -48,9 +48,7 @@ function App() {
   const [printScopeLabel, setPrintScopeLabel] = useState("전체 용어")
   const restoreAfterPrintRef = useRef<RestorePrintState>(null)
   const cleanupTimerRef = useRef<number | null>(null)
-  const deferredQuery = useDeferredValue(query)
-
-  const searchResults = useMemo(() => searchTerms(terms, deferredQuery, filter), [deferredQuery, filter])
+  const searchResults = useMemo(() => searchTerms(terms, query, filter), [query, filter])
   const filteredTerms = useMemo(() => searchResults.map((result) => result.term), [searchResults])
   const starterSuggestions = useMemo(() => getStarterQueries(), [])
   const hasActiveSearch = query.trim().length > 0 || filter !== "all"
@@ -334,7 +332,7 @@ function App() {
                   <TermCard
                     key={result.term.id}
                     index={index}
-                    matchReasons={deferredQuery ? result.reasons : undefined}
+                    matchReasons={query ? result.reasons : undefined}
                     selected={selectedTerm?.id === result.term.id}
                     term={result.term}
                     onSelect={selectTerm}

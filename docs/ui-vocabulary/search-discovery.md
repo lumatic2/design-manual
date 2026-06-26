@@ -123,6 +123,8 @@ Tie-breakers:
 
 Suggestion candidates should be generated from the same data source, not hardcoded lists.
 
+Typing into the search box should update autocomplete suggestions only. It must not immediately update the card grid, match reason badges, or URL state. The app commits a real search only when the user presses Enter, clicks the search button, or selects an autocomplete suggestion. This keeps the input responsive while preserving the heavier ranked-card search for explicit confirmation.
+
 Candidate types:
 
 - `term`: Korean name, English name, id, aliases.
@@ -215,6 +217,7 @@ Required implementation checks:
 - Lint: `npm run lint`.
 - Autocomplete: typing `토` shows switch/toggle candidates.
 - Autocomplete: typing `옆에서` shows drawer/side-sheet candidates.
+- Performance: typing updates suggestions only; card results and URL update after Enter, search button, or suggestion selection.
 - Keyboard: ArrowDown and Enter select a suggestion.
 - Ranking: fixture queries surface expected ids near the top.
 - Match reason: result cards show why a result matched.

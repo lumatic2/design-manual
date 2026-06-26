@@ -41,14 +41,13 @@ export function SearchAutocomplete({
     setDraftQuery(query)
   }, [query])
 
-  useEffect(() => {
-    if (draftQuery === query) {
-      return
-    }
-
-    const timer = window.setTimeout(() => onQueryChange(draftQuery), 180)
-    return () => window.clearTimeout(timer)
-  }, [draftQuery, onQueryChange, query])
+  function commitQuery(value = draftQuery) {
+    const nextQuery = value.trim()
+    setDraftQuery(nextQuery)
+    onQueryChange(nextQuery)
+    setFocused(false)
+    setActiveIndex(-1)
+  }
 
   function selectSuggestion(suggestion: SearchSuggestion) {
     if (suggestion.type === "category" || suggestion.type === "group") {
@@ -56,15 +55,15 @@ export function SearchAutocomplete({
       setDraftQuery("")
       onQueryChange("")
     } else {
-      setDraftQuery(suggestion.value)
-      onQueryChange(suggestion.value)
+      commitQuery(suggestion.value)
+      return
     }
     setFocused(false)
     setActiveIndex(-1)
   }
 
   function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
-    if (!open) {
+    if (!open && event.key !== "Enter") {
       return
     }
 
@@ -78,7 +77,11 @@ export function SearchAutocomplete({
     }
     if (event.key === "Enter") {
       event.preventDefault()
-      selectSuggestion(suggestions[Math.max(activeIndex, 0)])
+      if (open && activeIndex >= 0) {
+        selectSuggestion(suggestions[activeIndex])
+      } else {
+        commitQuery()
+      }
     }
     if (event.key === "Escape") {
       setFocused(false)
@@ -86,86 +89,93 @@ export function SearchAutocomplete({
   }
 
   return (
-    <Popover open={open}>
-      <PopoverAnchor asChild>
-        <div className="relative">
-          <Search className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
-          <Input
-            aria-autocomplete="list"
-            aria-expanded={open}
-            autoComplete="off"
-            className="h-11 pl-9 pr-10"
-            placeholder="토글, 모달, icon..."
-            value={draftQuery}
-            onBlur={() => window.setTimeout(() => setFocused(false), 120)}
-            onChange={(event) => {
-              setDraftQuery(event.target.value)
-              setActiveIndex(-1)
-            }}
-            onFocus={() => setFocused(true)}
-            onKeyDown={handleKeyDown}
-          />
-          {draftQuery && (
-            <Button
-              aria-label="검색어 지우기"
-              className="absolute right-1 top-1/2 -translate-y-1/2"
-              size="icon-sm"
-              variant="ghost"
-              onClick={() => {
-                setDraftQuery("")
-                onQueryChange("")
+    <div className="grid grid-cols-[minmax(0,1fr)_auto] gap-2">
+      <Popover open={open}>
+        <PopoverAnchor asChild>
+          <div className="relative">
+            <Search className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+            <Input
+              aria-autocomplete="list"
+              aria-expanded={open}
+              autoComplete="off"
+              className="h-11 pl-9 pr-10"
+              placeholder="토글, 모달, icon..."
+              value={draftQuery}
+              onBlur={() => window.setTimeout(() => setFocused(false), 120)}
+              onChange={(event) => {
+                setDraftQuery(event.target.value)
+                setFocused(true)
+                setActiveIndex(-1)
               }}
-            >
-              <X aria-hidden="true" />
-            </Button>
-          )}
-        </div>
-      </PopoverAnchor>
-      <PopoverContent
-        align="start"
-        className="w-[min(var(--radix-popover-trigger-width),calc(100vw-2rem))] p-0"
-        onOpenAutoFocus={(event) => event.preventDefault()}
-      >
-        <Command shouldFilter={false}>
-          <CommandList className="max-h-80">
-            <CommandGroup heading={draftQuery ? "추천 결과" : "이렇게 찾아보세요"}>
-              {suggestions.map((suggestion, index) => (
-                <CommandItem
-                  key={suggestion.id}
-                  className={cn("items-start gap-3", activeIndex === index && "bg-accent text-accent-foreground")}
-                  value={suggestion.id}
-                  onMouseEnter={() => setActiveIndex(index)}
-                  onSelect={() => selectSuggestion(suggestion)}
-                >
-                  <span className="mt-1 flex size-6 shrink-0 items-center justify-center rounded-md bg-secondary text-xs font-semibold text-secondary-foreground">
-                    {getSuggestionGlyph(suggestion)}
-                  </span>
-                  <span className="min-w-0 flex-1">
-                    <span className="block truncate font-medium">{suggestion.label}</span>
-                    <span className="block truncate text-xs text-muted-foreground">{suggestion.description}</span>
-                  </span>
-                  <CommandShortcut>
-                    <ArrowRight aria-hidden="true" />
-                  </CommandShortcut>
-                </CommandItem>
-              ))}
-            </CommandGroup>
-            {!draftQuery && (
-              <>
-                <CommandSeparator />
-                <CommandGroup heading="팁">
-                  <CommandItem disabled>
-                    <span className="text-xs text-muted-foreground">
-                      정확한 이름 대신 생김새나 목적을 입력해도 됩니다.
-                    </span>
-                  </CommandItem>
-                </CommandGroup>
-              </>
+              onFocus={() => setFocused(true)}
+              onKeyDown={handleKeyDown}
+            />
+            {draftQuery && (
+              <Button
+                aria-label="검색어 지우기"
+                className="absolute right-1 top-1/2 -translate-y-1/2"
+                size="icon-sm"
+                variant="ghost"
+                onClick={() => {
+                  setDraftQuery("")
+                  onQueryChange("")
+                }}
+              >
+                <X aria-hidden="true" />
+              </Button>
             )}
-          </CommandList>
-        </Command>
-      </PopoverContent>
-    </Popover>
+          </div>
+        </PopoverAnchor>
+        <PopoverContent
+          align="start"
+          className="w-[min(var(--radix-popover-trigger-width),calc(100vw-2rem))] p-0"
+          onOpenAutoFocus={(event) => event.preventDefault()}
+        >
+          <Command shouldFilter={false}>
+            <CommandList className="max-h-80">
+              <CommandGroup heading={draftQuery ? "추천 결과" : "이렇게 찾아보세요"}>
+                {suggestions.map((suggestion, index) => (
+                  <CommandItem
+                    key={suggestion.id}
+                    className={cn("items-start gap-3", activeIndex === index && "bg-accent text-accent-foreground")}
+                    value={suggestion.id}
+                    onMouseEnter={() => setActiveIndex(index)}
+                    onSelect={() => selectSuggestion(suggestion)}
+                  >
+                    <span className="mt-1 flex size-6 shrink-0 items-center justify-center rounded-md bg-secondary text-xs font-semibold text-secondary-foreground">
+                      {getSuggestionGlyph(suggestion)}
+                    </span>
+                    <span className="min-w-0 flex-1">
+                      <span className="block truncate font-medium">{suggestion.label}</span>
+                      <span className="block truncate text-xs text-muted-foreground">{suggestion.description}</span>
+                    </span>
+                    <CommandShortcut>
+                      <ArrowRight aria-hidden="true" />
+                    </CommandShortcut>
+                  </CommandItem>
+                ))}
+              </CommandGroup>
+              {!draftQuery && (
+                <>
+                  <CommandSeparator />
+                  <CommandGroup heading="팁">
+                    <CommandItem disabled>
+                      <span className="text-xs text-muted-foreground">
+                        정확한 이름 대신 생김새나 목적을 입력해도 됩니다.
+                      </span>
+                    </CommandItem>
+                  </CommandGroup>
+                </>
+              )}
+            </CommandList>
+          </Command>
+        </PopoverContent>
+      </Popover>
+      <Button className="h-11 shrink-0" variant="secondary" onClick={() => commitQuery()}>
+        <Search aria-hidden="true" data-icon="inline-start" />
+        검색
+      </Button>
+    </div>
   )
 }
 
