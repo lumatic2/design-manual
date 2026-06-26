@@ -119,6 +119,16 @@ function App() {
     setDetailOpen(true)
   }, [])
 
+  function goHome() {
+    setQuery("")
+    setFilter("all")
+    setOpenCategories([])
+    setSelectedTerm(terms[0] ?? null)
+    setDetailOpen(false)
+    window.history.replaceState(null, "", window.location.pathname)
+    window.scrollTo({ top: 0, behavior: "smooth" })
+  }
+
   function schedulePrint() {
     window.setTimeout(() => {
       window.print()
@@ -208,7 +218,12 @@ function App() {
           <header className="sticky top-0 z-20 border-b bg-background/95 backdrop-blur">
             <div className="flex flex-col gap-4 px-5 py-4 md:px-8 lg:px-10">
               <div className="grid gap-4 xl:grid-cols-[minmax(240px,320px)_minmax(280px,1fr)_auto] xl:items-center">
-                <div className="flex min-w-0 items-start gap-3">
+                <button
+                  type="button"
+                  aria-label="UI 용어 사전 홈으로 이동"
+                  className="flex min-w-0 items-start gap-3 rounded-lg text-left outline-none transition hover:text-primary focus-visible:ring-2 focus-visible:ring-ring"
+                  onClick={goHome}
+                >
                   <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary text-primary-foreground">
                     <BookOpen aria-hidden="true" className="size-5" />
                   </div>
@@ -218,7 +233,7 @@ function App() {
                       UI 컴포넌트 레퍼런스
                     </p>
                   </div>
-                </div>
+                </button>
 
                 <div data-print-hidden>
                   <SearchAutocomplete
