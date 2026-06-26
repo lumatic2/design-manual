@@ -17,6 +17,7 @@ export type VocabularyTerm = {
   asset: { kind: string; variant: string; props?: Record<string, unknown> }
   sources: { source_id: string; note?: string }[]
   confidence: "low" | "medium" | "high"
+  related?: { id: string; relation: "compare" | "alternative" | "use-with"; note: string }[]
 }
 
 export type SourceReference = {
@@ -242,6 +243,28 @@ export const terms = [
         "note": "menus and select-like input behavior"
       }
     ],
+    "related": [
+      {
+        "id": "combobox",
+        "relation": "compare",
+        "note": "옵션이 많거나 검색 입력이 필요하면 select보다 combobox가 맞다."
+      },
+      {
+        "id": "dropdown-menu",
+        "relation": "compare",
+        "note": "값을 고르는 입력이면 select, 명령을 숨겨 실행하는 목록이면 dropdown menu다."
+      },
+      {
+        "id": "radio-group",
+        "relation": "alternative",
+        "note": "선택지가 적고 모두 보여줘야 하면 select보다 radio group이 더 명확하다."
+      },
+      {
+        "id": "segmented-control",
+        "relation": "alternative",
+        "note": "2-5개의 보기 모드를 즉시 전환하면 segmented control이 더 빠르다."
+      }
+    ],
     "confidence": "medium"
   },
   {
@@ -296,6 +319,23 @@ export const terms = [
         "note": "combobox interaction pattern"
       }
     ],
+    "related": [
+      {
+        "id": "select",
+        "relation": "compare",
+        "note": "검색 없이 정해진 값 하나만 고르면 combobox보다 select가 단순하다."
+      },
+      {
+        "id": "autocomplete",
+        "relation": "compare",
+        "note": "추천 입력과 검색 선택이 핵심이면 autocomplete와 겹치므로 입력 자유도와 선택 강도를 먼저 정한다."
+      },
+      {
+        "id": "dropdown-menu",
+        "relation": "compare",
+        "note": "combobox는 값을 입력/선택하는 control이고 dropdown menu는 명령 목록이다."
+      }
+    ],
     "confidence": "high"
   },
   {
@@ -346,6 +386,18 @@ export const terms = [
       {
         "source_id": "wai-aria-apg-patterns",
         "note": "checkbox pattern"
+      }
+    ],
+    "related": [
+      {
+        "id": "switch",
+        "relation": "compare",
+        "note": "즉시 켜고 끄는 설정이면 switch, 제출 전 선택값이면 checkbox가 더 명확하다."
+      },
+      {
+        "id": "radio-group",
+        "relation": "compare",
+        "note": "여러 개 선택할 수 있으면 checkbox, 정확히 하나만 골라야 하면 radio group이다."
       }
     ],
     "confidence": "high"
@@ -401,6 +453,23 @@ export const terms = [
         "note": "radio group pattern"
       }
     ],
+    "related": [
+      {
+        "id": "checkbox",
+        "relation": "compare",
+        "note": "하나만 선택하면 radio group, 여러 개 선택 가능하면 checkbox를 쓴다."
+      },
+      {
+        "id": "select",
+        "relation": "alternative",
+        "note": "선택지가 많거나 공간을 아껴야 하면 select가 더 적합하다."
+      },
+      {
+        "id": "segmented-control",
+        "relation": "alternative",
+        "note": "보기 모드처럼 즉시 전환되는 소수 옵션은 segmented control이 더 compact하다."
+      }
+    ],
     "confidence": "high"
   },
   {
@@ -453,6 +522,18 @@ export const terms = [
       {
         "source_id": "material-m3-components",
         "note": "switch component"
+      }
+    ],
+    "related": [
+      {
+        "id": "checkbox",
+        "relation": "compare",
+        "note": "스위치는 즉시 적용되는 on/off 설정에 쓰고, checkbox는 폼 안 선택값에 더 적합하다."
+      },
+      {
+        "id": "toggle-group",
+        "relation": "compare",
+        "note": "여러 버튼형 상태를 묶어 켜고 끄면 toggle group이 더 낫다."
       }
     ],
     "confidence": "high"
@@ -666,6 +747,18 @@ export const terms = [
         "note": "tabs pattern"
       }
     ],
+    "related": [
+      {
+        "id": "segmented-control",
+        "relation": "compare",
+        "note": "콘텐츠 패널을 나누면 tabs, 보기 모드나 필터 값을 빠르게 바꾸면 segmented control이 맞다."
+      },
+      {
+        "id": "tab-bar",
+        "relation": "compare",
+        "note": "모바일 앱의 최상위 destination 전환이면 tab bar라는 이름이 더 자연스럽다."
+      }
+    ],
     "confidence": "high"
   },
   {
@@ -717,6 +810,23 @@ export const terms = [
       {
         "source_id": "material-m3-components",
         "note": "segmented buttons"
+      }
+    ],
+    "related": [
+      {
+        "id": "tabs",
+        "relation": "compare",
+        "note": "패널 구조가 명확하면 tabs, 같은 화면의 보기 방식만 바꾸면 segmented control이 더 적합하다."
+      },
+      {
+        "id": "toggle-group",
+        "relation": "compare",
+        "note": "하나만 선택되는 모드 전환이면 segmented control, 여러 pressed state가 필요하면 toggle group이다."
+      },
+      {
+        "id": "radio-group",
+        "relation": "alternative",
+        "note": "폼 선택값을 명확히 제출해야 하면 radio group이 더 보수적이다."
       }
     ],
     "confidence": "high"
@@ -771,6 +881,23 @@ export const terms = [
       {
         "source_id": "wai-aria-apg-patterns",
         "note": "menu button pattern"
+      }
+    ],
+    "related": [
+      {
+        "id": "select",
+        "relation": "compare",
+        "note": "사용자가 값 하나를 선택하는 입력이면 select, 숨겨진 명령을 실행하면 dropdown menu다."
+      },
+      {
+        "id": "popover",
+        "relation": "compare",
+        "note": "단순 명령 목록이면 dropdown menu, 작은 폼이나 보조 콘텐츠면 popover가 맞다."
+      },
+      {
+        "id": "tooltip",
+        "relation": "compare",
+        "note": "설명을 잠깐 보여주는 용도면 tooltip이고, 클릭 가능한 명령 목록은 dropdown menu다."
       }
     ],
     "confidence": "high"
@@ -1772,6 +1899,23 @@ export const terms = [
         "note": "dialog modal pattern"
       }
     ],
+    "related": [
+      {
+        "id": "drawer",
+        "relation": "compare",
+        "note": "즉시 결정이나 확인을 막고 받아야 하면 dialog, 현재 화면 맥락을 유지하며 보조 작업을 하면 drawer가 낫다."
+      },
+      {
+        "id": "side-sheet",
+        "relation": "alternative",
+        "note": "넓은 화면에서 상세나 편집을 옆으로 열면 side sheet가 더 작업 친화적이다."
+      },
+      {
+        "id": "modal-bottom-sheet",
+        "relation": "alternative",
+        "note": "모바일에서 짧은 선택을 하단에서 받으면 modal bottom sheet가 더 자연스럽다."
+      }
+    ],
     "confidence": "high"
   },
   {
@@ -1827,6 +1971,23 @@ export const terms = [
         "note": "navigation drawer and sheet-like surfaces"
       }
     ],
+    "related": [
+      {
+        "id": "dialog",
+        "relation": "compare",
+        "note": "사용자 결정을 막고 받아야 하면 dialog, 화면 맥락을 유지한 보조 패널이면 drawer다."
+      },
+      {
+        "id": "side-sheet",
+        "relation": "compare",
+        "note": "drawer는 탐색/패널 전반을 넓게 부르고, side sheet는 작업 맥락의 측면 표면에 더 가깝다."
+      },
+      {
+        "id": "modal-bottom-sheet",
+        "relation": "alternative",
+        "note": "모바일 하단에서 배경을 막아 선택을 받으면 modal bottom sheet를 쓴다."
+      }
+    ],
     "confidence": "medium"
   },
   {
@@ -1876,6 +2037,23 @@ export const terms = [
       {
         "source_id": "radix-ui-primitives",
         "note": "popover primitive"
+      }
+    ],
+    "related": [
+      {
+        "id": "dropdown-menu",
+        "relation": "compare",
+        "note": "명령 목록이면 dropdown menu, 작은 폼이나 보조 콘텐츠가 있으면 popover가 적합하다."
+      },
+      {
+        "id": "tooltip",
+        "relation": "compare",
+        "note": "hover/focus의 짧은 설명만 필요하면 tooltip이고, 상호작용 콘텐츠가 있으면 popover다."
+      },
+      {
+        "id": "dialog",
+        "relation": "alternative",
+        "note": "중요한 결정이나 긴 내용은 popover보다 dialog가 안전하다."
       }
     ],
     "confidence": "high"
@@ -2242,6 +2420,18 @@ export const terms = [
         "note": "tooltip pattern"
       }
     ],
+    "related": [
+      {
+        "id": "popover",
+        "relation": "compare",
+        "note": "짧은 설명만 보여주면 tooltip, 버튼이나 입력 같은 상호작용 콘텐츠가 있으면 popover다."
+      },
+      {
+        "id": "dropdown-menu",
+        "relation": "compare",
+        "note": "선택하거나 실행할 항목 목록이면 tooltip이 아니라 dropdown menu다."
+      }
+    ],
     "confidence": "high"
   },
   {
@@ -2296,6 +2486,23 @@ export const terms = [
         "note": "snackbar component"
       }
     ],
+    "related": [
+      {
+        "id": "snackbar",
+        "relation": "compare",
+        "note": "짧은 결과만 알리면 toast, 되돌리기 같은 한 가지 action이 중요하면 snackbar가 더 명확하다."
+      },
+      {
+        "id": "alert",
+        "relation": "compare",
+        "note": "사용자가 계속 봐야 하는 상태나 오류는 자동으로 사라지는 toast보다 alert/banner가 낫다."
+      },
+      {
+        "id": "dialog",
+        "relation": "alternative",
+        "note": "사용자 결정을 받아야 하는 위험 행동은 toast가 아니라 dialog를 쓴다."
+      }
+    ],
     "confidence": "high"
   },
   {
@@ -2348,6 +2555,23 @@ export const terms = [
       {
         "source_id": "shadcn-ui-docs",
         "note": "alert component"
+      }
+    ],
+    "related": [
+      {
+        "id": "toast",
+        "relation": "compare",
+        "note": "잠깐 보여도 되는 완료 피드백은 toast, 화면 안에 유지해야 하는 안내는 alert/banner다."
+      },
+      {
+        "id": "snackbar",
+        "relation": "compare",
+        "note": "짧은 메시지와 한 가지 action이면 snackbar, 맥락 안에서 지속 표시하면 alert가 맞다."
+      },
+      {
+        "id": "inline-alert",
+        "relation": "compare",
+        "note": "폼이나 섹션 내부 오류처럼 위치 맥락이 중요하면 inline alert로 좁혀 부른다."
       }
     ],
     "confidence": "high"
@@ -6085,6 +6309,23 @@ export const terms = [
         "note": "button pattern with pressed state"
       }
     ],
+    "related": [
+      {
+        "id": "segmented-control",
+        "relation": "compare",
+        "note": "하나의 보기 모드만 고르면 segmented control, 여러 버튼 상태를 동시에 켜면 toggle group이다."
+      },
+      {
+        "id": "switch",
+        "relation": "compare",
+        "note": "개별 설정 하나를 즉시 켜고 끄면 switch, 여러 pressed button을 묶으면 toggle group이다."
+      },
+      {
+        "id": "checkbox",
+        "relation": "alternative",
+        "note": "폼 제출용 다중 선택값이면 toggle group보다 checkbox가 더 명확하다."
+      }
+    ],
     "confidence": "high"
   },
   {
@@ -6596,6 +6837,23 @@ export const terms = [
         "note": "snackbar component"
       }
     ],
+    "related": [
+      {
+        "id": "toast",
+        "relation": "compare",
+        "note": "action 없이 짧은 상태만 알리면 toast, 실행 취소 같은 action이 있으면 snackbar가 좋다."
+      },
+      {
+        "id": "alert",
+        "relation": "compare",
+        "note": "사용자가 계속 읽어야 하는 오류나 안내는 snackbar보다 alert/banner로 유지한다."
+      },
+      {
+        "id": "undo-toast",
+        "relation": "use-with",
+        "note": "삭제나 보관처럼 되돌릴 수 있는 작업 뒤에는 undo toast/snackbar 패턴을 함께 검토한다."
+      }
+    ],
     "confidence": "high"
   },
   {
@@ -6850,6 +7108,23 @@ export const terms = [
       {
         "source_id": "material-m3-components",
         "note": "navigation drawer and sheet-like surfaces"
+      }
+    ],
+    "related": [
+      {
+        "id": "drawer",
+        "relation": "compare",
+        "note": "drawer는 넓은 패널 계열의 일반명이고, side sheet는 보조 작업을 담는 측면 표면에 더 가깝다."
+      },
+      {
+        "id": "dialog",
+        "relation": "alternative",
+        "note": "사용자의 집중 결정이 필요하면 side sheet보다 dialog가 더 명확하다."
+      },
+      {
+        "id": "modal-bottom-sheet",
+        "relation": "alternative",
+        "note": "모바일에서 같은 보조 작업을 하단에서 막아 처리하면 modal bottom sheet를 쓴다."
       }
     ],
     "confidence": "medium"
@@ -10709,6 +10984,23 @@ export const terms = [
       {
         "source_id": "material-m3-components",
         "note": "modal bottom sheets behavior"
+      }
+    ],
+    "related": [
+      {
+        "id": "dialog",
+        "relation": "compare",
+        "note": "중앙 집중 창이면 dialog, 모바일 하단에서 올라오는 짧은 선택/폼이면 modal bottom sheet가 자연스럽다."
+      },
+      {
+        "id": "drawer",
+        "relation": "compare",
+        "note": "측면 패널이면 drawer, 하단에서 배경을 막고 올라오면 modal bottom sheet다."
+      },
+      {
+        "id": "side-sheet",
+        "relation": "alternative",
+        "note": "데스크톱의 보조 상세/편집 패널은 side sheet가 더 적합할 수 있다."
       }
     ],
     "confidence": "high"

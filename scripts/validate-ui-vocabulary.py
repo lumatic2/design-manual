@@ -40,6 +40,7 @@ VALID_CATEGORIES = {
 
 VALID_STATUS = {"draft", "reviewed", "published"}
 VALID_CONFIDENCE = {"low", "medium", "high"}
+VALID_RELATED_RELATIONS = {"compare", "alternative", "use-with"}
 SOURCE_LINE_PATTERN = re.compile(r"^- `([^`]+)`: (.+?)\s*$")
 TIER_LINE_PATTERN = re.compile(r"^### Tier ([A-Z])\b")
 
@@ -94,6 +95,7 @@ def main() -> None:
     if len(terms) < 60:
         fail(f"expected at least 60 terms, got {len(terms)}")
 
+    term_ids = {term.get("id") for term in terms if isinstance(term, dict)}
     seen_ids: set[str] = set()
     counts: Counter[str] = Counter()
     for index, term in enumerate(terms):
@@ -132,6 +134,21 @@ def main() -> None:
                 fail(f"{term_id}: source_id is required")
             if source_id not in source_ids:
                 fail(f"{term_id}: unknown source_id {source_id}")
+        if "related" in term:
+            if not isinstance(term["related"], list):
+                fail(f"{term_id}: related must be a list")
+            for related in term["related"]:
+                related_id = related.get("id")
+                relation = related.get("relation")
+                note = related.get("note")
+                if not related_id or not relation or not note:
+                    fail(f"{term_id}: related items require id, relation, note")
+                if related_id not in term_ids:
+                    fail(f"{term_id}: unknown related id {related_id}")
+                if relation not in VALID_RELATED_RELATIONS:
+                    fail(f"{term_id}: invalid related relation {relation}")
+                if related_id == term_id:
+                    fail(f"{term_id}: related id cannot point to itself")
 
     sparse = {category: count for category, count in counts.items() if count < 8}
     if sparse:

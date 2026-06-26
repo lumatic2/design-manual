@@ -50,6 +50,12 @@ const explicitRelations: Record<string, Array<{ id: string; relation: RelatedTer
   ],
 }
 
+const relationLabels: Record<string, RelatedTerm["relation"]> = {
+  compare: "비교",
+  alternative: "대안",
+  "use-with": "함께 사용",
+}
+
 export const useCases: UseCase[] = [
   {
     id: "mobile-commerce",
@@ -97,12 +103,21 @@ export const useCases: UseCase[] = [
 
 export function getRelatedTerms(term: VocabularyTerm, terms: VocabularyTerm[], limit = 5): RelatedTerm[] {
   const byId = new Map(terms.map((item) => [item.id, item]))
+  const yamlRelations = (term.related ?? []).flatMap((item) => {
+    const related = byId.get(item.id)
+    return related ? [{ term: related, relation: relationLabels[item.relation] ?? "비교", note: item.note }] : []
+  })
   const explicit = (explicitRelations[term.id] ?? []).flatMap((item) => {
     const related = byId.get(item.id)
     return related ? [{ term: related, relation: item.relation, note: item.note }] : []
   })
 
-  const seen = new Set([term.id, ...explicit.map((item) => item.term.id)])
+  const primary = [...yamlRelations, ...explicit]
+  if (primary.length > 0) {
+    return primary.slice(0, limit)
+  }
+
+  const seen = new Set([term.id, ...primary.map((item) => item.term.id)])
   const group = categoryGroups.find((item) => item.ids.includes(term.id))
   const groupFallback = (group?.ids ?? []).flatMap((id) => {
     if (seen.has(id)) {
@@ -116,10 +131,9 @@ export function getRelatedTerms(term: VocabularyTerm, terms: VocabularyTerm[], l
     return [{ term: related, relation: "비교" as const, note: `같은 세부 분류인 '${group?.label}'에서 함께 비교할 만한 용어다.` }]
   })
 
-  return [...explicit, ...groupFallback].slice(0, limit)
+  return [...primary, ...groupFallback].slice(0, limit)
 }
 
 export function getUseCasesForTerm(term: VocabularyTerm) {
   return useCases.filter((item) => item.termIds.includes(term.id))
 }
-

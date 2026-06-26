@@ -153,6 +153,7 @@ export type VocabularyTerm = {
   asset: { kind: string; variant: string; props?: Record<string, unknown> }
   sources: { source_id: string; note?: string }[]
   confidence: "low" | "medium" | "high"
+  related?: { id: string; relation: "compare" | "alternative" | "use-with"; note: string }[]
 }
 
 export type SourceReference = {

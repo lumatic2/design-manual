@@ -22,7 +22,10 @@
     {
       "step": 2,
       "name": "confusing-term-data-depth",
-      "status": "pending"
+      "status": "completed",
+      "started_at": "2026-06-27T01:25:00+09:00",
+      "completed_at": "2026-06-27T01:45:00+09:00",
+      "summary": "Added optional related data support and validation, enriched core confusing groups in terms.yml (select/combobox/dropdown, dialog/drawer/sheet, toast/snackbar/alert, tabs/segmented/toggle, checkbox/switch/radio, popover/tooltip), generated typed related data, and verified explicit comparison notes in Chrome."
     },
     {
       "step": 3,
