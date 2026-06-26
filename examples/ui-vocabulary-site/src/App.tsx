@@ -20,7 +20,7 @@ import { cn } from "@/lib/utils"
 function App() {
   const [query, setQuery] = useState("")
   const [filter, setFilter] = useState<TermFilter>("all")
-  const [openCategories, setOpenCategories] = useState<string[]>(categories)
+  const [openCategories, setOpenCategories] = useState<string[]>([])
   const [selectedTerm, setSelectedTerm] = useState<VocabularyTerm | null>(terms[0] ?? null)
   const [detailOpen, setDetailOpen] = useState(false)
 
