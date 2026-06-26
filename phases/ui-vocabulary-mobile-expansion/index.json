@@ -38,8 +38,10 @@
     {
       "step": 4,
       "name": "mobile-inputs-pickers-and-auth",
-      "status": "pending",
-      "summary": "Add OTP, passcode, biometric, mobile picker, mobile search, address/contact, and voice input terms."
+      "status": "completed",
+      "started_at": "2026-06-26T20:14:00+09:00",
+      "completed_at": "2026-06-26T20:43:00+09:00",
+      "summary": "Added twelve mobile input/picker/auth terms: otp-code-input, passcode-keypad, biometric-prompt, mobile-date-picker, wheel-picker, time-wheel-picker, mobile-search-sheet, chip-input-mobile, contact-picker, address-autocomplete, voice-input-button, and clear-text-button. Added matching phone-frame visuals, updated group filters, regenerated 300-term dataset, and verified build/lint plus 390px Chrome smoke for representative mobile input queries without horizontal overflow."
     },
     {
       "step": 5,

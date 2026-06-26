@@ -3388,6 +3388,186 @@
   sources: [{ source_id: material-m3-components, note: ripple as touch state feedback }]
   confidence: medium
 
+- id: otp-code-input
+  status: draft
+  category: input
+  ko: { name: OTP 코드 입력, aliases: [otp code input, 인증번호 입력, 문자 인증 코드, verification code input] }
+  en: { name: OTP code input, aliases: [Verification code input, One-time password input] }
+  one_liner: SMS나 이메일로 받은 일회용 인증번호를 각 자리별 칸에 입력하는 모바일 입력.
+  description: 숫자 코드의 길이와 현재 입력 위치를 명확히 보여줘 인증 흐름을 빠르게 끝내게 한다.
+  visual_anatomy: [separated digit boxes, focused digit, numeric code, submit-ready state]
+  when_to_use: [회원가입, 로그인, 결제 확인에서 일회용 인증번호를 받을 때]
+  anti_use: [긴 비밀번호나 자유 텍스트에는 쓰지 않는다, 자동 입력을 막는 과도한 분리는 피한다]
+  prompt_phrases: [SMS 인증번호 6자리를 입력하는 OTP code input을 모바일 화면에 넣어줘]
+  asset: { kind: mini-mock, variant: otp-code-input, props: { length: 6 } }
+  sources: [{ source_id: apple-hig-components, note: one-time code and text input patterns }]
+  confidence: high
+
+- id: passcode-keypad
+  status: draft
+  category: input
+  ko: { name: 패스코드 키패드, aliases: [passcode keypad, 숫자 비밀번호, PIN 키패드, 잠금해제 키패드] }
+  en: { name: Passcode keypad, aliases: [PIN keypad, Numeric passcode input] }
+  one_liner: 모바일 잠금 해제나 보안 확인에 쓰는 숫자 키패드와 코드 점 표시.
+  description: 사용자가 화면 안의 숫자 키를 눌러 PIN이나 패스코드를 입력하게 한다.
+  visual_anatomy: [code dots, numeric keypad, delete key, secure entry]
+  when_to_use: [앱 잠금 해제, 결제 확인, 보안 설정 진입처럼 짧은 숫자 코드가 필요할 때]
+  anti_use: [일반 숫자 입력 폼에는 number input이 더 단순하다]
+  prompt_phrases: [앱 잠금 해제 화면에 숫자 passcode keypad를 넣어줘]
+  asset: { kind: mini-mock, variant: passcode-keypad, props: { digits: 4 } }
+  sources: [{ source_id: apple-hig-components, note: passcode and secure authentication interface }]
+  confidence: medium
+
+- id: biometric-prompt
+  status: draft
+  category: feedback
+  ko: { name: 생체 인증 프롬프트, aliases: [biometric prompt, Face ID, 지문 인증, 생체 인증 팝업] }
+  en: { name: Biometric prompt, aliases: [Face ID prompt, Fingerprint prompt, Biometric authentication] }
+  one_liner: 얼굴 인식이나 지문으로 사용자를 확인하는 모바일 인증 프롬프트.
+  description: 민감한 행동을 실행하기 전에 시스템 생체 인증을 통해 사용자의 의도를 확인한다.
+  visual_anatomy: [biometric icon, authentication message, confirm state, modal prompt]
+  when_to_use: [결제, 잠금 해제, 비밀번호 보기처럼 높은 신뢰가 필요한 행동에서]
+  anti_use: [일반 설정 변경처럼 낮은 위험 작업에는 과하다]
+  prompt_phrases: [결제 전에 Face ID biometric prompt로 본인 인증을 하게 해줘]
+  asset: { kind: mini-mock, variant: biometric-prompt, props: { approved: false } }
+  sources: [{ source_id: apple-hig-components, note: biometric authentication prompt behavior }]
+  confidence: high
+
+- id: mobile-date-picker
+  status: draft
+  category: input
+  ko: { name: 모바일 날짜 선택, aliases: [mobile date picker, 모바일 달력 선택, 날짜 선택 화면, calendar picker] }
+  en: { name: Mobile date picker, aliases: [Mobile calendar picker, Date selector] }
+  one_liner: 작은 화면에서 터치로 날짜를 고르게 만든 모바일 최적화 달력 입력.
+  description: 날짜 셀, 월 이동, 선택된 날짜를 손가락으로 누르기 쉬운 크기로 보여준다.
+  visual_anatomy: [month header, calendar grid, selected day, touch-sized date cells]
+  when_to_use: [예약일, 생년월일, 일정 날짜를 모바일에서 고를 때]
+  anti_use: [정확한 시간까지 필요하면 time picker나 datetime flow를 함께 쓴다]
+  prompt_phrases: [예약 날짜를 고르는 mobile date picker를 바텀시트 안에 넣어줘]
+  asset: { kind: mini-mock, variant: mobile-date-picker, props: { selected: true } }
+  sources: [{ source_id: material-m3-components, note: date picker component for mobile layouts }]
+  confidence: high
+
+- id: wheel-picker
+  status: draft
+  category: input
+  ko: { name: 휠 피커, aliases: [wheel picker, 스크롤 선택, iOS 휠 선택, 돌리는 선택창] }
+  en: { name: Wheel picker, aliases: [Picker wheel, Spinning picker] }
+  one_liner: 값을 세로로 굴려 가운데 줄에 맞춰 선택하는 모바일 피커.
+  description: 크기, 날짜 일부, 숫자처럼 순서가 있는 값을 손가락 스크롤로 빠르게 선택하게 한다.
+  visual_anatomy: [scrolling value column, center selection band, adjacent values]
+  when_to_use: [값의 범위가 정해져 있고 사용자가 순서대로 훑으며 고를 때]
+  anti_use: [옵션이 적고 비교가 중요하면 radio group이나 segmented control이 더 명확하다]
+  prompt_phrases: [사이즈를 S M L로 고르는 wheel picker를 만들어줘]
+  asset: { kind: mini-mock, variant: wheel-picker, props: { selected: M } }
+  sources: [{ source_id: apple-hig-components, note: pickers use spinning wheels for value selection }]
+  confidence: high
+
+- id: time-wheel-picker
+  status: draft
+  category: input
+  ko: { name: 시간 휠 피커, aliases: [time wheel picker, 시간 스크롤 선택, 시각 휠, 모바일 시간 선택] }
+  en: { name: Time wheel picker, aliases: [Wheel time picker, Spinning time picker] }
+  one_liner: 시와 분을 각각 휠처럼 굴려 모바일에서 시간을 고르는 입력.
+  description: 손가락으로 시/분 컬럼을 스크롤해 정확한 시간을 빠르게 맞추게 한다.
+  visual_anatomy: [hour wheel, minute wheel, center selected row, time separator]
+  when_to_use: [알람, 예약, 일정 시간처럼 시각을 모바일에서 선택할 때]
+  anti_use: [시간 범위를 고르는 경우에는 range picker나 별도 duration control을 검토한다]
+  prompt_phrases: [예약 시간을 고르는 time wheel picker를 넣어줘]
+  asset: { kind: mini-mock, variant: time-wheel-picker, props: { hour: 9, minute: 30 } }
+  sources: [{ source_id: apple-hig-components, note: date and time picker wheel controls }]
+  confidence: high
+
+- id: mobile-search-sheet
+  status: draft
+  category: input
+  ko: { name: 모바일 검색 시트, aliases: [mobile search sheet, 전체 검색 시트, 검색 바텀시트, 검색 화면] }
+  en: { name: Mobile search sheet, aliases: [Search sheet, Full-screen search sheet] }
+  one_liner: 모바일에서 검색 입력과 추천/결과를 별도 시트나 전체 화면으로 여는 검색 표면.
+  description: 작은 화면에서 검색에 집중할 수 있도록 현재 화면 위에 검색 전용 레이어를 만든다.
+  visual_anatomy: [search input, clear button, suggestions, results, sheet or full-screen surface]
+  when_to_use: [목록 화면에서 검색을 열 때 결과와 추천을 넓게 보여줘야 할 때]
+  anti_use: [항상 검색이 핵심이면 mobile-search-header가 더 직접적이다]
+  prompt_phrases: [검색 아이콘을 누르면 mobile search sheet가 열리고 추천 검색어를 보여줘]
+  asset: { kind: mini-mock, variant: mobile-search-sheet, props: { query: true } }
+  sources: [{ source_id: material-m3-components, note: search component and mobile search surface }]
+  confidence: high
+
+- id: chip-input-mobile
+  status: draft
+  category: input
+  ko: { name: 모바일 칩 입력, aliases: [chip input mobile, 모바일 태그 입력, 토큰 입력, 태그 칩] }
+  en: { name: Mobile chip input, aliases: [Mobile tag input, Tokenized input] }
+  one_liner: 모바일 입력창 안에서 여러 값을 칩 형태로 추가하고 지우는 입력 패턴.
+  description: 관심사, 수신자, 태그처럼 여러 짧은 값을 작은 화면에서도 구분해 편집하게 한다.
+  visual_anatomy: [input container, chips, remove affordance, add token button]
+  when_to_use: [여러 태그, 사람, 키워드를 모바일에서 입력할 때]
+  anti_use: [값이 많아지면 좁은 화면에서 복잡해지므로 별도 선택 화면을 검토한다]
+  prompt_phrases: [관심사를 여러 개 추가하는 mobile chip input을 넣어줘]
+  asset: { kind: mini-mock, variant: chip-input-mobile, props: { chips: 2 } }
+  sources: [{ source_id: material-m3-components, note: chips as compact input tokens }]
+  confidence: high
+
+- id: contact-picker
+  status: draft
+  category: input
+  ko: { name: 연락처 선택, aliases: [contact picker, 사람 선택, 연락처 목록, 친구 선택] }
+  en: { name: Contact picker, aliases: [People picker, Contact selector] }
+  one_liner: 모바일에서 사람이나 연락처를 검색하고 선택하는 목록형 입력.
+  description: 초대, 공유, 송금처럼 사람을 대상으로 하는 흐름에서 이름과 아바타를 보고 고르게 한다.
+  visual_anatomy: [contact rows, avatar, name, selected contact, optional search]
+  when_to_use: [친구 초대, 수신자 선택, 담당자 선택처럼 사람을 골라야 할 때]
+  anti_use: [단순 텍스트 이름 입력에는 text field가 더 빠를 수 있다]
+  prompt_phrases: [친구를 선택하는 contact picker를 모바일 화면으로 만들어줘]
+  asset: { kind: mini-mock, variant: contact-picker, props: { selected: true } }
+  sources: [{ source_id: apple-hig-components, note: people/contact selection patterns }]
+  confidence: medium
+
+- id: address-autocomplete
+  status: draft
+  category: input
+  ko: { name: 주소 자동완성, aliases: [address autocomplete, 주소 검색, 위치 자동완성, 주소 제안] }
+  en: { name: Address autocomplete, aliases: [Address search autocomplete, Location autocomplete] }
+  one_liner: 사용자가 주소 일부를 입력하면 후보 위치나 주소를 제안하는 모바일 입력.
+  description: 배달, 지도, 프로필 주소 입력에서 긴 주소를 끝까지 치지 않고 선택하게 한다.
+  visual_anatomy: [address input, location icon, suggestion rows, highlighted match]
+  when_to_use: [주소, 장소, 위치를 모바일에서 빠르게 입력해야 할 때]
+  anti_use: [정확한 법정 주소 검증이 필요하면 후속 확인 단계를 둔다]
+  prompt_phrases: [주소를 입력하면 후보가 뜨는 address autocomplete를 넣어줘]
+  asset: { kind: mini-mock, variant: address-autocomplete, props: { suggestions: true } }
+  sources: [{ source_id: material-m3-components, note: autocomplete and search suggestions for text input }]
+  confidence: high
+
+- id: voice-input-button
+  status: draft
+  category: action
+  ko: { name: 음성 입력 버튼, aliases: [voice input button, 마이크 버튼, 음성 검색, 말로 입력] }
+  en: { name: Voice input button, aliases: [Microphone button, Voice search button] }
+  one_liner: 모바일 입력창이나 검색 화면에서 음성으로 텍스트를 넣게 하는 마이크 버튼.
+  description: 타이핑이 불편한 상황에서 음성 검색, 메시지 입력, 명령 입력을 시작하는 affordance다.
+  visual_anatomy: [microphone icon, circular touch target, listening state, optional waveform]
+  when_to_use: [검색, 메시지, 접근성 보조 입력에서 음성 입력을 제공할 때]
+  anti_use: [조용해야 하는 맥락이나 개인정보가 민감한 입력에서는 기본값으로 강요하지 않는다]
+  prompt_phrases: [검색창 오른쪽에 voice input button을 넣고 누르면 듣는 상태로 바뀌게 해줘]
+  asset: { kind: mini-mock, variant: voice-input-button, props: { listening: false } }
+  sources: [{ source_id: material-m3-components, note: icon buttons and voice input affordance }]
+  confidence: medium
+
+- id: clear-text-button
+  status: draft
+  category: action
+  ko: { name: 텍스트 지우기 버튼, aliases: [clear text button, 입력 지우기, X 버튼, 검색어 지우기] }
+  en: { name: Clear text button, aliases: [Clear input button, Clear search button] }
+  one_liner: 모바일 입력창 안의 현재 텍스트를 한 번에 지우는 작은 X 버튼.
+  description: 검색어나 짧은 입력을 빠르게 비워 다시 입력할 수 있게 한다.
+  visual_anatomy: [text field, trailing x icon, filled text, cleared state]
+  when_to_use: [검색창, 주소 입력, 짧은 text field에서 사용자가 자주 다시 입력할 때]
+  anti_use: [긴 폼 전체 초기화에는 별도 reset action이 더 명확하다]
+  prompt_phrases: [검색창 오른쪽에 입력값을 지우는 clear text button을 넣어줘]
+  asset: { kind: mini-mock, variant: clear-text-button, props: { filled: true } }
+  sources: [{ source_id: material-m3-components, note: trailing icon actions in text fields }]
+  confidence: high
+
 - id: page-layout
   status: draft
   category: structure

@@ -83,19 +83,19 @@ export const categoryGroups: TermGroup[] = [
     id: "input-text",
     category: "input",
     label: "텍스트·숫자 입력",
-    ids: ["text-field", "textarea", "textarea-autosize", "password-field", "number-input", "masked-input", "input-group", "copy-field", "api-key-field"],
+    ids: ["text-field", "textarea", "textarea-autosize", "password-field", "number-input", "masked-input", "input-group", "otp-code-input", "passcode-keypad", "copy-field", "api-key-field"],
   },
   {
     id: "input-search-command",
     category: "input",
     label: "검색·명령 입력",
-    ids: ["search-field", "search-view", "mobile-search-header", "autocomplete", "search-suggestions", "command-palette"],
+    ids: ["search-field", "search-view", "mobile-search-header", "mobile-search-sheet", "address-autocomplete", "autocomplete", "search-suggestions", "command-palette"],
   },
   {
     id: "input-pickers",
     category: "input",
     label: "선택형 입력",
-    ids: ["select", "combobox", "date-picker", "date-range-picker", "time-picker", "color-picker", "rating-input", "tag-input", "coupon-field", "quantity-stepper", "otp-input", "pull-to-refresh-indicator"],
+    ids: ["select", "combobox", "date-picker", "mobile-date-picker", "date-range-picker", "time-picker", "time-wheel-picker", "wheel-picker", "color-picker", "rating-input", "tag-input", "chip-input-mobile", "contact-picker", "coupon-field", "quantity-stepper", "otp-input", "pull-to-refresh-indicator"],
   },
   {
     id: "input-file-media",
@@ -137,7 +137,7 @@ export const categoryGroups: TermGroup[] = [
     id: "action-buttons",
     category: "action",
     label: "버튼·아이콘 행동",
-    ids: ["button", "primary-button", "secondary-button", "destructive-button", "icon-button", "floating-action-button", "bottom-app-bar", "link", "button-group", "split-button", "copy-button", "download-button", "share-button", "close-button", "overflow-button", "loading-button", "icon-toggle-button", "speed-dial"],
+    ids: ["button", "primary-button", "secondary-button", "destructive-button", "icon-button", "floating-action-button", "bottom-app-bar", "voice-input-button", "clear-text-button", "link", "button-group", "split-button", "copy-button", "download-button", "share-button", "close-button", "overflow-button", "loading-button", "icon-toggle-button", "speed-dial"],
   },
   {
     id: "action-command-bars",
@@ -209,7 +209,7 @@ export const categoryGroups: TermGroup[] = [
     id: "feedback-access-limits",
     category: "feedback",
     label: "권한·제한·세션",
-    ids: ["permission-state", "permission-prompt", "permission-education-screen", "locked-state", "offline-state", "rate-limit-state", "session-expired-dialog", "upgrade-prompt", "quota-warning", "unsaved-changes-banner"],
+    ids: ["permission-state", "permission-prompt", "permission-education-screen", "biometric-prompt", "locked-state", "offline-state", "rate-limit-state", "session-expired-dialog", "upgrade-prompt", "quota-warning", "unsaved-changes-banner"],
   },
   {
     id: "feedback-status-notifications",

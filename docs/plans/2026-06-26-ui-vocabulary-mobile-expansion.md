@@ -57,7 +57,7 @@ Use existing Tier A/B source ids from `docs/ui-vocabulary/sources.md`.
   - AC: add sheets, action menus, permission/system prompts, snackbars/toasts; build/lint/mobile smoke pass.
 - [x] Step 3 — mobile gestures and touch affordances
   - AC: add gesture-visible patterns such as swipe actions, pull refresh, drag handles, long-press menu, page indicators; build/lint/mobile smoke pass.
-- [ ] Step 4 — mobile inputs, pickers, and auth flows
+- [x] Step 4 — mobile inputs, pickers, and auth flows
   - AC: add OTP, passcode, wheel pickers, mobile search, chip input, contact/address pickers; build/lint/mobile smoke pass.
 - [ ] Step 5 — mobile content, commerce, and final audit
   - AC: add feed/story/media/map/commerce/onboarding patterns; update search fixture; run duplicate/category audit.

@@ -79,6 +79,21 @@ Not duplicated because existing entries already cover the core term:
 - `scrim`
 - `touch-ripple`
 
+## Promoted In 2026-06-26 Step 4
+
+- `otp-code-input`
+- `passcode-keypad`
+- `biometric-prompt`
+- `mobile-date-picker`
+- `wheel-picker`
+- `time-wheel-picker`
+- `mobile-search-sheet`
+- `chip-input-mobile`
+- `contact-picker`
+- `address-autocomplete`
+- `voice-input-button`
+- `clear-text-button`
+
 ### Batch 1 — App Shell And Navigation
 
 - `phone-frame`: generic mobile viewport frame for visual examples.

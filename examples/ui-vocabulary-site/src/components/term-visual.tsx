@@ -25,6 +25,7 @@ import {
   LoaderCircle,
   MapPin,
   Menu,
+  Mic,
   MoreHorizontal,
   Palette,
   Play,
@@ -285,6 +286,18 @@ function renderVisual(variant: string, label: string) {
   if (variant === "pinch-zoom-viewer") return <PinchZoomViewerVisual />
   if (variant === "scrim") return <ScrimVisual />
   if (variant === "touch-ripple") return <TouchRippleVisual />
+  if (variant === "otp-code-input") return <OtpCodeInputVisual />
+  if (variant === "passcode-keypad") return <PasscodeKeypadVisual />
+  if (variant === "biometric-prompt") return <BiometricPromptVisual />
+  if (variant === "mobile-date-picker") return <MobileDatePickerVisual />
+  if (variant === "wheel-picker") return <WheelPickerVisual />
+  if (variant === "time-wheel-picker") return <TimeWheelPickerVisual />
+  if (variant === "mobile-search-sheet") return <MobileSearchSheetVisual />
+  if (variant === "chip-input-mobile") return <ChipInputMobileVisual />
+  if (variant === "contact-picker") return <ContactPickerVisual />
+  if (variant === "address-autocomplete") return <AddressAutocompleteVisual />
+  if (variant === "voice-input-button") return <VoiceInputButtonVisual />
+  if (variant === "clear-text-button") return <ClearTextButtonVisual />
   if (variant === "mobile-bottom-sheet") return <MobileBottomSheetVisual />
   if (variant === "page-layout") return <PageLayoutVisual />
   if (variant === "dashboard-grid") return <DashboardGridVisual />
@@ -2553,6 +2566,214 @@ function TouchRippleVisual() {
           <Bell aria-hidden="true" />
           {pressed && <span className="absolute size-12 rounded-full bg-primary/20" />}
         </button>
+      </div>
+    </PhoneFrame>
+  )
+}
+
+function OtpCodeInputVisual() {
+  const [digits, setDigits] = useState(["4", "2", "", "", "", ""])
+
+  return (
+    <PhoneFrame>
+      <div className="flex h-full flex-col items-center justify-center gap-2 p-2">
+        <p className="font-medium">코드 입력</p>
+        <div className="grid grid-cols-6 gap-0.5">
+          {digits.map((digit, index) => (
+            <button key={index} type="button" className={cn("flex size-5 items-center justify-center rounded border bg-background", index === 2 && "border-primary")} onClick={() => setDigits((current) => current.map((item, itemIndex) => itemIndex === index ? String((Number(item || 0) + 1) % 10) : item))}>
+              {digit}
+            </button>
+          ))}
+        </div>
+      </div>
+    </PhoneFrame>
+  )
+}
+
+function PasscodeKeypadVisual() {
+  const [count, setCount] = useState(2)
+
+  return (
+    <PhoneFrame>
+      <div className="flex h-full flex-col items-center justify-center gap-2 p-2">
+        <div className="flex gap-1">{[0, 1, 2, 3].map((item) => <span key={item} className={cn("size-1.5 rounded-full border", item < count && "bg-primary")} />)}</div>
+        <div className="grid grid-cols-3 gap-1">
+          {Array.from({ length: 9 }).map((_, index) => (
+            <button key={index} type="button" className="flex size-5 items-center justify-center rounded-full border" onClick={() => setCount((value) => Math.min(4, value + 1))}>{index + 1}</button>
+          ))}
+        </div>
+      </div>
+    </PhoneFrame>
+  )
+}
+
+function BiometricPromptVisual() {
+  const [approved, setApproved] = useState(false)
+
+  return (
+    <PhoneFrame>
+      <div className="absolute inset-1 rounded-[1rem] bg-foreground/20" />
+      <div className="absolute left-2 right-2 top-9 rounded-lg border bg-background p-2 text-center shadow-sm">
+        <User aria-hidden="true" className="mx-auto mb-1 text-primary" />
+        <p className="font-medium">{approved ? "인증됨" : "Face ID"}</p>
+        <button type="button" className="mt-2 rounded bg-primary px-2 py-1 text-primary-foreground" onClick={() => setApproved(true)}>확인</button>
+      </div>
+    </PhoneFrame>
+  )
+}
+
+function MobileDatePickerVisual() {
+  const [day, setDay] = useState(18)
+
+  return (
+    <PhoneFrame>
+      <div className="p-2">
+        <div className="mb-2 flex items-center justify-between"><span className="font-medium">6월</span><CalendarDays aria-hidden="true" /></div>
+        <div className="grid grid-cols-7 gap-0.5 text-center">
+          {Array.from({ length: 21 }).map((_, index) => (
+            <button key={index} type="button" className={cn("rounded py-0.5", index + 1 === day && "bg-primary text-primary-foreground")} onClick={() => setDay(index + 1)}>
+              {index + 1}
+            </button>
+          ))}
+        </div>
+      </div>
+    </PhoneFrame>
+  )
+}
+
+function WheelPickerVisual() {
+  const [selected, setSelected] = useState("M")
+  const values = ["S", "M", "L"]
+
+  return (
+    <PhoneFrame>
+      <div className="flex h-full items-center justify-center p-2">
+        <div className="relative w-full rounded-lg border bg-muted/30 py-2 text-center">
+          <div className="absolute inset-x-1 top-1/2 h-5 -translate-y-1/2 rounded border bg-background" />
+          {values.map((value) => (
+            <button key={value} type="button" className={cn("relative z-10 block w-full py-1", selected === value && "font-semibold text-primary")} onClick={() => setSelected(value)}>
+              {value}
+            </button>
+          ))}
+        </div>
+      </div>
+    </PhoneFrame>
+  )
+}
+
+function TimeWheelPickerVisual() {
+  const [hour, setHour] = useState(9)
+  const [minute, setMinute] = useState(30)
+
+  return (
+    <PhoneFrame>
+      <div className="flex h-full items-center justify-center gap-1 p-2">
+        <button type="button" className="rounded border px-2 py-3 text-center" onClick={() => setHour((value) => value === 9 ? 10 : 9)}>
+          <span className="block text-muted-foreground">08</span>
+          <span className="block font-semibold text-primary">{hour}</span>
+          <span className="block text-muted-foreground">10</span>
+        </button>
+        <span>:</span>
+        <button type="button" className="rounded border px-2 py-3 text-center" onClick={() => setMinute((value) => value === 30 ? 45 : 30)}>
+          <span className="block text-muted-foreground">15</span>
+          <span className="block font-semibold text-primary">{minute}</span>
+          <span className="block text-muted-foreground">45</span>
+        </button>
+      </div>
+    </PhoneFrame>
+  )
+}
+
+function MobileSearchSheetVisual() {
+  const [query, setQuery] = useState("pizza")
+
+  return (
+    <PhoneFrame>
+      <div className="absolute inset-1 rounded-[1rem] bg-background">
+        <div className="flex h-7 items-center gap-1 border-b px-2">
+          <Search aria-hidden="true" />
+          <input aria-label="sheet search" className="min-w-0 flex-1 bg-transparent outline-none" value={query} onChange={(event) => setQuery(event.target.value)} />
+          <X aria-hidden="true" />
+        </div>
+        <div className="p-2">
+          {(query ? ["최근 검색", "추천 결과", "주변 장소"] : ["최근 검색"]).map((item) => <Line key={item} className="mb-2 w-12" />)}
+        </div>
+      </div>
+    </PhoneFrame>
+  )
+}
+
+function ChipInputMobileVisual() {
+  const [chips, setChips] = useState(["UX", "앱"])
+
+  return (
+    <PhoneFrame>
+      <div className="p-2">
+        <div className="flex flex-wrap gap-1 rounded border p-1">
+          {chips.map((chip) => <button key={chip} type="button" className="rounded-full bg-primary px-1.5 py-0.5 text-primary-foreground" onClick={() => setChips((current) => current.filter((item) => item !== chip))}>{chip}</button>)}
+          <button type="button" className="rounded-full border px-1.5 py-0.5" onClick={() => setChips((current) => [...current, `Tag${current.length}`])}>+</button>
+        </div>
+      </div>
+    </PhoneFrame>
+  )
+}
+
+function ContactPickerVisual() {
+  const [selected, setSelected] = useState("민지")
+
+  return (
+    <PhoneFrame>
+      <div className="p-2">
+        {["민지", "준호", "서연"].map((name) => (
+          <button key={name} type="button" className={cn("mb-1 flex w-full items-center gap-1 rounded px-1 py-1 text-left", selected === name && "bg-primary/10 text-primary")} onClick={() => setSelected(name)}>
+            <span className="flex size-4 items-center justify-center rounded-full bg-muted"><User aria-hidden="true" /></span>{name}
+          </button>
+        ))}
+      </div>
+    </PhoneFrame>
+  )
+}
+
+function AddressAutocompleteVisual() {
+  const [query, setQuery] = useState("명륜")
+
+  return (
+    <PhoneFrame>
+      <div className="p-2">
+        <div className="mb-2 flex items-center gap-1 rounded border px-1 py-1">
+          <MapPin aria-hidden="true" />
+          <input aria-label="address" className="min-w-0 flex-1 bg-transparent outline-none" value={query} onChange={(event) => setQuery(event.target.value)} />
+        </div>
+        {["명륜동", "성균관대", "혜화역"].map((item) => <button key={item} type="button" className="mb-1 block w-full rounded px-1 py-1 text-left hover:bg-muted">{item}</button>)}
+      </div>
+    </PhoneFrame>
+  )
+}
+
+function VoiceInputButtonVisual() {
+  const [listening, setListening] = useState(false)
+
+  return (
+    <PhoneFrame>
+      <div className="flex h-full items-center justify-center">
+        <button type="button" className={cn("flex size-12 items-center justify-center rounded-full border", listening && "bg-primary text-primary-foreground")} onClick={() => setListening((value) => !value)}>
+          <Mic aria-hidden="true" />
+        </button>
+      </div>
+    </PhoneFrame>
+  )
+}
+
+function ClearTextButtonVisual() {
+  const [text, setText] = useState("검색어")
+
+  return (
+    <PhoneFrame>
+      <div className="p-2">
+        <div className="flex items-center gap-1 rounded border px-1 py-1">
+          <input aria-label="clearable text" className="min-w-0 flex-1 bg-transparent outline-none" value={text} onChange={(event) => setText(event.target.value)} />
+          {text && <button type="button" className="rounded-full bg-muted p-0.5" onClick={() => setText("")}><X aria-hidden="true" /></button>}
+        </div>
       </div>
     </PhoneFrame>
   )
