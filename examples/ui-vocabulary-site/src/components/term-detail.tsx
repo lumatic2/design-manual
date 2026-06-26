@@ -1,4 +1,5 @@
-import { ExternalLink } from "lucide-react"
+import { useState } from "react"
+import { Download, ExternalLink } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { ScrollArea } from "@/components/ui/scroll-area"
@@ -11,6 +12,7 @@ import {
 } from "@/components/ui/sheet"
 import { TermVisual } from "@/components/term-visual"
 import type { VocabularyTerm } from "@/data/terms.generated"
+import { downloadNodeAsPng, getTermPngFileName } from "@/lib/export-capture"
 import { categoryLabels } from "@/lib/search"
 
 type TermDetailProps = {
@@ -20,19 +22,53 @@ type TermDetailProps = {
 }
 
 export function TermDetail({ term, open, onOpenChange }: TermDetailProps) {
+  const [exporting, setExporting] = useState(false)
+
+  async function saveDetailPng() {
+    if (!term) {
+      return
+    }
+
+    const target = document.querySelector<HTMLElement>(`[data-export-detail="${term.id}"]`)
+    if (!target) {
+      return
+    }
+
+    setExporting(true)
+    try {
+      await downloadNodeAsPng(target, getTermPngFileName(term))
+    } finally {
+      setExporting(false)
+    }
+  }
+
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent className="w-full gap-0 p-0 sm:max-w-xl">
         {term && (
-          <>
+          <div className="bg-background" data-export-detail={term.id}>
             <SheetHeader className="border-b p-5">
-              <Badge variant="outline" className="w-fit rounded-md">
-                {categoryLabels[term.category]}
-              </Badge>
-              <SheetTitle className="text-2xl">{term.ko.name}</SheetTitle>
-              <SheetDescription>
-                {term.en.name} · {term.ko.aliases.concat(term.en.aliases).slice(0, 4).join(", ")}
-              </SheetDescription>
+              <div className="flex items-start justify-between gap-4">
+                <div className="min-w-0">
+                  <Badge variant="outline" className="w-fit rounded-md">
+                    {categoryLabels[term.category]}
+                  </Badge>
+                  <SheetTitle className="mt-3 text-2xl">{term.ko.name}</SheetTitle>
+                  <SheetDescription>
+                    {term.en.name} · {term.ko.aliases.concat(term.en.aliases).slice(0, 4).join(", ")}
+                  </SheetDescription>
+                </div>
+                <Button
+                  data-export-ignore="true"
+                  disabled={exporting}
+                  size="sm"
+                  variant="outline"
+                  onClick={saveDetailPng}
+                >
+                  <Download aria-hidden="true" />
+                  {exporting ? "저장 중" : "PNG 저장"}
+                </Button>
+              </div>
             </SheetHeader>
             <ScrollArea className="h-[calc(100svh-120px)]">
               <div className="flex flex-col gap-6 p-5">
@@ -70,7 +106,7 @@ export function TermDetail({ term, open, onOpenChange }: TermDetailProps) {
                 </Section>
               </div>
             </ScrollArea>
-          </>
+          </div>
         )}
       </SheetContent>
     </Sheet>

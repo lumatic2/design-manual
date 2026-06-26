@@ -30,7 +30,10 @@
     {
       "step": 3,
       "name": "single-card-png-capture",
-      "status": "pending"
+      "status": "completed",
+      "started_at": "2026-06-26T14:10:00+09:00",
+      "completed_at": "2026-06-26T14:22:00+09:00",
+      "summary": "Added browser-only PNG capture helper around html-to-image, with font readiness, white background, export-ignore filtering, and filename contract. Added data-export-card to cards, data-export-detail to detail sheets, and a detail-level PNG 저장 action. Verified npm run build, npm run lint, and Playwright smoke: text-field card/detail targets existed and produced ui-vocabulary-text-field-2026-06-26.png with a nonblank data:image/png URL."
     },
     {
       "step": 4,

@@ -24,6 +24,7 @@ export function TermCard({ term, index, selected, onSelect }: TermCardProps) {
 
   return (
     <Card
+      data-export-card={term.id}
       data-print-card
       role="button"
       tabIndex={0}
