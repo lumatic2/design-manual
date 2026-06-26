@@ -49,6 +49,21 @@ Not duplicated because existing entries already cover the core term:
 - `mobile-back-button` -> existing `back-button`
 - `mobile-floating-action-button` -> existing `floating-action-button`
 
+## Promoted In 2026-06-26 Step 2
+
+- `standard-bottom-sheet`
+- `modal-bottom-sheet`
+- `action-sheet`
+- `share-sheet`
+- `full-screen-dialog`
+- `permission-prompt`
+- `permission-education-screen`
+- `mobile-snackbar`
+- `mobile-toast`
+- `mobile-alert-dialog`
+- `mobile-popover-menu`
+- `sheet-drag-handle`
+
 ### Batch 1 — App Shell And Navigation
 
 - `phone-frame`: generic mobile viewport frame for visual examples.

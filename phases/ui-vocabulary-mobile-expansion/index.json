@@ -22,8 +22,10 @@
     {
       "step": 2,
       "name": "mobile-overlays-and-system-feedback",
-      "status": "pending",
-      "summary": "Add bottom sheets, action/share sheets, permission prompts, alerts, and mobile feedback terms."
+      "status": "completed",
+      "started_at": "2026-06-26T19:13:00+09:00",
+      "completed_at": "2026-06-26T19:44:00+09:00",
+      "summary": "Added twelve mobile overlay/system feedback terms: standard-bottom-sheet, modal-bottom-sheet, action-sheet, share-sheet, full-screen-dialog, permission-prompt, permission-education-screen, mobile-snackbar, mobile-toast, mobile-alert-dialog, mobile-popover-menu, and sheet-drag-handle. Added phone-frame mini visuals, updated group filters, regenerated 276-term dataset, and verified build/lint plus 390px Chrome smoke for representative overlay queries without horizontal overflow."
     },
     {
       "step": 3,

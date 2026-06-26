@@ -53,7 +53,7 @@ Use existing Tier A/B source ids from `docs/ui-vocabulary/sources.md`.
   - AC: `docs/ui-vocabulary/mobile-expansion.md` defines groups, acceptance rules, candidate batches, and search fixture queries.
 - [x] Step 1 — mobile app shell and navigation
   - AC: add high-frequency navigation/app-shell terms and phone-frame visuals; build/lint/mobile smoke pass.
-- [ ] Step 2 — mobile overlays and system feedback
+- [x] Step 2 — mobile overlays and system feedback
   - AC: add sheets, action menus, permission/system prompts, snackbars/toasts; build/lint/mobile smoke pass.
 - [ ] Step 3 — mobile gestures and touch affordances
   - AC: add gesture-visible patterns such as swipe actions, pull refresh, drag handles, long-press menu, page indicators; build/lint/mobile smoke pass.

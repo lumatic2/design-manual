@@ -10599,6 +10599,645 @@ export const terms = [
     "confidence": "high"
   },
   {
+    "id": "standard-bottom-sheet",
+    "status": "draft",
+    "category": "structure",
+    "ko": {
+      "name": "표준 바텀 시트",
+      "aliases": [
+        "standard bottom sheet",
+        "아래에서 올라오는 창",
+        "하단 패널",
+        "바텀시트"
+      ]
+    },
+    "en": {
+      "name": "Standard bottom sheet",
+      "aliases": [
+        "Bottom sheet",
+        "Persistent bottom sheet"
+      ]
+    },
+    "one_liner": "모바일 화면 아래에서 올라와 보조 정보나 선택지를 보여주는 비차단 시트.",
+    "description": "현재 화면 맥락을 유지하면서 필터, 세부 정보, 간단한 선택지를 하단에서 보여준다.",
+    "visual_anatomy": [
+      "phone screen",
+      "bottom sheet surface",
+      "drag handle",
+      "content rows",
+      "underlying page"
+    ],
+    "when_to_use": [
+      "모바일에서 현재 화면을 유지한 채 보조 선택지를 보여줄 때",
+      "지도나 목록 위에 요약 패널을 붙일 때"
+    ],
+    "anti_use": [
+      "사용자 결정을 반드시 막아야 하면 modal-bottom-sheet나 dialog를 쓴다"
+    ],
+    "prompt_phrases": [
+      "아래에서 올라오는 standard bottom sheet에 필터 옵션을 보여줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "standard-bottom-sheet",
+      "props": {
+        "open": true
+      }
+    },
+    "sources": [
+      {
+        "source_id": "material-m3-components",
+        "note": "bottom sheets component"
+      }
+    ],
+    "confidence": "high"
+  },
+  {
+    "id": "modal-bottom-sheet",
+    "status": "draft",
+    "category": "structure",
+    "ko": {
+      "name": "모달 바텀 시트",
+      "aliases": [
+        "modal bottom sheet",
+        "막는 바텀시트",
+        "아래에서 뜨는 모달",
+        "하단 모달"
+      ]
+    },
+    "en": {
+      "name": "Modal bottom sheet",
+      "aliases": [
+        "Blocking bottom sheet",
+        "Modal sheet"
+      ]
+    },
+    "one_liner": "배경을 어둡게 막고 하단에서 올라와 사용자의 선택을 요구하는 모바일 시트.",
+    "description": "중요한 선택, 확인, 짧은 폼처럼 완료 전까지 현재 화면 조작을 막아야 할 때 쓴다.",
+    "visual_anatomy": [
+      "scrim",
+      "bottom sheet",
+      "drag handle",
+      "primary action",
+      "underlying page"
+    ],
+    "when_to_use": [
+      "모바일에서 짧지만 집중이 필요한 선택이나 폼을 받을 때"
+    ],
+    "anti_use": [
+      "긴 작업 흐름은 full-screen-dialog나 별도 화면이 더 적합하다"
+    ],
+    "prompt_phrases": [
+      "배경을 어둡게 깔고 아래에서 modal bottom sheet가 올라오게 해줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "modal-bottom-sheet",
+      "props": {
+        "scrim": true
+      }
+    },
+    "sources": [
+      {
+        "source_id": "material-m3-components",
+        "note": "modal bottom sheets behavior"
+      }
+    ],
+    "confidence": "high"
+  },
+  {
+    "id": "action-sheet",
+    "status": "draft",
+    "category": "action",
+    "ko": {
+      "name": "액션 시트",
+      "aliases": [
+        "action sheet",
+        "작업 시트",
+        "하단 액션 메뉴",
+        "모바일 액션 메뉴"
+      ]
+    },
+    "en": {
+      "name": "Action sheet",
+      "aliases": [
+        "Action menu sheet",
+        "Bottom action menu"
+      ]
+    },
+    "one_liner": "모바일 화면 하단에서 여러 작업 명령을 목록으로 보여주는 메뉴형 시트.",
+    "description": "공유, 복사, 삭제처럼 현재 항목에 대한 행동을 엄지 조작 영역에 모아 보여준다.",
+    "visual_anatomy": [
+      "bottom sheet surface",
+      "action rows",
+      "destructive action",
+      "cancel or close area"
+    ],
+    "when_to_use": [
+      "모바일에서 한 항목에 대한 여러 행동을 선택하게 할 때"
+    ],
+    "anti_use": [
+      "최상위 탐색에는 쓰지 않는다",
+      "자주 쓰는 단일 행동은 버튼으로 노출한다"
+    ],
+    "prompt_phrases": [
+      "카드 더보기 버튼을 누르면 아래에서 action sheet가 올라오게 해줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "action-sheet",
+      "props": {
+        "actions": 3
+      }
+    },
+    "sources": [
+      {
+        "source_id": "apple-hig-components",
+        "note": "action sheets for action choices"
+      }
+    ],
+    "confidence": "high"
+  },
+  {
+    "id": "share-sheet",
+    "status": "draft",
+    "category": "action",
+    "ko": {
+      "name": "공유 시트",
+      "aliases": [
+        "share sheet",
+        "공유 패널",
+        "공유 대상 선택",
+        "모바일 공유창"
+      ]
+    },
+    "en": {
+      "name": "Share sheet",
+      "aliases": [
+        "Sharing sheet",
+        "Share panel"
+      ]
+    },
+    "one_liner": "링크나 콘텐츠를 보낼 대상과 공유 행동을 모바일 하단 패널로 보여주는 UI.",
+    "description": "사용자에게 메시지, 메일, 링크 복사 같은 공유 대상을 빠르게 선택하게 한다.",
+    "visual_anatomy": [
+      "share title",
+      "share targets",
+      "action icons",
+      "bottom sheet surface"
+    ],
+    "when_to_use": [
+      "콘텐츠",
+      "상품",
+      "장소",
+      "문서를 다른 앱이나 사람에게 보내게 할 때"
+    ],
+    "anti_use": [
+      "앱 내부 단순 초대 흐름이면 전용 invite form이 더 명확할 수 있다"
+    ],
+    "prompt_phrases": [
+      "공유 버튼을 누르면 share sheet가 열리고 링크 복사와 메일 보내기를 보여줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "share-sheet",
+      "props": {
+        "targets": 3
+      }
+    },
+    "sources": [
+      {
+        "source_id": "apple-hig-components",
+        "note": "share sheet as mobile sharing interface"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": "full-screen-dialog",
+    "status": "draft",
+    "category": "structure",
+    "ko": {
+      "name": "전체 화면 다이얼로그",
+      "aliases": [
+        "full-screen dialog",
+        "전체 화면 모달",
+        "모바일 전체 화면 편집"
+      ]
+    },
+    "en": {
+      "name": "Full-screen dialog",
+      "aliases": [
+        "Fullscreen dialog",
+        "Full-screen modal"
+      ]
+    },
+    "one_liner": "모바일에서 복잡한 작업을 별도 화면처럼 전체 화면으로 여는 모달.",
+    "description": "작은 dialog나 bottom sheet에 담기 어려운 편집, 작성, 설정 흐름을 현재 맥락 위의 전체 화면 작업으로 만든다.",
+    "visual_anatomy": [
+      "full-screen surface",
+      "close button",
+      "title",
+      "save action",
+      "form content"
+    ],
+    "when_to_use": [
+      "모바일에서 작성이나 편집처럼 집중 작업이 필요할 때"
+    ],
+    "anti_use": [
+      "단순 확인에는 alert dialog나 bottom sheet가 더 가볍다"
+    ],
+    "prompt_phrases": [
+      "모바일에서 프로필 편집을 full-screen dialog로 열어줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "full-screen-dialog",
+      "props": {
+        "title": true
+      }
+    },
+    "sources": [
+      {
+        "source_id": "material-m3-components",
+        "note": "full-screen dialog component"
+      }
+    ],
+    "confidence": "high"
+  },
+  {
+    "id": "permission-prompt",
+    "status": "draft",
+    "category": "feedback",
+    "ko": {
+      "name": "권한 요청 프롬프트",
+      "aliases": [
+        "permission prompt",
+        "권한 요청 화면",
+        "권한 요청 팝업",
+        "알림 권한 요청",
+        "위치 권한 요청"
+      ]
+    },
+    "en": {
+      "name": "Permission prompt",
+      "aliases": [
+        "Permission request prompt",
+        "System permission prompt"
+      ]
+    },
+    "one_liner": "카메라, 위치, 알림 같은 권한 허용을 사용자에게 묻는 모바일 프롬프트.",
+    "description": "실제 시스템 권한 요청 전후로 앱이 사용자에게 권한의 필요성과 선택을 보여주는 화면 요소다.",
+    "visual_anatomy": [
+      "system-like dialog",
+      "permission icon",
+      "allow action",
+      "deny action",
+      "dimmed background"
+    ],
+    "when_to_use": [
+      "권한 없이는 기능을 쓸 수 없을 때",
+      "사용자의 명시적 허용이 필요한 기능에서"
+    ],
+    "anti_use": [
+      "맥락 없이 앱 시작 직후 모든 권한을 한꺼번에 요구하지 않는다"
+    ],
+    "prompt_phrases": [
+      "알림 기능을 켤 때 permission prompt를 띄워서 허용 여부를 물어봐줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "permission-prompt",
+      "props": {
+        "permission": "notification"
+      }
+    },
+    "sources": [
+      {
+        "source_id": "apple-hig-components",
+        "note": "requesting permission in context"
+      }
+    ],
+    "confidence": "high"
+  },
+  {
+    "id": "permission-education-screen",
+    "status": "draft",
+    "category": "feedback",
+    "ko": {
+      "name": "권한 안내 화면",
+      "aliases": [
+        "permission education screen",
+        "권한 요청 화면",
+        "권한 설명 화면",
+        "권한 전 안내",
+        "pre-permission screen"
+      ]
+    },
+    "en": {
+      "name": "Permission education screen",
+      "aliases": [
+        "Pre-permission screen",
+        "Permission explainer"
+      ]
+    },
+    "one_liner": "시스템 권한을 요청하기 전에 왜 필요한지 앱 안에서 먼저 설명하는 모바일 화면.",
+    "description": "권한 요청의 이유와 사용자 이득을 설명해 갑작스러운 시스템 팝업보다 이해하기 쉽게 만든다.",
+    "visual_anatomy": [
+      "permission icon",
+      "benefit headline",
+      "explanation text",
+      "continue button"
+    ],
+    "when_to_use": [
+      "권한 거부율을 낮추고 싶을 때",
+      "카메라나 위치처럼 민감한 권한을 요청하기 전"
+    ],
+    "anti_use": [
+      "실제 권한 요청을 숨기거나 강제로 유도하는 dark pattern으로 쓰지 않는다"
+    ],
+    "prompt_phrases": [
+      "위치 권한을 요청하기 전에 왜 필요한지 설명하는 permission education screen을 넣어줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "permission-education-screen",
+      "props": {
+        "cta": true
+      }
+    },
+    "sources": [
+      {
+        "source_id": "apple-hig-components",
+        "note": "explaining permission value before system request"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": "mobile-snackbar",
+    "status": "draft",
+    "category": "feedback",
+    "ko": {
+      "name": "모바일 스낵바",
+      "aliases": [
+        "mobile snackbar",
+        "하단 스낵바",
+        "하단 피드백 바"
+      ]
+    },
+    "en": {
+      "name": "Mobile snackbar",
+      "aliases": [
+        "Bottom snackbar",
+        "Action snackbar"
+      ]
+    },
+    "one_liner": "모바일 화면 하단, 내비게이션 위에 잠깐 나타나 결과와 짧은 행동을 보여주는 피드백.",
+    "description": "저장됨, 실행 취소, 재시도처럼 작업 직후의 상태와 보조 행동을 엄지 영역 근처에 보여준다.",
+    "visual_anatomy": [
+      "bottom message bar",
+      "short text",
+      "optional action",
+      "navigation-safe placement"
+    ],
+    "when_to_use": [
+      "모바일에서 작업 결과를 방해 없이 알려줄 때",
+      "실행 취소 같은 짧은 행동을 함께 줄 때"
+    ],
+    "anti_use": [
+      "중요 확인이나 오류 복구를 짧게 사라지는 snackbar에만 의존하지 않는다"
+    ],
+    "prompt_phrases": [
+      "저장 후 화면 아래에 실행 취소가 있는 mobile snackbar를 보여줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "mobile-snackbar",
+      "props": {
+        "action": true
+      }
+    },
+    "sources": [
+      {
+        "source_id": "material-m3-components",
+        "note": "snackbar component and mobile placement"
+      }
+    ],
+    "confidence": "high"
+  },
+  {
+    "id": "mobile-toast",
+    "status": "draft",
+    "category": "feedback",
+    "ko": {
+      "name": "모바일 토스트",
+      "aliases": [
+        "mobile toast",
+        "작은 모바일 알림",
+        "복사됨 토스트"
+      ]
+    },
+    "en": {
+      "name": "Mobile toast",
+      "aliases": [
+        "Mobile notification toast",
+        "Floating toast"
+      ]
+    },
+    "one_liner": "모바일 화면 위에 작게 떠서 매우 짧은 상태를 알려주는 비차단 알림.",
+    "description": "복사됨, 저장됨처럼 사용자의 흐름을 끊지 않아도 되는 짧은 피드백을 보여준다.",
+    "visual_anatomy": [
+      "small floating pill",
+      "short message",
+      "temporary visibility"
+    ],
+    "when_to_use": [
+      "사용자가 이미 결과를 예상할 수 있는 작은 작업 성공을 알려줄 때"
+    ],
+    "anti_use": [
+      "사용자가 행동해야 하는 오류나 경고에는 alert",
+      "snackbar action",
+      "inline message를 쓴다"
+    ],
+    "prompt_phrases": [
+      "복사 버튼을 누르면 중앙에 작게 mobile toast로 복사됨을 보여줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "mobile-toast",
+      "props": {
+        "message": "copied"
+      }
+    },
+    "sources": [
+      {
+        "source_id": "material-m3-components",
+        "note": "transient feedback pattern comparable to snackbar/toast"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "id": "mobile-alert-dialog",
+    "status": "draft",
+    "category": "feedback",
+    "ko": {
+      "name": "모바일 경고 다이얼로그",
+      "aliases": [
+        "mobile alert dialog",
+        "모바일 알림창",
+        "삭제 확인창",
+        "확인 팝업"
+      ]
+    },
+    "en": {
+      "name": "Mobile alert dialog",
+      "aliases": [
+        "Alert dialog",
+        "Confirmation alert"
+      ]
+    },
+    "one_liner": "모바일 화면 중앙에 떠서 중요한 확인이나 선택을 요구하는 작은 차단 dialog.",
+    "description": "삭제, 로그아웃, 권한 실패처럼 사용자가 명확히 결정을 내려야 하는 순간에 쓴다.",
+    "visual_anatomy": [
+      "scrim",
+      "compact dialog",
+      "title",
+      "message",
+      "confirm action",
+      "cancel action"
+    ],
+    "when_to_use": [
+      "되돌리기 어렵거나 중요한 선택을 확인해야 할 때"
+    ],
+    "anti_use": [
+      "일상적인 안내나 성공 메시지에는 toast나 snackbar가 더 가볍다"
+    ],
+    "prompt_phrases": [
+      "삭제 버튼을 누르면 mobile alert dialog로 정말 삭제할지 물어봐줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "mobile-alert-dialog",
+      "props": {
+        "destructive": true
+      }
+    },
+    "sources": [
+      {
+        "source_id": "apple-hig-components",
+        "note": "alerts ask users to make decisions"
+      }
+    ],
+    "confidence": "high"
+  },
+  {
+    "id": "mobile-popover-menu",
+    "status": "draft",
+    "category": "selection",
+    "ko": {
+      "name": "모바일 팝오버 메뉴",
+      "aliases": [
+        "mobile popover menu",
+        "점 세개 메뉴",
+        "더보기 메뉴",
+        "anchored menu"
+      ]
+    },
+    "en": {
+      "name": "Mobile popover menu",
+      "aliases": [
+        "Anchored menu",
+        "Overflow popover"
+      ]
+    },
+    "one_liner": "모바일 화면의 아이콘이나 더보기 버튼 근처에 작게 붙어 뜨는 명령 메뉴.",
+    "description": "현재 항목에 대한 수정, 공유, 삭제 같은 짧은 명령을 앵커 위치 가까이에 보여준다.",
+    "visual_anatomy": [
+      "anchor icon",
+      "floating menu surface",
+      "menu items",
+      "small shadow"
+    ],
+    "when_to_use": [
+      "명령 수가 적고 현재 항목과의 위치 관계를 유지하고 싶을 때"
+    ],
+    "anti_use": [
+      "화면 아래 엄지 영역에서 선택하게 해야 하면 action-sheet가 더 편할 수 있다"
+    ],
+    "prompt_phrases": [
+      "카드 오른쪽 위 점 세개 버튼을 누르면 mobile popover menu를 띄워줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "mobile-popover-menu",
+      "props": {
+        "open": true
+      }
+    },
+    "sources": [
+      {
+        "source_id": "material-m3-components",
+        "note": "menus anchored to controls"
+      }
+    ],
+    "confidence": "high"
+  },
+  {
+    "id": "sheet-drag-handle",
+    "status": "draft",
+    "category": "structure",
+    "ko": {
+      "name": "시트 드래그 핸들",
+      "aliases": [
+        "sheet drag handle",
+        "바텀시트 손잡이",
+        "grabber",
+        "드래그 바"
+      ]
+    },
+    "en": {
+      "name": "Sheet drag handle",
+      "aliases": [
+        "Drag handle",
+        "Grabber",
+        "Bottom sheet handle"
+      ]
+    },
+    "one_liner": "바텀 시트를 끌어올리거나 내릴 수 있음을 알려주는 작은 손잡이 표시.",
+    "description": "하단 시트 상단에 짧은 막대 형태로 놓여 사용자가 드래그 가능한 레이어임을 인식하게 한다.",
+    "visual_anatomy": [
+      "rounded handle bar",
+      "sheet top edge",
+      "draggable surface",
+      "expanded/collapsed states"
+    ],
+    "when_to_use": [
+      "바텀 시트를 드래그로 확장하거나 닫을 수 있을 때"
+    ],
+    "anti_use": [
+      "드래그가 불가능한 일반 카드나 dialog에 장식처럼 붙이지 않는다"
+    ],
+    "prompt_phrases": [
+      "바텀시트 상단에 드래그 가능한 sheet drag handle을 넣어줘"
+    ],
+    "asset": {
+      "kind": "mini-mock",
+      "variant": "sheet-drag-handle",
+      "props": {
+        "draggable": true
+      }
+    },
+    "sources": [
+      {
+        "source_id": "material-m3-components",
+        "note": "bottom sheet drag handle affordance"
+      }
+    ],
+    "confidence": "high"
+  },
+  {
     "id": "page-layout",
     "status": "draft",
     "category": "structure",

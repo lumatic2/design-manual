@@ -261,6 +261,18 @@ function renderVisual(variant: string, label: string) {
   if (variant === "bottom-app-bar") return <BottomAppBarVisual />
   if (variant === "mobile-search-header") return <MobileSearchHeaderVisual />
   if (variant === "mobile-segmented-tabs") return <MobileSegmentedTabsVisual />
+  if (variant === "standard-bottom-sheet") return <StandardBottomSheetVisual />
+  if (variant === "modal-bottom-sheet") return <ModalBottomSheetVisual />
+  if (variant === "action-sheet") return <ActionSheetVisual />
+  if (variant === "share-sheet") return <ShareSheetVisual />
+  if (variant === "full-screen-dialog") return <FullScreenDialogVisual />
+  if (variant === "permission-prompt") return <PermissionPromptMobileVisual />
+  if (variant === "permission-education-screen") return <PermissionEducationScreenVisual />
+  if (variant === "mobile-snackbar") return <MobileSnackbarVisual />
+  if (variant === "mobile-toast") return <MobileToastVisual />
+  if (variant === "mobile-alert-dialog") return <MobileAlertDialogVisual />
+  if (variant === "mobile-popover-menu") return <MobilePopoverMenuVisual />
+  if (variant === "sheet-drag-handle") return <SheetDragHandleVisual />
   if (variant === "mobile-bottom-sheet") return <MobileBottomSheetVisual />
   if (variant === "page-layout") return <PageLayoutVisual />
   if (variant === "dashboard-grid") return <DashboardGridVisual />
@@ -2119,6 +2131,228 @@ function MobileSegmentedTabsVisual() {
         <p className="mt-2 font-medium">{active}</p>
         <Line className="mt-1 w-12" />
       </div>
+    </PhoneFrame>
+  )
+}
+
+function StandardBottomSheetVisual() {
+  const [open, setOpen] = useState(true)
+
+  return (
+    <PhoneFrame>
+      <MobileScreenLines />
+      <button type="button" className="absolute left-2 top-7 rounded border bg-background px-1 py-0.5" onClick={() => setOpen((value) => !value)}>
+        필터
+      </button>
+      {open && (
+        <div className="absolute inset-x-1 bottom-1 rounded-t-xl border bg-background p-2 shadow-sm">
+          <div className="mx-auto mb-2 h-0.5 w-6 rounded bg-muted-foreground/40" />
+          <Line className="w-12" />
+          <Line className="mt-1 w-10" />
+        </div>
+      )}
+    </PhoneFrame>
+  )
+}
+
+function ModalBottomSheetVisual() {
+  const [open, setOpen] = useState(true)
+
+  return (
+    <PhoneFrame>
+      <MobileScreenLines />
+      <button type="button" className="absolute left-2 top-7 rounded border bg-background px-1 py-0.5" onClick={() => setOpen((value) => !value)}>
+        열기
+      </button>
+      {open && (
+        <>
+          <div className="absolute inset-1 rounded-[1rem] bg-foreground/25" />
+          <div className="absolute inset-x-1 bottom-1 rounded-t-xl border bg-background p-2 shadow-sm">
+            <div className="mx-auto mb-2 h-0.5 w-6 rounded bg-muted-foreground/40" />
+            <p className="font-medium">선택</p>
+            <button type="button" className="mt-2 rounded bg-primary px-2 py-1 text-primary-foreground" onClick={() => setOpen(false)}>확인</button>
+          </div>
+        </>
+      )}
+    </PhoneFrame>
+  )
+}
+
+function ActionSheetVisual() {
+  const [picked, setPicked] = useState("공유")
+
+  return (
+    <PhoneFrame>
+      <MobileScreenLines />
+      <div className="absolute inset-x-1 bottom-1 rounded-xl border bg-background p-1.5 shadow-sm">
+        {["복사", "공유", "삭제"].map((item) => (
+          <button key={item} type="button" className={cn("block w-full rounded px-2 py-1 text-left", picked === item && "bg-primary/10 text-primary")} onClick={() => setPicked(item)}>
+            {item}
+          </button>
+        ))}
+      </div>
+    </PhoneFrame>
+  )
+}
+
+function ShareSheetVisual() {
+  const [target, setTarget] = useState("메시지")
+
+  return (
+    <PhoneFrame>
+      <MobileScreenLines />
+      <div className="absolute inset-x-1 bottom-1 rounded-xl border bg-background p-1.5 shadow-sm">
+        <div className="mb-1 flex items-center gap-1 font-medium"><Share2 aria-hidden="true" />공유</div>
+        <div className="grid grid-cols-3 gap-1">
+          {["메시지", "메일", "링크"].map((item) => (
+            <button key={item} type="button" className={cn("rounded border px-1 py-1", target === item && "bg-primary text-primary-foreground")} onClick={() => setTarget(item)}>
+              {item.slice(0, 1)}
+            </button>
+          ))}
+        </div>
+      </div>
+    </PhoneFrame>
+  )
+}
+
+function FullScreenDialogVisual() {
+  const [done, setDone] = useState(false)
+
+  return (
+    <PhoneFrame>
+      <div className="flex h-6 items-center gap-1 border-b px-2">
+        <X aria-hidden="true" />
+        <span className="font-medium">{done ? "완료" : "편집"}</span>
+        <button type="button" className="ml-auto text-primary" onClick={() => setDone(true)}>저장</button>
+      </div>
+      <div className="p-2">
+        <Line className="w-12" />
+        <Line className="mt-2 w-10" />
+        <div className="mt-2 h-10 rounded border bg-muted/40" />
+      </div>
+    </PhoneFrame>
+  )
+}
+
+function PermissionPromptMobileVisual() {
+  const [allowed, setAllowed] = useState(false)
+
+  return (
+    <PhoneFrame>
+      <div className="absolute inset-1 rounded-[1rem] bg-foreground/20" />
+      <div className="absolute left-2 right-2 top-10 rounded-lg border bg-background p-2 text-center shadow-sm">
+        <Bell aria-hidden="true" className="mx-auto mb-1" />
+        <p className="font-medium">{allowed ? "허용됨" : "알림 허용?"}</p>
+        <button type="button" className="mt-2 rounded bg-primary px-2 py-1 text-primary-foreground" onClick={() => setAllowed(true)}>허용</button>
+      </div>
+    </PhoneFrame>
+  )
+}
+
+function PermissionEducationScreenVisual() {
+  const [ready, setReady] = useState(false)
+
+  return (
+    <PhoneFrame>
+      <div className="flex h-full flex-col items-center justify-center gap-2 p-2 text-center">
+        <Bell aria-hidden="true" className="text-primary" />
+        <p className="font-medium">{ready ? "요청 준비" : "알림을 받아보세요"}</p>
+        <Line className="w-12" />
+        <button type="button" className="rounded bg-primary px-2 py-1 text-primary-foreground" onClick={() => setReady(true)}>계속</button>
+      </div>
+    </PhoneFrame>
+  )
+}
+
+function MobileSnackbarVisual() {
+  const [visible, setVisible] = useState(true)
+
+  return (
+    <PhoneFrame>
+      <MobileScreenLines />
+      {visible ? (
+        <div className="absolute inset-x-2 bottom-4 flex items-center justify-between rounded bg-foreground px-2 py-1 text-background shadow-sm">
+          <span>저장됨</span>
+          <button type="button" onClick={() => setVisible(false)}>닫기</button>
+        </div>
+      ) : (
+        <button type="button" className="absolute bottom-4 left-3 rounded border bg-background px-2 py-1" onClick={() => setVisible(true)}>보기</button>
+      )}
+    </PhoneFrame>
+  )
+}
+
+function MobileToastVisual() {
+  const [visible, setVisible] = useState(true)
+
+  return (
+    <PhoneFrame>
+      <MobileScreenLines />
+      {visible ? (
+        <button type="button" className="absolute left-1/2 top-12 -translate-x-1/2 rounded-full bg-foreground px-2 py-1 text-background shadow-sm" onClick={() => setVisible(false)}>
+          복사됨
+        </button>
+      ) : (
+        <button type="button" className="absolute left-3 top-12 rounded border bg-background px-2 py-1" onClick={() => setVisible(true)}>토스트</button>
+      )}
+    </PhoneFrame>
+  )
+}
+
+function MobileAlertDialogVisual() {
+  const [open, setOpen] = useState(true)
+
+  return (
+    <PhoneFrame>
+      <MobileScreenLines />
+      {open ? (
+        <>
+          <div className="absolute inset-1 rounded-[1rem] bg-foreground/20" />
+          <div className="absolute left-2 right-2 top-10 rounded-lg border bg-background p-2 shadow-sm">
+            <p className="font-medium">삭제할까요?</p>
+            <div className="mt-2 flex justify-end gap-1">
+              <button type="button" className="rounded border px-1 py-0.5" onClick={() => setOpen(false)}>취소</button>
+              <button type="button" className="rounded bg-destructive px-1 py-0.5 text-white" onClick={() => setOpen(false)}>삭제</button>
+            </div>
+          </div>
+        </>
+      ) : (
+        <button type="button" className="absolute left-3 top-10 rounded border bg-background px-2 py-1" onClick={() => setOpen(true)}>알림</button>
+      )}
+    </PhoneFrame>
+  )
+}
+
+function MobilePopoverMenuVisual() {
+  const [open, setOpen] = useState(true)
+
+  return (
+    <PhoneFrame>
+      <div className="flex h-6 items-center border-b px-2">
+        <span className="font-medium">상세</span>
+        <button type="button" className="ml-auto" onClick={() => setOpen((value) => !value)}><MoreHorizontal aria-hidden="true" /></button>
+      </div>
+      <MobileScreenLines />
+      {open && (
+        <div className="absolute right-2 top-7 rounded-md border bg-background p-1 shadow-sm">
+          {["수정", "공유", "삭제"].map((item) => <div key={item} className="px-2 py-1">{item}</div>)}
+        </div>
+      )}
+    </PhoneFrame>
+  )
+}
+
+function SheetDragHandleVisual() {
+  const [expanded, setExpanded] = useState(false)
+
+  return (
+    <PhoneFrame>
+      <MobileScreenLines />
+      <button type="button" className={cn("absolute inset-x-1 bottom-1 rounded-t-xl border bg-background p-2 shadow-sm transition-all", expanded ? "h-24" : "h-12")} onClick={() => setExpanded((value) => !value)}>
+        <span className="mx-auto mb-2 block h-0.5 w-7 rounded bg-muted-foreground/50" />
+        <Line className="w-12" />
+        {expanded && <Line className="mt-2 w-10" />}
+      </button>
     </PhoneFrame>
   )
 }

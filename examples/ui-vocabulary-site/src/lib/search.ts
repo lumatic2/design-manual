@@ -125,7 +125,7 @@ export const categoryGroups: TermGroup[] = [
     id: "selection-menus",
     category: "selection",
     label: "메뉴·드롭다운",
-    ids: ["dropdown-menu", "mega-menu", "context-menu", "menu-bar", "saved-view-tabs"],
+    ids: ["dropdown-menu", "mega-menu", "context-menu", "menu-bar", "mobile-popover-menu", "saved-view-tabs"],
   },
   {
     id: "selection-context",
@@ -143,7 +143,7 @@ export const categoryGroups: TermGroup[] = [
     id: "action-command-bars",
     category: "action",
     label: "툴바·커맨드",
-    ids: ["toolbar", "command-bar", "canvas-toolbar", "menu-item"],
+    ids: ["toolbar", "command-bar", "canvas-toolbar", "menu-item", "action-sheet", "share-sheet"],
   },
   {
     id: "action-bulk-danger",
@@ -185,13 +185,13 @@ export const categoryGroups: TermGroup[] = [
     id: "structure-mobile",
     category: "structure",
     label: "반응형·모바일",
-    ids: ["responsive-stack", "safe-area", "mobile-status-bar", "mobile-app-bar", "large-title-header", "mobile-bottom-sheet"],
+    ids: ["responsive-stack", "safe-area", "mobile-status-bar", "mobile-app-bar", "large-title-header", "standard-bottom-sheet", "modal-bottom-sheet", "full-screen-dialog", "sheet-drag-handle", "mobile-bottom-sheet"],
   },
   {
     id: "feedback-alerts-toasts",
     category: "feedback",
     label: "알림·토스트·배너",
-    ids: ["toast", "snackbar", "undo-toast", "toast-stack", "alert", "inline-alert", "success-toast", "error-toast", "announcement-banner", "trial-banner"],
+    ids: ["toast", "snackbar", "mobile-snackbar", "mobile-toast", "mobile-alert-dialog", "undo-toast", "toast-stack", "alert", "inline-alert", "success-toast", "error-toast", "announcement-banner", "trial-banner"],
   },
   {
     id: "feedback-loading-progress",
@@ -209,7 +209,7 @@ export const categoryGroups: TermGroup[] = [
     id: "feedback-access-limits",
     category: "feedback",
     label: "권한·제한·세션",
-    ids: ["permission-state", "locked-state", "offline-state", "rate-limit-state", "session-expired-dialog", "upgrade-prompt", "quota-warning", "unsaved-changes-banner"],
+    ids: ["permission-state", "permission-prompt", "permission-education-screen", "locked-state", "offline-state", "rate-limit-state", "session-expired-dialog", "upgrade-prompt", "quota-warning", "unsaved-changes-banner"],
   },
   {
     id: "feedback-status-notifications",
