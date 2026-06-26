@@ -6,7 +6,10 @@
     {
       "step": 0,
       "name": "search-quality-contract-and-query-fixture",
-      "status": "pending"
+      "status": "completed",
+      "started_at": "2026-06-26T15:10:00+09:00",
+      "completed_at": "2026-06-26T15:18:00+09:00",
+      "summary": "Added docs/ui-vocabulary/search-discovery.md with user models, target SearchResult API, scoring fields, autocomplete candidate types, representative query fixture, match reason labels, no-result recovery, URL state contract, smoke checklist, and non-goals. Verified all 34 expected fixture ids exist in terms.yml."
     },
     {
       "step": 1,
