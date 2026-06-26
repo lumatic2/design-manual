@@ -20,6 +20,7 @@ import { cn } from "@/lib/utils"
 function App() {
   const [query, setQuery] = useState("")
   const [filter, setFilter] = useState<TermFilter>("all")
+  const [openCategories, setOpenCategories] = useState<string[]>(categories)
   const [selectedTerm, setSelectedTerm] = useState<VocabularyTerm | null>(terms[0] ?? null)
   const [detailOpen, setDetailOpen] = useState(false)
 
@@ -54,22 +55,29 @@ function App() {
         label="전체"
         onClick={() => setFilter("all")}
       />
-      <Accordion className="flex flex-col gap-1" defaultValue={categories} type="multiple">
+      <Accordion className="flex flex-col gap-1" onValueChange={setOpenCategories} type="multiple" value={openCategories}>
         {categoryCounts.map((item) => (
           <AccordionItem key={item.category} className="rounded-md border px-2" value={item.category}>
-            <AccordionTrigger className="py-2 text-sm hover:no-underline">
+            <AccordionTrigger
+              className={cn(
+                "py-2 text-sm hover:no-underline",
+                filter === item.category && "text-primary"
+              )}
+              onClick={() => {
+                setFilter(item.category)
+                window.setTimeout(() => {
+                  setOpenCategories((current) =>
+                    current.includes(item.category) ? current : [...current, item.category]
+                  )
+                }, 0)
+              }}
+            >
               <span className="flex min-w-0 flex-1 items-center justify-between gap-2">
                 <span className="truncate">{categoryLabels[item.category]}</span>
                 <span className="shrink-0 text-xs text-muted-foreground">{item.count}</span>
               </span>
             </AccordionTrigger>
             <AccordionContent className="flex flex-col gap-1 pb-2">
-              <CategoryButton
-                active={filter === item.category}
-                count={item.count}
-                label={`${categoryLabels[item.category]} 전체`}
-                onClick={() => setFilter(item.category)}
-              />
               {item.groups.map((group) => (
                 <CategoryButton
                   key={group.id}
