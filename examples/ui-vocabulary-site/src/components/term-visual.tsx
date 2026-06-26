@@ -47,15 +47,15 @@ import { cn } from "@/lib/utils"
 type TermVisualProps = {
   variant: string
   label: string
-  size?: "card" | "detail"
+  size?: "card" | "detail" | "poster"
 }
 
 export function TermVisual({ variant, label, size = "card" }: TermVisualProps) {
   const canvasClass = cn(
     "flex w-full items-center justify-center rounded-md border bg-muted/40 p-3",
-    size === "detail" ? "min-h-56" : "min-h-28"
+    size === "detail" ? "min-h-56" : size === "poster" ? "h-24 p-1" : "min-h-28"
   )
-  const visualClass = size === "detail" ? "scale-125" : ""
+  const visualClass = size === "detail" ? "scale-125" : size === "poster" ? "scale-75" : ""
 
   return (
     <div className={canvasClass} onClick={(event) => event.stopPropagation()} onKeyDown={(event) => event.stopPropagation()}>

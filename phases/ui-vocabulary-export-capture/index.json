@@ -22,7 +22,10 @@
     {
       "step": 2,
       "name": "poster-view-for-filtered-category-exports",
-      "status": "pending"
+      "status": "completed",
+      "started_at": "2026-06-26T13:55:00+09:00",
+      "completed_at": "2026-06-26T14:06:00+09:00",
+      "summary": "Added PosterView for compact category/filter exports, wired PDF split menu option '포스터로 저장', extended TermVisual with poster sizing, and added print CSS for data-export-poster. Verified npm run build, npm run lint, and Playwright smoke: input poster rendered 35 terms, commerce/billing poster rendered 7 terms, each with matching TermVisual mini renders, and screen mode restored after print."
     },
     {
       "step": 3,

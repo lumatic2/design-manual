@@ -24,6 +24,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Input } from "@/components/ui/input"
+import { PosterView } from "@/components/poster-view"
 import { Separator } from "@/components/ui/separator"
 import { TermCard } from "@/components/term-card"
 import { TermDetail } from "@/components/term-detail"
@@ -31,7 +32,7 @@ import { categories, terms, type TermCategory, type VocabularyTerm } from "@/dat
 import { categoryGroups, categoryGroupsByCategory, categoryLabels, isTermCategory, matchesFilter, searchTerms, type TermFilter } from "@/lib/search"
 import { cn } from "@/lib/utils"
 
-type PrintMode = "screen" | "current" | "all"
+type PrintMode = "screen" | "current" | "all" | "poster"
 type RestorePrintState = {
   filter: TermFilter
   query: string
@@ -112,6 +113,13 @@ function App() {
     setFilter("all")
     setPrintMode("all")
     setPrintScopeLabel("전체 용어")
+    schedulePrint()
+  }
+
+  function savePosterAsPdf() {
+    restoreAfterPrintRef.current = null
+    setPrintMode("poster")
+    setPrintScopeLabel(getExportScopeLabel(filter, query))
     schedulePrint()
   }
 
@@ -231,6 +239,10 @@ function App() {
                           <Download aria-hidden="true" />
                           전체 용어 저장
                         </DropdownMenuItem>
+                        <DropdownMenuItem onClick={savePosterAsPdf}>
+                          <FileText aria-hidden="true" />
+                          포스터로 저장
+                        </DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
                   </div>
@@ -259,7 +271,9 @@ function App() {
 
             <Separator data-print-hidden />
 
-            {filteredTerms.length > 0 ? (
+            {filteredTerms.length > 0 && printMode === "poster" ? (
+              <PosterView scopeLabel={printScopeLabel} terms={filteredTerms} totalCount={terms.length} />
+            ) : filteredTerms.length > 0 ? (
               <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-3" data-print-grid>
                 {filteredTerms.map((term, index) => (
                   <TermCard
