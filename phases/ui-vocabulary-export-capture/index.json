@@ -1,0 +1,32 @@
+{
+  "project": "design-manual",
+  "phase": "ui-vocabulary-export-capture",
+  "mode": "product",
+  "steps": [
+    {
+      "step": 0,
+      "name": "export-contract-and-dependencies",
+      "status": "pending"
+    },
+    {
+      "step": 1,
+      "name": "print-and-pdf-layout-hardening",
+      "status": "pending"
+    },
+    {
+      "step": 2,
+      "name": "poster-view-for-filtered-category-exports",
+      "status": "pending"
+    },
+    {
+      "step": 3,
+      "name": "single-card-png-capture",
+      "status": "pending"
+    },
+    {
+      "step": 4,
+      "name": "export-qa-and-documentation",
+      "status": "pending"
+    }
+  ]
+}

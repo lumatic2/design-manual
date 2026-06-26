@@ -3,6 +3,10 @@
     {
       "dir": "ui-vocabulary-encyclopedia",
       "status": "pending"
+    },
+    {
+      "dir": "ui-vocabulary-export-capture",
+      "status": "pending"
     }
   ]
 }
