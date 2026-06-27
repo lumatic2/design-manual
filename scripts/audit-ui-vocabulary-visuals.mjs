@@ -26,6 +26,7 @@ const lowSpecificityPatterns = [
   "generic line skeleton",
   "same renderer as unrelated term",
   "effect name appears only as text",
+  "motion/effect visual appears static without animation or visible state change",
   "page/block visual lacks domain labels",
   "visual anatomy not visible in mini mock",
 ]

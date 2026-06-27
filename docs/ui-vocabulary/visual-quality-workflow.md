@@ -10,6 +10,7 @@ UI Dictionary의 각 카드는 용어를 몰라도 생김새를 보고 이해할
 - 같은 renderer를 공유하더라도 의도적으로 같은 시각 구조일 때만 공유한다.
 - page/block/form-pattern은 generic skeleton 대신 도메인 라벨과 대표 sub-section을 보여준다.
 - visual-effect/motion-pattern/visual-treatment는 이름만 적힌 카드가 아니라 효과 자체를 보여준다.
+- visual-effect/motion-pattern은 카드 목록 상태에서도 애니메이션, hover/click 전환, 진행 중인 상태 중 하나가 눈에 보여야 한다.
 - detail drawer에서도 같은 visual이 커져도 어색하지 않다.
 
 ## Audit Command
@@ -38,7 +39,7 @@ node ../../scripts/audit-ui-vocabulary-visuals.mjs --strict
 3. `generic renderer variants`는 10개 내외 batch로 고른다.
 4. 각 variant에 대해 `visual_anatomy`의 visible parts가 실제 mini mock에 보이는지 확인한다.
 5. page/block/form-pattern은 실제 화면 단위의 구성을 넣는다.
-6. effect/motion/treatment는 라벨보다 효과 자체를 우선한다.
+6. effect/motion/treatment는 라벨보다 효과 자체를 우선한다. 정지 화면처럼 보이면 실패로 본다.
 7. `npm run build`, `npm run lint`, Chrome smoke를 통과한다.
 8. 개선한 batch를 커밋하고 다음 batch로 넘어간다.
 
@@ -52,6 +53,7 @@ node ../../scripts/audit-ui-vocabulary-visuals.mjs --strict
 - 사용 맥락이 보인다.
 - card size와 detail size 모두에서 읽힌다.
 - 클릭 가능한 visual이면 눈에 보이는 상태 변화가 있다.
+- motion/effect visual이면 자동 재생 애니메이션 또는 직접 조작 가능한 전환이 보인다.
 
 ## New Term Gate
 
@@ -61,7 +63,9 @@ node ../../scripts/audit-ui-vocabulary-visuals.mjs --strict
 - 같은 variant를 재사용한다면 `visual_anatomy`가 기존 용어와 사실상 같은지 확인한다.
 - 새 renderer가 필요한 경우 `term-visual.tsx`에 variant 분기를 추가한다.
 - `npm run audit:visuals` 결과에서 새 항목이 `fallback variants`나 부적절한 `generic renderer variants`에 들어가지 않는다.
+- motion/effect/treatment 항목은 Chrome에서 실제 카드가 움직이거나 조작에 반응하는지 확인한다.
 
 ## Changelog
 
+- 2026-06-28: Add motion/effect interactivity requirement after cart-summary-bar and effect-pattern visual QA.
 - 2026-06-28: Initial visual quality loop and audit command.

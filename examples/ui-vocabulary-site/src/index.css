@@ -221,6 +221,222 @@ select {
   }
 }
 
+@keyframes visual-gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes visual-border-spin {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+@keyframes visual-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-96px);
+  }
+}
+
+@keyframes visual-typing {
+  from {
+    width: 0;
+  }
+  45%,
+  100% {
+    width: 12em;
+  }
+}
+
+@keyframes visual-number-pop {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  45% {
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes visual-scroll-dot {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(54px);
+  }
+}
+
+@keyframes visual-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes visual-blur-fade {
+  0% {
+    filter: blur(3px);
+    opacity: 0.45;
+    transform: translateY(6px);
+  }
+  45%,
+  100% {
+    filter: blur(0);
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes visual-shine {
+  to {
+    background-position: 200% center;
+  }
+}
+
+@keyframes visual-tilt {
+  0%,
+  100% {
+    transform: rotateX(6deg) rotateY(-8deg);
+  }
+  50% {
+    transform: rotateX(8deg) rotateY(-14deg);
+  }
+}
+
+@keyframes visual-stack-lift {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0);
+  }
+  50% {
+    transform: translateY(-4px) rotate(-2deg);
+  }
+}
+
+@keyframes visual-beam-dash {
+  to {
+    stroke-dashoffset: -120;
+  }
+}
+
+@keyframes visual-aurora-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(12deg);
+  }
+  50% {
+    transform: translate3d(22px, 10px, 0) rotate(4deg);
+  }
+}
+
+@keyframes visual-reveal-sweep {
+  from {
+    transform: translateX(-72px) skewX(-12deg);
+  }
+  to {
+    transform: translateX(240px) skewX(-12deg);
+  }
+}
+
+.visual-gradient-shift {
+  animation: visual-gradient-shift 5.5s ease-in-out infinite;
+}
+
+.visual-border-beam::before {
+  content: "";
+  position: absolute;
+  inset: -48%;
+  background: conic-gradient(from 0deg, transparent 0 70%, var(--primary), var(--accent), transparent 88% 100%);
+  animation: visual-border-spin 2.8s linear infinite;
+}
+
+.visual-marquee-track {
+  animation: visual-marquee 4.2s linear infinite;
+}
+
+.visual-typing-text {
+  animation: visual-typing 3.2s steps(10, end) infinite;
+}
+
+.visual-number-ticker {
+  animation: visual-number-pop 1.6s ease-in-out infinite;
+}
+
+.visual-scroll-dot {
+  animation: visual-scroll-dot 2.4s ease-in-out infinite;
+}
+
+.visual-scroll-beam {
+  animation: visual-scroll-dot 2.4s ease-in-out infinite;
+}
+
+.visual-floating-navbar {
+  animation: visual-float 3s ease-in-out infinite;
+}
+
+.visual-spotlight {
+  animation: visual-float 3.4s ease-in-out infinite;
+  transition: left 220ms ease, top 220ms ease;
+}
+
+.visual-blur-fade {
+  animation: visual-blur-fade 3s ease-out infinite;
+}
+
+.visual-shiny-text {
+  background-image: linear-gradient(90deg, var(--muted-foreground), var(--foreground), var(--primary), var(--foreground), var(--muted-foreground));
+  background-size: 200% auto;
+  animation: visual-shine 2.4s linear infinite;
+}
+
+.visual-3d-card {
+  animation: visual-tilt 3.2s ease-in-out infinite;
+}
+
+.visual-stack-card {
+  animation: visual-stack-lift 2.8s ease-in-out infinite;
+}
+
+.visual-beam-path {
+  stroke-dasharray: 40 80;
+  animation: visual-beam-dash 2.2s linear infinite;
+}
+
+.visual-beam-path-slow {
+  animation-duration: 3.2s;
+}
+
+.visual-aurora-one {
+  animation: visual-aurora-drift 5.4s ease-in-out infinite;
+}
+
+.visual-aurora-two {
+  animation: visual-aurora-drift 6.4s ease-in-out infinite reverse;
+}
+
+.visual-aurora-three {
+  animation: visual-aurora-drift 7s ease-in-out infinite;
+}
+
+.visual-reveal-sweep {
+  animation: visual-reveal-sweep 2.8s ease-in-out infinite;
+}
+
 [data-slot="sheet-overlay"][data-state="open"] {
   animation: sheet-overlay-in 240ms ease-out both;
 }
@@ -272,7 +488,25 @@ select {
 @media (prefers-reduced-motion: reduce) {
   [data-slot="sheet-overlay"],
   [data-slot="sheet-content"],
-  [data-term-detail-content] {
+  [data-term-detail-content],
+  .visual-gradient-shift,
+  .visual-border-beam::before,
+  .visual-marquee-track,
+  .visual-typing-text,
+  .visual-number-ticker,
+  .visual-scroll-dot,
+  .visual-scroll-beam,
+  .visual-floating-navbar,
+  .visual-spotlight,
+  .visual-blur-fade,
+  .visual-shiny-text,
+  .visual-3d-card,
+  .visual-stack-card,
+  .visual-beam-path,
+  .visual-aurora-one,
+  .visual-aurora-two,
+  .visual-aurora-three,
+  .visual-reveal-sweep {
     animation-duration: 1ms !important;
   }
 }

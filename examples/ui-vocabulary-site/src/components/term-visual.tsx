@@ -33,6 +33,7 @@ import {
   Search,
   Settings,
   Share2,
+  ShoppingCart,
   Star,
   Type,
   Trash2,
@@ -3021,13 +3022,34 @@ function ProductOptionSheetVisual() {
 
 function CartSummaryBarVisual() {
   const [count, setCount] = useState(2)
+  const total = count * 9000
 
   return (
     <PhoneFrame>
-      <MobileScreenLines />
-      <div className="absolute inset-x-1 bottom-1 flex items-center justify-between rounded-b-[1rem] border-t bg-background p-1.5">
-        <button type="button" onClick={() => setCount((value) => value + 1)}>{count}개 · ₩18k</button>
-        <span className="rounded-full bg-primary px-2 py-1 text-primary-foreground">주문</span>
+      <div className="space-y-1 p-2 pb-12">
+        <div className="flex items-center gap-1">
+          <span className="size-3 rounded bg-primary/25" />
+          <Line className="w-10" />
+        </div>
+        <div className="rounded border bg-muted/35 p-1">
+          <Line className="w-11" />
+          <Line className="mt-1 w-7" />
+        </div>
+        <div className="rounded border bg-muted/25 p-1">
+          <Line className="w-9" />
+        </div>
+      </div>
+      <div className="absolute inset-x-1 bottom-1 rounded-b-[1rem] border-t bg-card/95 p-1.5 shadow-[0_-8px_18px_rgba(15,23,42,.14)] backdrop-blur">
+        <button type="button" className="mb-1 flex w-full items-center justify-between text-left" onClick={() => setCount((value) => value + 1)}>
+          <span className="flex items-center gap-1 font-medium">
+            <ShoppingCart aria-hidden="true" className="size-3 text-primary" />
+            {count}개
+          </span>
+          <span className="font-semibold">₩{Math.round(total / 1000)}k</span>
+        </button>
+        <button type="button" className="flex w-full items-center justify-center rounded-md bg-primary py-1 text-[7px] font-semibold text-primary-foreground" onClick={() => setCount((value) => value + 1)}>
+          주문하기
+        </button>
       </div>
     </PhoneFrame>
   )
@@ -4214,7 +4236,8 @@ function ExternalEcosystemVisual({ kind }: { kind: ExternalEcosystemKind }) {
     return <Chrome className="grid w-64 grid-cols-3 gap-2 p-3 text-xs">{["Free", "Pro", "Team"].map((plan, index) => <div key={plan} className={cn("rounded border bg-background p-2", index === 1 && "border-primary shadow-sm")}><b>{plan}</b><p className="mt-1 text-lg">${index ? index * 19 : 0}</p><Line className="mt-2 w-10" /></div>)}</Chrome>
   }
   if (kind === "testimonial-section" || kind === "infinite-moving-cards") {
-    return <Chrome className="w-64 overflow-hidden p-3 text-xs"><div className="flex gap-2">{[0, 1, 2].map((item) => <div key={item} className="min-w-20 rounded border bg-background p-2"><Star aria-hidden="true" className="size-3 text-primary" /><Line className="mt-2 w-12" /><Line className="mt-1 w-10" /></div>)}</div></Chrome>
+    const cards = [0, 1, 2, 3, 4]
+    return <Chrome className="w-64 overflow-hidden p-3 text-xs"><div className={cn("flex gap-2", kind === "infinite-moving-cards" && "visual-marquee-track")}>{cards.map((item) => <div key={item} className="min-w-20 rounded border bg-background p-2"><Star aria-hidden="true" className="size-3 text-primary" /><Line className="mt-2 w-12" /><Line className="mt-1 w-10" /></div>)}</div></Chrome>
   }
   if (kind === "feature-grid-section" || kind === "integration-grid-section") {
     return <Chrome className="grid w-64 grid-cols-3 gap-2 p-3 text-xs">{[Search, Bell, Settings, Folder, LinkIcon, Palette].map((Icon, index) => <div key={index} className="rounded border bg-background p-2"><Icon aria-hidden="true" className="size-4 text-primary" /><Line className="mt-2 w-10" /></div>)}</Chrome>
@@ -4231,7 +4254,7 @@ function ExternalEcosystemVisual({ kind }: { kind: ExternalEcosystemKind }) {
     return <Chrome className="w-64 p-3 text-center text-xs"><b>{kind === "cta-section" ? "지금 시작하세요" : "업데이트 받기"}</b><Line className="mx-auto mt-2 w-32" /><div className="mt-3 flex justify-center gap-1"><span className="rounded border bg-background px-3 py-1">email</span><span className="rounded bg-primary px-3 py-1 text-primary-foreground">시작</span></div></Chrome>
   }
   if (kind === "marquee-row") {
-    return <Chrome className="w-64 overflow-hidden p-3 text-xs"><div className="flex gap-2">{["A", "B", "C", "D", "E"].map((item) => <span key={item} className="shrink-0 rounded-full border bg-background px-3 py-1">{item}</span>)}</div></Chrome>
+    return <Chrome className="w-64 overflow-hidden p-3 text-xs"><div className="visual-marquee-track flex gap-2">{["A", "B", "C", "D", "E", "A", "B"].map((item, index) => <span key={`${item}-${index}`} className="shrink-0 rounded-full border bg-background px-3 py-1">{item}</span>)}</div></Chrome>
   }
   if (kind === "animated-gradient-background") return <AnimatedGradientBackgroundVisual />
   if (kind === "border-beam") return <BorderBeamVisual />
@@ -4241,10 +4264,10 @@ function ExternalEcosystemVisual({ kind }: { kind: ExternalEcosystemKind }) {
   if (kind === "spotlight-card") return <SpotlightCardVisual />
   if (kind === "grid-pattern-background") return <PatternBackgroundVisual pattern="grid" />
   if (kind === "typing-text-effect") {
-    return <Chrome className="w-56 p-3 font-mono text-xs">AI가 초안을 작성 중<span className="animate-pulse">|</span></Chrome>
+    return <Chrome className="w-56 p-3 font-mono text-xs"><span className="visual-typing-text inline-block overflow-hidden whitespace-nowrap">AI가 초안을 작성 중</span><span className="animate-pulse">|</span></Chrome>
   }
   if (kind === "number-ticker") {
-    return <Chrome className="w-48 p-3 text-center"><p className="text-2xl font-semibold">12,840</p><p className="text-xs text-muted-foreground">active users</p></Chrome>
+    return <Chrome className="w-48 p-3 text-center"><p className="visual-number-ticker text-2xl font-semibold">12,840</p><p className="text-xs text-muted-foreground">active users</p></Chrome>
   }
   if (kind === "blur-fade-in") return <BlurFadeInVisual />
   if (kind === "animated-shiny-text") return <ShinyTextVisual />
@@ -4253,10 +4276,10 @@ function ExternalEcosystemVisual({ kind }: { kind: ExternalEcosystemKind }) {
     return <Chrome className="grid h-32 w-64 grid-cols-3 grid-rows-2 gap-2 p-3 text-xs"><div className="col-span-2 rounded border bg-background p-2"><Line className="w-24" /></div><div className="rounded border bg-background p-2"><Line className="w-10" /></div><div className="rounded border bg-background p-2"><Line className="w-12" /></div><div className="col-span-2 rounded border bg-background p-2"><Line className="w-20" /></div></Chrome>
   }
   if (kind === "sticky-scroll-section" || kind === "tracing-beam-section") {
-    return <Chrome className="flex h-32 w-64 gap-3 p-3 text-xs"><div className="relative w-8"><span className="absolute left-3 top-0 h-full w-0.5 bg-primary/40" /><span className="absolute left-1.5 top-6 size-4 rounded-full bg-primary" /></div><div className="flex-1 space-y-2"><Line className="w-28" /><Line className="w-36" /><Line className="w-24" /></div><div className="w-20 rounded border bg-background" /></Chrome>
+    return <Chrome className="flex h-32 w-64 gap-3 p-3 text-xs"><div className="relative w-8"><span className="absolute left-3 top-0 h-full w-0.5 bg-primary/25" /><span className="visual-scroll-beam absolute left-3 top-0 h-12 w-0.5 bg-primary" /><span className="visual-scroll-dot absolute left-1.5 top-6 size-4 rounded-full bg-primary shadow-[0_0_12px_var(--primary)]" /></div><div className="flex-1 space-y-2"><Line className="w-28" /><Line className="w-36" /><Line className="w-24" /></div><div className="w-20 rounded border bg-background" /></Chrome>
   }
   if (kind === "floating-navbar") {
-    return <div className="rounded-full border bg-card px-4 py-2 text-xs shadow-sm"><span className="mr-3 font-medium">Home</span><span className="mr-3">Work</span><span>Contact</span></div>
+    return <div className="visual-floating-navbar rounded-full border bg-card px-4 py-2 text-xs shadow-sm"><span className="mr-3 font-medium">Home</span><span className="mr-3">Work</span><span>Contact</span></div>
   }
   if (kind === "three-d-card") return <ThreeDCardVisual active={active} onToggle={() => setActive((value) => !value)} />
   if (kind === "hover-card-stack") return <HoverCardStackVisual active={active} onToggle={() => setActive((value) => !value)} />
@@ -4334,8 +4357,8 @@ function BillingSettingsPageVisual() {
 function AnimatedGradientBackgroundVisual() {
   return (
     <div className="relative h-32 w-64 overflow-hidden rounded-md border bg-card p-3 text-xs">
-      <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(96,80,220,.35),rgba(64,220,190,.24),rgba(255,100,120,.28),rgba(96,80,220,.35))] bg-[length:220%_220%]" />
-      <div className="absolute inset-0 animate-pulse bg-white/20" />
+      <div className="visual-gradient-shift absolute inset-0 bg-[linear-gradient(120deg,rgba(96,80,220,.35),rgba(64,220,190,.24),rgba(255,100,120,.28),rgba(96,80,220,.35))] bg-[length:240%_240%]" />
+      <div className="absolute inset-0 bg-white/15" />
       <div className="relative rounded border bg-card/80 p-3 shadow-sm">
         <b>Animated gradient</b>
         <Line className="mt-2 w-28" />
@@ -4346,22 +4369,23 @@ function AnimatedGradientBackgroundVisual() {
 
 function BorderBeamVisual() {
   return (
-    <div className="relative h-28 w-56 overflow-hidden rounded-md border bg-card p-3 text-xs shadow-sm">
-      <span className="absolute left-0 top-0 h-0.5 w-20 bg-primary shadow-[0_0_12px_var(--primary)]" />
-      <span className="absolute right-0 top-0 h-20 w-0.5 bg-primary/80 shadow-[0_0_12px_var(--primary)]" />
-      <span className="absolute bottom-0 right-6 h-0.5 w-24 bg-primary/50" />
-      <b>Live border beam</b>
-      <Line className="mt-3 w-32" />
-      <Line className="mt-2 w-20" />
+    <div className="visual-border-beam relative h-28 w-56 overflow-hidden rounded-md bg-card p-px text-xs shadow-sm">
+      <div className="relative h-full rounded-[calc(var(--radius-md)-1px)] bg-card p-3">
+        <b>Live border beam</b>
+        <Line className="mt-3 w-32" />
+        <Line className="mt-2 w-20" />
+      </div>
     </div>
   )
 }
 
 function SpotlightCardVisual() {
+  const [active, setActive] = useState(false)
+
   return (
-    <button type="button" className="relative h-28 w-56 overflow-hidden rounded-md border bg-card p-4 text-left text-xs shadow-sm">
-      <span className="absolute -right-8 -top-8 size-28 rounded-full bg-primary/25 blur-xl" />
-      <span className="absolute inset-0 bg-[radial-gradient(circle_at_75%_20%,rgba(255,255,255,.9),transparent_36%)]" />
+    <button type="button" className="relative h-28 w-56 overflow-hidden rounded-md border bg-card p-4 text-left text-xs shadow-sm" onClick={() => setActive((value) => !value)}>
+      <span className={cn("visual-spotlight absolute size-32 rounded-full bg-primary/25 blur-xl", active ? "left-1/2 top-1/2" : "-right-8 -top-8")} />
+      <span className={cn("absolute inset-0 transition-opacity", active ? "bg-[radial-gradient(circle_at_52%_58%,rgba(255,255,255,.9),transparent_34%)]" : "bg-[radial-gradient(circle_at_75%_20%,rgba(255,255,255,.9),transparent_36%)]")} />
       <div className="relative">
         <b>Spotlight card</b>
         <Line className="mt-3 w-28" />
@@ -4393,7 +4417,7 @@ function PatternBackgroundVisual({ pattern }: { pattern: "grid" | "dot" }) {
 function BlurFadeInVisual() {
   return (
     <div className="flex h-28 w-56 items-center justify-center rounded-md border bg-muted/40 p-3 text-xs">
-      <div className="rounded-md border bg-card p-3 shadow-sm blur-[1px] transition-all hover:blur-0">
+      <div className="visual-blur-fade rounded-md border bg-card p-3 shadow-sm">
         <p className="font-semibold opacity-80">Blur fade in</p>
         <Line className="mt-2 w-28 opacity-60" />
         <Line className="mt-2 w-20 opacity-40" />
@@ -4405,7 +4429,7 @@ function BlurFadeInVisual() {
 function ShinyTextVisual() {
   return (
     <Chrome className="w-56 p-4 text-center text-sm">
-      <span className="rounded-full border bg-gradient-to-r from-muted-foreground via-foreground to-muted-foreground bg-clip-text px-3 py-1 font-semibold text-transparent">
+      <span className="visual-shiny-text rounded-full border bg-clip-text px-3 py-1 font-semibold text-transparent">
         New feature
       </span>
       <Line className="mx-auto mt-3 w-28" />
@@ -4416,7 +4440,7 @@ function ShinyTextVisual() {
 function ThreeDCardVisual({ active, onToggle }: { active: boolean; onToggle: () => void }) {
   return (
     <button type="button" className="relative h-32 w-52 text-left text-xs [perspective:600px]" onClick={onToggle}>
-      <div className={cn("absolute inset-4 rounded-md border bg-card p-3 shadow-lg transition-transform", active ? "[transform:rotateX(8deg)_rotateY(-14deg)]" : "[transform:rotateX(6deg)_rotateY(-8deg)]")}>
+      <div className={cn("visual-3d-card absolute inset-4 rounded-md border bg-card p-3 shadow-lg transition-transform", active ? "[transform:rotateX(8deg)_rotateY(-14deg)]" : "[transform:rotateX(6deg)_rotateY(-8deg)]")}>
         <b>3D card</b>
         <Line className="mt-3 w-24" />
         <Line className="mt-2 w-16" />
@@ -4434,6 +4458,7 @@ function HoverCardStackVisual({ active, onToggle }: { active: boolean; onToggle:
           key={item}
           className={cn(
             "absolute inset-x-6 h-20 rounded-md border bg-card p-3 shadow-sm transition-transform",
+            item === 0 && "visual-stack-card",
             active
               ? item === 0 ? "top-2 -rotate-3" : item === 1 ? "top-6 rotate-2" : "top-10 rotate-6"
               : item === 0 ? "top-2" : item === 1 ? "top-4" : "top-6"
@@ -4450,8 +4475,8 @@ function BackgroundBeamsVisual() {
   return (
     <div className="relative h-32 w-64 overflow-hidden rounded-md border bg-foreground p-4 text-xs text-background">
       <svg aria-hidden="true" className="absolute inset-0 h-full w-full opacity-70" viewBox="0 0 260 130">
-        <path d="M-20 105 C40 20, 92 120, 158 34 S236 80, 284 16" fill="none" stroke="currentColor" strokeWidth="2" className="text-primary" />
-        <path d="M-8 36 C54 82, 96 8, 160 72 S226 42, 276 102" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-accent" />
+        <path d="M-20 105 C40 20, 92 120, 158 34 S236 80, 284 16" fill="none" stroke="currentColor" strokeWidth="2" className="visual-beam-path text-primary" />
+        <path d="M-8 36 C54 82, 96 8, 160 72 S226 42, 276 102" fill="none" stroke="currentColor" strokeWidth="1.5" className="visual-beam-path visual-beam-path-slow text-accent" />
       </svg>
       <div className="relative rounded border border-background/20 bg-background/10 p-3 backdrop-blur-sm">
         <b>Background beams</b>
@@ -4464,9 +4489,9 @@ function BackgroundBeamsVisual() {
 function AuroraBackgroundVisual() {
   return (
     <div className="relative h-32 w-64 overflow-hidden rounded-md border bg-foreground p-4 text-xs text-background">
-      <span className="absolute -left-10 top-2 h-24 w-36 rotate-12 rounded-full bg-primary/40 blur-2xl" />
-      <span className="absolute left-20 -top-6 h-24 w-40 -rotate-12 rounded-full bg-accent/50 blur-2xl" />
-      <span className="absolute right-0 bottom-0 h-20 w-32 rounded-full bg-destructive/30 blur-2xl" />
+      <span className="visual-aurora-one absolute -left-10 top-2 h-24 w-36 rotate-12 rounded-full bg-primary/40 blur-2xl" />
+      <span className="visual-aurora-two absolute left-20 -top-6 h-24 w-40 -rotate-12 rounded-full bg-accent/50 blur-2xl" />
+      <span className="visual-aurora-three absolute right-0 bottom-0 h-20 w-32 rounded-full bg-destructive/30 blur-2xl" />
       <div className="relative">
         <b>Aurora background</b>
         <Line className="mt-3 w-32 bg-background/40" />
@@ -4479,6 +4504,7 @@ function CanvasRevealCardVisual({ active, onToggle }: { active: boolean; onToggl
   return (
     <button type="button" className="relative h-32 w-52 overflow-hidden rounded-md border bg-card p-3 text-left text-xs" onClick={onToggle}>
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_35%_35%,rgba(80,80,220,.35),transparent_28%),radial-gradient(circle_at_70%_55%,rgba(64,220,190,.25),transparent_24%)]" />
+      <span className="visual-reveal-sweep absolute inset-y-0 w-16 -skew-x-12 bg-white/35" />
       <div className={cn("absolute inset-0 grid grid-cols-5 gap-px bg-card/80 transition-opacity", active && "opacity-35")}>
         {Array.from({ length: 25 }).map((_, index) => <span key={index} className="bg-background/80" />)}
       </div>
