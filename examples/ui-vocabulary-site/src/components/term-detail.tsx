@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react"
+import { useEffect, useState, type ReactNode } from "react"
 import { Check, Copy, Download, ExternalLink } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -31,6 +31,12 @@ export function TermDetail({ term, terms, open, onOpenChange, onSelectTerm }: Te
   const [copiedPhrase, setCopiedPhrase] = useState<string | null>(null)
   const relatedTerms = term ? getRelatedTerms(term, terms) : []
   const useCases = term ? getUseCasesForTerm(term) : []
+
+  useEffect(() => {
+    const viewport = document.querySelector<HTMLElement>('[data-term-detail-scroll] [data-slot="scroll-area-viewport"]')
+
+    viewport?.scrollTo({ top: 0, behavior: "smooth" })
+  }, [term?.id])
 
   async function saveDetailPng() {
     if (!term) {
@@ -73,7 +79,7 @@ export function TermDetail({ term, terms, open, onOpenChange, onSelectTerm }: Te
     <Sheet modal={false} open={open} onOpenChange={onOpenChange}>
       <SheetContent className="w-full gap-0 p-0 sm:max-w-xl">
         {term && (
-          <div className="bg-background" data-export-detail={term.id}>
+          <div key={term.id} className="bg-background" data-export-detail={term.id} data-term-detail-content>
             <SheetHeader className="border-b p-5">
               <div className="flex items-start justify-between gap-4">
                 <div className="min-w-0">
@@ -102,7 +108,7 @@ export function TermDetail({ term, terms, open, onOpenChange, onSelectTerm }: Te
                 </Button>
               </div>
             </SheetHeader>
-            <ScrollArea className="h-[calc(100svh-120px)]">
+            <ScrollArea className="h-[calc(100svh-120px)]" data-term-detail-scroll>
               <div className="flex flex-col gap-6 p-5">
                 <TermVisual variant={term.asset.variant} label={term.ko.name} size="detail" />
                 <Section title="빠른 판단">
@@ -156,7 +162,7 @@ export function TermDetail({ term, terms, open, onOpenChange, onSelectTerm }: Te
                     <div className="flex flex-col gap-2">
                       {relatedTerms.map((item) => (
                         <button
-                          key={item.term.id}
+                          key={`${item.term.id}-${item.relation}-${item.note}`}
                           type="button"
                           className="rounded-lg border bg-card p-3 text-left transition hover:border-primary/40 hover:bg-accent/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                           onClick={() => onSelectTerm(item.term)}

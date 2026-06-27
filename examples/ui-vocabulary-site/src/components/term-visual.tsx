@@ -4219,9 +4219,8 @@ function ExternalEcosystemVisual({ kind }: { kind: ExternalEcosystemKind }) {
   if (kind === "feature-grid-section" || kind === "integration-grid-section") {
     return <Chrome className="grid w-64 grid-cols-3 gap-2 p-3 text-xs">{[Search, Bell, Settings, Folder, LinkIcon, Palette].map((Icon, index) => <div key={index} className="rounded border bg-background p-2"><Icon aria-hidden="true" className="size-4 text-primary" /><Line className="mt-2 w-10" /></div>)}</Chrome>
   }
-  if (kind === "settings-page-layout" || kind === "billing-settings-page") {
-    return <Chrome className="flex h-32 w-64 overflow-hidden text-xs"><aside className="w-20 border-r bg-muted/50 p-2"><Line className="w-12" /><Line className="mt-2 w-10" /><Line className="mt-2 w-14" /></aside><main className="flex-1 p-3"><div className="rounded border bg-background p-2"><Line className="w-24" /><Line className="mt-2 w-32" /></div><div className="mt-2 rounded border bg-background p-2"><Line className="w-20" /></div></main></Chrome>
-  }
+  if (kind === "settings-page-layout") return <SettingsPageLayoutVisual />
+  if (kind === "billing-settings-page") return <BillingSettingsPageVisual />
   if (kind === "profile-settings-form") {
     return <Chrome className="w-60 p-3 text-xs"><div className="flex items-center gap-3"><span className="flex size-10 items-center justify-center rounded-full bg-primary/15 text-primary"><User aria-hidden="true" /></span><Line className="w-28" /></div><Line className="mt-3 h-7 w-full rounded border bg-background" /><Line className="mt-2 h-7 w-full rounded border bg-background" /></Chrome>
   }
@@ -4260,6 +4259,67 @@ function ExternalEcosystemVisual({ kind }: { kind: ExternalEcosystemKind }) {
   }
 
   return <Chrome className="relative h-28 w-56 overflow-hidden p-3 text-xs"><div className={cn("absolute inset-0", (kind.includes("grid") || kind.includes("dot")) && "bg-[radial-gradient(circle,rgba(0,0,0,.18)_1px,transparent_1px)] [background-size:12px_12px]", kind.includes("gradient") || kind.includes("aurora") ? "bg-gradient-to-br from-primary/30 via-muted to-destructive/20" : "bg-muted/40")} /><div className="relative rounded border bg-card/80 p-3"><b>{kind.includes("shiny") ? "New feature" : kind.includes("beam") ? "Beam effect" : "Visual effect"}</b><Line className="mt-2 w-24" /></div></Chrome>
+}
+
+function SettingsPageLayoutVisual() {
+  return (
+    <Chrome className="grid h-36 w-72 grid-cols-[82px_1fr] overflow-hidden text-[10px]">
+      <aside className="border-r bg-muted/50 p-2">
+        <p className="mb-2 font-semibold text-foreground">Settings</p>
+        {["Profile", "Account", "Security"].map((item, index) => (
+          <div key={item} className={cn("mb-1 rounded px-2 py-1", index === 1 ? "bg-primary/15 text-primary" : "text-muted-foreground")}>
+            {item}
+          </div>
+        ))}
+      </aside>
+      <main className="space-y-2 p-3">
+        <div>
+          <p className="font-semibold">Account settings</p>
+          <p className="text-muted-foreground">Manage your workspace</p>
+        </div>
+        <div className="rounded border bg-background p-2">
+          <label className="text-muted-foreground">Display name</label>
+          <div className="mt-1 rounded border bg-card px-2 py-1">Yusung</div>
+        </div>
+        <div className="flex items-center justify-between rounded border bg-background p-2">
+          <span>Email updates</span>
+          <span className="rounded-full bg-primary px-2 py-0.5 text-primary-foreground">On</span>
+        </div>
+      </main>
+    </Chrome>
+  )
+}
+
+function BillingSettingsPageVisual() {
+  return (
+    <Chrome className="grid h-36 w-72 grid-cols-[82px_1fr] overflow-hidden text-[10px]">
+      <aside className="border-r bg-muted/50 p-2">
+        <p className="mb-2 font-semibold text-foreground">Settings</p>
+        {["General", "Billing", "Members"].map((item, index) => (
+          <div key={item} className={cn("mb-1 rounded px-2 py-1", index === 1 ? "bg-primary/15 text-primary" : "text-muted-foreground")}>
+            {item}
+          </div>
+        ))}
+      </aside>
+      <main className="space-y-2 p-3">
+        <div className="flex items-center justify-between rounded border bg-background p-2">
+          <div>
+            <p className="font-semibold">Pro plan</p>
+            <p className="text-muted-foreground">$19 / month</p>
+          </div>
+          <span className="rounded bg-primary px-2 py-1 text-primary-foreground">Upgrade</span>
+        </div>
+        <div className="flex items-center justify-between rounded border bg-background p-2">
+          <span className="flex items-center gap-1"><span className="rounded border px-1">VISA</span> 4242</span>
+          <span className="text-primary">Edit</span>
+        </div>
+        <div className="grid grid-cols-[1fr_auto] gap-2 rounded border bg-background p-2 text-muted-foreground">
+          <span>INV-2026-06</span>
+          <span>Paid</span>
+        </div>
+      </main>
+    </Chrome>
+  )
 }
 
 function StateVisual({ tone }: { tone: "error" | "success" | "warning" | "info" }) {
