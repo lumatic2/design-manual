@@ -329,7 +329,7 @@ function App() {
         <div className="min-w-0">
           <header className="sticky top-0 z-20 border-b bg-background/95 backdrop-blur">
             <div className="flex flex-col gap-4 px-5 py-4 md:px-8 lg:px-10">
-              <div className="grid gap-4 xl:grid-cols-[minmax(240px,320px)_minmax(280px,1fr)_auto] xl:items-center">
+              <div className="grid gap-4 md:grid-cols-[minmax(240px,320px)_auto] md:items-center">
                 <button
                   type="button"
                   aria-label="UI 용어 사전 홈으로 이동"
@@ -347,17 +347,7 @@ function App() {
                   </div>
                 </button>
 
-                <div data-print-hidden>
-                  <SearchAutocomplete
-                    filter={filter}
-                    query={query}
-                    terms={terms}
-                    onFilterChange={updateFilter}
-                    onQueryChange={updateQuery}
-                  />
-                </div>
-
-                <div className="flex items-center justify-between gap-2 xl:justify-end" data-print-hidden>
+                <div className="flex items-center justify-between gap-2 md:justify-end" data-print-hidden>
                   <Badge variant="secondary" className="rounded-md px-3 py-1 text-sm">
                     {filteredTerms.length} / {terms.length} terms
                   </Badge>
@@ -405,6 +395,46 @@ function App() {
               </p>
             </div>
 
+            <div className="flex flex-col gap-3" data-print-hidden>
+              <SearchAutocomplete
+                filter={filter}
+                query={query}
+                terms={terms}
+                onFilterChange={updateFilter}
+                onQueryChange={updateQuery}
+              />
+
+              {hasActiveSearch && (
+                <div
+                  className="flex flex-col gap-2 text-sm text-muted-foreground md:flex-row md:items-center md:justify-between"
+                  data-search-summary
+                >
+                  <div className="flex min-w-0 flex-wrap items-center gap-x-2 gap-y-1">
+                    <span className="font-medium text-foreground">현재 탐색</span>
+                    {query.trim() && <span>검색어: {query.trim()}</span>}
+                    {activeUseCase && <span>상황: {activeUseCase.label}</span>}
+                    {filter !== "all" && <span>필터: {getFilterLabel(filter)}</span>}
+                    <span>{filteredTerms.length}개 결과</span>
+                  </div>
+                  <div className="flex flex-wrap gap-3">
+                    {query.trim() && (
+                      <button className="text-sm text-foreground underline-offset-4 hover:underline" type="button" onClick={() => updateQuery("")}>
+                        검색어 지우기
+                      </button>
+                    )}
+                    {filter !== "all" && (
+                      <button className="text-sm text-foreground underline-offset-4 hover:underline" type="button" onClick={() => updateFilter("all")}>
+                        필터 해제
+                      </button>
+                    )}
+                    <button className="text-sm text-foreground underline-offset-4 hover:underline" type="button" onClick={() => { updateQuery(""); updateFilter("all") }}>
+                      전체 초기화
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+
             <div className="hidden" data-print-summary>
               <p>UI 용어 사전</p>
               <h2>{printScopeLabel}</h2>
@@ -412,49 +442,6 @@ function App() {
             </div>
 
             <Separator data-print-hidden />
-
-            {hasActiveSearch && (
-              <section
-                className="flex flex-col gap-3 rounded-lg border bg-card p-4 md:flex-row md:items-center md:justify-between"
-                data-print-hidden
-                data-search-summary
-              >
-                <div className="flex min-w-0 flex-wrap items-center gap-2">
-                  <span className="text-sm font-medium">현재 탐색</span>
-                  {query.trim() && (
-                    <Badge variant="secondary" className="rounded-md">
-                      검색어: {query.trim()}
-                    </Badge>
-                  )}
-                  {activeUseCase && (
-                    <Badge variant="outline" className="rounded-md">
-                      상황: {activeUseCase.label}
-                    </Badge>
-                  )}
-                  {filter !== "all" && (
-                    <Badge variant="outline" className="rounded-md">
-                      필터: {getFilterLabel(filter)}
-                    </Badge>
-                  )}
-                  <span className="text-sm text-muted-foreground">{filteredTerms.length}개 결과</span>
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  {query.trim() && (
-                    <Button size="sm" variant="outline" onClick={() => updateQuery("")}>
-                      검색어 지우기
-                    </Button>
-                  )}
-                  {filter !== "all" && (
-                    <Button size="sm" variant="outline" onClick={() => updateFilter("all")}>
-                      필터 해제
-                    </Button>
-                  )}
-                  <Button size="sm" variant="ghost" onClick={() => { updateQuery(""); updateFilter("all") }}>
-                    전체 초기화
-                  </Button>
-                </div>
-              </section>
-            )}
 
             {filteredTerms.length > 0 && printMode === "poster" ? (
               <PosterView scopeLabel={printScopeLabel} terms={filteredTerms} totalCount={terms.length} />
