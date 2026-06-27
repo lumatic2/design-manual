@@ -19763,12 +19763,12 @@ export const terms = [
         "Continue with buttons"
       ]
     },
-    "one_liner": "Google, Apple, GitHub 같은 외부 계정으로 로그인하는 버튼 묶음.",
+    "one_liner": "Kakao, Google, Email, GitHub 같은 로그인 선택지를 한 화면에 묶어 보여주는 버튼 그룹.",
     "description": "인증 폼 상단이나 하단에서 OAuth provider 선택지를 일관된 버튼 그룹으로 제공한다.",
     "visual_anatomy": [
       "provider buttons",
       "provider icons",
-      "divider text",
+      "provider-specific button color",
       "email login alternative"
     ],
     "when_to_use": [
@@ -19778,7 +19778,7 @@ export const terms = [
       "provider가 하나뿐이면 단일 primary/secondary button으로 충분하다"
     ],
     "prompt_phrases": [
-      "Google Apple GitHub로 계속하기 social login button group을 넣어줘"
+      "Kakao Google Email GitHub로 계속하기 social login button group을 넣어줘"
     ],
     "asset": {
       "kind": "mini-mock",

@@ -23,7 +23,9 @@ import {
   Info,
   Link as LinkIcon,
   LoaderCircle,
+  Mail,
   MapPin,
+  MessageCircle,
   Menu,
   Mic,
   MoreHorizontal,
@@ -3791,7 +3793,7 @@ function AuthPatternVisual({ kind }: { kind: AuthPatternKind }) {
     return <Chrome className="w-56 p-3 text-xs"><div className="mb-3 flex items-center gap-2"><span className="flex size-7 items-center justify-center rounded bg-primary text-primary-foreground"><User aria-hidden="true" /></span><b>계정 접근</b></div><Line className="w-36" /><Line className="mt-2 w-28" /><button type="button" className="mt-3 w-full rounded bg-primary py-1 text-primary-foreground" onClick={() => setActive(true)}>{active ? "진행 중" : "계속"}</button></Chrome>
   }
   if (kind === "social-login-button-group") {
-    return <Chrome className="grid w-56 grid-cols-3 gap-2 p-3 text-xs">{["G", "A", "S"].map((item) => <button key={item} type="button" className={cn("rounded border py-2 font-semibold", active && item === "G" && "border-primary bg-primary/10 text-primary")} onClick={() => setActive(true)}>{item}</button>)}</Chrome>
+    return <SocialLoginButtonGroupVisual active={active} onSelect={() => setActive(true)} />
   }
   if (kind === "auth-method-choice") {
     return <Chrome className="w-56 p-3 text-xs"><b>로그인 방법 선택</b>{["이메일", "SSO", "패스키"].map((item, index) => <button key={item} type="button" className={cn("mt-2 flex w-full items-center justify-between rounded border px-2 py-1", active && index === 2 && "border-primary text-primary")} onClick={() => setActive(true)}><span>{item}</span><ChevronRight aria-hidden="true" /></button>)}</Chrome>
@@ -3827,6 +3829,55 @@ function AuthPatternVisual({ kind }: { kind: AuthPatternKind }) {
   }
 
   return <Chrome className="w-56 p-3 text-xs"><AuthMiniForm title="로그인" cta="로그인" active={active} onClick={() => setActive(true)} /></Chrome>
+}
+
+function SocialLoginButtonGroupVisual({ active, onSelect }: { active: boolean; onSelect: () => void }) {
+  const providers = [
+    {
+      id: "kakao",
+      label: "카카오로 계속하기",
+      className: "border-[#FEE500] bg-[#FEE500] text-[#181600]",
+      icon: <MessageCircle aria-hidden="true" className="size-5 fill-current" />,
+    },
+    {
+      id: "google",
+      label: "구글로 계속하기",
+      className: "border-muted bg-muted/70 text-foreground",
+      icon: <span aria-hidden="true" className="text-lg font-bold leading-none"><span className="text-[#4285F4]">G</span></span>,
+    },
+    {
+      id: "email",
+      label: "이메일로 계속하기",
+      className: "border-[#3F3F3F] bg-[#3F3F3F] text-white",
+      icon: <Mail aria-hidden="true" className="size-5 fill-white" />,
+    },
+    {
+      id: "github",
+      label: "GitHub로 계속하기",
+      className: "border-foreground bg-foreground text-background",
+      icon: <span aria-hidden="true" className="font-mono text-sm font-bold leading-none">GH</span>,
+    },
+  ]
+
+  return (
+    <Chrome className="w-72 space-y-2 p-3 text-sm">
+      {providers.map((provider, index) => (
+        <button
+          key={provider.id}
+          type="button"
+          className={cn(
+            "flex h-12 w-full items-center justify-center gap-3 rounded-lg border px-4 font-semibold shadow-sm transition-transform hover:-translate-y-0.5 hover:shadow-md",
+            provider.className,
+            active && index === 0 && "ring-2 ring-ring ring-offset-2 ring-offset-background"
+          )}
+          onClick={onSelect}
+        >
+          <span className="flex size-7 items-center justify-center">{provider.icon}</span>
+          <span>{provider.label}</span>
+        </button>
+      ))}
+    </Chrome>
+  )
 }
 
 function AuthMiniForm({ title, cta, active, onClick }: { title: string; cta: string; active: boolean; onClick: () => void }) {
