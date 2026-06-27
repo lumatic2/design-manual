@@ -1,5 +1,16 @@
 import { useEffect, useMemo, useState } from "react"
-import { ArrowRight, Search, X } from "lucide-react"
+import {
+  ArrowRight,
+  GalleryHorizontal,
+  Inbox,
+  LayoutPanelTop,
+  ListChecks,
+  Search,
+  TableProperties,
+  ToggleLeft,
+  X,
+  type LucideIcon,
+} from "lucide-react"
 import {
   Command,
   CommandGroup,
@@ -148,8 +159,8 @@ export function SearchAutocomplete({
                     onMouseEnter={() => setActiveIndex(index)}
                     onSelect={() => selectSuggestion(suggestion)}
                   >
-                    <span className="mt-1 flex size-6 shrink-0 items-center justify-center rounded-md bg-secondary text-xs font-semibold text-secondary-foreground">
-                      {getSuggestionGlyph(suggestion)}
+                    <span className="mt-1 flex size-6 shrink-0 items-center justify-center rounded-md bg-secondary text-secondary-foreground">
+                      <SuggestionIcon suggestion={suggestion} />
                     </span>
                     <span className="min-w-0 flex-1">
                       <span className="block truncate font-medium">{suggestion.label}</span>
@@ -185,12 +196,34 @@ export function SearchAutocomplete({
   )
 }
 
-function getSuggestionGlyph(suggestion: SearchSuggestion) {
+function SuggestionIcon({ suggestion }: { suggestion: SearchSuggestion }) {
+  const Icon = getSuggestionIcon(suggestion)
+
+  return <Icon aria-hidden="true" className="size-4" />
+}
+
+function getSuggestionIcon(suggestion: SearchSuggestion): LucideIcon {
   if (suggestion.type === "term") {
-    return "T"
+    return Search
   }
-  if (suggestion.type === "starter") {
-    return "?"
+  if (suggestion.type === "category" || suggestion.type === "group") {
+    return TableProperties
   }
-  return "F"
+
+  switch (suggestion.value) {
+    case "켜고 끄는":
+      return ToggleLeft
+    case "옆에서 나오는 창":
+      return LayoutPanelTop
+    case "표 필터":
+      return TableProperties
+    case "빈 화면":
+      return Inbox
+    case "카드 넘기기":
+      return GalleryHorizontal
+    case "진행 상태":
+      return ListChecks
+    default:
+      return Search
+  }
 }
