@@ -244,7 +244,13 @@ select {
     transform: translateX(0);
   }
   to {
-    transform: translateX(-96px);
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes visual-orbit {
+  to {
+    transform: rotate(1turn);
   }
 }
 
@@ -389,14 +395,23 @@ select {
 }
 
 .visual-marquee-track {
-  animation: visual-marquee 4.2s linear infinite;
-  transition: gap 180ms ease, filter 180ms ease;
+  animation: visual-marquee 7s linear infinite;
+  transition: filter 180ms ease;
+  will-change: transform;
 }
 
 .visual-hover-surface:hover .visual-marquee-track {
-  animation-duration: 1.8s;
+  animation-duration: 3.2s;
   filter: saturate(1.25);
-  gap: 0.75rem;
+}
+
+.visual-orbit-ring {
+  animation: visual-orbit 5.8s linear infinite;
+  transform-origin: center;
+}
+
+.visual-hover-surface:hover .visual-orbit-ring {
+  animation-duration: 2.4s;
 }
 
 .visual-typing-text {
@@ -601,6 +616,7 @@ select {
   .visual-gradient-shift,
   .visual-border-beam::before,
   .visual-marquee-track,
+  .visual-orbit-ring,
   .visual-typing-text,
   .visual-number-ticker,
   .visual-scroll-dot,

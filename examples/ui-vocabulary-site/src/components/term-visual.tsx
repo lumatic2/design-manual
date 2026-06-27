@@ -2159,10 +2159,8 @@ function ResponsiveStackVisual() {
 
 function PhoneFrame({ children, className }: { children: ReactNode; className?: string }) {
   return (
-    <div className={cn("relative h-36 w-20 overflow-hidden rounded-[1.25rem] border-2 bg-card p-1 shadow-sm", className)}>
-      <div className="absolute left-1/2 top-1 h-1 w-7 -translate-x-1/2 rounded-full bg-foreground/20" />
-      <div className="h-full overflow-hidden rounded-[1rem] bg-background pt-2 text-[8px]">{children}</div>
-      <div className="absolute bottom-1 left-1/2 h-0.5 w-8 -translate-x-1/2 rounded-full bg-foreground/20" />
+    <div className={cn("relative h-36 w-36 overflow-hidden rounded-md border bg-background text-[9px] shadow-sm", className)}>
+      {children}
     </div>
   )
 }
@@ -2170,10 +2168,10 @@ function PhoneFrame({ children, className }: { children: ReactNode; className?: 
 function MobileScreenLines() {
   return (
     <div className="flex flex-col gap-1 p-2">
-      <Line className="w-12" />
-      <Line className="w-10" />
-      <div className="h-8 rounded bg-muted/70" />
-      <Line className="w-11" />
+      <Line className="w-24" />
+      <Line className="w-20" />
+      <div className="h-10 rounded bg-muted/70" />
+      <Line className="w-24" />
     </div>
   )
 }
@@ -4236,8 +4234,8 @@ function ExternalEcosystemVisual({ kind }: { kind: ExternalEcosystemKind }) {
     return <Chrome className="grid w-64 grid-cols-3 gap-2 p-3 text-xs">{["Free", "Pro", "Team"].map((plan, index) => <div key={plan} className={cn("rounded border bg-background p-2", index === 1 && "border-primary shadow-sm")}><b>{plan}</b><p className="mt-1 text-lg">${index ? index * 19 : 0}</p><Line className="mt-2 w-10" /></div>)}</Chrome>
   }
   if (kind === "testimonial-section" || kind === "infinite-moving-cards") {
-    const cards = [0, 1, 2, 3, 4]
-    return <Chrome className="visual-hover-surface w-64 overflow-hidden p-3 text-xs"><div className={cn("flex gap-2", kind === "infinite-moving-cards" && "visual-marquee-track")}>{cards.map((item) => <div key={item} className="min-w-20 rounded border bg-background p-2"><Star aria-hidden="true" className="size-3 text-primary" /><Line className="mt-2 w-12" /><Line className="mt-1 w-10" /></div>)}</div></Chrome>
+    if (kind === "infinite-moving-cards") return <InfiniteMovingCardsVisual />
+    return <Chrome className="w-64 overflow-hidden p-3 text-xs"><div className="flex gap-2">{[0, 1, 2].map((item) => <div key={item} className="min-w-20 rounded border bg-background p-2"><Star aria-hidden="true" className="size-3 text-primary" /><Line className="mt-2 w-12" /><Line className="mt-1 w-10" /></div>)}</div></Chrome>
   }
   if (kind === "feature-grid-section" || kind === "integration-grid-section") {
     return <Chrome className="grid w-64 grid-cols-3 gap-2 p-3 text-xs">{[Search, Bell, Settings, Folder, LinkIcon, Palette].map((Icon, index) => <div key={index} className="rounded border bg-background p-2"><Icon aria-hidden="true" className="size-4 text-primary" /><Line className="mt-2 w-10" /></div>)}</Chrome>
@@ -4254,12 +4252,12 @@ function ExternalEcosystemVisual({ kind }: { kind: ExternalEcosystemKind }) {
     return <Chrome className="w-64 p-3 text-center text-xs"><b>{kind === "cta-section" ? "지금 시작하세요" : "업데이트 받기"}</b><Line className="mx-auto mt-2 w-32" /><div className="mt-3 flex justify-center gap-1"><span className="rounded border bg-background px-3 py-1">email</span><span className="rounded bg-primary px-3 py-1 text-primary-foreground">시작</span></div></Chrome>
   }
   if (kind === "marquee-row") {
-    return <Chrome className="visual-hover-surface w-64 overflow-hidden p-3 text-xs"><div className="visual-marquee-track flex gap-2">{["A", "B", "C", "D", "E", "A", "B"].map((item, index) => <span key={`${item}-${index}`} className="shrink-0 rounded-full border bg-background px-3 py-1">{item}</span>)}</div></Chrome>
+    return <MarqueeRowVisual />
   }
   if (kind === "animated-gradient-background") return <AnimatedGradientBackgroundVisual />
   if (kind === "border-beam") return <BorderBeamVisual />
   if (kind === "orbiting-icons") {
-    return <div className="relative flex size-28 items-center justify-center rounded-full border border-dashed"><span className="flex size-10 items-center justify-center rounded-full bg-primary text-primary-foreground"><Settings aria-hidden="true" className="size-4" /></span>{[Search, Bell, LinkIcon, Folder].map((Icon, index) => <span key={index} className={cn("absolute flex size-7 items-center justify-center rounded-full border bg-card", index === 0 && "top-0", index === 1 && "right-0", index === 2 && "bottom-0", index === 3 && "left-0")}><Icon aria-hidden="true" className="size-3" /></span>)}</div>
+    return <OrbitingIconsVisual />
   }
   if (kind === "spotlight-card") return <SpotlightCardVisual />
   if (kind === "grid-pattern-background") return <PatternBackgroundVisual pattern="grid" />
@@ -4351,6 +4349,67 @@ function BillingSettingsPageVisual() {
         </div>
       </main>
     </Chrome>
+  )
+}
+
+function MarqueeRowVisual() {
+  const items = ["A", "B", "C", "D", "E"]
+
+  return (
+    <Chrome className="visual-hover-surface w-64 overflow-hidden p-3 text-xs">
+      <div className="visual-marquee-track flex w-max">
+        {[0, 1].map((group) => (
+          <div key={group} className="flex shrink-0 gap-2 pr-2" aria-hidden={group === 1}>
+            {items.map((item) => <span key={`${group}-${item}`} className="shrink-0 rounded-full border bg-background px-3 py-1">{item}</span>)}
+          </div>
+        ))}
+      </div>
+    </Chrome>
+  )
+}
+
+function InfiniteMovingCardsVisual() {
+  const cards = [0, 1, 2, 3]
+
+  return (
+    <Chrome className="visual-hover-surface w-64 overflow-hidden p-3 text-xs">
+      <div className="visual-marquee-track flex w-max">
+        {[0, 1].map((group) => (
+          <div key={group} className="flex shrink-0 gap-2 pr-2" aria-hidden={group === 1}>
+            {cards.map((item) => (
+              <div key={`${group}-${item}`} className="min-w-20 rounded border bg-background p-2">
+                <Star aria-hidden="true" className="size-3 text-primary" />
+                <Line className="mt-2 w-12" />
+                <Line className="mt-1 w-10" />
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+    </Chrome>
+  )
+}
+
+function OrbitingIconsVisual() {
+  const icons = [Search, Bell, LinkIcon, Folder]
+
+  return (
+    <div className="visual-hover-surface relative flex size-32 items-center justify-center rounded-full border border-dashed bg-card/70">
+      <span className="flex size-11 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-sm">
+        <Settings aria-hidden="true" className="size-4" />
+      </span>
+      <div className="visual-orbit-ring absolute inset-2 rounded-full">
+        {icons.map((Icon, index) => (
+          <span
+            key={index}
+            className="absolute left-1/2 top-1/2 flex size-7 items-center justify-center rounded-full border bg-card shadow-sm"
+            style={{ transform: `rotate(${index * 90}deg) translateX(50px) rotate(-${index * 90}deg)` }}
+          >
+            <Icon aria-hidden="true" className="size-3" />
+          </span>
+        ))}
+      </div>
+    </div>
   )
 }
 
