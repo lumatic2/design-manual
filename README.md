@@ -34,3 +34,7 @@ Vibe-coding requests often start as vague instructions like "make it clean" or "
 ## Status
 
 Active public project. The current focus is vocabulary coverage, search quality, mobile readability, and poster/export reuse. It is a static site: no login, backend, account storage, or user-generated content is part of the MVP.
+
+## License
+
+MIT. See [LICENSE](LICENSE).
