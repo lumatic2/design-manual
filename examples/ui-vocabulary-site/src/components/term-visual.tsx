@@ -25,7 +25,6 @@ import {
   LoaderCircle,
   Mail,
   MapPin,
-  MessageCircle,
   Menu,
   Mic,
   MoreHorizontal,
@@ -3837,46 +3836,73 @@ function SocialLoginButtonGroupVisual({ active, onSelect }: { active: boolean; o
       id: "kakao",
       label: "카카오로 계속하기",
       className: "border-[#FEE500] bg-[#FEE500] text-[#181600]",
-      icon: <MessageCircle aria-hidden="true" className="size-5 fill-current" />,
+      icon: <KakaoIcon />,
     },
     {
       id: "google",
       label: "구글로 계속하기",
       className: "border-muted bg-muted/70 text-foreground",
-      icon: <span aria-hidden="true" className="text-lg font-bold leading-none"><span className="text-[#4285F4]">G</span></span>,
+      icon: <GoogleIcon />,
     },
     {
       id: "email",
       label: "이메일로 계속하기",
       className: "border-[#3F3F3F] bg-[#3F3F3F] text-white",
-      icon: <Mail aria-hidden="true" className="size-5 fill-white" />,
+      icon: <Mail aria-hidden="true" className="size-4 fill-white" />,
     },
     {
       id: "github",
       label: "GitHub로 계속하기",
       className: "border-foreground bg-foreground text-background",
-      icon: <span aria-hidden="true" className="font-mono text-sm font-bold leading-none">GH</span>,
+      icon: <GithubIcon />,
     },
   ]
 
   return (
-    <Chrome className="w-72 space-y-2 p-3 text-sm">
+    <Chrome className="w-56 space-y-1.5 p-2 text-[11px]">
       {providers.map((provider, index) => (
         <button
           key={provider.id}
           type="button"
           className={cn(
-            "flex h-12 w-full items-center justify-center gap-3 rounded-lg border px-4 font-semibold shadow-sm transition-transform hover:-translate-y-0.5 hover:shadow-md",
+            "flex h-8 w-full items-center justify-center gap-2 rounded-md border px-3 font-semibold shadow-sm transition-transform hover:-translate-y-0.5 hover:shadow-md",
             provider.className,
             active && index === 0 && "ring-2 ring-ring ring-offset-2 ring-offset-background"
           )}
           onClick={onSelect}
         >
-          <span className="flex size-7 items-center justify-center">{provider.icon}</span>
+          <span className="flex size-5 items-center justify-center">{provider.icon}</span>
           <span>{provider.label}</span>
         </button>
       ))}
     </Chrome>
+  )
+}
+
+function KakaoIcon() {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24" className="size-4 fill-current">
+      <path d="M12 4.5c-4.7 0-8.5 3-8.5 6.6 0 2.3 1.6 4.4 4 5.5l-.7 2.7c-.1.3.2.5.5.3l3.1-2.1c.5.1 1.1.2 1.6.2 4.7 0 8.5-3 8.5-6.6s-3.8-6.6-8.5-6.6Z" />
+    </svg>
+  )
+}
+
+function GoogleIcon() {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24" className="size-4">
+      <path fill="#4285F4" d="M21.6 12.2c0-.7-.1-1.3-.2-1.9H12v3.6h5.4c-.2 1.2-.9 2.2-2 2.9v2.4h3.2c1.9-1.7 3-4.2 3-7Z" />
+      <path fill="#34A853" d="M12 22c2.7 0 5-.9 6.6-2.5l-3.2-2.4c-.9.6-2 .9-3.4.9-2.6 0-4.8-1.8-5.6-4.1H3.1v2.5C4.7 19.7 8.1 22 12 22Z" />
+      <path fill="#FBBC05" d="M6.4 13.9c-.2-.6-.3-1.2-.3-1.9s.1-1.3.3-1.9V7.6H3.1C2.4 8.9 2 10.4 2 12s.4 3.1 1.1 4.4l3.3-2.5Z" />
+      <path fill="#EA4335" d="M12 6c1.5 0 2.8.5 3.8 1.5l2.9-2.9C17 3 14.7 2 12 2 8.1 2 4.7 4.3 3.1 7.6l3.3 2.5C7.2 7.8 9.4 6 12 6Z" />
+    </svg>
+  )
+}
+
+function GithubIcon() {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24" className="size-4 fill-current">
+      <path d="M12 2.5a9.5 9.5 0 0 0-3 18.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.2-3.4-1.2-.5-1.1-1.1-1.4-1.1-1.4-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.6.3-1.1.6-1.3-2.2-.3-4.6-1.1-4.6-4.7 0-1 .4-1.9 1-2.6-.1-.3-.4-1.3.1-2.6 0 0 .8-.3 2.7 1a9.2 9.2 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.3.2 2.3.1 2.6.6.7 1 1.6 1 2.6 0 3.6-2.4 4.4-4.6 4.7.4.3.7 1 .7 1.9v2.8c0 .3.2.6.7.5A9.5 9.5 0 0 0 12 2.5Z" />
+    </svg>
   )
 }
 
