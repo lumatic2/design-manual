@@ -59,6 +59,28 @@ design-manual/
 2. **기존 UI 비평** → `design-qa` 스킬 (WCAG + 토큰 lint + 스크린샷 diff)
 3. **새 방법론 발견** → `methodology/` 에 글로 정리 → 패턴이 굳어지면 `~/projects/custom-skills/<new-skill>/SKILL.md` 작성 → `bash ~/projects/custom-skills/setup.sh` 배포
 
+## UI Vocabulary Authoring Workflow
+
+UI Dictionary 용어 추가는 긴 검토 대기열이 아니라, 수집 단계에서 기존 데이터와 중복을 먼저 걸러낸 뒤 로컬 검증까지 끝내고 배포 직전에만 사용자 확인을 받는 워크플로우로 운영한다. 자세한 절차는 [docs/ui-vocabulary/authoring-workflow.md](docs/ui-vocabulary/authoring-workflow.md)를 따른다.
+
+기본 흐름:
+
+```text
+topic -> collect around 20 candidates -> duplicate prefilter
+-> terms.yml promotion -> visual renderer check
+-> validate/build/lint/smoke -> ask before deploy
+```
+
+- 한 번의 수집 배치는 좁은 주제 1개에 후보 20개 내외를 목표로 한다.
+- `docs/ui-vocabulary/inbox.yml`은 현재 수집 배치의 임시 버퍼로만 사용한다.
+- 승격 전 `node scripts/audit-ui-vocabulary-candidates.mjs`와 `node scripts/audit-ui-vocabulary-candidates.mjs --strict-duplicates`로 기존 `terms.yml` 대비 id/name/source/alias overlap과 duplicate-risk를 확인한다.
+- `node scripts/generate-ui-vocabulary-inbox-review.mjs`는 후보 설명, visual anatomy, duplicate-risk를 사람이 빠르게 보는 보조 리포트다.
+- 기존 용어와 의미가 같으면 새 항목 대신 alias를 추가한다.
+- 기존 용어와 헷갈리지만 행동이나 맥락이 다르면 `related` 비교를 추가한다.
+- 단순 상태나 변형이면 새 항목으로 만들지 않는다.
+- 승격 후에는 `python scripts/validate-ui-vocabulary.py`, `npm run build`, `npm run lint`, 브라우저 smoke를 통과한다.
+- 배포는 최종 승인 지점이다. 로컬 검증 결과를 보고한 뒤 사용자 승인 없이 `git push ui-dictionary main`을 실행하지 않는다.
+
 ## 참고 — DESIGN.md 란?
 
 Google Labs(Stitch) 가 오픈소스화한 포맷. 코딩 에이전트가 디자인 시스템을 "지속적·구조적"으로 이해하도록 하는 단일 markdown 파일. 자세한 가이드는 [methodology/design-md-guide.md](methodology/design-md-guide.md) 참조.

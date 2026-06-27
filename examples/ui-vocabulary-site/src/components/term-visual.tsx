@@ -389,6 +389,26 @@ function renderVisual(variant: string, label: string) {
   if (variant === "billing-summary") return <BillingSummaryVisual />
   if (variant === "invoice-row") return <InvoiceRowVisual />
   if (variant === "version-history-list") return <VersionHistoryListVisual />
+  if (variant === "email-verification-banner") return <AccountFlowVisual kind="email-banner" />
+  if (variant === "verification-required-screen") return <AccountFlowVisual kind="verify-gate" />
+  if (variant === "magic-link-sent-state") return <AccountFlowVisual kind="magic-link" />
+  if (variant === "passkey-enrollment-prompt") return <AccountFlowVisual kind="passkey-enroll" />
+  if (variant === "passkey-sign-in-sheet") return <AccountFlowVisual kind="passkey-sheet" />
+  if (variant === "mfa-enrollment-card") return <AccountFlowVisual kind="mfa-card" />
+  if (variant === "recovery-code-panel") return <AccountFlowVisual kind="recovery-codes" />
+  if (variant === "recovery-code-warning") return <AccountFlowVisual kind="recovery-warning" />
+  if (variant === "trusted-device-prompt") return <AccountFlowVisual kind="trusted-device" />
+  if (variant === "device-approval-state") return <AccountFlowVisual kind="device-approval" />
+  if (variant === "access-request-panel") return <AccountFlowVisual kind="access-request" />
+  if (variant === "access-pending-state") return <AccountFlowVisual kind="access-pending" />
+  if (variant === "invite-acceptance-screen") return <AccountFlowVisual kind="invite-accept" />
+  if (variant === "invite-expired-state") return <AccountFlowVisual kind="invite-expired" />
+  if (variant === "workspace-join-request") return <AccountFlowVisual kind="workspace-join" />
+  if (variant === "welcome-choice-screen") return <AccountFlowVisual kind="welcome-choice" />
+  if (variant === "import-data-choice") return <AccountFlowVisual kind="import-choice" />
+  if (variant === "setup-blocker-state") return <AccountFlowVisual kind="setup-blocker" />
+  if (variant === "reconnect-account-state") return <AccountFlowVisual kind="reconnect" />
+  if (variant === "consent-review-screen") return <AccountFlowVisual kind="consent-review" />
   if (variant === "error-state") return <StateVisual tone="error" />
   if (variant === "success-state") return <StateVisual tone="success" />
   if (variant === "warning-state") return <StateVisual tone="warning" />
@@ -3497,6 +3517,93 @@ function VersionHistoryListVisual() {
   const [restored, setRestored] = useState(false)
 
   return <Chrome className="w-56 p-2 text-xs">{["오늘 10:00", "어제 19:20"].map((item, index) => <div key={item} className="mb-1 flex items-center gap-2 rounded px-2 py-1"><Clock aria-hidden="true" /><span className="flex-1">{item}</span><button type="button" className="text-primary" onClick={() => setRestored(true)}>{restored && index === 0 ? "복원됨" : "복원"}</button></div>)}</Chrome>
+}
+
+type AccountFlowKind =
+  | "email-banner"
+  | "verify-gate"
+  | "magic-link"
+  | "passkey-enroll"
+  | "passkey-sheet"
+  | "mfa-card"
+  | "recovery-codes"
+  | "recovery-warning"
+  | "trusted-device"
+  | "device-approval"
+  | "access-request"
+  | "access-pending"
+  | "invite-accept"
+  | "invite-expired"
+  | "workspace-join"
+  | "welcome-choice"
+  | "import-choice"
+  | "setup-blocker"
+  | "reconnect"
+  | "consent-review"
+
+function AccountFlowVisual({ kind }: { kind: AccountFlowKind }) {
+  const [active, setActive] = useState(false)
+  const done = active
+
+  if (kind === "email-banner") {
+    return <Chrome className="flex w-64 items-center gap-2 px-3 py-2 text-xs"><Info aria-hidden="true" className="text-primary" /><span className="flex-1">이메일 인증 필요</span><button type="button" className="rounded border px-2 py-1" onClick={() => setActive(true)}>{done ? "전송됨" : "재전송"}</button></Chrome>
+  }
+  if (kind === "verify-gate") {
+    return <Chrome className="flex w-52 flex-col items-center gap-2 p-3 text-center text-xs"><CheckCircle2 aria-hidden="true" className="text-primary" /><b>인증 필요</b><Line className="w-28" /><button type="button" className="rounded bg-primary px-2 py-1 text-primary-foreground" onClick={() => setActive(true)}>{done ? "확인 중" : "인증하기"}</button></Chrome>
+  }
+  if (kind === "magic-link") {
+    return <Chrome className="w-56 p-3 text-xs"><div className="flex items-center gap-2"><LinkIcon aria-hidden="true" className="text-primary" /><b>로그인 링크 전송</b></div><p className="mt-2 text-muted-foreground">mail@example.com</p><button type="button" className="mt-3 rounded border px-2 py-1" onClick={() => setActive(true)}>{done ? "30초 후 가능" : "다시 보내기"}</button></Chrome>
+  }
+  if (kind === "passkey-enroll") {
+    return <Chrome className="w-52 p-3 text-xs"><div className="flex items-center gap-2"><Settings aria-hidden="true" /><b>패스키 설정</b></div><Line className="mt-3 w-32" /><div className="mt-3 flex gap-2"><button type="button" className="rounded bg-primary px-2 py-1 text-primary-foreground" onClick={() => setActive(true)}>{done ? "설정됨" : "등록"}</button><button type="button" className="rounded border px-2 py-1">나중에</button></div></Chrome>
+  }
+  if (kind === "passkey-sheet") {
+    return <div className="w-56 rounded-t-2xl border bg-card p-3 text-xs shadow-sm"><div className="mx-auto mb-3 h-1 w-10 rounded-full bg-muted-foreground/30" /><b>패스키로 로그인</b><p className="mt-2 text-muted-foreground">yusun@example.com</p><button type="button" className="mt-3 w-full rounded bg-primary py-1 text-primary-foreground" onClick={() => setActive(true)}>{done ? "인증됨" : "계속"}</button><button type="button" className="mt-2 w-full text-primary">다른 방법</button></div>
+  }
+  if (kind === "mfa-card") {
+    return <Chrome className="w-52 p-3 text-xs"><div className="flex justify-between"><b>2단계 인증</b><span className="rounded-full bg-muted px-2 py-0.5">꺼짐</span></div><Line className="mt-3 w-32" /><button type="button" className="mt-3 rounded bg-primary px-2 py-1 text-primary-foreground" onClick={() => setActive(true)}>{done ? "진행 중" : "설정"}</button></Chrome>
+  }
+  if (kind === "recovery-codes") {
+    return <Chrome className="w-56 p-3 text-xs"><div className="grid grid-cols-2 gap-1 font-mono">{["AB12", "CD34", "EF56", "GH78"].map((code) => <span key={code} className="rounded bg-muted px-2 py-1">{code}</span>)}</div><div className="mt-3 flex gap-2"><button type="button" className="rounded border px-2 py-1"><Copy aria-hidden="true" /></button><button type="button" className="rounded border px-2 py-1"><Download aria-hidden="true" /></button></div></Chrome>
+  }
+  if (kind === "recovery-warning") {
+    return <Chrome className="w-56 p-3 text-xs"><div className="flex gap-2"><AlertTriangle aria-hidden="true" className="text-destructive" /><b>코드 저장 필요</b></div><Line className="mt-3 w-32" /><label className="mt-3 flex items-center gap-2"><span className={cn("size-4 rounded border", done && "bg-primary")} onClick={() => setActive((value) => !value)} />확인했습니다</label></Chrome>
+  }
+  if (kind === "trusted-device") {
+    return <Chrome className="w-56 p-3 text-xs"><div className="flex items-center gap-2"><Home aria-hidden="true" /><b>이 기기 기억</b></div><p className="mt-2 text-muted-foreground">개인 기기에서만 사용</p><div className="mt-3 flex gap-2"><button type="button" className="rounded bg-primary px-2 py-1 text-primary-foreground">신뢰</button><button type="button" className="rounded border px-2 py-1">아니오</button></div></Chrome>
+  }
+  if (kind === "device-approval") {
+    return <Chrome className="flex w-56 flex-col items-center gap-2 p-3 text-center text-xs"><Clock aria-hidden="true" className="text-primary" /><b>새 기기 승인 대기</b><p className="text-muted-foreground">남은 시간 04:59</p><button type="button" className="rounded border px-2 py-1">취소</button></Chrome>
+  }
+  if (kind === "access-request") {
+    return <Chrome className="w-56 p-3 text-xs"><div className="flex items-center gap-2"><Folder aria-hidden="true" /><b>접근 권한 없음</b></div><textarea className="mt-3 h-12 w-full resize-none rounded border bg-background p-2" readOnly value="요청 사유" /><button type="button" className="mt-2 rounded bg-primary px-2 py-1 text-primary-foreground">접근 요청</button></Chrome>
+  }
+  if (kind === "access-pending") {
+    return <Chrome className="w-52 p-3 text-xs"><div className="flex items-center gap-2"><Clock aria-hidden="true" className="text-primary" /><b>승인 대기</b></div><p className="mt-2 text-muted-foreground">관리자에게 요청됨</p><button type="button" className="mt-3 rounded border px-2 py-1">요청 취소</button></Chrome>
+  }
+  if (kind === "invite-accept") {
+    return <Chrome className="w-56 p-3 text-xs"><b>Askewly 팀 초대</b><p className="mt-2 text-muted-foreground">Editor 역할</p><div className="mt-3 flex gap-2"><button type="button" className="rounded bg-primary px-2 py-1 text-primary-foreground">수락</button><button type="button" className="rounded border px-2 py-1">거절</button></div></Chrome>
+  }
+  if (kind === "invite-expired") {
+    return <Chrome className="flex w-52 flex-col items-center gap-2 p-3 text-center text-xs"><X aria-hidden="true" className="text-destructive" /><b>초대 만료</b><Line className="w-28" /><button type="button" className="rounded border px-2 py-1">새 초대 요청</button></Chrome>
+  }
+  if (kind === "workspace-join") {
+    return <Chrome className="w-56 p-3 text-xs"><div className="flex items-center gap-2"><User aria-hidden="true" /><b>Team Workspace</b></div><p className="mt-2 text-muted-foreground">승인 후 참여 가능</p><button type="button" className="mt-3 rounded bg-primary px-2 py-1 text-primary-foreground">참여 요청</button></Chrome>
+  }
+  if (kind === "welcome-choice") {
+    return <Chrome className="w-60 p-3 text-xs"><b>어떻게 시작할까요?</b><div className="mt-3 grid grid-cols-3 gap-1">{["새로", "가져오기", "템플릿"].map((item) => <button key={item} type="button" className="rounded border p-2">{item}</button>)}</div></Chrome>
+  }
+  if (kind === "import-choice") {
+    return <Chrome className="w-60 p-3 text-xs"><b>데이터 가져오기</b><div className="mt-3 grid grid-cols-3 gap-1">{["CSV", "직접", "연동"].map((item) => <button key={item} type="button" className="rounded border p-2">{item}</button>)}</div></Chrome>
+  }
+  if (kind === "setup-blocker") {
+    return <Chrome className="flex w-56 flex-col items-center gap-2 p-3 text-center text-xs"><Settings aria-hidden="true" /><b>설정 필요</b><p className="text-muted-foreground">연동을 완료해야 합니다</p><button type="button" className="rounded bg-primary px-2 py-1 text-primary-foreground">설정으로</button></Chrome>
+  }
+  if (kind === "reconnect") {
+    return <Chrome className="w-56 p-3 text-xs"><div className="flex items-center justify-between"><b>Google</b><span className="rounded-full bg-destructive/10 px-2 py-0.5 text-destructive">끊김</span></div><p className="mt-2 text-muted-foreground">마지막 동기화 실패</p><button type="button" className="mt-3 rounded bg-primary px-2 py-1 text-primary-foreground">다시 연결</button></Chrome>
+  }
+
+  return <Chrome className="w-56 p-3 text-xs"><b>접근 범위 검토</b>{["프로필", "이메일", "파일 목록"].map((item) => <div key={item} className="mt-2 flex items-center gap-2"><Check aria-hidden="true" className="text-primary" /><span>{item}</span></div>)}<button type="button" className="mt-3 rounded bg-primary px-2 py-1 text-primary-foreground">동의</button></Chrome>
 }
 
 function StateVisual({ tone }: { tone: "error" | "success" | "warning" | "info" }) {

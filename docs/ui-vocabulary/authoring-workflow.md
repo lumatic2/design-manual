@@ -1,68 +1,146 @@
 # UI Vocabulary Authoring Workflow
 
-This workflow keeps new UI terms reviewable before they enter the public dataset.
+This workflow is for adding UI terms to the public dictionary without letting
+duplicates creep in. It is not a long human review queue. The main idea is:
+filter duplicates early, add clean terms locally, verify, then stop at the
+deployment decision.
+
+## Principle
+
+```text
+choose topic
+-> collect around 20 candidates
+-> compare against existing terms
+-> exclude duplicates
+-> add clean terms to terms.yml
+-> add/reuse visuals
+-> validate/build/lint/smoke
+-> ask before deploy
+-> deploy only after approval
+```
 
 ## Files
 
-- `docs/ui-vocabulary/inbox.yml`: candidate terms collected from web research, product screenshots, or design-system references.
-- `docs/ui-vocabulary/terms.yml`: canonical editable dataset used by the website.
+- `docs/ui-vocabulary/terms.yml`: canonical editable dataset used by the site.
+- `docs/ui-vocabulary/inbox.yml`: short-lived buffer for the current collection batch.
+- `docs/ui-vocabulary/inbox-review.md`: generated review report, useful for a quick visual/readability pass.
 - `docs/ui-vocabulary/sources.md`: allowed source ids and trust rules.
-- `scripts/audit-ui-vocabulary-candidates.mjs`: candidate duplicate and readiness audit.
+- `docs/ui-vocabulary/schema.md`: canonical field definitions.
+- `scripts/audit-ui-vocabulary-candidates.mjs`: schema/source/duplicate-risk audit.
+- `scripts/generate-ui-vocabulary-inbox-review.mjs`: readable batch report.
 - `scripts/validate-ui-vocabulary.py`: canonical dataset validation after promotion.
+- `examples/ui-vocabulary-site/src/components/term-visual.tsx`: visual renderer mappings.
+- `docs/ui-vocabulary/deployment.md`: Cloudflare Pages deployment notes.
 
-## Candidate Lifecycle
+## 1. Choose One Topic
 
-1. Collect a candidate in `inbox.yml`.
-2. Fill the same core fields used by `terms.yml`.
-3. Add `collector_notes` with unresolved naming, category, or overlap questions.
-4. Run the candidate audit.
-5. Resolve duplicate and source warnings.
-6. Promote the candidate to `terms.yml`.
-7. Add or map its `asset.variant` in `TermVisual`.
-8. Run full validation and site build.
-9. Remove the promoted candidate from `inbox.yml`.
+Pick one narrow theme and collect around 20 candidates. 15-25 is fine if the
+theme is coherent.
 
-## Candidate Entry
+Good batch themes:
 
-```yaml
-- id: mobile-filter-bottom-sheet
-  status: candidate
-  category: structure
-  ko: { name: 모바일 필터 바텀 시트, aliases: [필터 시트] }
-  en: { name: Mobile filter bottom sheet, aliases: [Filter sheet] }
-  one_liner: 모바일 목록 화면에서 필터 옵션을 아래에서 올라오는 시트로 고르는 패턴.
-  description: 검색 결과, 상품 목록, 지도 목록처럼 필터 조건이 많지만 화면 공간이 좁을 때 사용한다.
-  visual_anatomy: [bottom sheet container, filter groups, apply button]
-  when_to_use: [모바일에서 필터 조건이 여러 그룹으로 나뉠 때]
-  anti_use: [필터가 1-2개뿐이면 filter chip이 더 빠르다]
-  prompt_phrases: [상품 목록 아래에서 올라오는 mobile filter bottom sheet를 만들어줘]
-  asset: { kind: mini-mock, variant: mobile-filter-bottom-sheet }
-  sources: [{ source_id: material-m3-components, note: bottom sheet and filter behavior reference }]
-  confidence: medium
-  collector_notes: filter-panel과 비교 필요.
-```
+- account activation and access recovery
+- mobile commerce checkout states
+- dashboard table operations
+- onboarding and setup blockers
+- editor and canvas controls
 
-## Promotion Criteria
+Do not mix unrelated categories in one batch. It makes duplicate filtering weak.
 
-A candidate can move to `terms.yml` when:
+## 2. Collect Candidates Into Inbox
 
-- `id` is unique and kebab-case.
-- Korean and English names do not duplicate existing terms.
-- Category fits one of the six current buckets.
-- `one_liner`, `description`, `visual_anatomy`, `when_to_use`, `anti_use`, and `prompt_phrases` are concrete enough for a beginner.
-- At least one source id is listed in `sources.md`.
-- Similar terms are handled through naming, aliases, or a future `related` comparison.
-- A recognizable mini visual can be rendered without relying on a screenshot.
+Use `docs/ui-vocabulary/inbox.yml` as a temporary staging file. Candidates
+should already be plausible new terms, not every raw thing found during research.
 
-## Commands
+Use source tiers from `sources.md`:
 
-Candidate audit:
+- Tier A/B for canonical naming and behavior.
+- Tier C/D for discovery and real-world variants.
+- Tier E only for aliases and beginner wording.
+
+Each candidate must include:
+
+- stable `id`
+- Korean and English names/aliases
+- one-line explanation
+- when to use / anti-use
+- visual anatomy
+- asset variant plan
+- at least one source id
+- collector note when overlap is possible
+
+## 3. Prefilter Duplicates
+
+Run the normal audit first:
 
 ```bash
 node scripts/audit-ui-vocabulary-candidates.mjs
 ```
 
-After promotion:
+Then run strict duplicate mode:
+
+```bash
+node scripts/audit-ui-vocabulary-candidates.mjs --strict-duplicates
+```
+
+Strict mode should pass before promotion. If it reports duplicate risk, resolve
+the candidate before touching `terms.yml`.
+
+Resolution rules:
+
+- Same concept: do not add a new term. Add useful wording to the existing term's aliases.
+- Same base component but different state only: do not add a new term unless the state has a widely recognized name and distinct UI shape.
+- Similar but behavior differs: keep the candidate and add `related` comparison notes.
+- Weak or unclear distinction: leave it out of this batch.
+
+## 4. Optional Readable Report
+
+Generate a report when you want to inspect the batch quickly:
+
+```bash
+node scripts/generate-ui-vocabulary-inbox-review.mjs
+```
+
+Open `docs/ui-vocabulary/inbox-review.md`. It shows:
+
+- what each candidate is
+- what it should look like
+- duplicate-risk matches
+- a decision column for quick notes
+
+This report is a helper, not an approval gate.
+
+## 5. Promote Clean Terms
+
+Only candidates that passed duplicate filtering should move from `inbox.yml` to
+`terms.yml`.
+
+During promotion:
+
+- Change `status` from `candidate` to `draft` or `reviewed`.
+- Keep at least one valid `sources` item.
+- Add `related` comparisons when nearby terms may confuse users.
+- Keep `prompt_phrases` practical and Korean-first.
+- Remove promoted candidates from `inbox.yml`.
+
+If a candidate became only an alias or related note, remove it from `inbox.yml`
+after updating the existing term.
+
+## 6. Check Visual Coverage
+
+Every promoted term needs a recognizable visual.
+
+Preferred options:
+
+- Reuse an existing `asset.variant` only when the visual is intentionally the same.
+- Add a new variant in `term-visual.tsx` when the shape is distinct.
+- Use `asset.props` for state differences instead of creating unnecessary variants.
+
+Do not ship a term that falls back to a generic visual.
+
+## 7. Verify Locally
+
+Run the full validation path:
 
 ```bash
 python scripts/validate-ui-vocabulary.py
@@ -71,20 +149,50 @@ npm run build
 npm run lint
 ```
 
-## Review Questions
+Expected lint note:
 
-Use these before promoting:
+- Existing shadcn `react-refresh/only-export-components` warnings may remain.
+- New errors should block promotion.
 
-- Is this a distinct component/pattern, or only a state of an existing term?
-- Would a beginner search for this exact phrase?
-- Does it have a recognizable shape in a small visual?
-- Does the English name match a design-system or platform convention?
-- Should it be a related comparison instead of a new term?
+Smoke test the site before asking for deploy:
 
-## Batch Strategy
+- Search for each promoted term.
+- Open the detail drawer.
+- Check source links, prompt copy, related notes, and mini visual.
 
-Keep candidate batches small:
+## 8. Stop Before Deploy
 
-- 5-10 terms for a focused category expansion.
-- 10-20 terms for a domain expansion such as mobile commerce or dashboard filters.
-- Do not promote a batch until every promoted term has an asset renderer or an intentional renderer mapping.
+Deployment is the manual approval point.
+
+After local validation and smoke pass, report:
+
+- promoted term ids
+- alias-only changes
+- related-only changes
+- validation/build/lint/smoke result
+- remaining duplicate-risk, if any
+
+Then ask whether to deploy.
+
+## 9. Deploy After Approval
+
+Production target:
+
+```text
+https://ui.askewly.com/
+```
+
+The production site is connected to the `ui-dictionary` remote through
+Cloudflare Pages Git integration.
+
+Approved deploy:
+
+```bash
+git push ui-dictionary main
+```
+
+Cloudflare builds the site from `examples/ui-vocabulary-site`.
+
+## Changelog
+
+- 2026-06-27: Simplified workflow around early duplicate filtering and final deployment approval.

@@ -8,6 +8,7 @@ const root = path.resolve(__dirname, "..")
 const siteRoot = path.join(root, "examples", "ui-vocabulary-site")
 const require = createRequire(path.join(siteRoot, "package.json"))
 const YAML = require("yaml")
+const strictDuplicates = process.argv.includes("--strict-duplicates")
 
 const termsPath = path.join(root, "docs", "ui-vocabulary", "terms.yml")
 const inboxPath = path.join(root, "docs", "ui-vocabulary", "inbox.yml")
@@ -147,6 +148,16 @@ for (const [index, candidate] of inbox.entries()) {
     warnings.push(`${label}: alias/name overlap with ${overlap.id} via "${overlap.value}"`)
   }
 
+  const duplicateRisks = findDuplicateRisks(candidate, existing)
+  for (const risk of duplicateRisks.slice(0, 5)) {
+    const message = `${label}: duplicate-risk with ${risk.id} (${risk.reason})`
+    if (strictDuplicates) {
+      errors.push(message)
+    } else {
+      warnings.push(message)
+    }
+  }
+
   if (!candidate.collector_notes) {
     warnings.push(`${label}: collector_notes is recommended for review context`)
   }
@@ -217,4 +228,164 @@ function findAliasOverlap(candidate, existingTerms) {
       return candidateValues.has(normalized) ? [{ id: term.id, value }] : []
     })
   })
+}
+
+function findDuplicateRisks(candidate, existingTerms) {
+  const candidatePhrases = collectComparablePhrases(candidate)
+  const candidateTokenSets = candidatePhrases
+    .map((phrase) => ({ phrase, tokens: tokenizeComparable(phrase) }))
+    .filter((entry) => entry.tokens.length > 0)
+
+  const risks = []
+
+  for (const term of existingTerms) {
+    const existingPhrases = collectComparablePhrases(term)
+    const existingTokenSets = existingPhrases
+      .map((phrase) => ({ phrase, tokens: tokenizeComparable(phrase) }))
+      .filter((entry) => entry.tokens.length > 0)
+
+    const substringMatch = findSubstringMatch(candidatePhrases, existingPhrases)
+    if (substringMatch) {
+      risks.push({
+        id: term.id,
+        score: 0.9,
+        reason: `name/id substring "${substringMatch.candidate}" ~= "${substringMatch.existing}"`,
+      })
+      continue
+    }
+
+    const tokenMatch = findTokenMatch(candidateTokenSets, existingTokenSets)
+    if (tokenMatch?.score >= 0.6) {
+      risks.push({
+        id: term.id,
+        score: tokenMatch.score,
+        reason: `token similarity ${tokenMatch.score.toFixed(2)} via "${tokenMatch.candidate}" ~= "${tokenMatch.existing}"`,
+      })
+    }
+  }
+
+  return risks
+    .sort((left, right) => right.score - left.score || left.id.localeCompare(right.id))
+    .slice(0, 8)
+}
+
+function collectComparablePhrases(term) {
+  return [
+    term.id,
+    term.id?.replace(/-/g, " "),
+    term.ko?.name,
+    term.en?.name,
+    ...(term.ko?.aliases ?? []),
+    ...(term.en?.aliases ?? []),
+  ].map(normalize).filter((phrase) => phrase.length >= 3)
+}
+
+function findSubstringMatch(candidatePhrases, existingPhrases) {
+  const genericPhrases = new Set([
+    "banner",
+    "button",
+    "card",
+    "field",
+    "input",
+    "menu",
+    "panel",
+    "prompt",
+    "screen",
+    "sheet",
+    "state",
+    "view",
+    "pending state",
+  ])
+
+  for (const candidatePhrase of candidatePhrases) {
+    for (const existingPhrase of existingPhrases) {
+      if (candidatePhrase === existingPhrase) {
+        continue
+      }
+
+      if (genericPhrases.has(candidatePhrase) || genericPhrases.has(existingPhrase)) {
+        continue
+      }
+
+      if (candidatePhrase.length < 6 || existingPhrase.length < 6) {
+        continue
+      }
+
+      if (candidatePhrase.includes(existingPhrase) || existingPhrase.includes(candidatePhrase)) {
+        return { candidate: candidatePhrase, existing: existingPhrase }
+      }
+    }
+  }
+
+  return null
+}
+
+function findTokenMatch(candidateEntries, existingEntries) {
+  let best = null
+
+  for (const candidateEntry of candidateEntries) {
+    for (const existingEntry of existingEntries) {
+      const score = jaccard(candidateEntry.tokens, existingEntry.tokens)
+      if (!best || score > best.score) {
+        best = {
+          score,
+          candidate: candidateEntry.phrase,
+          existing: existingEntry.phrase,
+        }
+      }
+    }
+  }
+
+  return best
+}
+
+function tokenizeComparable(value) {
+  const stopWords = new Set([
+    "a",
+    "an",
+    "and",
+    "for",
+    "of",
+    "or",
+    "the",
+    "to",
+    "ui",
+    "banner",
+    "button",
+    "card",
+    "field",
+    "input",
+    "menu",
+    "panel",
+    "prompt",
+    "screen",
+    "sheet",
+    "state",
+    "view",
+    "배너",
+    "버튼",
+    "상태",
+    "시트",
+    "입력",
+    "카드",
+    "패널",
+    "프롬프트",
+    "화면",
+  ])
+
+  return [...new Set(
+    normalize(value)
+      .replace(/[^a-z0-9가-힣]+/g, " ")
+      .split(/\s+/)
+      .filter((token) => token.length >= 3 && !stopWords.has(token)),
+  )]
+}
+
+function jaccard(leftTokens, rightTokens) {
+  const left = new Set(leftTokens)
+  const right = new Set(rightTokens)
+  const intersection = [...left].filter((token) => right.has(token)).length
+  const union = new Set([...left, ...right]).size
+
+  return union ? intersection / union : 0
 }

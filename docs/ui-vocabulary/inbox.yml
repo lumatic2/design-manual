@@ -1,4 +1,15 @@
 # UI Vocabulary candidate inbox.
 #
-# Keep candidates here until they are reviewed, rendered, and promoted to terms.yml.
-# Run `node scripts/audit-ui-vocabulary-candidates.mjs` before promotion.
+# Temporary buffer for the current collection batch.
+# Keep only plausible non-duplicate candidates here.
+# Run both audit commands before promotion:
+# - `node scripts/audit-ui-vocabulary-candidates.mjs`
+# - `node scripts/audit-ui-vocabulary-candidates.mjs --strict-duplicates`
+#
+# Workflow:
+# 1. Pick one narrow batch theme and collect about 20 candidates.
+# 2. Add candidate entries below.
+# 3. Run audit and strict duplicate audit.
+# 4. Remove duplicates, or turn them into aliases/related notes on existing terms.
+# 5. Move remaining clean entries to terms.yml and remove them from this inbox.
+# 6. Run validation/build/lint/smoke, then ask before deployment.
