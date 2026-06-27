@@ -8,13 +8,12 @@ import { cn } from "@/lib/utils"
 
 type TermCardProps = {
   term: VocabularyTerm
-  index: number
   matchReasons?: SearchMatchReason[]
   selected: boolean
   onSelect: (term: VocabularyTerm) => void
 }
 
-export const TermCard = memo(function TermCard({ term, index, matchReasons = [], selected, onSelect }: TermCardProps) {
+export const TermCard = memo(function TermCard({ term, matchReasons = [], selected, onSelect }: TermCardProps) {
   const openDetail = () => onSelect(term)
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLElement>) => {
@@ -37,7 +36,7 @@ export const TermCard = memo(function TermCard({ term, index, matchReasons = [],
         selected && "border-primary shadow-md"
       )}
     >
-      <CardHeader className="grid grid-cols-[minmax(0,1fr)_auto] gap-4">
+      <CardHeader>
         <div className="min-w-0">
           <Badge variant="outline" className="mb-2 rounded-md text-xs">
             {categoryLabels[term.category]}
@@ -47,9 +46,11 @@ export const TermCard = memo(function TermCard({ term, index, matchReasons = [],
               {kindLabels[term.kind]}
             </Badge>
           )}
-          <CardTitle className="truncate text-xl tracking-normal">
-            {term.ko.name}
-            <span className="ml-2 text-sm font-normal text-muted-foreground">{term.en.name}</span>
+          <CardTitle className="text-xl leading-7 tracking-normal">
+            <span className="block break-keep">{term.ko.name}</span>
+            <span className="mt-1 block break-words text-sm font-normal leading-5 text-muted-foreground">
+              {term.en.name}
+            </span>
           </CardTitle>
           {matchReasons.length > 0 && (
             <div className="mt-2 flex flex-wrap gap-1">
@@ -60,9 +61,6 @@ export const TermCard = memo(function TermCard({ term, index, matchReasons = [],
               ))}
             </div>
           )}
-        </div>
-        <div className="flex size-8 items-center justify-center rounded-full bg-secondary text-sm font-semibold text-secondary-foreground">
-          {index + 1}
         </div>
       </CardHeader>
       <CardContent className="flex flex-col gap-4">

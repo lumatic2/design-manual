@@ -447,10 +447,9 @@ function App() {
               <PosterView scopeLabel={printScopeLabel} terms={filteredTerms} totalCount={terms.length} />
             ) : filteredTerms.length > 0 ? (
               <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-3" data-print-grid>
-                {searchResults.map((result, index) => (
+                {searchResults.map((result) => (
                   <TermCard
                     key={result.term.id}
-                    index={index}
                     matchReasons={query ? result.reasons : undefined}
                     selected={selectedTerm?.id === result.term.id}
                     term={result.term}
