@@ -26,8 +26,8 @@ import { SearchAutocomplete } from "@/components/search-autocomplete"
 import { Separator } from "@/components/ui/separator"
 import { TermCard } from "@/components/term-card"
 import { TermDetail } from "@/components/term-detail"
-import { categories, kinds, terms, type TermCategory, type VocabularyTerm } from "@/data/terms.generated"
-import { categoryGroups, categoryGroupsByCategory, categoryLabels, getTermKindFromFilter, isTermCategory, isTermKindFilter, kindLabels, matchesFilter, searchTerms, type SearchResult, type TermFilter } from "@/lib/search"
+import { categories, kinds, terms, type TermCategory, type TermKind, type VocabularyTerm } from "@/data/terms.generated"
+import { categoryGroups, categoryGroupsByCategory, categoryLabels, getTermKindCategoryFromFilter, getTermKindFromFilter, getTermKindGroupFromFilter, isTermCategory, isTermKindCategoryFilter, isTermKindFilter, isTermKindGroupFilter, kindLabels, matchesFilter, searchTerms, type SearchResult, type TermFilter, type TermGroupId } from "@/lib/search"
 import { getStarterQueries } from "@/lib/search-suggestions"
 import { useCases } from "@/lib/term-ux"
 import { cn } from "@/lib/utils"
@@ -42,7 +42,8 @@ function App() {
   const initialSearchState = useMemo(getInitialSearchState, [])
   const [query, setQuery] = useState(initialSearchState.query)
   const [filter, setFilter] = useState<TermFilter>(initialSearchState.filter)
-  const [openExploreSections, setOpenExploreSections] = useState<string[]>(["kind", "category"])
+  const [openExploreSections, setOpenExploreSections] = useState<string[]>(["kind"])
+  const [openKinds, setOpenKinds] = useState<string[]>(["component"])
   const [openCategories, setOpenCategories] = useState<string[]>([])
   const [selectedTerm, setSelectedTerm] = useState<VocabularyTerm | null>(terms[0] ?? null)
   const [detailOpen, setDetailOpen] = useState(false)
@@ -77,6 +78,14 @@ function App() {
       kinds.map((kind) => ({
         kind,
         count: terms.filter((term) => term.kind === kind).length,
+        categories: categories.map((category) => ({
+          category,
+          count: terms.filter((term) => matchesFilter(term, kindCategoryFilter(kind, category))).length,
+          groups: categoryGroupsByCategory[category].map((group) => ({
+            ...group,
+            count: terms.filter((term) => matchesFilter(term, kindGroupFilter(kind, group.id))).length,
+          })).filter((group) => group.count > 0),
+        })).filter((category) => category.count > 0),
       })),
     []
   )
@@ -150,7 +159,8 @@ function App() {
     setActiveUseCaseId(useCase?.id ?? null)
     setQuery(queryValue)
     setFilter("all")
-    setOpenExploreSections(["kind", "category"])
+    setOpenExploreSections(["kind"])
+    setOpenKinds(["component"])
     setOpenCategories([])
     setDetailOpen(false)
     window.scrollTo({ top: 0, behavior: "smooth" })
@@ -160,7 +170,8 @@ function App() {
     setQuery("")
     setFilter("all")
     setActiveUseCaseId(null)
-    setOpenExploreSections(["kind", "category"])
+    setOpenExploreSections(["kind"])
+    setOpenKinds(["component"])
     setOpenCategories([])
     setSelectedTerm(terms[0] ?? null)
     setDetailOpen(false)
@@ -212,52 +223,69 @@ function App() {
           <AccordionTrigger className="rounded-lg px-3 py-2 text-sm hover:bg-muted hover:no-underline">
             형태
           </AccordionTrigger>
-          <AccordionContent className="flex flex-col gap-1 pb-2">
-            {kindCounts.map((item) => (
-              <CategoryButton
-                key={item.kind}
-                active={filter === `kind:${item.kind}`}
-                count={item.count}
-                label={kindLabels[item.kind]}
-                onClick={() => updateFilter(`kind:${item.kind}`)}
-              />
-            ))}
-          </AccordionContent>
-        </AccordionItem>
-        <AccordionItem className="border-0" value="category">
-          <AccordionTrigger className="rounded-lg px-3 py-2 text-sm hover:bg-muted hover:no-underline">
-            카테고리
-          </AccordionTrigger>
           <AccordionContent className="pb-2">
-            <Accordion className="flex flex-col gap-1" onValueChange={setOpenCategories} type="multiple" value={openCategories}>
-              {categoryCounts.map((item) => (
-                <AccordionItem key={item.category} className="border-0" value={item.category}>
-                  <AccordionTrigger
-                    className={cn(
-                      "rounded-lg px-3 py-2 text-sm hover:bg-muted hover:no-underline",
-                      filter === item.category && "bg-secondary text-primary"
-                    )}
-                    onClick={() => updateFilter(item.category)}
-                  >
-                    <span className="flex min-w-0 flex-1 items-center gap-3">
-                      <CategoryIcon category={item.category} />
-                      <span className="min-w-0 flex-1 truncate">{categoryLabels[item.category]}</span>
-                      <span className="shrink-0 text-xs text-muted-foreground">{item.count}</span>
-                    </span>
-                  </AccordionTrigger>
-                  <AccordionContent className="flex flex-col gap-1 pb-2 pl-8">
-                    {item.groups.map((group) => (
+            <Accordion className="flex flex-col gap-1" onValueChange={setOpenKinds} type="multiple" value={openKinds}>
+            {kindCounts.map((item) => (
+              <AccordionItem key={item.kind} className="border-0" value={item.kind}>
+                <AccordionTrigger
+                  className={cn(
+                    "rounded-lg px-3 py-2 text-sm hover:bg-muted hover:no-underline",
+                    filter === `kind:${item.kind}` && "bg-secondary text-primary"
+                  )}
+                  onClick={() => updateFilter(`kind:${item.kind}`)}
+                >
+                  <span className="flex min-w-0 flex-1 items-center gap-3">
+                    <span className="min-w-0 flex-1 truncate">{kindLabels[item.kind]}</span>
+                    <span className="shrink-0 text-xs text-muted-foreground">{item.count}</span>
+                  </span>
+                </AccordionTrigger>
+                <AccordionContent className="flex flex-col gap-1 pb-2 pl-4">
+                  {item.kind === "component" ? (
+                    <Accordion className="flex flex-col gap-1" onValueChange={setOpenCategories} type="multiple" value={openCategories}>
+                      {item.categories.map((categoryItem) => (
+                        <AccordionItem key={categoryItem.category} className="border-0" value={categoryItem.category}>
+                          <AccordionTrigger
+                            className={cn(
+                              "rounded-lg px-3 py-2 text-sm hover:bg-muted hover:no-underline",
+                              filter === kindCategoryFilter(item.kind, categoryItem.category) && "bg-secondary text-primary"
+                            )}
+                            onClick={() => updateFilter(kindCategoryFilter(item.kind, categoryItem.category))}
+                          >
+                            <span className="flex min-w-0 flex-1 items-center gap-3">
+                              <CategoryIcon category={categoryItem.category} />
+                              <span className="min-w-0 flex-1 truncate">{categoryLabels[categoryItem.category]}</span>
+                              <span className="shrink-0 text-xs text-muted-foreground">{categoryItem.count}</span>
+                            </span>
+                          </AccordionTrigger>
+                          <AccordionContent className="flex flex-col gap-1 pb-2 pl-8">
+                            {categoryItem.groups.map((group) => (
+                              <CategoryButton
+                                key={group.id}
+                                active={filter === kindGroupFilter(item.kind, group.id)}
+                                count={group.count}
+                                label={group.label}
+                                onClick={() => updateFilter(kindGroupFilter(item.kind, group.id))}
+                              />
+                            ))}
+                          </AccordionContent>
+                        </AccordionItem>
+                      ))}
+                    </Accordion>
+                  ) : (
+                    item.categories.map((categoryItem) => (
                       <CategoryButton
-                        key={group.id}
-                        active={filter === group.id}
-                        count={group.count}
-                        label={group.label}
-                        onClick={() => updateFilter(group.id)}
+                        key={categoryItem.category}
+                        active={filter === kindCategoryFilter(item.kind, categoryItem.category)}
+                        count={categoryItem.count}
+                        icon={categoryIcons[categoryItem.category]}
+                        label={categoryLabels[categoryItem.category]}
+                        onClick={() => updateFilter(kindCategoryFilter(item.kind, categoryItem.category))}
                       />
-                    ))}
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
+                    ))
+                  )}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
             </Accordion>
           </AccordionContent>
         </AccordionItem>
@@ -510,6 +538,15 @@ function getFilterLabel(filter: TermFilter) {
     return "전체 용어"
   }
 
+  if (isTermKindCategoryFilter(filter)) {
+    const { kind, category } = getTermKindCategoryFromFilter(filter)
+    return `${kindLabels[kind]} · ${categoryLabels[category]}`
+  }
+  if (isTermKindGroupFilter(filter)) {
+    const { kind, groupId } = getTermKindGroupFromFilter(filter)
+    const group = categoryGroups.find((item) => item.id === groupId)
+    return `${kindLabels[kind]} · ${group?.label ?? "세부 분류"}`
+  }
   if (isTermCategory(filter)) {
     return categoryLabels[filter]
   }
@@ -540,6 +577,12 @@ function parseFilterParam(value: string | null): TermFilter {
     return value as TermFilter
   }
   if (isTermKindFilter(value)) {
+    return value
+  }
+  if (isTermKindCategoryFilter(value)) {
+    return value
+  }
+  if (isTermKindGroupFilter(value)) {
     return value
   }
   if (categoryGroups.some((group) => group.id === value)) {
@@ -636,6 +679,14 @@ const categoryIcons: Record<TermCategory, LucideIcon> = {
   structure: LayoutPanelTop,
   feedback: BellDot,
   "data-display": TableProperties,
+}
+
+function kindCategoryFilter(kind: TermKind, category: TermCategory): TermFilter {
+  return `kind:${kind}:category:${category}`
+}
+
+function kindGroupFilter(kind: TermKind, groupId: TermGroupId): TermFilter {
+  return `kind:${kind}:group:${groupId}`
 }
 
 function CategoryIcon({ category }: { category: TermCategory }) {

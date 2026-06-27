@@ -1,7 +1,9 @@
 import type { TermCategory, TermKind, VocabularyTerm } from "@/data/terms.generated"
 
 export type TermKindFilter = `kind:${TermKind}`
-export type TermFilter = "all" | TermCategory | TermGroupId | TermKindFilter
+export type TermKindCategoryFilter = `kind:${TermKind}:category:${TermCategory}`
+export type TermKindGroupFilter = `kind:${TermKind}:group:${TermGroupId}`
+export type TermFilter = "all" | TermCategory | TermGroupId | TermKindFilter | TermKindCategoryFilter | TermKindGroupFilter
 export type SearchMatchReason =
   | "name"
   | "alias"
@@ -343,6 +345,14 @@ export function matchesFilter(term: VocabularyTerm, filter: TermFilter) {
   if (filter === "all") {
     return true
   }
+  if (isTermKindCategoryFilter(filter)) {
+    const { kind, category } = getTermKindCategoryFromFilter(filter)
+    return term.kind === kind && term.category === category
+  }
+  if (isTermKindGroupFilter(filter)) {
+    const { kind, groupId } = getTermKindGroupFromFilter(filter)
+    return term.kind === kind && getTermGroup(term)?.id === groupId
+  }
   if (isTermCategory(filter)) {
     return term.category === filter
   }
@@ -362,7 +372,7 @@ export function isTermCategory(filter: TermFilter): filter is TermCategory {
 }
 
 export function isTermKindFilter(filter: TermFilter | string): filter is TermKindFilter {
-  if (!filter.startsWith("kind:")) {
+  if (!filter.startsWith("kind:") || filter.includes(":category:") || filter.includes(":group:")) {
     return false
   }
 
@@ -371,6 +381,42 @@ export function isTermKindFilter(filter: TermFilter | string): filter is TermKin
 
 export function getTermKindFromFilter(filter: TermKindFilter): TermKind {
   return filter.slice("kind:".length) as TermKind
+}
+
+export function isTermKindCategoryFilter(filter: TermFilter | string): filter is TermKindCategoryFilter {
+  const match = filter.match(/^kind:([^:]+):category:([^:]+)$/)
+  if (!match) {
+    return false
+  }
+
+  return match[1] in kindLabels && match[2] in categoryLabels
+}
+
+export function getTermKindCategoryFromFilter(filter: TermKindCategoryFilter) {
+  const [, kind, category] = filter.match(/^kind:([^:]+):category:([^:]+)$/) ?? []
+
+  return {
+    kind: kind as TermKind,
+    category: category as TermCategory,
+  }
+}
+
+export function isTermKindGroupFilter(filter: TermFilter | string): filter is TermKindGroupFilter {
+  const match = filter.match(/^kind:([^:]+):group:([^:]+)$/)
+  if (!match) {
+    return false
+  }
+
+  return match[1] in kindLabels && categoryGroups.some((group) => group.id === match[2])
+}
+
+export function getTermKindGroupFromFilter(filter: TermKindGroupFilter) {
+  const [, kind, groupId] = filter.match(/^kind:([^:]+):group:([^:]+)$/) ?? []
+
+  return {
+    kind: kind as TermKind,
+    groupId: groupId as TermGroupId,
+  }
 }
 
 function categoriesToGroups() {
